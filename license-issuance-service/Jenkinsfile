@@ -1,0 +1,64 @@
+pipeline {
+   
+    agent any
+
+    environment {
+        MAVEN_HOME = tool 'Maven'
+    }
+
+      
+    stages {
+        
+		stage('Build') {
+            steps {
+                
+                    script{
+                        sh "${MAVEN_HOME}/bin/mvn clean package -DskipTests"
+                    }
+                }
+            
+        }
+    
+        
+
+        /*stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    script {
+                        sh "${MAVEN_HOME}/bin/mvn sonar:sonar"
+                    }
+                }
+            }
+        }*/
+
+
+        stage('Deploy') {
+            steps {
+                withEnv(['JENKINS_NODE_COOKIE=do_not_kill']) {
+                    script {
+                        
+                            // Kill any running instance of the application
+                            sh "pkill -f 'java -jar target/license-issuance-service-1.0.0.jar' || true"
+
+                            // Deploy the Spring Boot application (assuming it's a JAR file)
+                            sh "java -jar target/license-issuance-service-1.0.0.jar > target/license-issuance-service.log 2>&1 &"
+                        
+                    }
+                }
+            }
+        }
+  
+
+    }
+
+    post {
+    
+        success {
+            echo 'License Issuance Service application deployed and running successfully!'
+        }
+        
+        failure {
+            echo 'LICENSE-ISSUANCE-SERVICE: Pipeline failed!'
+        }
+    }
+}

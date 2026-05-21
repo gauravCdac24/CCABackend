@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><EsignResp errCode="ESP-710" errMsg="User has cancelled the eSign Transaction" resCode="4b9941f9-623a-41c5-bf70-ba49f5e5499a" status="0" ts="2025-01-22T17:27:20.553" txn="JiojBeDi6gTTkWShUDEKTK4S8Qi5gTxUn8uLPfCI"><Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+<SignedInfo>
+<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+<Reference URI="">
+<Transforms>
+<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+</Transforms>
+<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+<DigestValue>kLGTvh/Wx5SeeMIT3SFANT+Ev/8=</DigestValue>
+</Reference>
+</SignedInfo>
+<SignatureValue>
+onpoSXece112q3UGSsNw3WbX1CZHepVoZQ5LPQW0p9KndFehJJzsZKwqtioePjmLmj7NiHzZDjq1
+DXU2Wxy2S1c2KVw2BE31G4hZP//mfGgZm5w5/1RbPpAaYmTkHqLR2wSw7emomhWs1nZABIileMrV
+5IryYmgRn9mPQ447kHQPuN42MWmrpZghnnUhZBqL93/f/UU4bMc+Cyk2ezsb64540xUdoxvmO404
+ygnUhW+9rRwSSqrN/K4WZ0vouhV1fYckQgdRFhwrHmYSAL+eglA3MDYVzPZGtpwb8gi20Os4lx2j
+lXOrJqeukSoab2qeLSnbFjVJnHbAxisa3pK2mg==
+</SignatureValue>
+</Signature></EsignResp>
