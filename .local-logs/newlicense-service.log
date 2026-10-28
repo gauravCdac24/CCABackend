@@ -1,0 +1,52 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.5)
+
+2026-10-28 10:17:11 - Starting NewlicenseServiceApplication using Java 17.0.10 with PID 25840 (C:\Users\hp\Documents\CCAB\newlicense-service\target\classes started by hp in C:\Users\hp\Documents\CCAB\newlicense-service)
+2026-10-28 10:17:11 - Running with Spring Boot v3.3.5, Spring v6.1.14
+2026-10-28 10:17:11 - The following 1 profile is active: "test"
+2026-10-28 10:17:11 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-10-28 10:17:11 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-10-28 10:17:13 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-28 10:17:13 - Finished Spring Data repository scanning in 458 ms. Found 23 JPA repository interfaces.
+2026-10-28 10:17:14 - BeanFactory id=11e6ea25-8f8c-39ac-a075-dd018b4d7357
+2026-10-28 10:17:14 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-10-28 10:17:14 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected/applied to a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies/advisors. If this bean does not have to be post-processed, declare it with ROLE_INFRASTRUCTURE.
+2026-10-28 10:17:15 - Tomcat initialized with port 7783 (http)
+2026-10-28 10:17:15 - Starting service [Tomcat]
+2026-10-28 10:17:15 - Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-10-28 10:17:15 - Initializing Spring embedded WebApplicationContext
+2026-10-28 10:17:15 - Root WebApplicationContext: initialization completed in 4528 ms
+2026-10-28 10:17:16 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-10-28 10:17:16 - HHH000412: Hibernate ORM core version 6.5.3.Final
+2026-10-28 10:17:16 - HHH000026: Second-level cache disabled
+2026-10-28 10:17:17 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-28 10:17:17 - HikariPool-1 - Starting...
+2026-10-28 10:17:17 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4dd12903
+2026-10-28 10:17:17 - HikariPool-1 - Start completed.
+2026-10-28 10:17:17 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-10-28 10:17:20 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: alter table if exists new_license_management.application_timeline alter column application_status set data type varchar(100)
+Hibernate: alter table if exists new_license_management.govt_organization_application alter column public_key set data type TEXT
+Hibernate: alter table if exists new_license_management.intent_application alter column acknowledgementno set data type varchar(100)
+Hibernate: alter table if exists new_license_management.review_application alter column cca_remarks set data type TEXT
+Hibernate: alter table if exists new_license_management.review_application alter column status set data type varchar(8)
+2026-10-28 10:17:21 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-28 10:17:21 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-28 10:17:24 - Unable to start LiveReload server
+2026-10-28 10:17:24 - Eureka HTTP Client uses RestTemplate.
+2026-10-28 10:17:24 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-10-28 10:17:24 - Setting initial instance status as: STARTING
+2026-10-28 10:17:24 - Initializing Eureka in region us-east-1
+2026-10-28 10:17:24 - Client configured to neither register nor query for data.
+2026-10-28 10:17:24 - Discovery Client initialized at timestamp 1793162844981 with initial instances count: 0
+2026-10-28 10:17:24 - Registering application NEWLICENSE-SERVICE with eureka with status UP
+2026-10-28 10:17:25 - Tomcat started on port 7783 (http) with context path '/'
+2026-10-28 10:17:25 - Updating port to 7783
+2026-10-28 10:17:25 - Started NewlicenseServiceApplication in 15.585 seconds (process running for 16.853)

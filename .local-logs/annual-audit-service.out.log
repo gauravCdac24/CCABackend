@@ -1,0 +1,88 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< in.lms.cca:annual-audit-service >-------------------
+[INFO] Building annual-audit-service 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.3.2:run (default-cli) > test-compile @ annual-audit-service >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ annual-audit-service ---
+[INFO] Copying 5 resources from src\main\resources to target\classes
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ annual-audit-service ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 107 source files with javac [debug parameters release 17] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ annual-audit-service ---
+[INFO] Copying 0 resource from src\test\resources to target\test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ annual-audit-service ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug parameters release 17] to target\test-classes
+[INFO] 
+[INFO] <<< spring-boot:3.3.2:run (default-cli) < test-compile @ annual-audit-service <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.3.2:run (default-cli) @ annual-audit-service ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.2)
+
+2026-10-22 11:02:57 - Starting AnnualAuditServiceApplication using Java 17.0.10 with PID 524 (C:\Users\hp\Documents\CCAB\annual-audit-service\target\classes started by hp in C:\Users\hp\Documents\CCAB\annual-audit-service)
+2026-10-22 11:02:57 - Running with Spring Boot v3.3.2, Spring v6.1.11
+2026-10-22 11:02:57 - The following 1 profile is active: "test"
+2026-10-22 11:02:57 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-10-22 11:02:57 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-10-22 11:02:59 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-22 11:02:59 - Finished Spring Data repository scanning in 319 ms. Found 11 JPA repository interfaces.
+2026-10-22 11:02:59 - BeanFactory id=42ef994f-6b97-3a09-a501-6a4b08627c83
+2026-10-22 11:03:00 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-10-22 11:03:00 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-10-22 11:03:00 - Tomcat initialized with port 7791 (http)
+2026-10-22 11:03:00 - Starting service [Tomcat]
+2026-10-22 11:03:00 - Starting Servlet engine: [Apache Tomcat/10.1.26]
+2026-10-22 11:03:01 - Initializing Spring embedded WebApplicationContext
+2026-10-22 11:03:01 - Root WebApplicationContext: initialization completed in 3134 ms
+2026-10-22 11:03:01 - Filter 'annualAuditScheduleFilter' configured for use
+2026-10-22 11:03:01 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-10-22 11:03:01 - HHH000412: Hibernate ORM core version 6.5.2.Final
+2026-10-22 11:03:01 - HHH000026: Second-level cache disabled
+2026-10-22 11:03:02 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-22 11:03:02 - HikariPool-1 - Starting...
+2026-10-22 11:03:02 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@50a4bd64
+2026-10-22 11:03:02 - HikariPool-1 - Start completed.
+2026-10-22 11:03:02 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-10-22 11:03:04 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: alter table if exists annual_audit_management.application_action_taken alter column remarks set data type TEXT
+Hibernate: alter table if exists annual_audit_management.application_audit alter column applicant_remarks set data type TEXT
+Hibernate: alter table if exists annual_audit_management.application_audit alter column remarks set data type TEXT
+Hibernate: alter table if exists annual_audit_management.application_auditors alter column remarks set data type TEXT
+Hibernate: alter table if exists annual_audit_management.application_short_comings_report alter column remarks set data type TEXT
+Hibernate: alter table if exists annual_audit_management.audit_agency_selection alter column remarks set data type TEXT
+Hibernate: alter table if exists annual_audit_management.audit_ncs alter column remarks set data type TEXT
+Hibernate: alter table if exists annual_audit_management.audit_report_document alter column remarks set data type TEXT
+Hibernate: alter table if exists annual_audit_management.audit_schedule alter column description set data type TEXT
+Hibernate: alter table if exists annual_audit_management.audit_short_coming alter column remarks set data type TEXT
+2026-10-22 11:03:04 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-22 11:03:04 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-22 11:03:06 - Unable to start LiveReload server
+2026-10-22 11:03:07 - Eureka HTTP Client uses RestTemplate.
+2026-10-22 11:03:07 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-10-22 11:03:07 - Setting initial instance status as: STARTING
+2026-10-22 11:03:07 - Initializing Eureka in region us-east-1
+2026-10-22 11:03:07 - Client configured to neither register nor query for data.
+2026-10-22 11:03:07 - Discovery Client initialized at timestamp 1792647187572 with initial instances count: 0
+2026-10-22 11:03:07 - Registering application ANNUAL-AUDIT-SERVICE with eureka with status UP
+2026-10-22 11:03:07 - Tomcat started on port 7791 (http) with context path '/'
+2026-10-22 11:03:07 - Updating port to 7791
+2026-10-22 11:03:07 - Started AnnualAuditServiceApplication in 11.309 seconds (process running for 12.126)
+Hibernate: select aase1_0.audit_schedule_id,aase1_0.actual_start_date,aase1_0.audit_agency_id,aase1_0.created,aase1_0.created_by,aase1_0.date_of_completion,aase1_0.date_of_submission,aase1_0.license_id,aase1_0.schedule_start_date,aase1_0.schedule_submission_date,aase1_0.status,aase1_0.updated,aase1_0.updated_by,aase1_0.user_name from annual_audit_management.annual_audit_schedule aase1_0

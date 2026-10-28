@@ -1,0 +1,92 @@
+=============================================================================================================================       
+|                                                                                                                           |
+|        ____      ____    _    ____                                                                                        |
+|       / ___|    |  _ \  / \  / ___|                                                                                       |
+|      | |   _____| | | |/ _ \| |                                                                                           |
+|      | |__|_____| |_| / ___ \ |___                                                                                        |
+|       \____|    |____/_/   \_\____|                                                                                       |
+|                                                                                                                           |
+|                                                                                                                           |                               
+|   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++      |
+|   +                                                                                                                +      |
+|   + P o w e r e d  B y   e - G o v e r n a n c e   S o l u t i o n s   G r o u p ,  C - D A C   N e w   D e l h i  +      |
+|   +                                                                                                                +      |
+|   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++      |
+|                                                                                                                           | 
+|                                                                                                                           | 
+|   License Issuance Service for CCA                                                              |
+|   Spring Boot V3.4.0                                                                                     |
+|                                                                                                                           |
+=============================================================================================================================
+
+2026-10-28 10:17:07 - Starting LicenseIssuanceServiceApplication using Java 17.0.10 with PID 10300 (C:\Users\hp\Documents\CCAB\license-issuance-service\target\classes started by hp in C:\Users\hp\Documents\CCAB\license-issuance-service)
+2026-10-28 10:17:07 - Running with Spring Boot v3.4.0, Spring v6.2.0
+2026-10-28 10:17:07 - The following 1 profile is active: "test"
+2026-10-28 10:17:07 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-10-28 10:17:07 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-10-28 10:17:09 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-28 10:17:10 - Finished Spring Data repository scanning in 408 ms. Found 2 JPA repository interfaces.
+2026-10-28 10:17:10 - BeanFactory id=bd42c63e-25de-3023-a33a-65565cb99eea
+2026-10-28 10:17:12 - Tomcat initialized with port 7784 (http)
+2026-10-28 10:17:12 - Starting service [Tomcat]
+2026-10-28 10:17:12 - Starting Servlet engine: [Apache Tomcat/10.1.33]
+2026-10-28 10:17:12 - Initializing Spring embedded WebApplicationContext
+2026-10-28 10:17:12 - Root WebApplicationContext: initialization completed in 5098 ms
+2026-10-28 10:17:12 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-10-28 10:17:12 - HHH000412: Hibernate ORM core version 6.6.2.Final
+2026-10-28 10:17:13 - HHH000026: Second-level cache disabled
+2026-10-28 10:17:13 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-28 10:17:13 - HikariPool-1 - Starting...
+2026-10-28 10:17:14 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7d568481
+2026-10-28 10:17:14 - HikariPool-1 - Start completed.
+2026-10-28 10:17:14 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-10-28 10:17:14 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 16.13
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-10-28 10:17:15 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-28 10:17:16 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-28 10:17:16 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-28 10:17:18 - Unable to start LiveReload server
+2026-10-28 10:17:19 - Eureka HTTP Client uses RestTemplate.
+2026-10-28 10:17:20 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-10-28 10:17:20 - Setting initial instance status as: STARTING
+2026-10-28 10:17:20 - Initializing Eureka in region us-east-1
+2026-10-28 10:17:20 - Client configured to neither register nor query for data.
+2026-10-28 10:17:20 - Discovery Client initialized at timestamp 1793162840213 with initial instances count: 0
+2026-10-28 10:17:20 - Registering application LICENSE-ISSUANCE-SERVICE with eureka with status UP
+2026-10-28 10:17:20 - Tomcat started on port 7784 (http) with context path '/'
+2026-10-28 10:17:20 - Updating port to 7784
+2026-10-28 10:17:20 - Started LicenseIssuanceServiceApplication in 16.981 seconds (process running for 25.7)
+Hibernate: select ld1_0.license_id,ld1_0.created,ld1_0.created_by,ld1_0.expiry_date,ld1_0.intent_app_id,ld1_0.issue_date,ld1_0.license_certificate,ld1_0.licensename,ld1_0.serial_no,ld1_0.status,ld1_0.updated,ld1_0.updated_by,ld1_0.username from license_issuance_management.license_details ld1_0
+2026-10-28 10:17:21 - Unexpected error occurred in scheduled task
+org.springframework.web.client.HttpServerErrorException$InternalServerError: 500  on GET request for "http://localhost:8080/api/esign-application-service/change-review-status/UCCA20250037": "{"timestamp":"2026-10-28T04:47:21.769+00:00","path":"/api/esign-application-service/change-review-status/UCCA20250037","status":500,"error":"Internal Server Error","requestId":"3c9439e0","message":"Connection refused: no further information: localhost/127.0.0.1:7785","trace":"io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: no further information: localhost/127.0.0.1:7785\r\n\tSuppressed: The stacktrace has been enhanced by Reactor, refer to additional information below: \r\nError has been observed at the following site(s):\r\n\t*__checkpoint ? org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]\r\n\t*__checkpoint ? HTTP GET \"/api/esign-application-service/change-review-status/UCCA20250037\" [ExceptionHandlingWebHandler]\r\nOriginal Stack Trace:\r\nCaused by: java.net.ConnectException: Connection refused: no further information\r\n\tat java.base/sun.nio.ch.Net.pollConnect(Native Method)\r\n\tat java.base/sun.nio.ch.Net.pollConnectNow(Net.java:672)\r\n\tat java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:946)\r\n\tat io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:336)\r\n\tat io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)\r\n\tat io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:776)\r\n\tat io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)\r\n\tat io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)\r\n\tat io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)\r\n\tat io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:994)\r\n\tat io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)\r\n\tat io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)\r\n\tat java.base/java.lang.Thread.run(Thread.java:842)\r\n"}"
+	at org.springframework.web.client.HttpServerErrorException.create(HttpServerErrorException.java:102)
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:228)
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:163)
+	at org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:953)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:902)
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:801)
+	at org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:415)
+	at in.lms.cca.service.impl.LicenseSchedulerService.deactivateExpiredLicensesAndApplications(LicenseSchedulerService.java:55)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.runInternal(ScheduledMethodRunnable.java:130)
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.lambda$run$2(ScheduledMethodRunnable.java:124)
+	at io.micrometer.observation.Observation.observe(Observation.java:499)
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.run(ScheduledMethodRunnable.java:124)
+	at org.springframework.scheduling.config.Task$OutcomeTrackingRunnable.run(Task.java:83)
+	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:305)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:305)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+Hibernate: select ld1_0.license_id,ld1_0.created,ld1_0.created_by,ld1_0.expiry_date,ld1_0.intent_app_id,ld1_0.issue_date,ld1_0.license_certificate,ld1_0.licensename,ld1_0.serial_no,ld1_0.status,ld1_0.updated,ld1_0.updated_by,ld1_0.username from license_issuance_management.license_details ld1_0

@@ -1,0 +1,164 @@
+server:
+  port: 7778
+
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+       default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+        - name: CSPFilter
+       globalcors:
+        corsConfigurations:
+          '[/**]':
+              allowedOrigins: 
+                - "http://localhost:3000"  
+                - "null"  
+              allowCredentials: true
+              allowedMethods: "*"
+              allowedHeaders: "*"
+       routes:
+       - id: AUTH-SERVICE
+         uri: http://localhost:7779
+         predicates:
+         - Path=/auth-service/**
+
+       - id: NOTIFICATION-SERVICE
+         uri: http://localhost:7780
+         predicates:
+         - Path=/notification-service/**
+
+       - id: ESIGN-SERVICE
+         uri: http://localhost:7781
+         predicates:
+         - Path=/esign-service/**
+         filters:
+          - AuthenticationFilter
+
+         
+       - id: ADMIN-SERVICE
+         uri: http://localhost:7782
+         predicates:
+         - Path=/admin-service/**
+         filters:
+          - AuthenticationFilter
+
+       - id: NEWLICENSE-SERVICE
+         uri: http://localhost:7783
+         predicates:
+         - Path=/newlicense-service/**
+         filters:
+          - AuthenticationFilter
+
+       - id: LICENSE-ISSUANCE-SERVICE
+         uri: http://localhost:7784
+         predicates:
+         - Path=/license-issuance-service/**
+         filters:
+          - AuthenticationFilter
+
+       - id: RENEWAL-SERVICE
+         uri: http://localhost:7786
+         predicates:
+         - Path=/renew-license-service/**
+         filters:
+          - AuthenticationFilter
+          
+       - id: ESIGN-APPLICATION-SERVICE
+         uri: http://localhost:7785
+         predicates:
+         - Path=/esign-application-service/**
+         filters:
+          - AuthenticationFilter
+
+       - id: AUDIT-SERVICE
+         uri: http://localhost:7787
+         predicates:
+         - Path=/audit-service/**
+         filters:
+          - AuthenticationFilter
+
+       - id: RENEW-AUDIT-SERVICE
+         uri: http://localhost:7788
+         predicates:
+         - Path=/renew-audit-service/**
+         filters:
+          - AuthenticationFilter
+          
+       - id: DASHBOARD-SERVICE
+         uri: http://localhost:7790
+         predicates:
+         - Path=/dashboard-service/**
+         filters:
+          - AuthenticationFilter
+
+       - id: CESSATION-SERVICE
+         uri: http://localhost:7789
+         predicates:
+         - Path=/cessation-service/**
+         filters:
+          - AuthenticationFilter
+          
+       - id: ANNUAL-AUDIT-SERVICE
+         uri: http://localhost:7791
+         predicates:
+         - Path=/annual-audit-service/**
+         filters:
+          - AuthenticationFilter
+
+
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    config-url: /v3/api-docs/swagger-config
+    urls:
+      - url: /admin-service/api-docs
+        name: ADMIN-SERVICE
+      - url: /notification-service/api-docs
+        name: NOTIFICATION-SERVICE
+      - url: /esign-service/api-docs
+        name: ESIGN-SERVICE
+      - url: /auth-service/api-docs
+        name: AUTH-SERVICE
+      - url: /newlicense-service/api-docs
+        name: NEWLICENSE-SERVICE
+      - url:  /license-issuance-service/api-docs
+        name: LICENSE-ISSUANCE-SERVICE
+      - url: /renew-license-service/api-docs
+        name: RENEWAL-SERVICE
+      - url: /esign-application-service/api-docs
+        name: ESIGN-APPLICATION-SERVICE
+      - url: /audit-service/api-docs
+        name: AUDIT-SERVICE
+      - url: /renew-audit-service/api-docs
+        name: RENEW-AUDIT-SERVICE
+      - url: /dashboard-service/api-docs
+        name: DASHBOARD-SERVICE
+      - url: /cessation-service/api-docs
+        name: CESSATION-SERVICE
+      - url: /annual-audit-service/api-docs
+        name: ANNUAL-AUDIT-SERVICE
+
+      
+          
+logging:
+  level:
+    root: INFO
+    '[logging.level[in.lms.cca]]': DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+         
+           
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:7777/eureka

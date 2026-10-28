@@ -1,0 +1,81 @@
+=============================================================================================================================       
+|                                                                                                                           |
+|        ____      ____    _    ____                                                                                        |
+|       / ___|    |  _ \  / \  / ___|                                                                                       |
+|      | |   _____| | | |/ _ \| |                                                                                           |
+|      | |__|_____| |_| / ___ \ |___                                                                                        |
+|       \____|    |____/_/   \_\____|                                                                                       |
+|                                                                                                                           |
+|                                                                                                                           |                               
+|   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++      |
+|   +                                                                                                                +      |
+|   + P o w e r e d  B y   e - G o v e r n a n c e   S o l u t i o n s   G r o u p ,  C - D A C   N e w   D e l h i  +      |
+|   +                                                                                                                +      |
+|   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++      |
+|                                                                                                                           | 
+|                                                                                                                           | 
+|   API Gateway for CCA                                                                                          |
+|   Spring Boot V3.3.1                                                                                                      |
+|                                                                                                                           |
+=============================================================================================================================
+
+2026-10-28 10:17:08 - Starting ApiGatewayApplication using Java 17.0.10 with PID 21432 (C:\Users\hp\Documents\CCAB\api-gateway\target\classes started by hp in C:\Users\hp\Documents\CCAB\api-gateway)
+2026-10-28 10:17:08 - Running with Spring Boot v3.3.1, Spring v6.1.10
+2026-10-28 10:17:08 - The following 1 profile is active: "test"
+2026-10-28 10:17:08 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-10-28 10:17:08 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-10-28 10:17:10 - BeanFactory id=2e14d9ca-3ba3-3d94-90b9-6f39ff276d1a
+2026-10-28 10:17:10 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-10-28 10:17:10 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-10-28 10:17:10 - Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-10-28 10:17:10 - Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-10-28 10:17:10 - Bean 'reactorDeferringLoadBalancerExchangeFilterFunction' of type [org.springframework.cloud.client.loadbalancer.reactive.DeferringLoadBalancerExchangeFilterFunction] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-10-28 10:17:11 - Tomcat initialized with port 8080 (http)
+2026-10-28 10:17:11 - Starting service [Tomcat]
+2026-10-28 10:17:11 - Starting Servlet engine: [Apache Tomcat/10.1.25]
+2026-10-28 10:17:14 - Loaded RoutePredicateFactory [After]
+2026-10-28 10:17:14 - Loaded RoutePredicateFactory [Before]
+2026-10-28 10:17:14 - Loaded RoutePredicateFactory [Between]
+2026-10-28 10:17:14 - Loaded RoutePredicateFactory [Cookie]
+2026-10-28 10:17:14 - Loaded RoutePredicateFactory [Header]
+2026-10-28 10:17:14 - Loaded RoutePredicateFactory [Host]
+2026-10-28 10:17:14 - Loaded RoutePredicateFactory [Method]
+2026-10-28 10:17:14 - Loaded RoutePredicateFactory [Path]
+2026-10-28 10:17:14 - Loaded RoutePredicateFactory [Query]
+2026-10-28 10:17:14 - Loaded RoutePredicateFactory [ReadBody]
+2026-10-28 10:17:14 - Loaded RoutePredicateFactory [RemoteAddr]
+2026-10-28 10:17:14 - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2026-10-28 10:17:14 - Loaded RoutePredicateFactory [Weight]
+2026-10-28 10:17:14 - Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2026-10-28 10:17:14 - Unable to start LiveReload server
+2026-10-28 10:17:15 - Eureka HTTP Client uses RestTemplate.
+2026-10-28 10:17:16 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-10-28 10:17:16 - Setting initial instance status as: STARTING
+2026-10-28 10:17:16 - Initializing Eureka in region us-east-1
+2026-10-28 10:17:16 - Client configured to neither register nor query for data.
+2026-10-28 10:17:16 - Discovery Client initialized at timestamp 1793162836214 with initial instances count: 0
+2026-10-28 10:17:16 - Registering application API-GATEWAY with eureka with status UP
+2026-10-28 10:17:16 - Tomcat started on port 8080 (http)
+2026-10-28 10:17:16 - Updating port to 8080
+2026-10-28 10:17:17 - Started ApiGatewayApplication in 11.316 seconds (process running for 20.125)
+2026-10-28 10:17:21 - [3c9439e0]  500 Server Error for HTTP GET "/api/esign-application-service/change-review-status/UCCA20250037"
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: no further information: localhost/127.0.0.1:7785
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ? org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+	*__checkpoint ? HTTP GET "/api/esign-application-service/change-review-status/UCCA20250037" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+Caused by: java.net.ConnectException: Connection refused: no further information
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:672)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:946)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:336)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:776)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:994)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:842)
