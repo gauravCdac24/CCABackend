@@ -15,6 +15,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,12 +28,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import in.lms.cca.dto.LicenseDetailsSubmissionRequest;
+import in.lms.cca.dto.LicenseFormDefaultsDTO;
+import in.lms.cca.dto.LicenseReviewDecisionRequest;
+import in.lms.cca.certificate.LicenseCertificatePdfGenerator;
+import in.lms.cca.certificate.LicenseCertificateDataService;
 import in.lms.cca.dto.StatusChangedOfLicense;
 import in.lms.cca.entity.BankGuaranteeProof;
 import in.lms.cca.entity.LicenseDetails;
 import in.lms.cca.payload.NotificationsRequest;
 import in.lms.cca.service.IBankGuaranteeProofService;
 import in.lms.cca.service.ILicenseDetailsService;
+import in.lms.cca.service.ILicenseReviewService;
 import in.lms.cca.service.INewLicenseClientService;
 import in.lms.cca.service.impl.NotificationClientServiceImpl;
 import in.lms.cca.util.api.LicenseIssuanceServiceAPIs;
@@ -57,6 +64,15 @@ public class LicenseIssuanceController {
 	
 	@Autowired
 	private ILicenseDetailsService licenseDetailsServ;
+
+	@Autowired
+	private LicenseCertificatePdfGenerator licenseCertificatePdf;
+
+	@Autowired
+	private LicenseCertificateDataService licenseCertificateData;
+
+	@Autowired
+	private ILicenseReviewService licenseReviewServ;
 	
 	@GetMapping(LicenseIssuanceServiceAPIs.GRANT_IN_PRINCIPLE_APPROVAL)
 	public ResponseEntity<?> getAllRecommendedNewApplication(
@@ -435,6 +451,67 @@ public class LicenseIssuanceController {
 	}
 	
 	
+	@GetMapping(LicenseIssuanceServiceAPIs.LICENSE_FORM_DEFAULTS)
+	public ResponseEntity<?> getLicenseFormDefaults(@RequestParam("id") String intentAppId,
+			@RequestParam("pid") String applicantUsername) {
+		try {
+			LicenseFormDefaultsDTO defaults = licenseReviewServ.getFormDefaults(intentAppId, applicantUsername);
+			return new ResponseEntity<>(defaults, HttpStatus.OK);
+		} catch (IllegalArgumentException ex) {
+			return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return new ResponseEntity<>("Unable to prepare license details.", HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@PostMapping(LicenseIssuanceServiceAPIs.SUBMIT_LICENSE_DETAILS_FOR_REVIEW)
+	public ResponseEntity<?> submitLicenseDetailsForReview(@RequestBody LicenseDetailsSubmissionRequest request) {
+		try {
+			licenseReviewServ.submitForReview(request.getIntentAppId(), request.getApplicantUsername(),
+					request.getSubmittedBy(), request.getSerialNo(), request.getIssueDate(), request.getExpiryDate(),
+					request.getPublicKey());
+			return new ResponseEntity<>("License details have been sent to CCA for review.", HttpStatus.OK);
+		} catch (IllegalArgumentException | IllegalStateException ex) {
+			return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			String detail = ex.getMessage() != null ? ex.getMessage() : ex.getClass().getSimpleName();
+			return new ResponseEntity<>("An error occurred while sending license details for review: " + detail,
+					HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@PostMapping(LicenseIssuanceServiceAPIs.APPROVE_LICENSE_REVIEW)
+	public ResponseEntity<?> approveLicenseReview(@RequestBody LicenseReviewDecisionRequest request) {
+		try {
+			licenseReviewServ.approve(request.getReviewId(), request.getRemark(), request.getReviewedBy());
+			return new ResponseEntity<>("License has been approved. The applicant has been granted the license and is now a CA.",
+					HttpStatus.OK);
+		} catch (IllegalArgumentException | IllegalStateException ex) {
+			return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			String detail = ex.getMessage() != null ? ex.getMessage() : ex.getClass().getSimpleName();
+			return new ResponseEntity<>("An error occurred while approving the license: " + detail, HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@PostMapping(LicenseIssuanceServiceAPIs.SEND_LICENSE_REVIEW_TO_ADMIN)
+	public ResponseEntity<?> sendLicenseReviewToAdmin(@RequestBody LicenseReviewDecisionRequest request) {
+		try {
+			licenseReviewServ.sendToAdmin(request.getReviewId(), request.getRemark(), request.getReviewedBy());
+			return new ResponseEntity<>("The form and your remark have been sent to admin.", HttpStatus.OK);
+		} catch (IllegalArgumentException | IllegalStateException ex) {
+			return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			String detail = ex.getMessage() != null ? ex.getMessage() : ex.getClass().getSimpleName();
+			return new ResponseEntity<>("An error occurred while sending the form to admin: " + detail,
+					HttpStatus.BAD_REQUEST);
+		}
+	}
+
 	@GetMapping(LicenseIssuanceServiceAPIs.GET_LICENSE_DETAILS_BY_USERNAME)
 	public ResponseEntity<?> getLicenseDetailsByUsername(@RequestParam("id")String username)
 	{
@@ -475,7 +552,16 @@ public class LicenseIssuanceController {
 			LicenseDetails li = licenseDetailsServ.getLicenseDetailsById(Long.parseLong(id));
 	
 		        if (li != null) {
-		        	
+		        	try {
+		        		byte[] pdf = licenseCertificatePdf.render(licenseCertificateData.load(li));
+		        		return ResponseEntity.ok()
+		        				.contentType(MediaType.APPLICATION_PDF)
+		        				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"CA-License-Certificate.pdf\"")
+		        				.body(pdf);
+		        	} catch (Exception generationError) {
+		        		generationError.printStackTrace();
+		        	}
+
 	                Path filePath = Paths.get(RealPath.REAL_PATH + "//LicenseCertificate//Document").resolve(li.getLicenseCertificate()).normalize();
 	                
 	                Resource resource = new UrlResource(filePath.toUri());

@@ -2234,6 +2234,9 @@ public class ApplicationAuditController {
 			if (parts.length > 0 && !parts[0].isBlank()) {
 				lookup.putIfAbsent(parts[0], entity);
 			}
+			if (parts.length > 1 && !parts[1].isBlank()) {
+				lookup.putIfAbsent("master:" + parts[1].trim(), entity);
+			}
 		}
 		return lookup;
 	}
@@ -2241,7 +2244,7 @@ public class ApplicationAuditController {
 	private Map<Long, ApplicantActionTakenEntity> buildApplicantActionLookup(String username) {
 		Map<Long, ApplicantActionTakenEntity> lookup = new HashMap<>();
 		List<ApplicantActionTakenEntity> actions = actionTakenService
-				.getAllApplicationTaken(normalizeReportUsername(username));
+				.getAllApplicationTakenAnyStatus(normalizeReportUsername(username));
 		if (actions == null) {
 			return lookup;
 		}
@@ -2254,36 +2257,52 @@ public class ApplicationAuditController {
 		return lookup;
 	}
 
+	private boolean hasReportText(String value) {
+		return value != null && !value.trim().isEmpty()
+				&& !"undefined".equalsIgnoreCase(value.trim())
+				&& !"null".equalsIgnoreCase(value.trim());
+	}
+
+	private boolean isValidComplianceValue(String value) {
+		if (!hasReportText(value)) {
+			return false;
+		}
+		String normalized = value.trim();
+		return "Yes".equalsIgnoreCase(normalized) || "No".equalsIgnoreCase(normalized)
+				|| "N/A".equalsIgnoreCase(normalized) || "NA".equalsIgnoreCase(normalized);
+	}
+
+	/**
+	 * NC control belongs in the audit report only when the applicant submitted
+	 * action-taken data and the auditor completed Approve/Reject review.
+	 */
+	private boolean isApplicantFilledAndAuditorReviewed(AuditReportCriteriaEntity reportCriteria,
+			ApplicantActionTakenEntity applicantAction) {
+		if (reportCriteria == null || applicantAction == null) {
+			return false;
+		}
+		boolean applicantFilled = hasReportText(applicantAction.getActionReport())
+				|| hasReportText(applicantAction.getRemarks());
+		boolean auditorReviewed = hasReportText(applicantAction.getAuditorRemarks())
+				|| isValidComplianceValue(reportCriteria.getCompliance());
+		return applicantFilled && auditorReviewed;
+	}
+
+	private boolean shouldIncludeAnnexureSection(String auditorVerification) {
+		return hasReportText(auditorVerification);
+	}
+
 	private String AnnualAuditPeriod(String username) {
 		StringBuilder contentBuilder = new StringBuilder();
 
 		AnnexureMain amain = resolveAnnexureForReport(username);
 		if (amain == null) {
-
-			contentBuilder.append("<p><b>1. Annual Audit Period Details</b></p>");
-
-			contentBuilder.append("<table>").append("<tr>").append("<th>S. No.</th>").append("<th>Description</th>")
-					.append("<th>From</th>").append("<th>To</th>")
-					.append("<th>Brief details of open observation (max 50 words)</th>").append("</tr>");
-
-			for (int i = 0; i < 4; i++) {
-				contentBuilder.append("<tr>").append("<td>").append(" ").append("</td>") // Serial Number
-						.append("<td>").append(" ").append("</td>").append("<td>").append(" ").append("</td>")
-						.append("<td>").append(" ").append("</td>").append("<td>").append(" ").append("</td>")
-						.append("</tr>");
-			}
-
-			contentBuilder.append("<tr><td colspan = 5 style='text-align: left;'><b>Auditor Remarks: </b></td></tr>");
-
-			contentBuilder.append("</table>");
-
-			return contentBuilder.toString();
-
+			return "";
 		} else {
 
 			AnnualAuditPeriodMain mainObj = periodMainServ.getByAnnexureId(amain.getAnnexureMainId());
-			if (mainObj == null) {
-				return "<p>No audit period details available.</p>";
+			if (mainObj == null || !shouldIncludeAnnexureSection(mainObj.getAuditorVerification())) {
+				return "";
 			}
 
 			contentBuilder.append("<p><b>1. Annual Audit Period Details</b></p>");
@@ -2352,8 +2371,8 @@ public class ApplicationAuditController {
 		} else {
 
 			InternalAuditMain mainObj = internalMainServ.getByAnnexureId(amain.getAnnexureMainId());
-			if (mainObj == null) {
-				return "<p>No internal audit details available.</p>";
+			if (mainObj == null || !shouldIncludeAnnexureSection(mainObj.getAuditorVerification())) {
+				return "";
 			}
 
 			
@@ -2403,31 +2422,12 @@ public class ApplicationAuditController {
 		// Fetch Annexure and eKYC Audit Details
 		AnnexureMain amain = resolveAnnexureForReport(username);
 		if (amain == null) {
-			
-
-			contentBuilder.append("<p><b>3. eKYC Account Audit Details of last one year - Month-wise</b></p>");
-
-			contentBuilder.append("<table>").append("<tr>").append("<th>S. No.</th>").append("<th>Month</th>")
-					.append("<th>From</th>").append("<th>To</th>").append("<th>Summary of Observations</th>")
-					.append("<th>Details of Auditors</th>").append("</tr>");
-			for (int i = 0; i < 12; i++) {
-				contentBuilder.append("<tr>").append("<td>").append(" ").append("</td>") // Serial Number
-						.append("<td>").append(" ").append("</td>").append("<td>").append(" ").append("</td>")
-						.append("<td>").append(" ").append("</td>").append("<td>").append(" ").append("</td>")
-						.append("<td>").append(" ").append("</td>").append("</tr>");
-			}
-			contentBuilder.append("<tr><td colspan = 6 style='text-align: left;'><b>Auditor Remarks: </b></td></tr>");
-
-			contentBuilder.append("</table>");
-
-			
-			return contentBuilder.toString();
-
+			return "";
 		} else {
 
 			EKYCMonthMain mainObj = monthMainServ.getByAnnexureId(amain.getAnnexureMainId());
-			if (mainObj == null) {
-				return "<p>No eKYC account audit details available.</p>";
+			if (mainObj == null || !shouldIncludeAnnexureSection(mainObj.getAuditorVerification())) {
+				return "";
 			}
 
 			
@@ -2478,35 +2478,12 @@ public class ApplicationAuditController {
 		// Fetch Annexure and eKYC Account-Based Verification Details
 		AnnexureMain amain = resolveAnnexureForReport(username);
 		if (amain == null) {
-			// Title
-			
-
-			contentBuilder.append(
-					"<p><b>4. eKYC Account-based Verification Enabled by CA - Details of the Audit Period</b></p>");
-
-			// Table Header
-			contentBuilder.append("<table>").append("<tr>").append("<th>S. No.</th>").append("<th>Option</th>")
-					.append("<th>Date of Approval by CCA</th>").append("<th>No DSCs Issued</th>")
-					.append("<th>Associated External Service</th>").append("<th>Details of External Service</th>")
-					.append("</tr>");
-			for (int i = 0; i < 12; i++) {
-				contentBuilder.append("<tr>").append("<td>").append(" ").append("</td>").append("<td>").append(" ")
-						.append("</td>").append("<td>").append(" ").append("</td>").append("<td>").append(" ")
-						.append("</td>").append("<td>").append(" ").append("</td>").append("<td>").append(" ")
-						.append("</td>").append("</tr>");
-
-			}
-			contentBuilder.append("<tr><td colspan = 6 style='text-align: left;'><b>Auditor Remarks: </b></td></tr>");
-
-			contentBuilder.append("</table>");
-
-			return contentBuilder.toString();
-
+			return "";
 		} else {
 
 			EKYCAccountBasedMain mainObj = accountBasedServ.getByAnnexureId(amain.getAnnexureMainId());
-			if (mainObj == null) {
-				return "<p>No eKYC account-based verification details available.</p>";
+			if (mainObj == null || !shouldIncludeAnnexureSection(mainObj.getAuditorVerification())) {
+				return "";
 			}
 
 			// Title
@@ -2551,7 +2528,8 @@ public class ApplicationAuditController {
 					mainObj.getApprovalDateOrganisational() != null ? mainObj.getApprovalDateOrganisational().toString()
 							: "-",
 					mainObj.getOrganisationalDSCCount() != null ? mainObj.getOrganisationalDSCCount().toString() : "0",
-					mainObj.getGstServiceDetails().toString(), mainObj.getExtServOrg()));
+					mainObj.getGstServiceDetails() != null ? mainObj.getGstServiceDetails().toString() : "-",
+					mainObj.getExtServOrg()));
 
 			dataList.add(createRow("Banking eKYC",
 					mainObj.getApprovalDateBanking() != null ? mainObj.getApprovalDateBanking().toString() : "-",
@@ -2597,40 +2575,18 @@ public class ApplicationAuditController {
 		StringBuilder contentBuilder = new StringBuilder();
 		AnnexureMain amain = resolveAnnexureForReport(username);
 		if (amain == null) {
-			
-
-			contentBuilder.append("<h3>5. RA Audit Details – During the Annual Audit Period</h3>");
-
-			contentBuilder.append("<table>").append("<tr>").append("<th>S. No.</th>").append("<th>Description</th>")
-					.append("<th>Details</th>").append("</tr>");
-
-			contentBuilder.append("<tr>").append("<td>1</td>").append("<td>Number of RAs</td>")
-					.append("<td>Total RAs - ").append("  Active RAs - ").append("</td>").append("</tr>");
-
-			contentBuilder.append("<tr>").append("<td>2</td>").append("<td>Dates of RA Audit</td>").append("<td>")
-					.append(" ").append("</td>").append("</tr>");
-
-			contentBuilder.append("<tr>").append("<td>3</td>")
-					.append("<td>Details of Non-Compliance reported by RAs</td>").append("<td>)").append(" ")
-					.append("</td>").append("</tr>");
-
-			contentBuilder.append("<tr>").append("<td>4</td>").append("<td>Action Taken by CAs</td>").append("<td>")
-					.append(" ").append("</td>").append("</tr>");
-
-			contentBuilder.append("<tr><td colspan = 5 style='text-align: left;'><b>Auditor Remarks: </b></td></tr>");
-
-			contentBuilder.append("</table>");
-
-			
-			return contentBuilder.toString();
-
+			return "";
 		} else {
 
 			RaAuditMain mainObj4 = raAuditServ.getByAnnexureId(amain.getAnnexureMainId());
 
 		
 
-			contentBuilder.append("<h3 style='color: red;'>5. RA Audit Details – During the Annual Audit Period</h3>");
+			
+			if (mainObj4 == null || !shouldIncludeAnnexureSection(mainObj4.getAuditorVerification())) {
+				return "";
+			}
+contentBuilder.append("<h3 style='color: red;'>5. RA Audit Details – During the Annual Audit Period</h3>");
 
 			contentBuilder.append("<table>").append("<tr>").append("<th>S. No.</th>").append("<th>Description</th>")
 					.append("<th>Details</th>").append("</tr>");
@@ -2674,37 +2630,17 @@ public class ApplicationAuditController {
 		StringBuilder contentBuilder = new StringBuilder();
 		AnnexureMain amain = resolveAnnexureForReport(username);
 		if (amain == null) {
-			
-
-			contentBuilder.append("<h3>6. No of Court Cases / Police Complaints</h3>");
-
-			contentBuilder.append("<table>").append("<tr>").append("<th>S. No.</th>").append("<th>Description</th>")
-					.append("<th>Details</th>").append("</tr>");
-			contentBuilder.append("<tr>").append("<td>1</td>").append(
-					"<td>Number of active court cases related to verification prior to issuance of DSC (Exists before the audit period)</td>")
-					.append("<td>").append(" ").append("</td>").append("</tr>");
-
-			contentBuilder.append("<tr>").append("<td>2</td>").append(
-					"<td>Number of court cases related to verification prior to issuance of DSC (Registered during the audit period)</td>")
-					.append("<td>").append(" ").append("</td>").append("</tr>");
-
-			contentBuilder.append("<tr>").append("<td>3</td>").append(
-					"<td>Number of police complaints against CA on DSC issuance/verification related activities</td>")
-					.append("<td>").append(" ").append("</td>").append("</tr>");
-
-			contentBuilder.append("<tr><td colspan = 5 style='text-align: left;'><b>Auditor Remarks: </b></td></tr>");
-
-			contentBuilder.append("</table>");
-
-			
-			return contentBuilder.toString();
-
+			return "";
 		} else {
 
 			CourtCasesMain mainObj5 = courtCasesServ.getByAnnexureId(amain.getAnnexureMainId());
 
 			
-			contentBuilder.append("<h3 style='color: red;'>6. No of Court Cases / Police Complaints</h3>");
+			
+			if (mainObj5 == null || !shouldIncludeAnnexureSection(mainObj5.getAuditorVerification())) {
+				return "";
+			}
+contentBuilder.append("<h3 style='color: red;'>6. No of Court Cases / Police Complaints</h3>");
 
 			contentBuilder.append("<table>").append("<tr>").append("<th>S. No.</th>").append("<th>Description</th>")
 					.append("<th>Details</th>").append("</tr>");
@@ -2743,37 +2679,18 @@ public class ApplicationAuditController {
 		StringBuilder contentBuilder = new StringBuilder();
 		AnnexureMain amain = resolveAnnexureForReport(username);
 		if (amain == null) {
-			
-			contentBuilder.append("<h3>7. No of Revocation of DSC during the Audit Period</h3>");
-
-			contentBuilder.append("<table>").append("<tr>").append("<th>S. No.</th>").append("<th>Description</th>")
-					.append("<th>Details</th>").append("</tr>");
-
-			contentBuilder.append("<tr>").append("<td>1</td>").append("<td>Number of DSCs revoked</td>").append("<td>")
-					.append(" ").append("</td>").append("</tr>");
-
-			contentBuilder.append("<tr>").append("<td>2</td>")
-					.append("<td>Number of revocation requests received from subscriber/organizations & reasons</td>")
-					.append("<td>").append(" ").append("</td>").append("</tr>");
-
-			contentBuilder.append("<tr>").append("<td>3</td>")
-					.append("<td>Number of DSCs revoked by CAs & reasons</td>").append("<td>)").append(" ")
-					.append("</td>").append("</tr>");
-
-			contentBuilder.append("<tr><td colspan = 5 style='text-align: left;'><b>Auditor Remarks: </b></td></tr>");
-
-			contentBuilder.append("</table>");
-
-			
-			return contentBuilder.toString();
-
+			return "";
 		} else {
 
 			RevocationMain mainObj6 = revocationServ.getByAnnexureId(amain.getAnnexureMainId());
 
 			
 
-			contentBuilder.append("<h3 style='color: red;'>7. No of Revocation of DSC during the Audit Period</h3>");
+			
+			if (mainObj6 == null || !shouldIncludeAnnexureSection(mainObj6.getAuditorVerification())) {
+				return "";
+			}
+contentBuilder.append("<h3 style='color: red;'>7. No of Revocation of DSC during the Audit Period</h3>");
 
 			contentBuilder.append("<table>").append("<tr>").append("<th>S. No.</th>").append("<th>Description</th>")
 					.append("<th>Details</th>").append("</tr>");
@@ -2812,32 +2729,15 @@ public class ApplicationAuditController {
 		// Fetch Annexure and eKYC Audit Details
 		AnnexureMain amain = resolveAnnexureForReport(username);
 		if (amain == null) {
-			
-
-			// Title
-			contentBuilder.append("<p><b>8. Empanelment of Crypto Token</b></p>");
-
-			// Table Header
-			contentBuilder.append("<table>").append("<tr>").append("<th>S. No.</th>")
-					.append("<th>Brand Name of Token</th>").append("<th>Details of OEM </th>")
-					.append("<th>Make in India Percentage</th>").append("<th>FIPs Certification up to</th>")
-					.append("<th>Details of Security Audit Details of Crypto token</th>").append("</tr>");
-			for (int i = 0; i < 5; i++) {
-				contentBuilder.append("<tr>").append("<td>").append(" ").append("</td>") // Serial Number
-						.append("<td>").append(" ").append("</td>").append("<td>").append(" ").append("</td>")
-						.append("<td>").append(" ").append("</td>").append("<td>").append(" ").append("</td>")
-						.append("<td>").append(" ").append("</td>").append("</tr>");
-			}
-			contentBuilder.append("<tr><td colspan = 6 style='text-align: left;'><b>Auditor Remarks: </b></td></tr>");
-
-			contentBuilder.append("</table>");
-
-			
-			return contentBuilder.toString();
+			return "";
 		} else {
 
 			CryptoTokenMain mainObj = cryptoTokenMainServ.getByAnnexureId(amain.getAnnexureMainId());
-			if (mainObj == null) {
+			
+			if (mainObj == null || !shouldIncludeAnnexureSection(mainObj.getAuditorVerification())) {
+				return "";
+			}
+if (mainObj == null) {
 				return "<p>No eKYC account audit details available.</p>";
 			}
 
@@ -2891,33 +2791,15 @@ public class ApplicationAuditController {
 		// Fetch Annexure and eKYC Audit Details
 		AnnexureMain amain = resolveAnnexureForReport(username);
 		if (amain == null) {
-			
-
-			// Title
-			contentBuilder.append("<p><b>9. Details of CA Software/Website</b></p>");
-
-			// Table Header
-			contentBuilder.append("<table>").append("<tr>").append("<th>S. No.</th>").append("<th>Description</th>")
-					.append("<th>Developed By</th>").append("<th>Database Used</th>").append("<th>Certification</th>")
-					.append("<th>Last Security Audit</th>").append("</tr>");
-
-			for (int i = 0; i < 6; i++) {
-				contentBuilder.append("<tr>").append("<td>").append(" ").append("</td>") // Serial Number
-						.append("<td>").append(" ").append("</td>").append("<td>").append(" ").append("</td>")
-						.append("<td>").append(" ").append("</td>").append("<td>").append(" ").append("</td>")
-						.append("<td>").append(" ").append("</td>").append("</tr>");
-			}
-			contentBuilder.append("<tr><td colspan = 6 style='text-align: left;'><b>Auditor Remarks: </b></td></tr>");
-
-			contentBuilder.append("</table>");
-
-		
-			return contentBuilder.toString();
-
+			return "";
 		} else {
 
 			CaSwWebMain mainObj = caSwWebMainServ.getByAnnexureId(amain.getAnnexureMainId());
-			if (mainObj == null) {
+			
+			if (mainObj == null || !shouldIncludeAnnexureSection(mainObj.getAuditorVerification())) {
+				return "";
+			}
+if (mainObj == null) {
 				return "<p>No eKYC account audit details available.</p>";
 			}
 
@@ -2971,33 +2853,15 @@ public class ApplicationAuditController {
 		// Fetch Annexure and eKYC Audit Details
 		AnnexureMain amain = resolveAnnexureForReport(username);
 		if (amain == null) {
-			
-
-			// Title
-			contentBuilder.append("<p><b>10. Details of DC & DR Site</b></p>");
-
-			// Table Header
-			contentBuilder.append("<table>").append("<tr>").append("<th>S. No.</th>").append("<th>Description</th>")
-					.append("<th>Location</th>").append("<thNo of CA Administrators</th>")
-					.append("<th>No of System Administrators</th>").append("<th>No of CA Operators</th>")
-					.append("<th>No of Verification Officers</th>").append("<th>Total CA Manpower</th>")
-					.append("</tr>");
-			for (int i = 0; i < 5; i++) {
-				contentBuilder.append("<tr>").append("<td>").append(" ").append("</td>") // Serial Number
-						.append("<td>").append(" ").append("</td>").append("<td>").append(" ").append("</td>")
-						.append("<td>").append(" ").append("</td>").append("<td>").append(" ").append("</td>")
-						.append("<td>").append(" ").append("</td>").append("<td>").append(" ").append("</td>").append("</tr>");
-			}
-			contentBuilder.append("<tr><td colspan = 7 style='text-align: left;'><b>Auditor Remarks: </b></td></tr>");
-
-			contentBuilder.append("</table>");
-
-		
-			return contentBuilder.toString();
+			return "";
 		} else {
 
 			LocationMain mainObj = locationMainServ.getByAnnexureId(amain.getAnnexureMainId());
-			if (mainObj == null) {
+			
+			if (mainObj == null || !shouldIncludeAnnexureSection(mainObj.getAuditorVerification())) {
+				return "";
+			}
+if (mainObj == null) {
 				return "<p>No Details of DC & DR Site available.</p>";
 			}
 
@@ -3059,30 +2923,15 @@ public class ApplicationAuditController {
 		// Fetch Annexure and eKYC Audit Details
 		AnnexureMain amain = resolveAnnexureForReport(username);
 		if (amain == null) {
-			
-			// Title
-			contentBuilder.append("<p><b>11. Details of CA Services</b></p>");
-
-			// Table Header
-			contentBuilder.append("<table>").append("<tr>").append("<th>S. No.</th>").append("<th>Description</th>")
-					.append("<th>Internal Only</th>").append("<th>External Service</th>")
-					.append("<th>No of ASPs/ Organizations</th>").append("</tr>");
-			for (int i = 0; i < 5; i++) {
-				contentBuilder.append("<tr>").append("<td>").append(" ").append("</td>") // Serial Number
-						.append("<td>").append(" ").append("</td>").append("<td>").append(" ").append("</td>")
-						.append("<td>").append(" ").append("</td>").append("<td>").append(" ").append("</td>")
-						.append("</tr>");
-			}
-			contentBuilder.append("<tr><td colspan = 5 style='text-align: left;'><b>Auditor Remarks: </b></td></tr>");
-
-			contentBuilder.append("</table>");
-
-			
-			return contentBuilder.toString();
+			return "";
 		} else {
 
 			CAServicesMain mainObj = caServicesMainServ.getByAnnexureId(amain.getAnnexureMainId());
-			if (mainObj == null) {
+			
+			if (mainObj == null || !shouldIncludeAnnexureSection(mainObj.getAuditorVerification())) {
+				return "";
+			}
+if (mainObj == null) {
 				return "<p>No  Details of CA Services available.</p>";
 			}
 
@@ -3134,31 +2983,18 @@ public class ApplicationAuditController {
 		StringBuilder contentBuilder = new StringBuilder();
 		AnnexureMain amain = resolveAnnexureForReport(username);
 		if (amain == null) {
-			
-			contentBuilder.append("<h3>12. Details of ASP</h3>");
-
-			contentBuilder.append("<table>").append("<tr>").append("<th>S. No.</th>").append("<th>Description</th>")
-					.append("<th>Details</th>").append("</tr>");
-			contentBuilder.append("<tr>").append("<td>1</td>").append("<td>No of ASPs</td>").append("<td>").append(" ")
-					.append("</td>").append("</tr>");
-
-			contentBuilder.append("<tr>").append("<td>2</td>")
-					.append("<td>No of ASPs whose audit exceed more than One year</td>").append("<td>").append(" ")
-					.append("</td>").append("</tr>");
-			contentBuilder.append("<tr><td colspan = 3 style='text-align: left;'><b>Auditor Remarks: </b></td></tr>");
-
-			contentBuilder.append("</table>");
-
-			
-			return contentBuilder.toString();
-
+			return "";
 		}
 
 		ASPDetails mainObj11 = aspDetailsServ.getByAnnexureId(amain.getAnnexureMainId());
 
 		
 
-		contentBuilder.append("<h3 style='color: red;'>12. Details of ASP</h3>");
+		
+		if (mainObj11 == null || !shouldIncludeAnnexureSection(mainObj11.getAuditorVerification())) {
+			return "";
+		}
+contentBuilder.append("<h3 style='color: red;'>12. Details of ASP</h3>");
 
 		contentBuilder.append("<table>").append("<tr>").append("<th>S. No.</th>").append("<th>Description</th>")
 				.append("<th>Details</th>").append("</tr>");
@@ -3215,7 +3051,11 @@ public class ApplicationAuditController {
 		} else {
 
 			PublicInfoMain mainObj = publicInfoMainServ.getByAnnexureId(amain.getAnnexureMainId());
-			if (mainObj == null) {
+			
+			if (mainObj == null || !shouldIncludeAnnexureSection(mainObj.getAuditorVerification())) {
+				return "";
+			}
+if (mainObj == null) {
 				return "<p>No  Public Information maintained available.</p>";
 			}
 
@@ -3262,36 +3102,18 @@ public class ApplicationAuditController {
 		StringBuilder contentBuilder = new StringBuilder();
 		AnnexureMain amain = resolveAnnexureForReport(username);
 		if (amain == null) {
-		
-
-			contentBuilder.append("<h3>14. Cost of Certificates issued during audit period</h3>");
-
-			contentBuilder.append("<table>").append("<tr>").append("<th>S. No.</th>").append("<th>Description</th>")
-					.append("<th>Details</th>").append("</tr>");
-
-			contentBuilder.append("<tr>").append("<td>1</td>").append(
-					"<td>Average expenditure for issuance of one DSC and maintenance of the details for a period of 7 years after expiry of DSC</td>")
-					.append("<td>").append(" ").append("</td>").append("</tr>");
-
-			contentBuilder.append("<tr>").append("<td>2</td>").append("<td>Average fee charged for one DSC by CA</td>")
-					.append("<td>").append(" ").append("</td>").append("</tr>");
-
-			contentBuilder.append("<tr>").append("<td>3</td>").append(
-					"<td>Detailed explanation, sustainability plan if the average fee charged is less than average cost of certificates</td>")
-					.append("<td>").append(" ").append("</td>").append("</tr>");
-			contentBuilder.append("<tr><td colspan = 3 style='text-align: left;'><b>Auditor Remarks: </b></td></tr>");
-
-			contentBuilder.append("</table>");
-
-		
-			return contentBuilder.toString();
+			return "";
 		}
 
 		CertificateCost mainObj13 = certificateCostServ.getByAnnexureId(amain.getAnnexureMainId());
 
 		
 
-		contentBuilder.append("<h3 style='color: red;'>14. Cost of Certificates issued during audit period</h3>");
+		
+		if (mainObj13 == null || !shouldIncludeAnnexureSection(mainObj13.getAuditorVerification())) {
+			return "";
+		}
+contentBuilder.append("<h3 style='color: red;'>14. Cost of Certificates issued during audit period</h3>");
 
 		contentBuilder.append("<table>").append("<tr>").append("<th>S. No.</th>").append("<th>Description</th>")
 				.append("<th>Details</th>").append("</tr>");
@@ -3317,7 +3139,9 @@ public class ApplicationAuditController {
 
 		contentBuilder.append("<p><b>Auditor Remarks</b></p>");
 		contentBuilder.append("<p>")
-				.append(mainObj13.getAuditorVerification() != null ? mainObj13.getAuditorVerification() : "No remarks")
+				.append(mainObj13 != null && mainObj13.getAuditorVerification() != null
+						? mainObj13.getAuditorVerification()
+						: "No remarks")
 				.append("</p>");
 
 		
@@ -3378,7 +3202,11 @@ public class ApplicationAuditController {
 
 			
 
-			contentBuilder.append("<h3 style='color: red;'>15. CA Self-assessment for audit period</h3>");
+			
+			if (mainObj14 == null || !shouldIncludeAnnexureSection(mainObj14.getAuditorVerification())) {
+				return "";
+			}
+contentBuilder.append("<h3 style='color: red;'>15. CA Self-assessment for audit period</h3>");
 
 			contentBuilder.append("<table>").append("<tr>").append("<th>S. No.</th>").append("<th>Name</th>")
 					.append("<th>Details</th>").append("</tr>");
@@ -3433,7 +3261,9 @@ public class ApplicationAuditController {
 
 			contentBuilder.append("<p><b>Auditor Remarks</b></p>");
 			contentBuilder.append("<p>").append(
-					mainObj14.getAuditorVerification() != null ? mainObj14.getAuditorVerification() : "No remarks")
+					mainObj14 != null && mainObj14.getAuditorVerification() != null
+							? mainObj14.getAuditorVerification()
+							: "No remarks")
 					.append("</p>");
 
 			
@@ -3450,29 +3280,12 @@ public class ApplicationAuditController {
 		// Fetch Annexure and eKYC Audit Details
 		AnnexureMain amain = resolveAnnexureForReport(username);
 		if (amain == null) {
-			
-			// Title
-			contentBuilder.append("<p><b>16. CA Software and external connectivity</b></p>");
-
-			// Table Header
-			contentBuilder.append("<table>").append("<tr>").append("<th>S. No.</th>").append("<th>Name</th>")
-					.append("<th>Details</th>").append("</tr>");
-			for (int i = 0; i < 12; i++) {
-				contentBuilder.append("<tr>").append("<td>").append(" ").append("</td>") // Serial Number
-						.append("<td>").append(" ").append("</td>").append("<td>").append(" ").append("</td>")
-						.append("</tr>");
-			}
-			contentBuilder.append("<tr><td colspan = 3 style='text-align: left;'><b>Auditor Remarks: </b></td></tr>");
-
-			contentBuilder.append("</table>");
-
-			
-			return contentBuilder.toString();
+			return "";
 		} else {
 
 			ConnectivityMain mainObj = connectivityMainServ.getByAnnexureId(amain.getAnnexureMainId());
-			if (mainObj == null) {
-				return "<p>No CA Software and external connectivity available.</p>";
+			if (mainObj == null || !shouldIncludeAnnexureSection(mainObj.getAuditorVerification())) {
+				return "";
 			}
 
 			
@@ -3519,34 +3332,18 @@ public class ApplicationAuditController {
 		StringBuilder contentBuilder = new StringBuilder();
 		AnnexureMain amain = resolveAnnexureForReport(username);
 		if (amain == null) {
-			
-
-			contentBuilder.append("<h3>15. CA Self-assessment for audit period</h3>");
-
-			contentBuilder.append("<table>").append("<tr>").append("<th>S. No.</th>").append("<th>Name</th>")
-					.append("<th>Details</th>").append("</tr>");
-
-			contentBuilder.append("<tr>").append("<td>1</td>")
-					.append("<td>Total service down time during the audit period, if any.</td>").append("<td>")
-					.append(" ").append("</td>").append("</td>").append("</tr>");
-
-			contentBuilder.append("<tr>").append("<td>2</td>")
-					.append("<td>Reason for non-availability of service and remedial measures taken.</td>")
-					.append("<td>").append(" ").append("</td>").append("</tr>");
-
-			contentBuilder.append("<tr><td colspan = 3 style='text-align: left;'><b>Auditor Remarks: </b></td></tr>");
-
-			contentBuilder.append("</table>");
-
-		
-			return contentBuilder.toString();
+			return "";
 		} else {
 
 			DownTime mainObj16 = downTimeServ.getByAnnexureId(amain.getAnnexureMainId());
 
 		
 
-			contentBuilder.append("<h3 style='color: red;'>15. CA Self-assessment for audit period</h3>");
+			
+			if (mainObj16 == null || !shouldIncludeAnnexureSection(mainObj16.getAuditorVerification())) {
+				return "";
+			}
+contentBuilder.append("<h3 style='color: red;'>15. CA Self-assessment for audit period</h3>");
 
 			contentBuilder.append("<table>").append("<tr>").append("<th>S. No.</th>").append("<th>Name</th>")
 					.append("<th>Details</th>").append("</tr>");
@@ -3571,7 +3368,9 @@ public class ApplicationAuditController {
 
 			contentBuilder.append("<p><b>Auditor Remarks</b></p>");
 			contentBuilder.append("<p>").append(
-					mainObj16.getAuditorVerification() != null ? mainObj16.getAuditorVerification() : "No remarks")
+					mainObj16 != null && mainObj16.getAuditorVerification() != null
+							? mainObj16.getAuditorVerification()
+							: "No remarks")
 					.append("</p>");
 
 			
@@ -3588,37 +3387,12 @@ public class ApplicationAuditController {
 		// Fetch Annexure and eKYC Audit Details
 		AnnexureMain amain = resolveAnnexureForReport(username);
 		if (amain == null) {
-			
-
-			// Title
-			contentBuilder.append("<p><b>18. List of CA Trusted Persons</b></p>");
-
-			contentBuilder.append("<table>").append("<tr>").append("<th>S. No.</th>").append("<th>Name</th>")
-					.append("<th>Designation</th>").append("<th>Location of<br/>Posting<br/>DC/DR</th>")
-					.append("<th>Role in CA</th>").append("<th>ID Card No<br/>& Mobile</th>")
-					.append("<th>Identification<br/>Details in the CA<br/>Payroll</th>")
-					.append("<th>Employed<br/>Since</th>").append("<th>Training details</th>")
-					.append("<th>Date of last<br/>background<br/>verification</th>").append("</tr>");
-
-			for (int i = 0; i < 12; i++) {
-				contentBuilder.append("<tr>").append("<td>").append(" ").append("</td>").append("<td>").append(" ")
-						.append("</td>").append("<td>").append(" ").append("</td>").append("<td>").append(" ")
-						.append("</td>").append("<td>").append(" ").append("</td>").append("<td>").append(" ")
-						.append("</td>").append("<td>").append(" ").append("</td>").append("<td>").append(" ")
-						.append("</td>").append("<td>").append(" ").append("</td>").append("<td>").append(" ")
-						.append("</td>").append("</tr>");
-			}
-			contentBuilder.append("<tr><td colspan = 10 style='text-align: left;'><b>Auditor Remarks: </b></td></tr>");
-
-			contentBuilder.append("</table>");
-
-			
-			return contentBuilder.toString();
+			return "";
 		} else {
 
 			CATrustedPersonMain mainObj = personMainServ.getByAnnexureId(amain.getAnnexureMainId());
-			if (mainObj == null) {
-				return "<p>No CA Trusted Persons available.</p>";
+			if (mainObj == null || !shouldIncludeAnnexureSection(mainObj.getAuditorVerification())) {
+				return "";
 			}
 
 		
@@ -3686,7 +3460,8 @@ public class ApplicationAuditController {
 	        @RequestParam(value ="annexureVI" , required = false) MultipartFile annexureVI,
 	        @RequestParam(value ="annexureVIII" , required = false) MultipartFile annexureVIII,
 	        @RequestParam(value ="annexureVIIIRepeat" , required = false) MultipartFile annexureVIIIRepeat,
-	        @RequestParam(value ="annexureVIIIUndertaking" , required = false) MultipartFile annexureVIIIUndertaking) {
+	        @RequestParam(value ="annexureVIIIUndertaking" , required = false) MultipartFile annexureVIIIUndertaking,
+	        @RequestParam(value = "preview", required = false, defaultValue = "false") boolean preview) {
 
 	    if (userName == null || userName.trim().isEmpty()) {
 	        return ResponseEntity.badRequest().body("Username is required");
@@ -3704,9 +3479,13 @@ public class ApplicationAuditController {
 	        }
 	        List<AuditReportCriteriaEntity> auditReportCriteriaEntities = auditReportCriteriaService.getAllDatas(applicationAuditEntity);
 
-	        Optional<ESignedDocumentsEntity> optional = resolveOrCreatePendingEsignRecord(normalizedUserName);
-	        if (!optional.isPresent()) {
-	            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to save eSigned document");
+	        String downloadFileName = "AuditReportPreview.pdf";
+	        if (!preview) {
+	            Optional<ESignedDocumentsEntity> optional = resolveOrCreatePendingEsignRecord(normalizedUserName);
+	            if (!optional.isPresent()) {
+	                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to save eSigned document");
+	            }
+	            downloadFileName = optional.get().geteSignedId() + " ";
 	        }
 
 	        // Generate HTML content
@@ -3780,7 +3559,7 @@ public class ApplicationAuditController {
 
 	        // Return final response
 	        return ResponseEntity.ok()
-	                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + optional.get().geteSignedId() + " ")
+	                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + downloadFileName)
 	                .header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, HttpHeaders.CONTENT_DISPOSITION)
 	                .contentType(MediaType.APPLICATION_PDF)
 	                .body(numberedPdf.toByteArray());
@@ -3800,35 +3579,30 @@ public class ApplicationAuditController {
 		Map<Long, ApplicantActionTakenEntity> applicantActionLookup = buildApplicantActionLookup(userName);
 		String normalizedUserName = normalizeReportUsername(userName);
 
-		contentBuilder.append("<html><head><style>").append("@page { margin: 50pt 20pt 50pt 20pt; }")
-				.append("body { font-size: 12px; font-family: 'Times New Roman', serif; }")
-				.append("table { border-collapse: collapse; width: 100%; }")
-				.append("th, td { border: 1px solid black; padding: 5px; }")
-				.append(".section-title { font-size: 22px; font-style: italic; font-weight: bold; color: #2f4f6f; }")
-				.append(".summary-title { font-size: 15px; font-style: italic; font-weight: bold; color: #2f4f6f; }")
-		        .append(".subsection-title { font-size: 20px; font-style: italic; font-weight: bold; color: #6f2020; margin-top: 10px; }")
-		        .append(".minor-title { font-size: 18px; font-style: italic; font-weight: bold; color: #6f2020; margin-top: 10px; }")
-				.append("th { background-color: #d9534f; color: white; }").append("</style></head><body>");
-		
-		
-		contentBuilder.append("<p class='summary-title'>c. <i>Summary Of Observation</i></p>");
+		contentBuilder.append("<html><head><style>")
+				.append("@page { size: A4 landscape; margin: 28pt 16pt 32pt 16pt; }")
+				.append("body { font-size: 9pt; font-family: 'Times New Roman', serif; }")
+				.append("table { border-collapse: collapse; width: 100%; table-layout: fixed; }")
+				.append("th, td { border: 1px solid black; padding: 3px; vertical-align: top; ")
+				.append("word-wrap: break-word; overflow-wrap: anywhere; word-break: break-word; }")
+				.append(".section-title { font-size: 16pt; font-style: italic; font-weight: bold; color: #2f4f6f; }")
+				.append(".summary-title { font-size: 13pt; font-style: italic; font-weight: bold; color: #2f4f6f; }")
+				.append(".subsection-title { font-size: 14pt; font-style: italic; font-weight: bold; color: #6f2020; margin-top: 10px; }")
+				.append(".minor-title { font-size: 12pt; font-style: italic; font-weight: bold; color: #6f2020; margin-top: 10px; }")
+				.append("th { background-color: #d9534f; color: white; font-size: 8pt; }")
+				.append("td { font-size: 8pt; }")
+				.append("</style></head><body>");
+
+		contentBuilder.append("<p class='summary-title'><i>Summary of Observation</i></p>");
 
 		List<AuditCriteriaPayload> criteriaPayloads = applicationAuditorsService.getAllData(normalizedUserName);
+		StringBuilder summaryRows = new StringBuilder();
+		int summarySerial = 1;
 
 		int criteriaIndex = 1;
 		for (AuditCriteriaPayload criteria : criteriaPayloads) {
 		    int subCriteriaIndex = 1;
 		    for (AuditSubCriteriaPayload subCriteria : criteria.getAuditSubCriteria()) {
-		        contentBuilder.append("<table border='1'><tr>")
-		            .append("<th>S.No.</th>")
-		            .append("<th>Control No.</th>")
-		            .append("<th>Reference(s)</th>")
-		            .append("<th>Non-compliance observed</th>")
-		            .append("<th>Action taken by CA, if any</th>")
-		            .append("<th>Compliance</th>")
-		            .append("</tr>");
-
-		        int serialNumber = 1;
 		        int auditControlIndex = 1;
 		        for (AuditParameterPayload parameter : subCriteria.getAuditParameterPayload()) {
 		            for (AuditControlPayload control : parameter.getAuditControlPayload()) {
@@ -3836,51 +3610,69 @@ public class ApplicationAuditController {
 		                String fullControlId = controlKey + "-" + control.getAuditControllId();
 		                AuditReportCriteriaEntity reportCriteria = findMatchingEntity(criteriaLookup, controlKey, fullControlId)
 		                        .orElse(null);
-		                String complianceValue = reportCriteria != null && reportCriteria.getCompliance() != null
-		                        ? reportCriteria.getCompliance()
-		                        : "";
-
-		                contentBuilder.append("<tr>")
-		                    .append("<td>").append(serialNumber++).append("</td>")
-		                    .append("<td>").append(escapeHtml(controlKey)).append("</td>")
-		                    .append("<td>").append(escapeHtml(control.getReferences())).append("</td>")
-		                    .append("<td style='max-width: 200px;'>").append(control.getAuditControl() != null ? control.getAuditControl() : "").append("</td>")
-		                    .append("<td>").append(control.getAuditCheck() != null ? control.getAuditCheck() : "").append("</td>")
-		                    .append("<td>").append(escapeHtml(complianceValue)).append("</td>")
-		                    .append("</tr>");
-
+						ApplicantActionTakenEntity applicantAction = reportCriteria != null
+								&& reportCriteria.getCriteriaId() != null
+										? applicantActionLookup.get(reportCriteria.getCriteriaId())
+										: null;
+						if (isApplicantFilledAndAuditorReviewed(reportCriteria, applicantAction)) {
+							String complianceValue = reportCriteria.getCompliance() != null
+									? reportCriteria.getCompliance()
+									: "";
+							String actionTaken = hasReportText(applicantAction.getActionReport())
+									? applicantAction.getActionReport()
+									: (applicantAction.getRemarks() != null ? applicantAction.getRemarks() : "");
+							summaryRows.append("<tr>")
+									.append("<td style='width:6%'>").append(summarySerial++).append("</td>")
+									.append("<td style='width:10%'>").append(escapeHtml(controlKey)).append("</td>")
+									.append("<td style='width:14%'>").append(breakLongWords(control.getReferences())).append("</td>")
+									.append("<td style='width:28%'>")
+									.append(control.getAuditControl() != null ? control.getAuditControl() : "")
+									.append("</td>")
+									.append("<td style='width:28%'>").append(breakLongWords(actionTaken)).append("</td>")
+									.append("<td style='width:14%'>").append(displayCompliance(complianceValue)).append("</td>")
+									.append("</tr>");
+						}
 		                auditControlIndex++;
 		            }
 		        }
-
-		        contentBuilder.append("</table><br/>");
 		        subCriteriaIndex++;
 		    }
 		    criteriaIndex++;
 		}
+
+		if (summaryRows.length() > 0) {
+			contentBuilder.append("<table border='1'><tr>")
+					.append("<th>S.No.</th>")
+					.append("<th>Control No.</th>")
+					.append("<th>Reference(s)</th>")
+					.append("<th>Non-compliance observed</th>")
+					.append("<th>Action taken by CA, if any</th>")
+					.append("<th>Compliance</th>")
+					.append("</tr>")
+					.append(summaryRows)
+					.append("</table><br/>");
+		} else {
+			contentBuilder.append("<p>No applicant-filled and auditor-reviewed NC controls available.</p>");
+		}
 		
 		contentBuilder.append("<p class='section-title'>3. <i>Detailed Audit Controls</i></p>");
 
+		Set<String> selectedControlIds = loadApplicantSelectedControlIds(normalizedUserName);
+		boolean anyDetailedControl = false;
 		criteriaIndex = 1;
 		for (AuditCriteriaPayload criteria : criteriaPayload) {
-			contentBuilder.append("<p class='subsection-title'><i>3.").append(criteriaIndex).append(". ")
-					.append(escapeHtml(criteria.getAuditCriteria())).append("</i></p>");
+			StringBuilder criteriaHtml = new StringBuilder();
+			boolean criteriaHasRows = false;
 
 			int subCriteriaIndex = 1;
 			for (AuditSubCriteriaPayload subCriteria : criteria.getAuditSubCriteria()) {
-				contentBuilder.append("<p class='minor-title'><span style='color:#1a4fb2;'>3.").append(criteriaIndex)
-						.append(".").append(subCriteriaIndex).append(". ").append("</span>").append("<i>")
-						.append(escapeHtml(subCriteria.getAuditSubCriteria())).append("</i></p>");
-
-				contentBuilder.append("<table><tr>").append("<th>Control No.</th><th>Control</th><th>Audit Checks</th>")
-						.append("<th>Control Type</th><th>References</th>")
-						.append("<th>Compliance</th><th>Document</th><th>Remarks</th>")
-						.append("<th>Applicant Document</th><th>Applicant Remarks</th></tr>");
+				StringBuilder subHtml = new StringBuilder();
+				boolean subHasRows = false;
 
 				int auditControlIndex = 1;
 				for (AuditParameterPayload parameter : subCriteria.getAuditParameterPayload()) {
-					contentBuilder.append("<tr><td colspan='10' style='font-weight: bold;text-align: left;background-color:#d9d9d9;'>")
-							.append(escapeHtml(parameter.getAuditParameter())).append("</td></tr>");
+					StringBuilder parameterRows = new StringBuilder();
+					boolean parameterHasRows = false;
 
 					for (AuditControlPayload control : parameter.getAuditControlPayload()) {
 						String controlKey = "3." + criteriaIndex + "." + subCriteriaIndex + "." + auditControlIndex;
@@ -3892,54 +3684,86 @@ public class ApplicationAuditController {
 										? applicantActionLookup.get(matchingEntity.getCriteriaId())
 										: null;
 
-						contentBuilder.append("<tr><td>").append(escapeHtml(controlKey)).append("</td>")
-								.append("<td style='max-width: 200px;'>")
-								.append(control.getAuditControl() != null ? control.getAuditControl() : "")
-								.append("</td>").append("<td>")
-								.append(control.getAuditCheck() != null ? control.getAuditCheck() : "").append("</td>")
-								.append("<td>").append(escapeHtml(control.getControlType())).append("</td>")
-								.append("<td>").append(escapeHtml(control.getReferences())).append("</td>")
-								.append("<td>")
-								.append(matchingEntity != null ? escapeHtml(matchingEntity.getCompliance()) : "")
-								.append("</td>").append("<td>")
-								.append(matchingEntity != null ? escapeHtml(matchingEntity.getDocument()) : "")
-								.append("</td>").append("<td>")
-								.append(matchingEntity != null ? escapeHtml(matchingEntity.getRemarks()) : "")
-								.append("</td>").append("<td>")
-								.append(applicantAction != null ? escapeHtml(applicantAction.getActionReport()) : "")
-								.append("</td>").append("<td>")
-								.append(applicantAction != null ? escapeHtml(applicantAction.getRemarks()) : "")
-								.append("</td>").append("</tr>");
+						if (isApplicantSelectedControl(control, selectedControlIds)
+								|| isApplicantFilledAndAuditorReviewed(matchingEntity, applicantAction)) {
+							parameterHasRows = true;
+							parameterRows.append("<tr><td style='width:7%'>").append(escapeHtml(controlKey)).append("</td>")
+									.append("<td style='width:16%'>")
+									.append(control.getAuditControl() != null ? control.getAuditControl() : "")
+									.append("</td>").append("<td style='width:14%'>")
+									.append(control.getAuditCheck() != null ? control.getAuditCheck() : "").append("</td>")
+									.append("<td style='width:8%'>").append(breakLongWords(control.getControlType())).append("</td>")
+									.append("<td style='width:10%'>").append(breakLongWords(control.getReferences())).append("</td>")
+									.append("<td style='width:8%'>")
+									.append(matchingEntity != null ? displayCompliance(matchingEntity.getCompliance()) : "")
+									.append("</td>").append("<td style='width:12%'>")
+									.append(matchingEntity != null ? breakLongWords(matchingEntity.getDocument()) : "")
+									.append("</td>").append("<td style='width:9%'>")
+									.append(matchingEntity != null ? breakLongWords(matchingEntity.getRemarks()) : "")
+									.append("</td>").append("<td style='width:8%'>")
+									.append(applicantAction != null ? breakLongWords(applicantAction.getActionReport()) : "")
+									.append("</td>").append("<td style='width:8%'>")
+									.append(applicantAction != null ? breakLongWords(applicantAction.getRemarks()) : "")
+									.append("</td>").append("</tr>");
+						}
 						auditControlIndex++;
+					}
+
+					if (parameterHasRows) {
+						subHasRows = true;
+						subHtml.append("<tr><td colspan='10' style='font-weight: bold;text-align: left;background-color:#d9d9d9;'>")
+								.append(escapeHtml(parameter.getAuditParameter())).append("</td></tr>")
+								.append(parameterRows);
 					}
 				}
 
-				contentBuilder.append("</table><p></p>");
+				if (subHasRows) {
+					criteriaHasRows = true;
+					criteriaHtml.append("<p class='minor-title'><span style='color:#1a4fb2;'>3.").append(criteriaIndex)
+							.append(".").append(subCriteriaIndex).append(". ").append("</span>").append("<i>")
+							.append(escapeHtml(subCriteria.getAuditSubCriteria())).append("</i></p>");
+					criteriaHtml.append("<table><tr>").append("<th>Control No.</th><th>Control</th><th>Audit Checks</th>")
+							.append("<th>Control Type</th><th>References</th>")
+							.append("<th>Compliance</th><th>Document</th><th>Remarks</th>")
+							.append("<th>Applicant Document</th><th>Applicant Remarks</th></tr>")
+							.append(subHtml)
+							.append("</table><p></p>");
+				}
 				subCriteriaIndex++;
+			}
+
+			if (criteriaHasRows) {
+				anyDetailedControl = true;
+				contentBuilder.append("<p class='subsection-title'><i>3.").append(criteriaIndex).append(". ")
+						.append(escapeHtml(criteria.getAuditCriteria())).append("</i></p>")
+						.append(criteriaHtml);
 			}
 			criteriaIndex++;
 		}
 
-		// Append additional audit sections
-		contentBuilder.append("<div>").append((AnnualAuditPeriod(userName))).append("</div>")
-				.append("<div>").append((InternalAuditDetailes(userName))).append("</div>")
-				.append("<div>").append((ekycAccountAuditDetailes(userName)))
-				.append("</div>").append("<div>")
-				.append((ekycAccountBasedVerification(userName))).append("</div>").append("<div>")
-				.append((raAuditDetails(userName))).append("</div>").append("<div>")
-				.append((courtCases(userName))).append("</div>").append("<div>")
-				.append((revocationMain(userName))).append("</div>").append("<div>")
-				.append((cryptoToken(userName))).append("</div>").append("<div>")
-				.append((caSwWebMain(userName))).append("</div>").append("<div>")
-				.append((locationMain(userName))).append("</div>").append("<div>")
-				.append((cAServiceMain(userName))).append("</div>").append("<div>")
-				.append((aSPDetails(userName))).append("</div>").append("<div>")
-				.append((publicInfoMain(userName))).append("</div>").append("<div>")
-				.append((certificateCost(userName))).append("</div>").append("<div>")
-				.append((selfAssessmentMain(userName))).append("</div>").append("<div>")
-				.append((caSoftwareAndExternal(userName))).append("</div>").append("<div>")
-				.append((downTimeDuringAudit(userName))).append("</div>").append("<div>")
-				.append((caTrustedPersons(userName))).append("</div>");
+		if (!anyDetailedControl) {
+			contentBuilder.append("<p>No audit controls selected by the applicant.</p>");
+		}
+
+		// Annexure A2: only sections filled by applicant and reviewed by auditor
+		contentBuilder.append("<div>").append(AnnualAuditPeriod(userName)).append("</div>")
+				.append("<div>").append(InternalAuditDetailes(userName)).append("</div>")
+				.append("<div>").append(ekycAccountAuditDetailes(userName)).append("</div>")
+				.append("<div>").append(ekycAccountBasedVerification(userName)).append("</div>")
+				.append("<div>").append(raAuditDetails(userName)).append("</div>")
+				.append("<div>").append(courtCases(userName)).append("</div>")
+				.append("<div>").append(revocationMain(userName)).append("</div>")
+				.append("<div>").append(cryptoToken(userName)).append("</div>")
+				.append("<div>").append(caSwWebMain(userName)).append("</div>")
+				.append("<div>").append(locationMain(userName)).append("</div>")
+				.append("<div>").append(cAServiceMain(userName)).append("</div>")
+				.append("<div>").append(aSPDetails(userName)).append("</div>")
+				.append("<div>").append(publicInfoMain(userName)).append("</div>")
+				.append("<div>").append(certificateCost(userName)).append("</div>")
+				.append("<div>").append(selfAssessmentMain(userName)).append("</div>")
+				.append("<div>").append(caSoftwareAndExternal(userName)).append("</div>")
+				.append("<div>").append(downTimeDuringAudit(userName)).append("</div>")
+				.append("<div>").append(caTrustedPersons(userName)).append("</div>");
 
 		contentBuilder.append("</body></html>");
 		
@@ -3957,7 +3781,46 @@ public class ApplicationAuditController {
 		if (controlKey != null && lookup.containsKey(controlKey)) {
 			return Optional.of(lookup.get(controlKey));
 		}
+		if (fullControlId != null) {
+			int dash = fullControlId.lastIndexOf('-');
+			if (dash >= 0 && dash < fullControlId.length() - 1) {
+				AuditReportCriteriaEntity byMaster = lookup.get("master:" + fullControlId.substring(dash + 1).trim());
+				if (byMaster != null) {
+					return Optional.of(byMaster);
+				}
+			}
+		}
 		return Optional.empty();
+	}
+
+	/**
+	 * Active controls the applicant saved for this audit, including rows stored
+	 * against a schedule after the audit agency was chosen. The preview request
+	 * often has no schedule header, so this does not depend on that header.
+	 */
+	private Set<String> loadApplicantSelectedControlIds(String userName) {
+		Set<String> selectedIds = new HashSet<>();
+		if (userName == null || userName.isBlank()) {
+			return selectedIds;
+		}
+		List<AuditControlEntity> controls = auditService.getActiveAuditControlsByUser(userName);
+		if (controls == null) {
+			return selectedIds;
+		}
+		for (AuditControlEntity control : controls) {
+			if (control != null && control.getControlId() != null) {
+				selectedIds.add(String.valueOf(control.getControlId()));
+			}
+		}
+		return selectedIds;
+	}
+
+	private boolean isApplicantSelectedControl(AuditControlPayload control, Set<String> selectedControlIds) {
+		if (control == null || control.getAuditControllId() == null || selectedControlIds == null
+				|| selectedControlIds.isEmpty()) {
+			return false;
+		}
+		return selectedControlIds.contains(control.getAuditControllId().trim());
 	}
 
 	private Optional<AuditReportCriteriaEntity> findMatchingEntity(List<AuditReportCriteriaEntity> entities,
@@ -3973,6 +3836,40 @@ public class ApplicationAuditController {
 			String[] parts = entity.getAuditControlId().split("-");
 			return parts.length > 0 && parts[0].equals(controlId);
 		}).findFirst();
+	}
+
+	private String displayCompliance(String value) {
+		if (value == null) {
+			return "";
+		}
+		String trimmed = value.trim();
+		if (trimmed.isEmpty() || "undefined".equalsIgnoreCase(trimmed) || "null".equalsIgnoreCase(trimmed)) {
+			return "";
+		}
+		return escapeHtml(trimmed);
+	}
+
+	private String breakLongWords(String value) {
+		String escaped = escapeHtml(value);
+		if (escaped.isEmpty()) {
+			return "";
+		}
+		StringBuilder broken = new StringBuilder(escaped.length() + 8);
+		int run = 0;
+		for (int i = 0; i < escaped.length(); i++) {
+			char c = escaped.charAt(i);
+			broken.append(c);
+			if (Character.isWhitespace(c) || c == '-' || c == '/' || c == '.' || c == ',' || c == '_') {
+				run = 0;
+			} else {
+				run++;
+				if (run >= 18) {
+					broken.append('\u200B');
+					run = 0;
+				}
+			}
+		}
+		return broken.toString();
 	}
 
 	private String escapeHtml(String input) {

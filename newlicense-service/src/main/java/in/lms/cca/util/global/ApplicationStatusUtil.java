@@ -19,6 +19,8 @@ public final class ApplicationStatusUtil {
 	public static final String IN_PRINCIPLE_GRANTED = "IN_PRINCIPLE_APPROVAL_GRANTED";
 	public static final String DOCUMENT_SUBMITTED = "DOCUMENT_SUBMITTED_FOR_LICENSE";
 	public static final String BANK_GUARANTEE_UPLOADED = "BANK_GUARANTEE_PROOF_UPLOADED";
+	public static final String LICENSE_DETAILS_PENDING_CCA = "LICENSE_DETAILS_PENDING_CCA_REVIEW";
+	public static final String LICENSE_DETAILS_SENT_TO_ADMIN = "LICENSE_DETAILS_SENT_TO_ADMIN";
 	public static final String LICENSE_ISSUED = "LICENSE_ISSUED";
 	public static final String APPLICATION_REJECTED = "Application Rejected";
 	public static final String SEND_TO_REJECTION = "Send To Rejection";

@@ -72,6 +72,10 @@ public class ApplicationActionTakenServiceImpl implements ApplicationActionTaken
 		return actionTakenRepository.getAllApplicationTaken(applicantUserName);
 	}
 
+	@Override
+	public List<ApplicantActionTakenEntity> getAllApplicationTakenAnyStatus(String applicantUserName) {
+		return actionTakenRepository.getAllApplicationTakenAnyStatus(applicantUserName);
+	}
 
 	@Override
 	public Optional<ApplicantActionTakenEntity> downloadfileBydDocumentName(String documentName) {

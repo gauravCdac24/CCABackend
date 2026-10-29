@@ -9,4 +9,5 @@ public class NewLicenseClientServiceAPIs {
 	public static final String GET_NEW_APPLICATION_WITH_BANK_GUARANTEE_PROOF = "/get-new-application-with-bank-guarantee-proof";
 	public static final String GET_LICENSE_ISSUED_APPLICATIONS = "/get-license-issued-applications";
 	public static final String GET_ALL_APPLICATION_TIMELINE = "/get-all-application-timeline";
+	public static final String GET_LICENSE_FORM_CONTEXT = "/license-form-context";
 }

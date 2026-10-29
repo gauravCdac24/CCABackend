@@ -669,6 +669,16 @@ public class IndividualApplicationFormController {
 	
 	
 	
+	private void applySelectedServices(BankDetails bankDetails, AdditionalDetailsDTO additionalDetailsDTO) {
+		if (bankDetails == null || additionalDetailsDTO == null || additionalDetailsDTO.getServices() == null) {
+			return;
+		}
+		String services = additionalDetailsDTO.getServices().trim();
+		if (!services.isEmpty()) {
+			bankDetails.setServices(services);
+		}
+	}
+
 	@PostMapping(IndividualApplicationFormAPIs.ADD_INDIVIDUAL_APPLICATIONS_FORM4)
 	public ResponseEntity<?> addApplication4(@RequestBody AdditionalDetailsDTO additionalDetailsDTO) {
 
@@ -713,6 +723,7 @@ public class IndividualApplicationFormController {
 	    bankDetails.setStatus("Active");
 	    IntentApplication intentApp=intentAppServ.findIntentAppById(additionalDetailsDTO.getUserName());
 	    bankDetails.setIntentAppId(intentApp); // Assuming getIntentAppId() exists
+	    applySelectedServices(bankDetails, additionalDetailsDTO);
       
 	    Optional<BankDetails> bankDetailsSave = bankDetailsSev.addBankDetails(bankDetails);
 
@@ -1455,6 +1466,11 @@ List<ApplicationDocument> sortedActiveDocuments = applicationDocument.stream()
             }
 
             // Check if response has meaningful data
+            Object bankObj = response.get("bankDetails");
+            if (bankObj instanceof BankDetails) {
+                response.put("services", ((BankDetails) bankObj).getServices());
+            }
+
             if (response.values().stream().allMatch(value -> value == null)) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Document not found.");
             }
@@ -2420,6 +2436,7 @@ List<ApplicationDocument> sortedActiveDocuments = applicationDocument.stream()
 	            newBankDetails.setBranchName(bankDetailsDTO.getBranch());
 	            newBankDetails.setStatus("Active");
 	            newBankDetails.setIntentAppId(intentApp); // Assuming getIntentAppId() exists
+	            applySelectedServices(newBankDetails, additionalDetailsDTO);
 
 	            bankDetailsSave = bankDetailsSev.addBankDetails(newBankDetails);
 	        } else {
@@ -2439,6 +2456,7 @@ List<ApplicationDocument> sortedActiveDocuments = applicationDocument.stream()
 	            updatedBankDetails.setStatus("Active");
 
 	            updatedBankDetails.setIntentAppId(intentApp);
+	            applySelectedServices(updatedBankDetails, additionalDetailsDTO);
 
 	            bankDetailsSave = bankDetailsSev.updateBankDetails(updatedBankDetails);
 	        }

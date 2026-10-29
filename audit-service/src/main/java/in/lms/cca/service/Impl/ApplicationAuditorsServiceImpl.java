@@ -103,7 +103,8 @@ public class ApplicationAuditorsServiceImpl implements ApplicationAuditorsServic
 	@Override
 	public List<AuditCriteriaPayload> getAllDatas(String userName) {
 	    // Modify the URI to include the query parameter
-	    String uriTemplate = apigatewayServiceUrl + "/api/admin-service/data?userName=" + userName;
+	    String uriTemplate = apigatewayServiceUrl + "/api/admin-service/data?userName=" + userName
+	            + "&includeAllControls=true";
 
 	    ResponseEntity<List<AuditCriteriaPayload>> response = restTemplate.exchange(
 	        uriTemplate,

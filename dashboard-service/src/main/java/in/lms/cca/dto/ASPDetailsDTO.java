@@ -1,5 +1,6 @@
 package in.lms.cca.dto;
 
+import java.util.List;
 
 public class ASPDetailsDTO{
 
@@ -11,6 +12,34 @@ public class ASPDetailsDTO{
 	    private String stateId;
 	    private String onBoardingDate;
 	    private String exitDate;
+	    private String apiSpecificationId;
+	    private String apiVersionId;
+	    private List<AuditReportItem> auditReports;
+
+	    public static class AuditReportItem {
+	    	private String fileName;
+	    	private String fileContent;
+	    	private String auditDate;
+
+	    	public String getFileName() {
+	    		return fileName;
+	    	}
+	    	public void setFileName(String fileName) {
+	    		this.fileName = fileName;
+	    	}
+	    	public String getFileContent() {
+	    		return fileContent;
+	    	}
+	    	public void setFileContent(String fileContent) {
+	    		this.fileContent = fileContent;
+	    	}
+	    	public String getAuditDate() {
+	    		return auditDate;
+	    	}
+	    	public void setAuditDate(String auditDate) {
+	    		this.auditDate = auditDate;
+	    	}
+	    }
 	    
 	    
 		public String getAspId() {
@@ -60,6 +89,24 @@ public class ASPDetailsDTO{
 		}
 		public void setExitDate(String exitDate) {
 			this.exitDate = exitDate;
+		}
+		public String getApiSpecificationId() {
+			return apiSpecificationId;
+		}
+		public void setApiSpecificationId(String apiSpecificationId) {
+			this.apiSpecificationId = apiSpecificationId;
+		}
+		public String getApiVersionId() {
+			return apiVersionId;
+		}
+		public void setApiVersionId(String apiVersionId) {
+			this.apiVersionId = apiVersionId;
+		}
+		public List<AuditReportItem> getAuditReports() {
+			return auditReports;
+		}
+		public void setAuditReports(List<AuditReportItem> auditReports) {
+			this.auditReports = auditReports;
 		}
 		
 	    

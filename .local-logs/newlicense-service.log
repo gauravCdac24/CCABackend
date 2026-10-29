@@ -1,3 +1,32 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------------< in.lms.cca:newlicense-service >--------------------
+[INFO] Building newlicense-service 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.3.5:run (default-cli) > test-compile @ newlicense-service >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ newlicense-service ---
+[INFO] Copying 5 resources from src\main\resources to target\classes
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ newlicense-service ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 181 source files with javac [debug parameters release 17] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ newlicense-service ---
+[INFO] skip non existing resourceDirectory C:\Users\hp\Documents\CCABackend\CCABackend\newlicense-service\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ newlicense-service ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug parameters release 17] to target\test-classes
+[INFO] 
+[INFO] <<< spring-boot:3.3.5:run (default-cli) < test-compile @ newlicense-service <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.3.5:run (default-cli) @ newlicense-service ---
+[INFO] Attaching agents: []
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -8,45 +37,374 @@
 
  :: Spring Boot ::                (v3.3.5)
 
-2026-10-28 10:17:11 - Starting NewlicenseServiceApplication using Java 17.0.10 with PID 25840 (C:\Users\hp\Documents\CCAB\newlicense-service\target\classes started by hp in C:\Users\hp\Documents\CCAB\newlicense-service)
-2026-10-28 10:17:11 - Running with Spring Boot v3.3.5, Spring v6.1.14
-2026-10-28 10:17:11 - The following 1 profile is active: "test"
-2026-10-28 10:17:11 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2026-10-28 10:17:11 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2026-10-28 10:17:13 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-10-28 10:17:13 - Finished Spring Data repository scanning in 458 ms. Found 23 JPA repository interfaces.
-2026-10-28 10:17:14 - BeanFactory id=11e6ea25-8f8c-39ac-a075-dd018b4d7357
-2026-10-28 10:17:14 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
-2026-10-28 10:17:14 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected/applied to a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies/advisors. If this bean does not have to be post-processed, declare it with ROLE_INFRASTRUCTURE.
-2026-10-28 10:17:15 - Tomcat initialized with port 7783 (http)
-2026-10-28 10:17:15 - Starting service [Tomcat]
-2026-10-28 10:17:15 - Starting Servlet engine: [Apache Tomcat/10.1.31]
-2026-10-28 10:17:15 - Initializing Spring embedded WebApplicationContext
-2026-10-28 10:17:15 - Root WebApplicationContext: initialization completed in 4528 ms
-2026-10-28 10:17:16 - HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-10-28 10:17:16 - HHH000412: Hibernate ORM core version 6.5.3.Final
-2026-10-28 10:17:16 - HHH000026: Second-level cache disabled
-2026-10-28 10:17:17 - No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-10-28 10:17:17 - HikariPool-1 - Starting...
-2026-10-28 10:17:17 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4dd12903
-2026-10-28 10:17:17 - HikariPool-1 - Start completed.
-2026-10-28 10:17:17 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-10-28 10:17:20 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-Hibernate: alter table if exists new_license_management.application_timeline alter column application_status set data type varchar(100)
+2026-10-29 16:09:45 - Starting NewlicenseServiceApplication using Java 17.0.10 with PID 36324 (C:\Users\hp\Documents\CCABackend\CCABackend\newlicense-service\target\classes started by hp in C:\Users\hp\Documents\CCABackend\CCABackend\newlicense-service)
+2026-10-29 16:09:45 - Running with Spring Boot v3.3.5, Spring v6.1.14
+2026-10-29 16:09:45 - The following 1 profile is active: "test"
+2026-10-29 16:09:45 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-10-29 16:09:45 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-10-29 16:09:46 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-29 16:09:46 - Finished Spring Data repository scanning in 296 ms. Found 23 JPA repository interfaces.
+2026-10-29 16:09:46 - BeanFactory id=11e6ea25-8f8c-39ac-a075-dd018b4d7357
+2026-10-29 16:09:46 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-10-29 16:09:46 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected/applied to a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies/advisors. If this bean does not have to be post-processed, declare it with ROLE_INFRASTRUCTURE.
+2026-10-29 16:09:47 - Tomcat initialized with port 7783 (http)
+2026-10-29 16:09:47 - Starting service [Tomcat]
+2026-10-29 16:09:47 - Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-10-29 16:09:47 - Initializing Spring embedded WebApplicationContext
+2026-10-29 16:09:47 - Root WebApplicationContext: initialization completed in 2148 ms
+2026-10-29 16:09:47 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-10-29 16:09:47 - HHH000412: Hibernate ORM core version 6.5.3.Final
+2026-10-29 16:09:47 - HHH000026: Second-level cache disabled
+2026-10-29 16:09:48 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-29 16:09:48 - HikariPool-1 - Starting...
+2026-10-29 16:09:48 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@613e2d85
+2026-10-29 16:09:48 - HikariPool-1 - Start completed.
+2026-10-29 16:09:48 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-10-29 16:09:49 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
 Hibernate: alter table if exists new_license_management.govt_organization_application alter column public_key set data type TEXT
-Hibernate: alter table if exists new_license_management.intent_application alter column acknowledgementno set data type varchar(100)
 Hibernate: alter table if exists new_license_management.review_application alter column cca_remarks set data type TEXT
-Hibernate: alter table if exists new_license_management.review_application alter column status set data type varchar(8)
-2026-10-28 10:17:21 - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-10-28 10:17:21 - Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-10-28 10:17:24 - Unable to start LiveReload server
-2026-10-28 10:17:24 - Eureka HTTP Client uses RestTemplate.
-2026-10-28 10:17:24 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
-2026-10-28 10:17:24 - Setting initial instance status as: STARTING
-2026-10-28 10:17:24 - Initializing Eureka in region us-east-1
-2026-10-28 10:17:24 - Client configured to neither register nor query for data.
-2026-10-28 10:17:24 - Discovery Client initialized at timestamp 1793162844981 with initial instances count: 0
-2026-10-28 10:17:24 - Registering application NEWLICENSE-SERVICE with eureka with status UP
-2026-10-28 10:17:25 - Tomcat started on port 7783 (http) with context path '/'
-2026-10-28 10:17:25 - Updating port to 7783
-2026-10-28 10:17:25 - Started NewlicenseServiceApplication in 15.585 seconds (process running for 16.853)
+2026-10-29 16:09:50 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-29 16:09:50 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-29 16:09:51 - Unable to start LiveReload server
+2026-10-29 16:09:53 - Cannot determine local hostname
+2026-10-29 16:09:54 - Cannot determine local hostname
+2026-10-29 16:09:54 - Eureka HTTP Client uses RestTemplate.
+2026-10-29 16:09:54 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-10-29 16:09:54 - Setting initial instance status as: STARTING
+2026-10-29 16:09:54 - Initializing Eureka in region us-east-1
+2026-10-29 16:09:54 - Client configured to neither register nor query for data.
+2026-10-29 16:09:54 - Discovery Client initialized at timestamp 1793270394522 with initial instances count: 0
+2026-10-29 16:09:54 - Registering application NEWLICENSE-SERVICE with eureka with status UP
+2026-10-29 16:09:54 - Tomcat started on port 7783 (http) with context path '/'
+2026-10-29 16:09:54 - Updating port to 7783
+2026-10-29 16:09:55 - Cannot determine local hostname
+2026-10-29 16:09:55 - Started NewlicenseServiceApplication in 12.131 seconds (process running for 12.61)
+2026-10-29 16:10:09 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-10-29 16:10:09 - Initializing Servlet 'dispatcherServlet'
+2026-10-29 16:10:09 - Completed initialization in 1 ms
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0
+Hibernate: select atl1_0.app_timeline_id,atl1_0.application_status,atl1_0.created,atl1_0.initiated_by,atl1_0.intent_app_id,atl1_0.updated from new_license_management.application_timeline atl1_0 where atl1_0.intent_app_id=? order by atl1_0.created desc
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0
+Hibernate: select atl1_0.app_timeline_id,atl1_0.application_status,atl1_0.created,atl1_0.initiated_by,atl1_0.intent_app_id,atl1_0.updated from new_license_management.application_timeline atl1_0 where atl1_0.intent_app_id=? order by atl1_0.created desc
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0
+Hibernate: select atl1_0.app_timeline_id,atl1_0.application_status,atl1_0.created,atl1_0.initiated_by,atl1_0.intent_app_id,atl1_0.updated from new_license_management.application_timeline atl1_0 where atl1_0.intent_app_id=? order by atl1_0.created desc
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0
+Hibernate: select atl1_0.app_timeline_id,atl1_0.application_status,atl1_0.created,atl1_0.initiated_by,atl1_0.intent_app_id,atl1_0.updated from new_license_management.application_timeline atl1_0 where atl1_0.intent_app_id=? order by atl1_0.created desc
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0
+Hibernate: select atl1_0.app_timeline_id,atl1_0.application_status,atl1_0.created,atl1_0.initiated_by,atl1_0.intent_app_id,atl1_0.updated from new_license_management.application_timeline atl1_0 where atl1_0.intent_app_id=? order by atl1_0.created desc
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0
+Hibernate: select atl1_0.app_timeline_id,atl1_0.application_status,atl1_0.created,atl1_0.initiated_by,atl1_0.intent_app_id,atl1_0.updated from new_license_management.application_timeline atl1_0 where atl1_0.intent_app_id=? order by atl1_0.created desc
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0
+Hibernate: select atl1_0.app_timeline_id,atl1_0.application_status,atl1_0.created,atl1_0.initiated_by,atl1_0.intent_app_id,atl1_0.updated from new_license_management.application_timeline atl1_0 where atl1_0.intent_app_id=? order by atl1_0.created desc
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0
+Hibernate: select atl1_0.app_timeline_id,atl1_0.application_status,atl1_0.created,atl1_0.initiated_by,atl1_0.intent_app_id,atl1_0.updated from new_license_management.application_timeline atl1_0 where atl1_0.intent_app_id=? order by atl1_0.created desc
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+2026-10-29 16:43:35 - Restarting due to 186 class path changes (0 additions, 186 deletions, 0 modifications)
+2026-10-29 16:43:35 - Unregistering application NEWLICENSE-SERVICE with eureka with status DOWN
+2026-10-29 16:43:36 - The acceptor thread [http-nio-7783-Acceptor] did not stop cleanly
+2026-10-29 16:43:36 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-10-29 16:43:36 - HikariPool-1 - Shutdown initiated...
+2026-10-29 16:43:36 - HikariPool-1 - Shutdown completed.
+2026-10-29 16:43:36 - Shutting down DiscoveryClient ...
+2026-10-29 16:43:36 - Completed shut down of DiscoveryClient
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.5)
+
+2026-10-29 16:43:38 - Starting NewlicenseServiceApplication using Java 17.0.10 with PID 36324 (C:\Users\hp\Documents\CCABackend\CCABackend\newlicense-service\target\classes started by hp in C:\Users\hp\Documents\CCABackend\CCABackend\newlicense-service)
+2026-10-29 16:43:38 - Running with Spring Boot v3.3.5, Spring v6.1.14
+2026-10-29 16:43:38 - The following 1 profile is active: "test"
+2026-10-29 16:43:38 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-29 16:43:38 - Finished Spring Data repository scanning in 12 ms. Found 0 JPA repository interfaces.
+2026-10-29 16:43:38 - BeanFactory id=d0b22d20-224b-39ff-97fc-0b47a26321a9
+2026-10-29 16:43:38 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-10-29 16:43:38 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected/applied to a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies/advisors. If this bean does not have to be post-processed, declare it with ROLE_INFRASTRUCTURE.
+2026-10-29 16:43:39 - Tomcat initialized with port 7783 (http)
+2026-10-29 16:43:39 - Starting service [Tomcat]
+2026-10-29 16:43:39 - Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-10-29 16:43:39 - Initializing Spring embedded WebApplicationContext
+2026-10-29 16:43:39 - Root WebApplicationContext: initialization completed in 575 ms
+2026-10-29 16:43:39 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-10-29 16:43:39 - HHH000026: Second-level cache disabled
+2026-10-29 16:43:39 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-29 16:43:39 - HikariPool-2 - Starting...
+2026-10-29 16:43:39 - HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@50ac84c5
+2026-10-29 16:43:39 - HikariPool-2 - Start completed.
+2026-10-29 16:43:39 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-10-29 16:43:39 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: alter table if exists new_license_management.govt_organization_application alter column public_key set data type TEXT
+Hibernate: alter table if exists new_license_management.review_application alter column cca_remarks set data type TEXT
+2026-10-29 16:43:40 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-29 16:43:40 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'applicationReviewController': Unsatisfied dependency expressed through field 'intentAppServ': No qualifying bean of type 'in.lms.cca.service.IIntentApplicationService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+2026-10-29 16:43:40 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-10-29 16:43:40 - HikariPool-2 - Shutdown initiated...
+2026-10-29 16:43:40 - HikariPool-2 - Shutdown completed.
+2026-10-29 16:43:40 - Stopping service [Tomcat]
+2026-10-29 16:43:40 - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-10-29 16:43:40 - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field intentAppServ in in.lms.cca.controller.ApplicationReviewController required a bean of type 'in.lms.cca.service.IIntentApplicationService' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'in.lms.cca.service.IIntentApplicationService' in your configuration.
+
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.5)
+
+2026-10-29 16:43:43 - Starting NewlicenseServiceApplication using Java 17.0.10 with PID 36324 (C:\Users\hp\Documents\CCABackend\CCABackend\newlicense-service\target\classes started by hp in C:\Users\hp\Documents\CCABackend\CCABackend\newlicense-service)
+2026-10-29 16:43:43 - Running with Spring Boot v3.3.5, Spring v6.1.14
+2026-10-29 16:43:43 - The following 1 profile is active: "test"
+2026-10-29 16:43:43 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-29 16:43:43 - Finished Spring Data repository scanning in 45 ms. Found 23 JPA repository interfaces.
+2026-10-29 16:43:43 - BeanFactory id=11e6ea25-8f8c-39ac-a075-dd018b4d7357
+2026-10-29 16:43:43 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-10-29 16:43:43 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected/applied to a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies/advisors. If this bean does not have to be post-processed, declare it with ROLE_INFRASTRUCTURE.
+2026-10-29 16:43:43 - Tomcat initialized with port 7783 (http)
+2026-10-29 16:43:43 - Starting service [Tomcat]
+2026-10-29 16:43:43 - Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-10-29 16:43:43 - Initializing Spring embedded WebApplicationContext
+2026-10-29 16:43:43 - Root WebApplicationContext: initialization completed in 326 ms
+2026-10-29 16:43:43 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-10-29 16:43:43 - HHH000026: Second-level cache disabled
+2026-10-29 16:43:43 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-29 16:43:43 - HikariPool-3 - Starting...
+2026-10-29 16:43:43 - HikariPool-3 - Added connection org.postgresql.jdbc.PgConnection@1a33f435
+2026-10-29 16:43:43 - HikariPool-3 - Start completed.
+2026-10-29 16:43:43 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-10-29 16:43:43 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: alter table if exists new_license_management.govt_organization_application alter column public_key set data type TEXT
+Hibernate: alter table if exists new_license_management.review_application alter column cca_remarks set data type TEXT
+2026-10-29 16:43:43 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-29 16:43:44 - Unable to start LiveReload server
+2026-10-29 16:43:45 - Cannot determine local hostname
+2026-10-29 16:43:46 - Cannot determine local hostname
+2026-10-29 16:43:46 - Eureka HTTP Client uses RestTemplate.
+2026-10-29 16:43:46 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-10-29 16:43:47 - Setting initial instance status as: STARTING
+2026-10-29 16:43:47 - Initializing Eureka in region us-east-1
+2026-10-29 16:43:47 - Client configured to neither register nor query for data.
+2026-10-29 16:43:47 - Discovery Client initialized at timestamp 1793272427003 with initial instances count: 0
+2026-10-29 16:43:47 - Registering application NEWLICENSE-SERVICE with eureka with status UP
+2026-10-29 16:43:47 - Tomcat started on port 7783 (http) with context path '/'
+2026-10-29 16:43:47 - Updating port to 7783
+2026-10-29 16:43:48 - Cannot determine local hostname
+2026-10-29 16:43:48 - Started NewlicenseServiceApplication in 6.479 seconds (process running for 2045.043)
+2026-10-29 16:43:48 - Condition evaluation unchanged
+2026-10-29 16:45:00 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-10-29 16:45:00 - Initializing Servlet 'dispatcherServlet'
+2026-10-29 16:45:00 - Completed initialization in 1 ms
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0
+Hibernate: select atl1_0.app_timeline_id,atl1_0.application_status,atl1_0.created,atl1_0.initiated_by,atl1_0.intent_app_id,atl1_0.updated from new_license_management.application_timeline atl1_0 where atl1_0.intent_app_id=? order by atl1_0.created desc
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0
+Hibernate: select atl1_0.app_timeline_id,atl1_0.application_status,atl1_0.created,atl1_0.initiated_by,atl1_0.intent_app_id,atl1_0.updated from new_license_management.application_timeline atl1_0 where atl1_0.intent_app_id=? order by atl1_0.created desc
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0
+Hibernate: select atl1_0.app_timeline_id,atl1_0.application_status,atl1_0.created,atl1_0.initiated_by,atl1_0.intent_app_id,atl1_0.updated from new_license_management.application_timeline atl1_0 where atl1_0.intent_app_id=? order by atl1_0.created desc
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0
+Hibernate: select atl1_0.app_timeline_id,atl1_0.application_status,atl1_0.created,atl1_0.initiated_by,atl1_0.intent_app_id,atl1_0.updated from new_license_management.application_timeline atl1_0 where atl1_0.intent_app_id=? order by atl1_0.created desc
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select atl1_0.app_timeline_id,atl1_0.application_status,atl1_0.created,atl1_0.initiated_by,atl1_0.intent_app_id,atl1_0.updated from new_license_management.application_timeline atl1_0 where atl1_0.intent_app_id=? order by atl1_0.created desc
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select al1_0.location_id,al1_0.address_id,al1_0.certificate_file,al1_0.certificate_level,al1_0.company_name,al1_0.created,al1_0.created_by,al1_0.intent_app_id,al1_0.location_name,al1_0.status,al1_0.updated,al1_0.updated_by from new_license_management.app_location al1_0 where al1_0.intent_app_id=?
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select atl1_0.app_timeline_id,atl1_0.application_status,atl1_0.created,atl1_0.initiated_by,atl1_0.intent_app_id,atl1_0.updated from new_license_management.application_timeline atl1_0 where atl1_0.intent_app_id=? order by atl1_0.created desc
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select al1_0.location_id,al1_0.address_id,al1_0.certificate_file,al1_0.certificate_level,al1_0.company_name,al1_0.created,al1_0.created_by,al1_0.intent_app_id,al1_0.location_name,al1_0.status,al1_0.updated,al1_0.updated_by from new_license_management.app_location al1_0 where al1_0.intent_app_id=?
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select atl1_0.app_timeline_id,atl1_0.application_status,atl1_0.created,atl1_0.initiated_by,atl1_0.intent_app_id,atl1_0.updated from new_license_management.application_timeline atl1_0 where atl1_0.intent_app_id=? order by atl1_0.created desc
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select al1_0.location_id,al1_0.address_id,al1_0.certificate_file,al1_0.certificate_level,al1_0.company_name,al1_0.created,al1_0.created_by,al1_0.intent_app_id,al1_0.location_name,al1_0.status,al1_0.updated,al1_0.updated_by from new_license_management.app_location al1_0 where al1_0.intent_app_id=?
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select atl1_0.app_timeline_id,atl1_0.application_status,atl1_0.created,atl1_0.initiated_by,atl1_0.intent_app_id,atl1_0.updated from new_license_management.application_timeline atl1_0 where atl1_0.intent_app_id=? order by atl1_0.created desc
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select al1_0.location_id,al1_0.address_id,al1_0.certificate_file,al1_0.certificate_level,al1_0.company_name,al1_0.created,al1_0.created_by,al1_0.intent_app_id,al1_0.location_name,al1_0.status,al1_0.updated,al1_0.updated_by from new_license_management.app_location al1_0 where al1_0.intent_app_id=?
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0
+Hibernate: select atl1_0.app_timeline_id,atl1_0.application_status,atl1_0.created,atl1_0.initiated_by,atl1_0.intent_app_id,atl1_0.updated from new_license_management.application_timeline atl1_0 where atl1_0.intent_app_id=? order by atl1_0.created desc
+Hibernate: select atl1_0.app_timeline_id,atl1_0.application_status,atl1_0.created,atl1_0.initiated_by,atl1_0.intent_app_id,atl1_0.updated from new_license_management.application_timeline atl1_0 where atl1_0.intent_app_id=? order by atl1_0.created desc
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select al1_0.location_id,al1_0.address_id,al1_0.certificate_file,al1_0.certificate_level,al1_0.company_name,al1_0.created,al1_0.created_by,al1_0.intent_app_id,al1_0.location_name,al1_0.status,al1_0.updated,al1_0.updated_by from new_license_management.app_location al1_0 where al1_0.intent_app_id=?
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0
+Hibernate: select atl1_0.app_timeline_id,atl1_0.application_status,atl1_0.created,atl1_0.initiated_by,atl1_0.intent_app_id,atl1_0.updated from new_license_management.application_timeline atl1_0 where atl1_0.intent_app_id=? order by atl1_0.created desc
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0
+Hibernate: select atl1_0.app_timeline_id,atl1_0.application_status,atl1_0.created,atl1_0.initiated_by,atl1_0.intent_app_id,atl1_0.updated from new_license_management.application_timeline atl1_0 where atl1_0.intent_app_id=? order by atl1_0.created desc
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select atl1_0.app_timeline_id,atl1_0.application_status,atl1_0.created,atl1_0.initiated_by,atl1_0.intent_app_id,atl1_0.updated from new_license_management.application_timeline atl1_0 where atl1_0.intent_app_id=? order by atl1_0.created desc
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select al1_0.location_id,al1_0.address_id,al1_0.certificate_file,al1_0.certificate_level,al1_0.company_name,al1_0.created,al1_0.created_by,al1_0.intent_app_id,al1_0.location_name,al1_0.status,al1_0.updated,al1_0.updated_by from new_license_management.app_location al1_0 where al1_0.intent_app_id=?
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select atl1_0.app_timeline_id,atl1_0.application_status,atl1_0.created,atl1_0.initiated_by,atl1_0.intent_app_id,atl1_0.updated from new_license_management.application_timeline atl1_0 where atl1_0.intent_app_id=? order by atl1_0.created desc
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select al1_0.location_id,al1_0.address_id,al1_0.certificate_file,al1_0.certificate_level,al1_0.company_name,al1_0.created,al1_0.created_by,al1_0.intent_app_id,al1_0.location_name,al1_0.status,al1_0.updated,al1_0.updated_by from new_license_management.app_location al1_0 where al1_0.intent_app_id=?
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: insert into new_license_management.application_timeline (application_status,created,initiated_by,intent_app_id,updated) values (?,?,?,?,?) returning app_timeline_id
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: update new_license_management.intent_application set acknowledgementno=?,app_type_master_id=?,application_status=?,created=?,created_by=?,licensee_id=?,unique_code=?,updated=?,updated_by=?,user_name=? where intent_app_id=?
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0
+Hibernate: select atl1_0.app_timeline_id,atl1_0.application_status,atl1_0.created,atl1_0.initiated_by,atl1_0.intent_app_id,atl1_0.updated from new_license_management.application_timeline atl1_0 where atl1_0.intent_app_id=? order by atl1_0.created desc
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0
+Hibernate: select atl1_0.app_timeline_id,atl1_0.application_status,atl1_0.created,atl1_0.initiated_by,atl1_0.intent_app_id,atl1_0.updated from new_license_management.application_timeline atl1_0 where atl1_0.intent_app_id=? order by atl1_0.created desc
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0
+Hibernate: select atl1_0.app_timeline_id,atl1_0.application_status,atl1_0.created,atl1_0.initiated_by,atl1_0.intent_app_id,atl1_0.updated from new_license_management.application_timeline atl1_0 where atl1_0.intent_app_id=? order by atl1_0.created desc
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0
+Hibernate: select atl1_0.app_timeline_id,atl1_0.application_status,atl1_0.created,atl1_0.initiated_by,atl1_0.intent_app_id,atl1_0.updated from new_license_management.application_timeline atl1_0 where atl1_0.intent_app_id=? order by atl1_0.created desc
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0
+Hibernate: select atl1_0.app_timeline_id,atl1_0.application_status,atl1_0.created,atl1_0.initiated_by,atl1_0.intent_app_id,atl1_0.updated from new_license_management.application_timeline atl1_0 where atl1_0.intent_app_id=? order by atl1_0.created desc
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select atl1_0.app_timeline_id,atl1_0.application_status,atl1_0.created,atl1_0.initiated_by,atl1_0.intent_app_id,atl1_0.updated from new_license_management.application_timeline atl1_0 where atl1_0.intent_app_id=? order by atl1_0.created desc
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select al1_0.location_id,al1_0.address_id,al1_0.certificate_file,al1_0.certificate_level,al1_0.company_name,al1_0.created,al1_0.created_by,al1_0.intent_app_id,al1_0.location_name,al1_0.status,al1_0.updated,al1_0.updated_by from new_license_management.app_location al1_0 where al1_0.intent_app_id=?
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.user_name=? order by ia1_0.intent_app_id desc
+Hibernate: select ra1_0.review_id,ra1_0.cca_remarks,ra1_0.created,ra1_0.created_by,ra1_0.intent_app_id,ra1_0.mom_file,ra1_0.remarks,ra1_0.review_by,ra1_0.review_date,ra1_0.status,ra1_0.updated,ra1_0.updated_by from new_license_management.review_application ra1_0 where ra1_0.intent_app_id=? and ra1_0.status='Active'
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.user_name=? order by ia1_0.intent_app_id desc
+Hibernate: select pp1_0.payment_proof_id,pp1_0.amount,pp1_0.created,pp1_0.created_by,pp1_0.date_of_payment,pp1_0.intent_app_id,pp1_0.payment_proof_doc,pp1_0.status,pp1_0.transaction_id,pp1_0.updated,pp1_0.updated_by from new_license_management.payment_proof pp1_0 where pp1_0.intent_app_id=? and pp1_0.status='Active'
+Hibernate: select pv1_0.payment_verifi_id,pv1_0.amount,pv1_0.created,pv1_0.created_by,pv1_0.date_of_payment,pv1_0.intent_app_id,pv1_0.payment_verification_proof,pv1_0.status,pv1_0.transaction_id,pv1_0.updated,pv1_0.updated_by,pv1_0.verified_by from new_license_management.payment_verification pv1_0 where pv1_0.intent_app_id=? and pv1_0.status='Active'
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+org.springframework.dao.IncorrectResultSizeDataAccessException: Query did not return a unique result: 2 results were returned
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:301)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:244)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:550)
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61)
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:335)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:160)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:136)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
+	at jdk.proxy6/jdk.proxy6.$Proxy201.getChangedThePaymentStatus(Unknown Source)
+	at in.lms.cca.service.impl.PaymentVerificationServiceImpl.getChangedThePaymentStatus(PaymentVerificationServiceImpl.java:70)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:355)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:379)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:720)
+	at in.lms.cca.service.impl.PaymentVerificationServiceImpl$$SpringCGLIB$$0.getChangedThePaymentStatus(<generated>)
+	at in.lms.cca.controller.ApplicationReviewController.changedThePaymentStatus(ApplicationReviewController.java:1659)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:384)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+Caused by: org.hibernate.NonUniqueResultException: Query did not return a unique result: 2 results were returned
+	at org.hibernate.query.spi.AbstractSelectionQuery.uniqueElement(AbstractSelectionQuery.java:578)
+	at org.hibernate.query.spi.AbstractSelectionQuery.getSingleResult(AbstractSelectionQuery.java:561)
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution$SingleEntityExecution.doExecute(JpaQueryExecution.java:223)
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution.execute(JpaQueryExecution.java:92)
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.doExecute(AbstractJpaQuery.java:152)
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.execute(AbstractJpaQuery.java:140)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:170)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:169)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:148)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:70)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:379)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138)
+	... 73 more
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: insert into new_license_management.application_timeline (application_status,created,initiated_by,intent_app_id,updated) values (?,?,?,?,?) returning app_timeline_id
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0 where ia1_0.intent_app_id=?
+Hibernate: update new_license_management.intent_application set acknowledgementno=?,app_type_master_id=?,application_status=?,created=?,created_by=?,licensee_id=?,unique_code=?,updated=?,updated_by=?,user_name=? where intent_app_id=?
+Hibernate: select ia1_0.intent_app_id,ia1_0.acknowledgementno,ia1_0.app_type_master_id,ia1_0.application_status,ia1_0.created,ia1_0.created_by,ia1_0.licensee_id,ia1_0.unique_code,ia1_0.updated,ia1_0.updated_by,ia1_0.user_name from new_license_management.intent_application ia1_0

@@ -24,6 +24,9 @@ public class LicenseDetails extends AbstractTimestampEntity{
 	
     @Column(name = "licenseCertificate", length = 255, nullable = false)
     private String licenseCertificate;
+
+    @Column(name = "public_key", columnDefinition = "TEXT")
+    private String publicKey;
     
     @Column(name = "username", length = 50, nullable=false)
 	private String userName;
@@ -87,6 +90,14 @@ public class LicenseDetails extends AbstractTimestampEntity{
 
 	public void setLicenseCertificate(String licenseCertificate) {
 		this.licenseCertificate = licenseCertificate;
+	}
+
+	public String getPublicKey() {
+		return publicKey;
+	}
+
+	public void setPublicKey(String publicKey) {
+		this.publicKey = publicKey;
 	}
 
 	public String getSerialNo() {

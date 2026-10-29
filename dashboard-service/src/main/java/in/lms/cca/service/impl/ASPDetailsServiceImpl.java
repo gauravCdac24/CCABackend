@@ -8,7 +8,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import in.lms.cca.entity.ASPDetails;
+import in.lms.cca.entity.AspAuditReport;
 import in.lms.cca.repository.ASPDetailsRepository;
+import in.lms.cca.repository.AspAuditReportRepository;
 import in.lms.cca.service.IASPDetailsService;
 import jakarta.transaction.Transactional;
 
@@ -18,6 +20,9 @@ public class ASPDetailsServiceImpl implements IASPDetailsService{
 
 	@Autowired
 	private ASPDetailsRepository aspRepo;
+
+	@Autowired
+	private AspAuditReportRepository auditReportRepo;
 	
 	@Override
 	public Optional<ASPDetails> addASPDetails(ASPDetails obj) {
@@ -33,6 +38,21 @@ public class ASPDetailsServiceImpl implements IASPDetailsService{
 	    } catch (Exception e) {
 	        return Optional.empty();
 	    }
+	}
+
+	@Override
+	public Optional<ASPDetails> addASPDetails(ASPDetails obj, List<AspAuditReport> auditReports) {
+		Optional<ASPDetails> saved = addASPDetails(obj);
+		if (saved.isEmpty()) {
+			return saved;
+		}
+		if (auditReports != null) {
+			for (AspAuditReport report : auditReports) {
+				report.setAspId(saved.get().getAspId());
+				auditReportRepo.save(report);
+			}
+		}
+		return saved;
 	}
 
 	@Override

@@ -39,6 +39,12 @@ public class ASPDetails extends AbstractTimestampEntity{
 	    
 	    @Column(name = "exit_date", length = 10)
 	    private Date exitDate;
+
+	    @Column(name = "api_specification_id", length = 20)
+	    private String apiSpecificationId;
+
+	    @Column(name = "api_version_id", length = 20)
+	    private String apiVersionId;
 		
 	    @Column(name = "created_by", length = 75)
 	    private String createdBy; 
@@ -110,6 +116,22 @@ public class ASPDetails extends AbstractTimestampEntity{
 
 		public void setExitDate(Date exitDate) {
 			this.exitDate = exitDate;
+		}
+
+		public String getApiSpecificationId() {
+			return apiSpecificationId;
+		}
+
+		public void setApiSpecificationId(String apiSpecificationId) {
+			this.apiSpecificationId = apiSpecificationId;
+		}
+
+		public String getApiVersionId() {
+			return apiVersionId;
+		}
+
+		public void setApiVersionId(String apiVersionId) {
+			this.apiVersionId = apiVersionId;
 		}
 
 		public String getCreatedBy() {

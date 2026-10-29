@@ -23,4 +23,7 @@ public interface AuditRepository extends JpaRepository<AuditControlEntity, Long>
 	List<AuditControlEntity> getAuditControlsByUser(@Param("userName") String userName,
 			@Param("auditScheduleId") Long auditScheduleId);
 
+	@Query("SELECT d FROM AuditControlEntity d WHERE d.userName = :userName AND d.status='Active'")
+	List<AuditControlEntity> findActiveByUserName(@Param("userName") String userName);
+
 }

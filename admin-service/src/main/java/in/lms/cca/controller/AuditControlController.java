@@ -297,7 +297,8 @@ public class AuditControlController {
 	
 
 	@GetMapping(AuditControlServiceAPIs.DATA)
-	public List<AuditCriteriaPayload> getData(@RequestParam String userName) {
+	public List<AuditCriteriaPayload> getData(@RequestParam String userName,
+			@RequestParam(value = "includeAllControls", required = false, defaultValue = "false") boolean includeAllControls) {
 		
 		System.out.println("userNAme=-=->"+userName);
 
@@ -325,7 +326,7 @@ public class AuditControlController {
 	                    .getAuditCriteriaId())
 	            .collect(Collectors.toSet());
 
-	    if (requestedCriteriaIds.isEmpty()) {
+	    if (includeAllControls || requestedCriteriaIds.isEmpty()) {
 	    	requestedCriteriaIds = auditCriterias.stream()
 	    			.map(AuditCriteria::getAuditCriteriaId)
 	    			.collect(Collectors.toSet());

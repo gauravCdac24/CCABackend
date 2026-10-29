@@ -1,8 +1,11 @@
 package in.lms.cca.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,14 +17,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import in.lms.cca.dto.LicenseAcquisitionWorkflowDTO;
+import in.lms.cca.dto.LicenseFormContextDTO;
 import in.lms.cca.dto.client.ApplicationDTO;
+import in.lms.cca.entity.AppLocation;
+import in.lms.cca.entity.ApplicationDocument;
 import in.lms.cca.entity.ApplicationTimeLine;
 import in.lms.cca.entity.IntentApplication;
+import in.lms.cca.service.AppLocationService;
+import in.lms.cca.service.ApplicationDocumentService;
 import in.lms.cca.service.IApplicationTimeLineService;
 import in.lms.cca.service.IIntentApplicationService;
 import in.lms.cca.service.LicenseAcquisitionWorkflowService;
 import in.lms.cca.util.api.NewLicenseClientServiceAPIs;
 import in.lms.cca.util.api.NewLicenseServiceAPIs;
+import in.lms.cca.util.global.ApplicationStatusUtil;
 import in.lms.cca.util.global.EncryptionUtil;
 
 
@@ -38,6 +47,12 @@ public class NewLicenseClientController {
 
 	@Autowired
 	private LicenseAcquisitionWorkflowService licenseAcquisitionWorkflowService;
+
+	@Autowired
+	private AppLocationService appLocationService;
+
+	@Autowired
+	private ApplicationDocumentService applicationDocumentService;
 	
 	@GetMapping(NewLicenseClientServiceAPIs.GET_ALL_NEW_APPLICATIONS_RECOMMENDED_FOR_IN_PRINCIPAL_APPROVAL)
     public ResponseEntity<?> getAllApplications() {
@@ -123,7 +138,8 @@ public class NewLicenseClientController {
 	
 	
 	@GetMapping(NewLicenseClientServiceAPIs.GET_NEW_APPLICATION_WITH_BANK_GUARANTEE_PROOF)
-    public ResponseEntity<?> getNewAppWithBankGuaranteeProof() {
+    public ResponseEntity<?> getNewAppWithBankGuaranteeProof(
+			@RequestParam(value = "role", required = false, defaultValue = "ADMIN") String role) {
 		
         List<ApplicationDTO> applicationDTO = new ArrayList<>();
         
@@ -132,7 +148,7 @@ public class NewLicenseClientController {
         
         for(IntentApplication app: intentApplications) {
         	
-        	if(app.getApplicationStatus() != null && app.getApplicationStatus().equals("BANK_GUARANTEE_PROOF_UPLOADED")) {
+        	if (isLicenseDetailsQueue(app.getApplicationStatus())) {
         	
 	        	ApplicationDTO application = new ApplicationDTO();
 	        	
@@ -151,7 +167,7 @@ public class NewLicenseClientController {
 	        	else
 	        		application.setStatusInitiatedOn(app.getUpdated());
 
-	        	applyWorkflow(application, app, "CCA");
+	        	applyWorkflow(application, app, role);
 	        	
 	        	applicationDTO.add(application);
         	
@@ -271,6 +287,86 @@ public class NewLicenseClientController {
 		return new ResponseEntity<>(null, HttpStatus.OK);
 		
 	}
+	}
+
+	@GetMapping(NewLicenseClientServiceAPIs.GET_LICENSE_FORM_CONTEXT)
+	public ResponseEntity<?> getLicenseFormContext(@RequestParam("id") String intentAppId) {
+		String id = intentAppId;
+		if (EncryptionUtil.decrypt(id) != null) {
+			id = EncryptionUtil.decrypt(id);
+		}
+		try {
+			Long appId = Long.parseLong(id);
+			LicenseFormContextDTO context = new LicenseFormContextDTO();
+			context.setInPrincipleApprovalDate(findInPrincipleApprovalDate(appId));
+			context.setRootCaKeyCount(countRootCaKeys(appId));
+			return new ResponseEntity<>(context, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Unable to load license form context.", HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	private boolean isLicenseDetailsQueue(String status) {
+		if (status == null) {
+			return false;
+		}
+		return "BANK_GUARANTEE_PROOF_UPLOADED".equals(status)
+				|| ApplicationStatusUtil.LICENSE_DETAILS_PENDING_CCA.equals(status)
+				|| ApplicationStatusUtil.LICENSE_DETAILS_SENT_TO_ADMIN.equals(status);
+	}
+
+	private String findInPrincipleApprovalDate(Long intentAppId) {
+		List<ApplicationTimeLine> timeline = appTimeLineServ.getByIntentApplicationId(intentAppId);
+		if (timeline == null) {
+			return null;
+		}
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		for (ApplicationTimeLine entry : timeline) {
+			if (entry.getApplicationStatus() != null
+					&& ApplicationStatusUtil.normalize(entry.getApplicationStatus())
+							.equals(ApplicationStatusUtil.normalize(ApplicationStatusUtil.IN_PRINCIPLE_GRANTED))
+					&& entry.getCreated() != null) {
+				return format.format(entry.getCreated());
+			}
+		}
+		return null;
+	}
+
+	private int countRootCaKeys(Long intentAppId) {
+		Set<String> rootFiles = new LinkedHashSet<>();
+		Set<String> certificateFiles = new LinkedHashSet<>();
+		List<AppLocation> locations = appLocationService.findIntentWithoutStatusAppById(intentAppId);
+		if (locations != null) {
+			for (AppLocation location : locations) {
+				String file = location.getCertificateFile();
+				if (file == null || file.isBlank()) {
+					continue;
+				}
+				certificateFiles.add(file.trim());
+				String level = location.getCertificateLevel() == null ? "" : location.getCertificateLevel().toLowerCase();
+				if (level.contains("root")) {
+					rootFiles.add(file.trim());
+				}
+			}
+		}
+		if (!rootFiles.isEmpty()) {
+			return rootFiles.size();
+		}
+		if (!certificateFiles.isEmpty()) {
+			return certificateFiles.size();
+		}
+		List<ApplicationDocument> documents = applicationDocumentService.findIntentWithStatusAppById(intentAppId);
+		int csrCount = 0;
+		if (documents != null) {
+			for (ApplicationDocument document : documents) {
+				String title = document.getDocumentTitle() == null ? "" : document.getDocumentTitle().toLowerCase();
+				if (title.contains("csr")) {
+					csrCount++;
+				}
+			}
+		}
+		return csrCount;
 	}
 
 	private void applyWorkflow(ApplicationDTO application, IntentApplication app, String role) {

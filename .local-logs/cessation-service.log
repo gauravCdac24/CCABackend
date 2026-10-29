@@ -1,3 +1,32 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------< in.lms.cca:cessation-service >--------------------
+[INFO] Building cessation-service 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.3.3:run (default-cli) > test-compile @ cessation-service >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ cessation-service ---
+[INFO] Copying 5 resources from src\main\resources to target\classes
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ cessation-service ---
+[INFO] Recompiling the module because of added or removed source files.
+[INFO] Compiling 40 source files with javac [debug parameters release 17] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ cessation-service ---
+[INFO] skip non existing resourceDirectory C:\Users\hp\Documents\CCABackend\CCABackend\cessation-service\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ cessation-service ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug parameters release 17] to target\test-classes
+[INFO] 
+[INFO] <<< spring-boot:3.3.3:run (default-cli) < test-compile @ cessation-service <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.3.3:run (default-cli) @ cessation-service ---
+[INFO] Attaching agents: []
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -8,40 +37,80 @@
 
  :: Spring Boot ::                (v3.3.3)
 
-2026-10-28 10:17:08 - Starting CessationServiceApplication using Java 17.0.10 with PID 18188 (C:\Users\hp\Documents\CCAB\cessation-service\target\classes started by hp in C:\Users\hp\Documents\CCAB\cessation-service)
-2026-10-28 10:17:08 - Running with Spring Boot v3.3.3, Spring v6.1.12
-2026-10-28 10:17:08 - The following 1 profile is active: "test"
-2026-10-28 10:17:08 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2026-10-28 10:17:08 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2026-10-28 10:17:10 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-10-28 10:17:11 - Finished Spring Data repository scanning in 411 ms. Found 5 JPA repository interfaces.
-2026-10-28 10:17:11 - BeanFactory id=39215ab4-5f59-38b6-8c0a-1701dc6073b4
-2026-10-28 10:17:12 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
-2026-10-28 10:17:12 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
-2026-10-28 10:17:13 - Tomcat initialized with port 7789 (http)
-2026-10-28 10:17:13 - Starting service [Tomcat]
-2026-10-28 10:17:13 - Starting Servlet engine: [Apache Tomcat/10.1.28]
-2026-10-28 10:17:13 - Initializing Spring embedded WebApplicationContext
-2026-10-28 10:17:13 - Root WebApplicationContext: initialization completed in 4506 ms
-2026-10-28 10:17:13 - HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-10-28 10:17:13 - HHH000412: Hibernate ORM core version 6.5.2.Final
-2026-10-28 10:17:13 - HHH000026: Second-level cache disabled
-2026-10-28 10:17:14 - No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-10-28 10:17:14 - HikariPool-1 - Starting...
-2026-10-28 10:17:14 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5e8e4dd2
-2026-10-28 10:17:14 - HikariPool-1 - Start completed.
-2026-10-28 10:17:14 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-10-28 10:17:16 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-10-28 10:17:17 - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-10-28 10:17:17 - Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-10-28 10:17:19 - Unable to start LiveReload server
-2026-10-28 10:17:20 - Eureka HTTP Client uses RestTemplate.
-2026-10-28 10:17:20 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
-2026-10-28 10:17:20 - Setting initial instance status as: STARTING
-2026-10-28 10:17:21 - Initializing Eureka in region us-east-1
-2026-10-28 10:17:21 - Client configured to neither register nor query for data.
-2026-10-28 10:17:21 - Discovery Client initialized at timestamp 1793162841028 with initial instances count: 0
-2026-10-28 10:17:21 - Registering application CESSATION-SERVICE with eureka with status UP
-2026-10-28 10:17:21 - Tomcat started on port 7789 (http) with context path '/'
-2026-10-28 10:17:21 - Updating port to 7789
-2026-10-28 10:17:21 - Started CessationServiceApplication in 15.192 seconds (process running for 18.755)
+2026-10-29 11:31:34 - Starting CessationServiceApplication using Java 17.0.10 with PID 23688 (C:\Users\hp\Documents\CCABackend\CCABackend\cessation-service\target\classes started by hp in C:\Users\hp\Documents\CCABackend\CCABackend\cessation-service)
+2026-10-29 11:31:34 - Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-10-29 11:31:34 - The following 1 profile is active: "test"
+2026-10-29 11:31:34 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-10-29 11:31:34 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-10-29 11:31:36 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-29 11:31:37 - Finished Spring Data repository scanning in 404 ms. Found 5 JPA repository interfaces.
+2026-10-29 11:31:38 - BeanFactory id=39215ab4-5f59-38b6-8c0a-1701dc6073b4
+2026-10-29 11:31:38 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-10-29 11:31:38 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-10-29 11:31:39 - Tomcat initialized with port 7789 (http)
+2026-10-29 11:31:39 - Starting service [Tomcat]
+2026-10-29 11:31:39 - Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-10-29 11:31:39 - Initializing Spring embedded WebApplicationContext
+2026-10-29 11:31:39 - Root WebApplicationContext: initialization completed in 4648 ms
+2026-10-29 11:31:39 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-10-29 11:31:40 - HHH000412: Hibernate ORM core version 6.5.2.Final
+2026-10-29 11:31:40 - HHH000026: Second-level cache disabled
+2026-10-29 11:31:40 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-29 11:31:40 - HikariPool-1 - Starting...
+2026-10-29 11:31:41 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@274e5aba
+2026-10-29 11:31:41 - HikariPool-1 - Start completed.
+2026-10-29 11:31:41 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-10-29 11:31:43 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-29 11:31:44 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-29 11:31:44 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-29 11:31:47 - Unable to start LiveReload server
+2026-10-29 11:31:48 - Cannot determine local hostname
+2026-10-29 11:31:50 - Cannot determine local hostname
+2026-10-29 11:31:50 - Eureka HTTP Client uses RestTemplate.
+2026-10-29 11:31:50 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-10-29 11:31:50 - Setting initial instance status as: STARTING
+2026-10-29 11:31:50 - Initializing Eureka in region us-east-1
+2026-10-29 11:31:50 - Client configured to neither register nor query for data.
+2026-10-29 11:31:50 - Discovery Client initialized at timestamp 1793253710311 with initial instances count: 0
+2026-10-29 11:31:50 - Registering application CESSATION-SERVICE with eureka with status UP
+2026-10-29 11:31:50 - Tomcat started on port 7789 (http) with context path '/'
+2026-10-29 11:31:50 - Updating port to 7789
+2026-10-29 11:31:51 - Cannot determine local hostname
+2026-10-29 11:31:51 - Started CessationServiceApplication in 20.089 seconds (process running for 21.571)
+2026-10-29 16:29:44 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-10-29 16:29:44 - Initializing Servlet 'dispatcherServlet'
+2026-10-29 16:29:44 - Completed initialization in 10 ms
+-=-=-=-=-=-=-==->43
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.license_id=? and lcae1_0.status<>'Inactive'
+-=-=-=-=-=-=-==->43
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.license_id=? and lcae1_0.status<>'Inactive'
+cessationAppId===-=-=-=-=-> 5
+Hibernate: select caue1_0.app_undertaking_id,caue1_0.cessation_app_id,caue1_0.created,caue1_0.created_by,caue1_0.file_name,caue1_0.status,caue1_0.undertaking_id,caue1_0.undertaking_key,caue1_0.updated,caue1_0.updated_by from cessation_management.cessation_app_undertaking caue1_0 where caue1_0.cessation_app_id=? and caue1_0.status='Active'
+-=-=-=-=-=-=-==->43
+cessationAppId===-=-=-=-=-> 5
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.license_id=? and lcae1_0.status<>'Inactive'
+Hibernate: select caue1_0.app_undertaking_id,caue1_0.cessation_app_id,caue1_0.created,caue1_0.created_by,caue1_0.file_name,caue1_0.status,caue1_0.undertaking_id,caue1_0.undertaking_key,caue1_0.updated,caue1_0.updated_by from cessation_management.cessation_app_undertaking caue1_0 where caue1_0.cessation_app_id=? and caue1_0.status='Active'
+-=-=-=-=-=-=-==->43
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.license_id=? and lcae1_0.status<>'Inactive'
+-=-=-=-=-=-=-==->43
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.license_id=? and lcae1_0.status<>'Inactive'
+-=-=-=-=-=-=-==->43
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.license_id=? and lcae1_0.status<>'Inactive'
+cessationAppId===-=-=-=-=-> 5
+Hibernate: select caue1_0.app_undertaking_id,caue1_0.cessation_app_id,caue1_0.created,caue1_0.created_by,caue1_0.file_name,caue1_0.status,caue1_0.undertaking_id,caue1_0.undertaking_key,caue1_0.updated,caue1_0.updated_by from cessation_management.cessation_app_undertaking caue1_0 where caue1_0.cessation_app_id=? and caue1_0.status='Active'
+-=-=-=-=-=-=-==->44
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.license_id=? and lcae1_0.status<>'Inactive'
+-=-=-=-=-=-=-==->44
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.license_id=? and lcae1_0.status<>'Inactive'
+-=-=-=-=-=-=-==->44
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.license_id=? and lcae1_0.status<>'Inactive'
+-=-=-=-=-=-=-==->44
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.license_id=? and lcae1_0.status<>'Inactive'
+-=-=-=-=-=-=-==->44
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.license_id=? and lcae1_0.status<>'Inactive'
+-=-=-=-=-=-=-==->44
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.license_id=? and lcae1_0.status<>'Inactive'
+-=-=-=-=-=-=-==->44
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.license_id=? and lcae1_0.status<>'Inactive'
+-=-=-=-=-=-=-==->44
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.license_id=? and lcae1_0.status<>'Inactive'

@@ -20,6 +20,9 @@ public interface ApplicationActionTakenRepository extends JpaRepository<Applican
 	@Query("SELECT d FROM ApplicantActionTakenEntity d WHERE d.userName=:applicantUserName AND d.status='Active'")
 	List<ApplicantActionTakenEntity> getAllApplicationTaken(String applicantUserName);
 
+	@Query("SELECT d FROM ApplicantActionTakenEntity d WHERE d.userName=:applicantUserName")
+	List<ApplicantActionTakenEntity> getAllApplicationTakenAnyStatus(String applicantUserName);
+
 	@Query("SELECT d FROM ApplicantActionTakenEntity d WHERE d.actionReport=:documentName AND d.status='Active'")
 	Optional<ApplicantActionTakenEntity> downloadfileBydDocumentName(@Param("documentName")String documentName);
 	

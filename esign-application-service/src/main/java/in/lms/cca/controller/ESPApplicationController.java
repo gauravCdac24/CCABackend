@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -348,7 +349,16 @@ public class ESPApplicationController {
 										 	.orElse(null);
 		
 		String[] ekycmodesArray = ekycmodes.split(",");
-		String modes = ekycmodesArray.length > 1? "s":"";
+		int selectedModeCount = 0;
+		for (String mode : ekycmodesArray) {
+			if (mode != null && !mode.trim().isEmpty()) {
+				selectedModeCount++;
+			}
+		}
+		if (selectedModeCount < 2) {
+			return new ResponseEntity<>("Please select at least two eKYC modes.", HttpStatus.BAD_REQUEST);
+		}
+		String modes = selectedModeCount > 1? "s":"";
 			
 		String estr = "";
 		estr += "<div style=\"margin-left: 20px;\"><b> Purpose of usage</b><ul style = \"margin-left: 10px;\"><li>"+purpose;
@@ -557,6 +567,16 @@ public class ESPApplicationController {
 		
 			String[] ekycModes = EncryptionUtil.decrypt(id).split(","); 
 			String purpose = EncryptionUtil.decrypt(spurpose).trim();
+
+			int selectedModeCount = 0;
+			for (String mode : ekycModes) {
+				if (mode != null && !mode.trim().isEmpty()) {
+					selectedModeCount++;
+				}
+			}
+			if (selectedModeCount < 2) {
+				return new ResponseEntity<>("Please select at least two eKYC modes.", HttpStatus.BAD_REQUEST);
+			}
 			
 			
 			
@@ -790,23 +810,32 @@ public class ESPApplicationController {
 		}
 		
 		if(Obj.geteKYCApprovalDoc() != null && !Obj.geteKYCApprovalDoc().isEmpty()) {
+
+			List<EkycMode> activeModes = ekycModeServ.getAllEKYCModeByAppIdAndStatus(objApp.get(0).getEsignLicenseeAppId(), "Active");
 		
 			for(EKYCApprovalDocDTO e: Obj.geteKYCApprovalDoc()) {
+
+				EkycMode matchedMode = findEkycModeByEncryptedId(activeModes, e.getId());
+				String modeKind = ekycModeKind(matchedMode == null ? null : matchedMode.getEkycModeTitle());
+				boolean requiresFile = !"aadhaarOffline".equals(modeKind);
 				
-				
-				
-				if((e.getFile() == null || e.getFile().isEmpty()) && (e.getFileName() == null || e.getFileName().isEmpty())) {
+				if(requiresFile && (e.getFile() == null || e.getFile().isEmpty()) && (e.getFileName() == null || e.getFileName().isEmpty())) {
 					return new ResponseEntity<>("Please upload Required Approval.", HttpStatus.BAD_REQUEST);
-				}else if(!respObj.isEmpty() && respObj.get(0).getEkycMode() && (e.getFile() == null || e.getFile().isEmpty()) && (e.getFileName() != null || !e.getFileName().isEmpty())) {
+				}else if(requiresFile && !respObj.isEmpty() && respObj.get(0).getEkycMode() && (e.getFile() == null || e.getFile().isEmpty()) && (e.getFileName() != null && !e.getFileName().isEmpty())) {
 					
 					EkycMode matchedEkycMode = rekycobj.stream()
 				            .filter(client -> Long.parseLong(EncryptionUtil.decrypt(client.getEkycMode())) == Long.parseLong(EncryptionUtil.decrypt(e.getId()))) 
 				            .findFirst()
 				            .orElse(null);
 					
-					if(matchedEkycMode != null && matchedEkycMode.getFileName().equals(e.getFileName())) {
+					if(matchedEkycMode != null && matchedEkycMode.getFileName() != null && matchedEkycMode.getFileName().equals(e.getFileName())) {
 						return new ResponseEntity<>("Please reupload "+matchedEkycMode.getEkycModeTitle()+" approval, as it has been marked by the reviewer for reuploading.", HttpStatus.BAD_REQUEST);
 					}
+				}
+
+				String detailError = validateEkycModeDetails(modeKind, e);
+				if(detailError != null) {
+					return new ResponseEntity<>(detailError, HttpStatus.BAD_REQUEST);
 				}
 				
 			}
@@ -870,47 +899,31 @@ public class ESPApplicationController {
 			
 			if(Obj.geteKYCApprovalDoc() != null && !Obj.geteKYCApprovalDoc().isEmpty()) {
 				for(EKYCApprovalDocDTO e: Obj.geteKYCApprovalDoc()) {
-					
-					if(e.getFile() != null && !e.getFile().isEmpty()) {
-					
-						EkycMode ekycModeObj = ekycMode.stream()
-												.filter((item)->EncryptionUtil.decrypt(item.getEkycMode()).equals(EncryptionUtil.decrypt(e.getId())))
-												.findFirst()
-												.orElse(null);
-						
-						if(ekycModeObj != null) {
-											
-							Integer rnums = rand.nextInt(1000);
-							
-							
-							if(ekycModeObj.getFileName() != null && !ekycModeObj.getFileName().isEmpty()) {
-								DocumentFileUtil.deleteFile(ekycModeObj.getFileName(), "eKYCApproval");
-							}
-							
-							String ekycModeFileName = DocumentFileUtil.saveFile(e.getFile(), "eKYCApproval", rnums.toString(), "eKYCApproval");
-							ekycModeObj.setUpdatedBy(Obj.getUserName());
-							ekycModeObj.setUpdated(new Date());
-							ekycModeObj.setFileName(ekycModeFileName);
-							ekycModeServ.addekycMode(ekycModeObj);
-						}
-					}else if(e.getFileName() != null){
-						
-						EkycMode ekycModeObj = ekycMode.stream()
-								.filter((item)->item.getFileName() != null && item.getFileName().equals(e.getFileName()))
-								.findFirst()
-								.orElse(null);
-						
-						if(ekycModeObj != null) {
-							
-							ekycModeObj.setStatus("Active");
-							ekycModeObj.setUpdated(new Date());
-							ekycModeObj.setUpdatedBy(Obj.getUserName());
-							ekycModeServ.addekycMode(ekycModeObj);
-						}
-						
+
+					EkycMode ekycModeObj = findEkycModeByEncryptedId(ekycMode, e.getId());
+					if(ekycModeObj == null) {
+						continue;
 					}
-					
-					
+
+					if(e.getFile() != null && !e.getFile().isEmpty()) {
+						Integer rnums = rand.nextInt(1000);
+
+						if(ekycModeObj.getFileName() != null && !ekycModeObj.getFileName().isEmpty()) {
+							DocumentFileUtil.deleteFile(ekycModeObj.getFileName(), "eKYCApproval");
+						}
+
+						String ekycModeFileName = DocumentFileUtil.saveFile(e.getFile(), "eKYCApproval", rnums.toString(), "eKYCApproval");
+						ekycModeObj.setFileName(ekycModeFileName);
+					}
+
+					ekycModeObj.setServiceProviderName(trimToNull(e.getServiceProviderName()));
+					ekycModeObj.setIntegrationDetails(trimToNull(e.getIntegrationDetails()));
+					ekycModeObj.setIntegrationDate(trimToNull(e.getIntegrationDate()));
+					ekycModeObj.setEntityName(trimToNull(e.getEntityName()));
+					ekycModeObj.setStatus("Active");
+					ekycModeObj.setUpdated(new Date());
+					ekycModeObj.setUpdatedBy(Obj.getUserName());
+					ekycModeServ.addekycMode(ekycModeObj);
 				}
 			}
 			
@@ -2562,8 +2575,99 @@ public class ESPApplicationController {
         return ResponseEntity.ok("Successfully updated the status of active applications for user: " + applicantUserName);
     }
 
+	private EkycMode findEkycModeByEncryptedId(List<EkycMode> modes, String encryptedId) {
+		if (modes == null || encryptedId == null || encryptedId.isEmpty()) {
+			return null;
+		}
+		String modeId = EncryptionUtil.decrypt(encryptedId);
+		for (EkycMode mode : modes) {
+			if (mode.getEkycMode() != null && EncryptionUtil.decrypt(mode.getEkycMode()).equals(modeId)) {
+				return mode;
+			}
+		}
+		return null;
+	}
 
+	private String ekycModeKind(String title) {
+		if (title == null) {
+			return "default";
+		}
+		String normalized = title.toLowerCase();
+		if (normalized.contains("offline")) {
+			return "aadhaarOffline";
+		}
+		if (normalized.contains("online")) {
+			return "aadhaarOnline";
+		}
+		if (normalized.contains("organis") || normalized.contains("organiz")) {
+			return "organisational";
+		}
+		if (normalized.contains("bank")) {
+			return "banking";
+		}
+		if (normalized.contains("pan")) {
+			return "pan";
+		}
+		return "default";
+	}
 
+	private String validateEkycModeDetails(String modeKind, EKYCApprovalDocDTO details) {
+		if ("aadhaarOnline".equals(modeKind) && isBlank(details.getServiceProviderName())) {
+			return "Please enter Aadhaar Authorised Verification Service Provider Name.";
+		}
+		if ("pan".equals(modeKind) && isBlank(details.getServiceProviderName())) {
+			return "Please enter PAN Authorised Verification Service Provider.";
+		}
+		if ("banking".equals(modeKind)) {
+			if (isBlank(details.getIntegrationDetails())) {
+				return "Please enter Bank eKYC Integration.";
+			}
+			if (isBlank(details.getIntegrationDate()) || !isValidDate(details.getIntegrationDate())) {
+				return "Please select the date.";
+			}
+			if (isBlank(details.getEntityName())) {
+				return "Please enter Bank Name.";
+			}
+		}
+		if ("organisational".equals(modeKind)) {
+			if (isBlank(details.getIntegrationDetails())) {
+				return "Please enter Organisational eKYC Integration.";
+			}
+			if (isBlank(details.getIntegrationDate()) || !isValidDate(details.getIntegrationDate())) {
+				return "Please select the date.";
+			}
+			if (isBlank(details.getEntityName())) {
+				return "Please enter Organisation Name.";
+			}
+		}
+		if (exceedsLength(details.getServiceProviderName()) || exceedsLength(details.getIntegrationDetails()) || exceedsLength(details.getEntityName())) {
+			return "Entered details must not exceed 255 characters.";
+		}
+		return null;
+	}
 
-	
+	private boolean isBlank(String value) {
+		return value == null || value.trim().isEmpty();
+	}
+
+	private boolean exceedsLength(String value) {
+		return value != null && value.trim().length() > 255;
+	}
+
+	private boolean isValidDate(String value) {
+		try {
+			LocalDate.parse(value.trim());
+			return true;
+		} catch (Exception ex) {
+			return false;
+		}
+	}
+
+	private String trimToNull(String value) {
+		if (value == null || value.trim().isEmpty()) {
+			return null;
+		}
+		return value.trim();
+	}
+
 }

@@ -45,6 +45,23 @@ public class DocumentFileUtil {
 	    
 	}
 	
+	public static String saveBytes(byte[] content, String documentName, String uniqueCode, String folderPath, String extension) throws IOException {
+	    Date cdate = new Date();
+	    SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyHHmmss");
+	    String currentDate = sdf.format(cdate);
+	    String suffix = extension == null ? "" : extension;
+	    Path directoryPath = Paths.get(RealPath.REAL_PATH, folderPath);
+	    Files.createDirectories(directoryPath);
+	    String uniqueFileName;
+	    Path filePath;
+	    do {
+	        uniqueFileName = documentName + currentDate + uniqueCode + suffix;
+	        filePath = directoryPath.resolve(uniqueFileName);
+	    } while (Files.exists(filePath));
+	    Files.write(filePath, content);
+	    return uniqueFileName;
+	}
+
 	public static void deleteFile(String fileName, String filepath) {
 		
 		 Path filePath = Paths.get(RealPath.REAL_PATH, filepath+"//"+fileName);

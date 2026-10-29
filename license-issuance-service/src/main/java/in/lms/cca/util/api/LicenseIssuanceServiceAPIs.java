@@ -12,6 +12,14 @@ public class LicenseIssuanceServiceAPIs {
 
 	public static final String ISSUE_LICENSE_TO_APPLICANT = "/issue-license-to-applicant";
 
+	public static final String LICENSE_FORM_DEFAULTS = "/license-form-defaults";
+
+	public static final String SUBMIT_LICENSE_DETAILS_FOR_REVIEW = "/submit-license-details-for-review";
+
+	public static final String APPROVE_LICENSE_REVIEW = "/approve-license-review";
+
+	public static final String SEND_LICENSE_REVIEW_TO_ADMIN = "/send-license-review-to-admin";
+
 	public static final String GET_LICENSE_DETAILS_BY_USERNAME = "/license-details-by-username";
 
 	public static final String VIEW_LICENSE_DOCUMENT = "/view-license-document";

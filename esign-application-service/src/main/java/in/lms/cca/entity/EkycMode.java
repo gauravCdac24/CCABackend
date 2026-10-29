@@ -34,6 +34,18 @@ public class EkycMode extends AbstractTimestampEntity{
 	
 	@Column(name = "approval_file", length = 100)
 	private String fileName;
+
+	@Column(name = "service_provider_name", length = 255)
+	private String serviceProviderName;
+
+	@Column(name = "integration_details", length = 255)
+	private String integrationDetails;
+
+	@Column(name = "integration_date", length = 20)
+	private String integrationDate;
+
+	@Column(name = "entity_name", length = 255)
+	private String entityName;
 	
 	@Column(name = "status", length = 8)
 	private String status;
@@ -114,6 +126,38 @@ public class EkycMode extends AbstractTimestampEntity{
 
 	public void setIsApprovalRequired(Boolean isApprovalRequired) {
 		this.isApprovalRequired = isApprovalRequired;
+	}
+
+	public String getServiceProviderName() {
+		return serviceProviderName;
+	}
+
+	public void setServiceProviderName(String serviceProviderName) {
+		this.serviceProviderName = serviceProviderName;
+	}
+
+	public String getIntegrationDetails() {
+		return integrationDetails;
+	}
+
+	public void setIntegrationDetails(String integrationDetails) {
+		this.integrationDetails = integrationDetails;
+	}
+
+	public String getIntegrationDate() {
+		return integrationDate;
+	}
+
+	public void setIntegrationDate(String integrationDate) {
+		this.integrationDate = integrationDate;
+	}
+
+	public String getEntityName() {
+		return entityName;
+	}
+
+	public void setEntityName(String entityName) {
+		this.entityName = entityName;
 	}
 	
 	

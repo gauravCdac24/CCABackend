@@ -34,6 +34,9 @@ public class BankDetails extends AbstractTimestampEntity{
     @Column(name = "ifsc", length = 11)
     private String ifsc;
 
+    @Column(name = "services", length = 500)
+    private String services;
+
     @Column(name = "status", length = 8)
     private String status;
 
@@ -102,6 +105,14 @@ public class BankDetails extends AbstractTimestampEntity{
 
 	public void setIfsc(String ifsc) {
 		this.ifsc = ifsc;
+	}
+
+	public String getServices() {
+		return services;
+	}
+
+	public void setServices(String services) {
+		this.services = services;
 	}
 
 	public String getStatus() {

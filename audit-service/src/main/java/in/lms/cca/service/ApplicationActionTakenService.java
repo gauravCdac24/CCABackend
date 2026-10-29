@@ -18,6 +18,8 @@ public interface ApplicationActionTakenService {
 
 	List<ApplicantActionTakenEntity> getAllApplicationTaken(String applicantUserName);
 
+	List<ApplicantActionTakenEntity> getAllApplicationTakenAnyStatus(String applicantUserName);
+
 	Optional<ApplicantActionTakenEntity> downloadfileBydDocumentName(String documentName);
 
 }

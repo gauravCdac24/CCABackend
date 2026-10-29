@@ -27,6 +27,8 @@ public class LicenseAcquisitionWorkflowServiceImpl implements LicenseAcquisition
 	public static final String STEP_IN_PRINCIPLE = "IN_PRINCIPLE";
 	public static final String STEP_LICENSE_DOCUMENTS = "LICENSE_DOCUMENTS";
 	public static final String STEP_BANK_GUARANTEE = "BANK_GUARANTEE";
+	public static final String STEP_LICENSE_CCA_REVIEW = "LICENSE_CCA_REVIEW";
+	public static final String STEP_LICENSE_SENT_TO_ADMIN = "LICENSE_SENT_TO_ADMIN";
 	public static final String STEP_LICENSE_ISSUED = "LICENSE_ISSUED";
 	public static final String STEP_REJECTED = "REJECTED";
 	public static final String STEP_COMPLETED = "COMPLETED";
@@ -78,6 +80,14 @@ public class LicenseAcquisitionWorkflowServiceImpl implements LicenseAcquisition
 		}
 		if (ApplicationStatusUtil.isRejected(status)) {
 			return STEP_REJECTED;
+		}
+		if (ApplicationStatusUtil.normalize(status)
+				.equals(ApplicationStatusUtil.normalize(ApplicationStatusUtil.LICENSE_DETAILS_PENDING_CCA))) {
+			return STEP_LICENSE_CCA_REVIEW;
+		}
+		if (ApplicationStatusUtil.normalize(status)
+				.equals(ApplicationStatusUtil.normalize(ApplicationStatusUtil.LICENSE_DETAILS_SENT_TO_ADMIN))) {
+			return STEP_LICENSE_SENT_TO_ADMIN;
 		}
 		if (ApplicationStatusUtil.normalize(status)
 				.equals(ApplicationStatusUtil.normalize(ApplicationStatusUtil.BANK_GUARANTEE_UPLOADED))) {
@@ -139,6 +149,9 @@ public class LicenseAcquisitionWorkflowServiceImpl implements LicenseAcquisition
 			break;
 		case "CCA":
 			addCcaActions(actions, intentApplication, currentStep);
+			break;
+		case "ADMIN":
+			addAdminActions(actions, currentStep);
 			break;
 		case "REVIEW_COMMITTEE":
 		case "REVIEWCOMMITTEE":
@@ -244,6 +257,10 @@ public class LicenseAcquisitionWorkflowServiceImpl implements LicenseAcquisition
 			actions.add("REVIEW_APPLICATION");
 			return;
 		}
+		if (STEP_LICENSE_CCA_REVIEW.equals(currentStep)) {
+			actions.add("REVIEW_LICENSE");
+			return;
+		}
 		if (STEP_IN_PRINCIPLE.equals(currentStep)
 				&& ApplicationStatusUtil.normalize(intentApplication.getApplicationStatus())
 						.equals(ApplicationStatusUtil.normalize(ApplicationStatusUtil.RECOMMENDED_IN_PRINCIPLE))) {
@@ -251,13 +268,21 @@ public class LicenseAcquisitionWorkflowServiceImpl implements LicenseAcquisition
 			return;
 		}
 		if (STEP_BANK_GUARANTEE.equals(currentStep)) {
-			actions.add("ISSUE_LICENSE");
+			actions.add("VIEW");
 			return;
 		}
 		if (STEP_AUDIT_PHASE.equals(currentStep)
 				&& ApplicationStatusUtil.normalize(intentApplication.getApplicationStatus())
 						.equals(ApplicationStatusUtil.normalize(ApplicationStatusUtil.RECOMMENDED_FOR_AUDIT_AGENCY))) {
 			actions.add("REVIEW_AUDIT_AGENCY");
+			return;
+		}
+		actions.add("VIEW");
+	}
+
+	private void addAdminActions(List<String> actions, String currentStep) {
+		if (STEP_BANK_GUARANTEE.equals(currentStep) || STEP_LICENSE_SENT_TO_ADMIN.equals(currentStep)) {
+			actions.add("ISSUE_LICENSE");
 			return;
 		}
 		actions.add("VIEW");

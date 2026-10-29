@@ -12,6 +12,8 @@ public interface AuditService {
 
 	List<AuditControlEntity> getAuditControlsByUser(String userName);
 
+	List<AuditControlEntity> getActiveAuditControlsByUser(String userName);
+
 	void deleteByControlId(int idToRemove, String userName);
 
 	

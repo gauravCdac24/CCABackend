@@ -110,7 +110,7 @@ public class EsignController {
     	// Create XML File for eSign
         String hashDocId = "1";
         String transactionId = "";
-        String resUrl = "http://10.22.118.201:3000/api/esign-service/esignresponse";
+        String resUrl = "http://localhost:8080/api/esign-service/esignresponse";
         String fileHash = "";
         String xmlData = "";
         String xmlasstring = "";
@@ -390,25 +390,39 @@ public class EsignController {
             // Redirect straight to frontend success route
             String pid = EncryptionUtil.encrypt(ereqquest.getRedirectUrl());
             String id = EncryptionUtil.encrypt("signed_success");
-            
-            String urlToRedirect = CrossOrigins.Origins + "/esignresponse?id=" + id + "&pid=" + pid;
-            URI location = URI.create(urlToRedirect);
-            HttpHeaders headers = new HttpHeaders();
-            headers.setLocation(location);
-            return new ResponseEntity<>(headers, HttpStatus.FOUND);
+            return buildEsignCallbackResponse(request, id, pid, "signed_success");
            
 //
         } catch (Exception e) {
             e.printStackTrace();
             String pid = EncryptionUtil.encrypt(ereqquest.getRedirectUrl());
             String id = EncryptionUtil.encrypt("failed");
-            
-            String urlToRedirect = CrossOrigins.Origins + "/esignresponse?id=" + id + "&pid=" + pid;
-            URI location = URI.create(urlToRedirect);
-            HttpHeaders headers = new HttpHeaders();
-            headers.setLocation(location);
-            return new ResponseEntity<>(headers, HttpStatus.FOUND);
+            return buildEsignCallbackResponse(request, id, pid, "failed");
         }
+    }
+
+    /**
+     * Local/mock skip uses header X-Local-Esign-Skip=true and returns JSON so the
+     * SPA can navigate without depending on browser form-post + 302 callback URL.
+     * Normal CDAC/form flow still gets HTTP 302 Location redirect.
+     */
+    private ResponseEntity<?> buildEsignCallbackResponse(HttpServletRequest request, String id, String pid,
+            String status) {
+        boolean localSkip = "true".equalsIgnoreCase(request.getHeader("X-Local-Esign-Skip"));
+        String urlToRedirect = CrossOrigins.Origins + "/esignresponse?id=" + id + "&pid=" + pid;
+        if (localSkip) {
+            java.util.Map<String, String> body = new java.util.HashMap<>();
+            body.put("status", status);
+            body.put("id", id);
+            body.put("pid", pid);
+            body.put("redirectUrl", "/esignresponse?id=" + id + "&pid=" + pid);
+            return new ResponseEntity<>(body, HttpStatus.OK);
+        }
+        URI location = URI.create(urlToRedirect);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(location);
+        headers.add(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, HttpHeaders.LOCATION);
+        return new ResponseEntity<>(headers, HttpStatus.FOUND);
     }
     
     @GetMapping(EsignServiceAPIs.GET_DIGITALLY_SIGNED_DOCUMENT)

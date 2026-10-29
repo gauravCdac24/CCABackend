@@ -230,6 +230,7 @@ public class AdditionalDetailsDTO {
     private boolean eSign;
     private boolean timeStamp;
     private boolean SSL;
+    private String services;
     private String status;
     private String userName;
 	  private String createdBy;
@@ -302,6 +303,14 @@ public class AdditionalDetailsDTO {
 
     public void setSSL(boolean SSL) {
         this.SSL = SSL;
+    }
+
+    public String getServices() {
+        return services;
+    }
+
+    public void setServices(String services) {
+        this.services = services;
     }
 
 	public String getStatus() {

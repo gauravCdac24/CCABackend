@@ -82,6 +82,7 @@ import in.lms.cca.dto.StateDTO;
 import in.lms.cca.dto.TotalDSCeSignIssuedResponse;
 import in.lms.cca.dto.ViewDSCeSignIssuedDTO;
 import in.lms.cca.entity.ASPDetails;
+import in.lms.cca.entity.AspAuditReport;
 import in.lms.cca.entity.DSCeSignIssued;
 import in.lms.cca.entity.LdifDocument;
 import in.lms.cca.service.IASPDetailsService;
@@ -492,6 +493,65 @@ public class DashoboardController {
 				    }
 					
 				}
+
+				List<AspAuditReport> auditReportsToSave = new ArrayList<>();
+				boolean newAsp = obj.getAspId() == null || obj.getAspId().isBlank();
+				if (newAsp) {
+					if (obj.getApiSpecificationId() == null || obj.getApiSpecificationId().isBlank()) {
+						return new ResponseEntity<>("Please select API specification.", HttpStatus.BAD_REQUEST);
+					}
+					if (obj.getApiVersionId() == null || obj.getApiVersionId().isBlank()) {
+						return new ResponseEntity<>("Please select API version.", HttpStatus.BAD_REQUEST);
+					}
+					if (obj.getAuditReports() == null || obj.getAuditReports().isEmpty()) {
+						return new ResponseEntity<>("Please upload ASP audit report.", HttpStatus.BAD_REQUEST);
+					}
+					int reportIndex = 1;
+					for (ASPDetailsDTO.AuditReportItem item : obj.getAuditReports()) {
+						if (item.getFileName() == null || item.getFileName().isBlank() || item.getFileContent() == null || item.getFileContent().isBlank()) {
+							return new ResponseEntity<>("Please upload ASP audit report.", HttpStatus.BAD_REQUEST);
+						}
+						if (item.getAuditDate() == null || item.getAuditDate().isBlank()) {
+							return new ResponseEntity<>("Please select audit report date.", HttpStatus.BAD_REQUEST);
+						}
+						String lowerName = item.getFileName().toLowerCase();
+						if (!(lowerName.endsWith(".pdf") || lowerName.endsWith(".doc") || lowerName.endsWith(".docx"))) {
+							return new ResponseEntity<>("Audit report must be a PDF or Word file.", HttpStatus.BAD_REQUEST);
+						}
+						Date auditDate;
+						try {
+							auditDate = dateFormat.parse(item.getAuditDate());
+						} catch (ParseException e) {
+							return new ResponseEntity<>("Please select a valid audit report date.", HttpStatus.BAD_REQUEST);
+						}
+						if (auditDate.after(new Date())) {
+							return new ResponseEntity<>("Audit report date cannot be in the future.", HttpStatus.BAD_REQUEST);
+						}
+						if (auditDate.before(onBoardingDate)) {
+							return new ResponseEntity<>("Audit report date cannot be before the onboarding date.", HttpStatus.BAD_REQUEST);
+						}
+						byte[] fileBytes;
+						try {
+							fileBytes = Base64.getDecoder().decode(item.getFileContent());
+						} catch (IllegalArgumentException e) {
+							return new ResponseEntity<>("Audit report file could not be read.", HttpStatus.BAD_REQUEST);
+						}
+						if (fileBytes.length > 5 * 1024 * 1024) {
+							return new ResponseEntity<>("Each audit report must be 5 MB or smaller.", HttpStatus.BAD_REQUEST);
+						}
+						String extension = lowerName.substring(lowerName.lastIndexOf('.'));
+						String storedName = DocumentFileUtil.saveBytes(fileBytes, "ASPAudit", String.valueOf(reportIndex), "ASPAuditReport/Document", extension);
+						if (storedName == null) {
+							return new ResponseEntity<>("Audit report could not be saved. Please try again.", HttpStatus.BAD_REQUEST);
+						}
+						AspAuditReport report = new AspAuditReport();
+						report.setFileName(storedName);
+						report.setAuditReportDate(auditDate);
+						auditReportsToSave.add(report);
+						reportIndex++;
+					}
+					exitDate = null;
+				}
 				
 				
 			
@@ -551,14 +611,18 @@ public class DashoboardController {
 					newObj.setStateId(obj.getStateId());
 					newObj.setAspName(obj.getAspName());
 					newObj.setEmailId(obj.getEmailId());
-					newObj.setExitDate(exitDate);
+					newObj.setExitDate(null);
 					newObj.setOnBoardingDate(onBoardingDate);
+					newObj.setApiSpecificationId(obj.getApiSpecificationId());
+					newObj.setApiVersionId(obj.getApiVersionId());
 
 					
 				}
 							
 				
-				Optional<ASPDetails> asp = aspServ.addASPDetails(newObj);
+				Optional<ASPDetails> asp = newAsp
+						? aspServ.addASPDetails(newObj, auditReportsToSave)
+						: aspServ.addASPDetails(newObj);
 				
 				if (asp.isEmpty()) {
 	                return new ResponseEntity<>("An error occurred while saving. Please Try again.", HttpStatus.BAD_REQUEST);

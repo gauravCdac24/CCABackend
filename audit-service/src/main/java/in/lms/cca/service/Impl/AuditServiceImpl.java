@@ -43,6 +43,15 @@ public class AuditServiceImpl implements AuditService {
 	}
 
 	@Override
+	public List<AuditControlEntity> getActiveAuditControlsByUser(String userName) {
+		if (userName == null || userName.isBlank()) {
+			return List.of();
+		}
+		List<AuditControlEntity> controls = auditRepository.findActiveByUserName(userName.trim());
+		return controls == null ? List.of() : controls;
+	}
+
+	@Override
 	public void deleteByControlId(int idToRemove, String userName) {
 		 auditRepository.deleteByControlIdAndUser(idToRemove, userName, AnnualAuditContext.getAuditScheduleId());
 	}
