@@ -257,43 +257,132 @@ public class LicenseIssuanceController {
 		}
 	}
 
-	// Endpoint to download document templates
-	@GetMapping("/download-template/{templateName}")
-	public ResponseEntity<Resource> downloadTemplate(@PathVariable String templateName) {
-		/*try {
-			// Define path where templates are stored on your server (e.g., src/main/resources/templates/ or external folder)
-			String filePath = "templates/" + templateName + ".pdf"; 
-			Path path = Paths.get(filePath);
+// 	// Endpoint to download document templates
+// 	@GetMapping("/download-template/{templateName}")
+// 	public ResponseEntity<Resource> downloadTemplate(@PathVariable String templateName) {
+// 		/*try {
+// 			// Define path where templates are stored on your server (e.g., src/main/resources/templates/ or external folder)
+// 			String filePath = "templates/" + templateName + ".pdf"; 
+// 			Path path = Paths.get(filePath);
 			
-			if (!Files.exists(path)) {
-				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-			}*/
+// 			if (!Files.exists(path)) {
+// 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+// 			}*/
 		
-		try {
-            // Loads from src/main/resources/templates/{templateName}.pdf
-            Resource resource = resourceLoader.getResource("classpath:templates/" + templateName + ".pdf");
+// 		try {
+//             // Loads from src/main/resources/templates/{templateName}.pdf
+//             Resource resource = resourceLoader.getResource("classpath:templates/" + templateName + ".pdf");
             
-            if (!resource.exists() || !resource.isReadable()) {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
+//             if (!resource.exists() || !resource.isReadable()) {
+//                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//             }
 			
-			//ByteArrayResource resource = new ByteArrayResource(Files.readAllBytes(path));
+// 			//ByteArrayResource resource = new ByteArrayResource(Files.readAllBytes(path));
 			
-			HttpHeaders headers = new HttpHeaders();
-			headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + templateName + ".pdf");
-			headers.add(HttpHeaders.CACHE_CONTROL, "no-cache, no-store, must-revalidate");
-			headers.add(HttpHeaders.PRAGMA, "no-cache");
-			headers.add(HttpHeaders.EXPIRES, "0");
+// 			HttpHeaders headers = new HttpHeaders();
+// 			headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + templateName + ".pdf");
+// 			headers.add(HttpHeaders.CACHE_CONTROL, "no-cache, no-store, must-revalidate");
+// 			headers.add(HttpHeaders.PRAGMA, "no-cache");
+// 			headers.add(HttpHeaders.EXPIRES, "0");
 
-			return ResponseEntity.ok()
-					.headers(headers)
-					//.contentLength(path.toFile().length())
-					.contentType(MediaType.APPLICATION_PDF)
-					.body(resource);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+// 			return ResponseEntity.ok()
+// 					.headers(headers)
+// 					//.contentLength(path.toFile().length())
+// 					.contentType(MediaType.APPLICATION_PDF)
+// 					.body(resource);
+// 		} catch (Exception e) {
+// 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+// 		}
+// 	}
+// }
+
+// Endpoint to download document templates
+//	@GetMapping("/download-template/{templateName}")
+//	public ResponseEntity<Resource> downloadTemplate(@PathVariable String templateName) {
+//		/*try {
+//			// Define path where templates are stored on your server (e.g., src/main/resources/templates/ or external folder)
+//			String filePath = "templates/" + templateName + ".pdf"; 
+//			Path path = Paths.get(filePath);
+//			
+//			if (!Files.exists(path)) {
+//				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//			}*/
+//		
+//		try {
+//            // Loads from src/main/resources/templates/{templateName}.pdf
+//            Resource resource = resourceLoader.getResource("classpath:templates/" + templateName + ".pdf");
+//            
+//            if (!resource.exists() || !resource.isReadable()) {
+//                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//            }
+//			
+//			//ByteArrayResource resource = new ByteArrayResource(Files.readAllBytes(path));
+//			
+//			HttpHeaders headers = new HttpHeaders();
+//			headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + templateName + ".pdf");
+//			headers.add(HttpHeaders.CACHE_CONTROL, "no-cache, no-store, must-revalidate");
+//			headers.add(HttpHeaders.PRAGMA, "no-cache");
+//			headers.add(HttpHeaders.EXPIRES, "0");
+//
+//			return ResponseEntity.ok()
+//					.headers(headers)
+//					//.contentLength(path.toFile().length())
+//					.contentType(MediaType.APPLICATION_PDF)
+//					.body(resource);
+//		} catch (Exception e) {
+//			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//		}
+//	}
+	
+	// Endpoint to download document templates
+		@GetMapping("/download-template/{templateName}")
+		public ResponseEntity<Resource> downloadTemplate(@PathVariable String templateName) {
+			try {
+				// Define the absolute or relative physical path to your webapp Templates folder
+				// (Adjust the base path if your server runs from a different root directory)
+				String folderPath = "src/main/webapp/Templates/";
+				File dir = new File(folderPath);
+
+				if (!dir.exists() || !dir.isDirectory()) {
+					return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+				}
+
+				// Automatically find the file matching the template name prefix and ending with .pdf
+				File[] matchingFiles = dir.listFiles((d, name) -> 
+					name.startsWith(templateName) && name.toLowerCase().endsWith(".pdf")
+				);
+
+				if (matchingFiles == null || matchingFiles.length == 0) {
+					return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+				}
+
+				// Take the automatically found file
+				File targetFile = matchingFiles[0];
+
+				// Load the resource using the "file:" prefix for physical system files
+				Resource resource = resourceLoader.getResource("file:" + targetFile.getAbsolutePath());
+				
+				if (!resource.exists() || !resource.isReadable()) {
+					return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+				}
+				
+				HttpHeaders headers = new HttpHeaders();
+				headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + targetFile.getName() + "\"");
+				headers.add(HttpHeaders.CACHE_CONTROL, "no-cache, no-store, must-revalidate");
+				headers.add(HttpHeaders.PRAGMA, "no-cache");
+				headers.add(HttpHeaders.EXPIRES, "0");
+
+				return ResponseEntity.ok()
+						.headers(headers)
+						.contentLength(targetFile.length())
+						.contentType(MediaType.APPLICATION_PDF)
+						.body(resource);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			}
 		}
-	}
+	
 }
 
 
