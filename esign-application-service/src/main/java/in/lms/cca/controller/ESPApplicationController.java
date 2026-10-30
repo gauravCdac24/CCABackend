@@ -905,7 +905,13 @@ public class ESPApplicationController {
 						continue;
 					}
 
-					if(e.getFile() != null && !e.getFile().isEmpty()) {
+					String savedModeKind = ekycModeKind(ekycModeObj.getEkycModeTitle());
+					if("aadhaarOffline".equals(savedModeKind)) {
+						if(ekycModeObj.getFileName() != null && !ekycModeObj.getFileName().isEmpty()) {
+							DocumentFileUtil.deleteFile(ekycModeObj.getFileName(), "eKYCApproval");
+						}
+						ekycModeObj.setFileName(null);
+					} else if(e.getFile() != null && !e.getFile().isEmpty()) {
 						Integer rnums = rand.nextInt(1000);
 
 						if(ekycModeObj.getFileName() != null && !ekycModeObj.getFileName().isEmpty()) {
@@ -2263,11 +2269,23 @@ public class ESPApplicationController {
 	
 	
 	@GetMapping(EsignApplicationServiceAPIs.APPROVE_ESIGN_GO_LIVE)
-	public ResponseEntity<?> approveForEsignGoLive(@RequestParam("id") String licenseAppId, @RequestParam("pid") String username){
+	public ResponseEntity<?> approveForEsignGoLive(@RequestParam("id") String licenseAppId, @RequestParam("pid") String username, @RequestParam("rid") String remarksParam){
 		try {
+
+			String remarks = EncryptionUtil.decrypt(remarksParam);
+			if(remarks == null || remarks.trim().isEmpty()) {
+				return new ResponseEntity<>("Kindly provide your remarks.", HttpStatus.BAD_REQUEST);
+			}
+			remarks = remarks.trim();
+			if(!remarks.matches("^[A-Za-z0-9,./ ]+$")) {
+				return new ResponseEntity<>("Only alphabets, numbers and the characters ,./ are allowed.", HttpStatus.BAD_REQUEST);
+			}else if(remarks.length() < 3 || remarks.length() > 500) {
+				return new ResponseEntity<>("The length must be between 3 and 500 characters.", HttpStatus.BAD_REQUEST);
+			}
 			
 			EsignLicenseeApplication objApp = applicationServ.getApplicationById(Long.parseLong(EncryptionUtil.decrypt(licenseAppId)));
 			List<ReviewESPApplication> respObj = espAppServ.getReviewESPApplicationByStatusAndId(objApp.getEsignLicenseeAppId(), "Active");
+			List<ReviewESPApplication> recommendedReviews = espAppServ.getReviewESPApplicationByStatusAndId(objApp.getEsignLicenseeAppId(), "Inactive");
 			
 			objApp.setApplicationStatus("Approved for eSign Go-Live");
 			
@@ -2289,6 +2307,13 @@ public class ESPApplicationController {
 			
 			applicationTimeServ.addApplicationTimeLine(apptimelineObj);
 			
+			if(!recommendedReviews.isEmpty()) {
+				ReviewESPApplication recommendation = recommendedReviews.get(0);
+				recommendation.setCcaRemarks(remarks);
+				recommendation.setUpdated(new Date());
+				espAppServ.addReviewESPApplication(recommendation);
+			}
+
 			if(!respObj.isEmpty()) {
 				ReviewESPApplication r = respObj.get(0);
 				r.setStatus("Inactive");
@@ -2616,7 +2641,7 @@ public class ESPApplicationController {
 			return "Please enter Aadhaar Authorised Verification Service Provider Name.";
 		}
 		if ("pan".equals(modeKind) && isBlank(details.getServiceProviderName())) {
-			return "Please enter PAN Authorised Verification Service Provider.";
+			return "Please enter PAN Authorised Verification Service Provider Name.";
 		}
 		if ("banking".equals(modeKind)) {
 			if (isBlank(details.getIntegrationDetails())) {

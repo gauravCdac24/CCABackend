@@ -38,5 +38,12 @@ public class LicenseIssuanceServiceAPIs {
 	
 	public static final String GET_RENEWAL_START_DATE_BY_USERNAME = "/get-renewal-start-date-by-username";
 
-	
+	public static final String GET_RENEWAL_WINDOW_BY_USERNAME = "/renewal-window-by-username";
+
+	public static final String GET_RENEWAL_EXTENSION_CANDIDATES = "/renewal-extension-candidates";
+
+	public static final String GET_RENEWAL_EXTENSIONS = "/renewal-extensions";
+
+	public static final String GRANT_RENEWAL_EXTENSION = "/grant-renewal-extension";
+
 }

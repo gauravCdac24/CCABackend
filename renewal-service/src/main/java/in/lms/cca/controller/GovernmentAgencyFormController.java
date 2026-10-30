@@ -27,6 +27,7 @@ import in.lms.cca.entity.IntentApplication;
 import in.lms.cca.service.AppLocationService;
 import in.lms.cca.service.GovernmentAgencyService;
 import in.lms.cca.service.IIntentApplicationService;
+import in.lms.cca.service.impl.RenewalWindowGuard;
 import in.lms.cca.util.api.GovernmentAgencyApplicationFormAPIs;
 import in.lms.cca.util.api.RenewLicenseServiceAPIs;
 import in.lms.cca.util.global.EncryptionUtil;
@@ -45,6 +46,9 @@ public class GovernmentAgencyFormController {
 	
 	@Autowired
 	private AppLocationService appLocationServ;
+
+	@Autowired
+	private RenewalWindowGuard renewalWindowGuard;
 	
 	
 	@PostMapping(GovernmentAgencyApplicationFormAPIs.ADD_GOVERNMENT_AGENCY_APPLICATION_FORM)
@@ -181,6 +185,11 @@ public class GovernmentAgencyFormController {
 	    // Username validation
 	    if (organizationalDTO.getUserName() == null || organizationalDTO.getUserName().trim().isEmpty()) {
 	        return new ResponseEntity<>("Username cannot be empty.", HttpStatus.BAD_REQUEST);
+	    }
+
+	    ResponseEntity<String> blocked = renewalWindowGuard.blockIfCannotApply(organizationalDTO.getUserName());
+	    if (blocked != null) {
+	        return blocked;
 	    }
 
 
@@ -481,7 +490,11 @@ public class GovernmentAgencyFormController {
 	    }
 
 		try {
-			
+			 ResponseEntity<String> blocked = renewalWindowGuard.blockIfCannotApply(organizationalDTO.getUserName());
+			 if (blocked != null) {
+			     return blocked;
+			 }
+
 			 IntentApplication intentApp = intentAppServ.findIntentAppById(organizationalDTO.getUserName());
 			 Long intentAppId = Long.valueOf(intentApp.getIntentAppId());
 			 

@@ -57,6 +57,7 @@ import in.lms.cca.service.ReviewApplicationService;
 import in.lms.cca.service.ReviewDocumentsService;
 import in.lms.cca.service.ReviewFieldsService;
 import in.lms.cca.service.impl.NotificationClientServiceImpl;
+import in.lms.cca.service.impl.RenewalWindowGuard;
 import in.lms.cca.payload.NotificationsRequest;
 import in.lms.cca.util.api.ApplicationReviewAPIs;
 import in.lms.cca.util.api.RenewLicenseServiceAPIs;
@@ -181,12 +182,37 @@ String status="Active";
 	                application.setStatusInitiatedOn(app.getUpdated());
 	            }
 
+	            attachDelayDocument(application, app.getIntentAppId());
+
 	            // Add the application to the DTO list
 	            applicationDTO.add(application);
 	        }
 	    }
 
 	    return new ResponseEntity<>(applicationDTO, HttpStatus.OK);
+	}
+
+	private void attachDelayDocument(ApplicationDTO application, Long intentAppId) {
+		List<ApplicationDocument> documents = applicationDocumentService.findIntentWithoutStatusAppById(intentAppId);
+		if (documents == null) {
+			return;
+		}
+		ApplicationDocument latest = null;
+		for (ApplicationDocument document : documents) {
+			if (!RenewalWindowGuard.isActiveDelayDocument(document)) {
+				continue;
+			}
+			if (latest == null || (document.getCreated() != null
+					&& (latest.getCreated() == null || document.getCreated().after(latest.getCreated())))) {
+				latest = document;
+			}
+		}
+		if (latest != null) {
+			application.setDelayOfRenewalFileName(latest.getFileName());
+			if (latest.getAppDocId() != null) {
+				application.setDelayOfRenewalDocumentId(latest.getAppDocId().toString());
+			}
+		}
 	}
 
 	

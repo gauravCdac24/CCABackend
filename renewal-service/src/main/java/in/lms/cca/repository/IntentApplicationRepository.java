@@ -11,8 +11,8 @@ import in.lms.cca.entity.IntentApplication;
 public interface IntentApplicationRepository extends JpaRepository<IntentApplication, Long> {
 
 	//
-	@Query("FROM IntentApplication a WHERE a.userName=:userName")
-	IntentApplication findIntentAppById(@Param("userName")String userName);
+	@Query("FROM IntentApplication a WHERE a.userName=:userName ORDER BY a.intentAppId DESC")
+	List<IntentApplication> findIntentAppsByUserName(@Param("userName") String userName);
 
 	@Query("FROM IntentApplication a WHERE a.intentAppId=:intentAppId")
 	IntentApplication findByIntentAppId(Long intentAppId);

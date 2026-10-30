@@ -10,6 +10,7 @@ import in.lms.cca.entity.annexure.AnnexureMain;
 import in.lms.cca.repository.annexure.AnnexureMainRepository;
 import in.lms.cca.service.annexure.IAnnexureMainService;
 import in.lms.cca.util.global.AnnualAuditContext;
+import in.lms.cca.util.global.RenewalAnnexureContext;
 
 @Service
 @Transactional
@@ -23,6 +24,10 @@ public class AnnexureMainServiceImpl implements IAnnexureMainService{
 		Long auditScheduleId = AnnualAuditContext.getAuditScheduleId();
 		if (auditScheduleId != null) {
 			return repo.findAnnexureByStatusUsernameAndAuditScheduleId(status, username, auditScheduleId);
+		}
+		Long intentAppId = RenewalAnnexureContext.getIntentAppId();
+		if (intentAppId != null) {
+			return repo.findAnnexureByStatusUsernameAndIntentAppId(status, username, intentAppId);
 		}
 		return repo.findAnnexureByStatusAndUsername(status, username);
 	}
@@ -41,11 +46,15 @@ public class AnnexureMainServiceImpl implements IAnnexureMainService{
 				return scheduled;
 			}
 		}
+		Long intentAppId = RenewalAnnexureContext.getIntentAppId();
+		if (intentAppId != null) {
+			return repo.findAnnexureByStatusUsernameAndIntentAppId("Active", normalized, intentAppId);
+		}
 		AnnexureMain active = repo.findAnnexureByStatusAndUsername("Active", normalized);
 		if (active != null) {
 			return active;
 		}
-		List<AnnexureMain> rows = repo.findByUserNameOrderByIdDesc(normalized);
+		List<AnnexureMain> rows = repo.findFreshByUserNameOrderByIdDesc(normalized);
 		return rows.isEmpty() ? null : rows.get(0);
 	}
 
@@ -57,6 +66,9 @@ public class AnnexureMainServiceImpl implements IAnnexureMainService{
 
 		if (sobj.getAuditScheduleId() == null) {
 			sobj.setAuditScheduleId(AnnualAuditContext.getAuditScheduleId());
+		}
+		if (sobj.getIntentAppId() == null) {
+			sobj.setIntentAppId(RenewalAnnexureContext.getIntentAppId());
 		}
 
 	    try {

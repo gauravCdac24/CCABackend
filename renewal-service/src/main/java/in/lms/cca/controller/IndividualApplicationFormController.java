@@ -71,6 +71,7 @@ import in.lms.cca.service.IIndividualEmailsService;
 import in.lms.cca.service.IIntentApplicationService;
 import in.lms.cca.service.IndivAdditionalDetailsService;
 import in.lms.cca.service.impl.NotificationClientServiceImpl;
+import in.lms.cca.service.impl.RenewalWindowGuard;
 import in.lms.cca.util.api.IndividualApplicationFormAPIs;
 import in.lms.cca.util.api.RenewLicenseServiceAPIs;
 import in.lms.cca.util.global.Constant;
@@ -114,6 +115,9 @@ public class IndividualApplicationFormController {
 
 	@Autowired
 	private RestTemplate restTemplate;
+
+	@Autowired
+	private RenewalWindowGuard renewalWindowGuard;
 
 	@Value("${apigateway.service.url}")
 	private String apigatewayServiceUrl;
@@ -264,7 +268,11 @@ public class IndividualApplicationFormController {
 
 
 		try {
-			
+			ResponseEntity<String> blocked = renewalWindowGuard.blockIfCannotApply(personalDetailsDTO.getUserName());
+			if (blocked != null) {
+				return blocked;
+			}
+
 			//Intent Application Created During First Step
 			IntentApplication intentApp = new IntentApplication();
 			intentApp.setAppTypeMasterId(personalDetailsDTO.getAppTypeMasterId());
@@ -631,12 +639,10 @@ public class IndividualApplicationFormController {
 	            return new ResponseEntity<>("Bank Draft details cannot be null.", HttpStatus.BAD_REQUEST);
 	        }
 
-	        // Draft Number validation
-	        if (bankDraftDTO.getDraftNo() == null || bankDraftDTO.getDraftNo().trim().isEmpty()) {
-	            return new ResponseEntity<>("Draft Number cannot be empty.", HttpStatus.BAD_REQUEST);
-	        }
-	        if (!bankDraftDTO.getDraftNo().matches("^[0-9]+$")) {
-	            return new ResponseEntity<>("Please enter a valid Draft Number.", HttpStatus.BAD_REQUEST);
+	        ResponseEntity<String> referenceError = invalidPaymentReference(
+	        		bankDraftDTO.getTransactionType(), bankDraftDTO.getDraftNo());
+	        if (referenceError != null) {
+	            return referenceError;
 	        }
 
 	        // Amount validation
@@ -1549,8 +1555,11 @@ List<ApplicationDocument> sortedActiveDocuments = applicationDocument.stream()
 
 		Optional<IndivApplication> result;
 		try {
-			
-			
+			ResponseEntity<String> blocked = renewalWindowGuard.blockIfCannotApply(personalDetailsDTO.getUserName());
+			if (blocked != null) {
+				return blocked;
+			}
+
 			IntentApplication intentApp = intentAppServ.findIntentAppById(personalDetailsDTO.getUserName());
 			
 			intentApp.setApplicationStatus("PENDING-FOR-RENEWAL");
@@ -2197,12 +2206,10 @@ List<ApplicationDocument> sortedActiveDocuments = applicationDocument.stream()
 	            return new ResponseEntity<>("Bank Draft details cannot be null.", HttpStatus.BAD_REQUEST);
 	        }
 
-	        // Validate Draft Number
-	        if (bankDraftDTO.getDraftNo() == null || bankDraftDTO.getDraftNo().trim().isEmpty()) {
-	            return new ResponseEntity<>("Draft Number cannot be empty.", HttpStatus.BAD_REQUEST);
-	        }
-	        if (!bankDraftDTO.getDraftNo().matches("^[0-9]+$")) {
-	            return new ResponseEntity<>("Please enter a valid Draft Number.", HttpStatus.BAD_REQUEST);
+	        ResponseEntity<String> referenceError = invalidPaymentReference(
+	        		bankDraftDTO.getTransactionType(), bankDraftDTO.getDraftNo());
+	        if (referenceError != null) {
+	            return referenceError;
 	        }
 
 	        // Validate Amount
@@ -2517,6 +2524,21 @@ List<ApplicationDocument> sortedActiveDocuments = applicationDocument.stream()
 		            return new ResponseEntity<>("No undertaking data provided.", HttpStatus.BAD_REQUEST);
 		        }
 
+		        for (AppUndertakingDTO appUndertakingDTO : appUndertakingDTOList) {
+		            if (appUndertakingDTO.getUserName() == null || appUndertakingDTO.getUserName().isEmpty()) {
+		                return new ResponseEntity<>("Username is missing in one of the entries.", HttpStatus.BAD_REQUEST);
+		            }
+		            IntentApplication intentApp = intentAppServ.findIntentAppById(appUndertakingDTO.getUserName());
+		            if (intentApp == null) {
+		                return new ResponseEntity<>("Intent application not found for username: " + appUndertakingDTO.getUserName(), HttpStatus.NOT_FOUND);
+		            }
+		            ResponseEntity<String> blocked = renewalWindowGuard.blockIfCannotSubmit(
+		            		appUndertakingDTO.getUserName(), intentApp.getIntentAppId());
+		            if (blocked != null) {
+		                return blocked;
+		            }
+		        }
+
 		        IntentApplication submittedIntentApp = null;
 
 		        // Loop through each AppUndertakingDTO in the list
@@ -2657,6 +2679,15 @@ List<ApplicationDocument> sortedActiveDocuments = applicationDocument.stream()
 	        bankDraft.setStatus("Active");
 	        IntentApplication intentApplication = intentAppServ.getIntentByIntentAppId(Long.valueOf(bankDraftDTO.getIntentId()));
 	        bankDraft.setIntentAppId(intentApplication);
+	        List<BankDraft> previousDrafts = bankDraftServ.findIntentWithoutAppById(intentApplication.getIntentAppId());
+	        if (previousDrafts != null) {
+	            for (BankDraft previous : previousDrafts) {
+	                if (previous != null && "Active".equalsIgnoreCase(previous.getStatus())) {
+	                    previous.setStatus("Inactive");
+	                    bankDraftServ.updateBankDraft(previous);
+	                }
+	            }
+	        }
 	        Optional<BankDraft> savedBankDraft = bankDraftServ.addBankDraft(bankDraft);
 
 	        IntentApplication intentApplication1 = intentAppServ.getIntentByIntentAppId(Long.valueOf(bankDraftDTO.getIntentId()));
@@ -2723,6 +2754,33 @@ List<ApplicationDocument> sortedActiveDocuments = applicationDocument.stream()
 			System.err.println("Active license lookup skipped for renewal SMS: " + e.getMessage());
 		}
 		return "";
+	}
+
+	/** Demand Draft and cheque numbers are digits. A UTR may include letters, up to 30 characters. */
+	private ResponseEntity<String> invalidPaymentReference(String transactionType, String draftNo) {
+		String type = transactionType != null ? transactionType.trim() : "";
+		if (type.isEmpty()) {
+			type = "Demand Draft";
+		}
+		if (!type.equals("Demand Draft") && !type.equals("Banker's check") && !type.equals("UTR")) {
+			return new ResponseEntity<>(
+					"Invalid Transaction Type. Allowed values: Demand Draft, Banker's check, UTR.",
+					HttpStatus.BAD_REQUEST);
+		}
+		String label = "UTR".equals(type) ? "UTR Number"
+				: "Banker's check".equals(type) ? "Cheque Number" : "Draft Number";
+		if (draftNo == null || draftNo.trim().isEmpty()) {
+			return new ResponseEntity<>(label + " cannot be empty.", HttpStatus.BAD_REQUEST);
+		}
+		String referenceNo = draftNo.trim();
+		if ("UTR".equals(type)) {
+			if (!referenceNo.matches("^[A-Za-z0-9]{1,30}$")) {
+				return new ResponseEntity<>("Please enter a valid UTR Number.", HttpStatus.BAD_REQUEST);
+			}
+		} else if (!referenceNo.matches("^[0-9]+$")) {
+			return new ResponseEntity<>("Please enter a valid " + label + ".", HttpStatus.BAD_REQUEST);
+		}
+		return null;
 	}
 
 }

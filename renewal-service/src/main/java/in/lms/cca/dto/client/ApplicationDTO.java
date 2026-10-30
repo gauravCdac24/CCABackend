@@ -12,6 +12,8 @@ public class ApplicationDTO {
 	private Date applicationInitiatedOn;
 	private Date statusInitiatedOn;
 	private String applicantName;
+	private String delayOfRenewalFileName;
+	private String delayOfRenewalDocumentId;
 	
 	
 	
@@ -20,6 +22,18 @@ public class ApplicationDTO {
 	}
 	public void setApplicantName(String applicantName) {
 		this.applicantName = applicantName;
+	}
+	public String getDelayOfRenewalFileName() {
+		return delayOfRenewalFileName;
+	}
+	public void setDelayOfRenewalFileName(String delayOfRenewalFileName) {
+		this.delayOfRenewalFileName = delayOfRenewalFileName;
+	}
+	public String getDelayOfRenewalDocumentId() {
+		return delayOfRenewalDocumentId;
+	}
+	public void setDelayOfRenewalDocumentId(String delayOfRenewalDocumentId) {
+		this.delayOfRenewalDocumentId = delayOfRenewalDocumentId;
 	}
 	public String getIntentAppId() {
 		return intentAppId;

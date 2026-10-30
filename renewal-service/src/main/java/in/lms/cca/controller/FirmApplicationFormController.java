@@ -63,6 +63,7 @@ import in.lms.cca.service.FirmApplicationService;
 import in.lms.cca.service.FirmAuthorizedRepresentiveService;
 import in.lms.cca.service.FirmPartnerService;
 import in.lms.cca.service.IIntentApplicationService;
+import in.lms.cca.service.impl.RenewalWindowGuard;
 import in.lms.cca.util.api.FirmApplicationFormAPIs;
 import in.lms.cca.util.api.GovernmentAgencyApplicationFormAPIs;
 import in.lms.cca.util.api.RenewLicenseServiceAPIs;
@@ -97,6 +98,9 @@ public class FirmApplicationFormController {
 	
 	@Autowired
 	private	FirmAuthorizedRepresentiveService firmAuthorizedRepresentiveService;
+
+	@Autowired
+	private RenewalWindowGuard renewalWindowGuard;
 	
 	@PostMapping(FirmApplicationFormAPIs.ADD_FIRM_APPLICATION_FORM)
 	public ResponseEntity<?> addGovernmentAgency(@RequestBody FirmApplicationDTO firmApplicationDTO) {
@@ -167,6 +171,11 @@ public class FirmApplicationFormController {
         // Username validation
         if (firmApplicationDTO.getUserName() == null || firmApplicationDTO.getUserName().trim().isEmpty()) {
             return new ResponseEntity<>("Username cannot be empty.", HttpStatus.BAD_REQUEST);
+        }
+
+        ResponseEntity<String> blocked = renewalWindowGuard.blockIfCannotApply(firmApplicationDTO.getUserName());
+        if (blocked != null) {
+            return blocked;
         }
 
 		
@@ -341,6 +350,11 @@ public class FirmApplicationFormController {
 	    }
 
 	    try {
+	        ResponseEntity<String> blocked = renewalWindowGuard.blockIfCannotApply(firmApplicationDTO.getUserName());
+	        if (blocked != null) {
+	            return blocked;
+	        }
+
 	        IntentApplication intentApp = intentAppServ.findIntentAppById(firmApplicationDTO.getUserName());
 	        if (intentApp == null) {
 	            return new ResponseEntity<>("Intent Application not found.", HttpStatus.NOT_FOUND);

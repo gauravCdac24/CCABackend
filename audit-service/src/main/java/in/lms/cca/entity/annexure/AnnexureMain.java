@@ -22,6 +22,9 @@ public class AnnexureMain extends AbstractTimestampEntity{
 
 	@Column(name = "audit_schedule_id")
 	private Long auditScheduleId;
+
+	@Column(name = "intent_app_id")
+	private Long intentAppId;
 	
 	@Column(name="completed", length = 50)
 	private Integer completed = 0;
@@ -63,6 +66,14 @@ public class AnnexureMain extends AbstractTimestampEntity{
 
 	public void setAuditScheduleId(Long auditScheduleId) {
 		this.auditScheduleId = auditScheduleId;
+	}
+
+	public Long getIntentAppId() {
+		return intentAppId;
+	}
+
+	public void setIntentAppId(Long intentAppId) {
+		this.intentAppId = intentAppId;
 	}
 
 	public Integer getCompleted() {

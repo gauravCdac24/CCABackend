@@ -60,8 +60,11 @@ public class IntentApplicationServiceImpl implements IIntentApplicationService{
 
 	@Override
 	public IntentApplication findIntentAppById(String userName) {
-	
-		return intentAppRepo.findIntentAppById(userName);
+		List<IntentApplication> apps = intentAppRepo.findIntentAppsByUserName(userName);
+		if (apps == null || apps.isEmpty()) {
+			return null;
+		}
+		return apps.get(0);
 	}
 
 	@Override

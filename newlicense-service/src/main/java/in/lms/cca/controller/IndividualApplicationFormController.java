@@ -739,12 +739,10 @@ public class IndividualApplicationFormController {
 	            return new ResponseEntity<>("Bank Draft details cannot be null.", HttpStatus.BAD_REQUEST);
 	        }
 
-	        // Draft Number validation
-	        if (bankDraftDTO.getDraftNo() == null || bankDraftDTO.getDraftNo().trim().isEmpty()) {
-	            return new ResponseEntity<>("Draft Number cannot be empty.", HttpStatus.BAD_REQUEST);
-	        }
-	        if (!bankDraftDTO.getDraftNo().matches("^[0-9]+$")) {
-	            return new ResponseEntity<>("Please enter a valid Draft Number.", HttpStatus.BAD_REQUEST);
+	        ResponseEntity<String> referenceError = invalidPaymentReference(
+	        		bankDraftDTO.getTransactionType(), bankDraftDTO.getDraftNo());
+	        if (referenceError != null) {
+	            return referenceError;
 	        }
 
 	        // Amount validation
@@ -2476,12 +2474,10 @@ List<ApplicationDocument> sortedActiveDocuments = applicationDocument.stream()
 	            return new ResponseEntity<>("Bank Draft details cannot be null.", HttpStatus.BAD_REQUEST);
 	        }
 
-	        // Validate Draft Number
-	        if (bankDraftDTO.getDraftNo() == null || bankDraftDTO.getDraftNo().trim().isEmpty()) {
-	            return new ResponseEntity<>("Draft Number cannot be empty.", HttpStatus.BAD_REQUEST);
-	        }
-	        if (!bankDraftDTO.getDraftNo().matches("^[0-9]+$")) {
-	            return new ResponseEntity<>("Please enter a valid Draft Number.", HttpStatus.BAD_REQUEST);
+	        ResponseEntity<String> referenceError = invalidPaymentReference(
+	        		bankDraftDTO.getTransactionType(), bankDraftDTO.getDraftNo());
+	        if (referenceError != null) {
+	            return referenceError;
 	        }
 
 	        // Validate Amount
@@ -3813,20 +3809,36 @@ List<ApplicationDocument> sortedActiveDocuments = applicationDocument.stream()
 		        return new ResponseEntity<>("No applications found with 'PaymentProof Recieved' status.", HttpStatus.NOT_FOUND);
 		    }
 
-		    // Prefer Active bank draft; fall back to latest row for this intent (any status)
-		    BankDraft bankDraft = bankDraftServ.findByindivApplicationId(decryptedIntentId);
-		    if (bankDraft == null) {
-		        List<BankDraft> allDrafts = bankDraftServ.findIntentWithoutAppById(decryptedIntentId);
-		        if (allDrafts != null && !allDrafts.isEmpty()) {
-		            bankDraft = allDrafts.stream()
-		                    .filter(d -> "Active".equalsIgnoreCase(d.getStatus()))
-		                    .findFirst()
-		                    .orElse(allDrafts.get(allDrafts.size() - 1));
+		    // A renewal payment can leave more than one Active bank draft.
+		    // The single-row lookup throws and the verification page stays blank.
+		    List<BankDraft> allDrafts = bankDraftServ.findIntentWithoutAppById(decryptedIntentId);
+		    BankDraft bankDraft = null;
+		    if (allDrafts != null) {
+		        for (BankDraft draft : allDrafts) {
+		            if (draft == null || draft.getStatus() == null || !"Active".equalsIgnoreCase(draft.getStatus())) {
+		                continue;
+		            }
+		            if (bankDraft == null
+		                    || (draft.getBankDraftId() != null
+		                        && (bankDraft.getBankDraftId() == null
+		                            || draft.getBankDraftId() > bankDraft.getBankDraftId()))) {
+		                bankDraft = draft;
+		            }
 		        }
 		    }
 
+		    IntentApplication intentApplication = intentAppServ.getIntentByIntentAppId(decryptedIntentId);
+		    Map<String, Object> applicant = new LinkedHashMap<>();
+		    applicant.put("userName", intentApplication != null ? intentApplication.getUserName() : null);
+
+		    Map<String, Object> proofView = new LinkedHashMap<>();
+		    proofView.put("amount", paymentVerification.getAmount());
+		    proofView.put("transactionID", paymentVerification.getTransactionID());
+		    proofView.put("dateOfPayment", paymentVerification.getDateOfPayment());
+		    proofView.put("indivApplicationId", applicant);
+
 		    Map<String, Object> response = new HashMap<>();
-		    response.put("paymentProof", paymentVerification);
+		    response.put("paymentProof", proofView);
 		    response.put("transactionType", bankDraft != null ? bankDraft.getTransactionType() : null);
 		    response.put("draftNo", bankDraft != null ? bankDraft.getDraftNo() : null);
 
@@ -3894,6 +3906,33 @@ List<ApplicationDocument> sortedActiveDocuments = applicationDocument.stream()
 				return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
 			}
 		}
+
+	/** Demand Draft and cheque numbers are digits. A UTR may include letters, up to 30 characters. */
+	private ResponseEntity<String> invalidPaymentReference(String transactionType, String draftNo) {
+		String type = transactionType != null ? transactionType.trim() : "";
+		if (type.isEmpty()) {
+			type = "Demand Draft";
+		}
+		if (!type.equals("Demand Draft") && !type.equals("Banker's check") && !type.equals("UTR")) {
+			return new ResponseEntity<>(
+					"Invalid Transaction Type. Allowed values: Demand Draft, Banker's check, UTR.",
+					HttpStatus.BAD_REQUEST);
+		}
+		String label = "UTR".equals(type) ? "UTR Number"
+				: "Banker's check".equals(type) ? "Cheque Number" : "Draft Number";
+		if (draftNo == null || draftNo.trim().isEmpty()) {
+			return new ResponseEntity<>(label + " cannot be empty.", HttpStatus.BAD_REQUEST);
+		}
+		String referenceNo = draftNo.trim();
+		if ("UTR".equals(type)) {
+			if (!referenceNo.matches("^[A-Za-z0-9]{1,30}$")) {
+				return new ResponseEntity<>("Please enter a valid UTR Number.", HttpStatus.BAD_REQUEST);
+			}
+		} else if (!referenceNo.matches("^[0-9]+$")) {
+			return new ResponseEntity<>("Please enter a valid " + label + ".", HttpStatus.BAD_REQUEST);
+		}
+		return null;
+	}
 		
 		
 }

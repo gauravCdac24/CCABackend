@@ -5,9 +5,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -42,6 +39,7 @@ import in.lms.cca.service.ILicenseDetailsService;
 import in.lms.cca.service.ILicenseReviewService;
 import in.lms.cca.service.INewLicenseClientService;
 import in.lms.cca.service.impl.NotificationClientServiceImpl;
+import in.lms.cca.service.impl.RenewalWindowServiceImpl;
 import in.lms.cca.util.api.LicenseIssuanceServiceAPIs;
 import in.lms.cca.util.global.SmsTemplateKey;
 import in.lms.cca.util.golbal.DocumentFileUtil;
@@ -73,6 +71,9 @@ public class LicenseIssuanceController {
 
 	@Autowired
 	private ILicenseReviewService licenseReviewServ;
+
+	@Autowired
+	private RenewalWindowServiceImpl renewalWindowServ;
 	
 	@GetMapping(LicenseIssuanceServiceAPIs.GRANT_IN_PRINCIPLE_APPROVAL)
 	public ResponseEntity<?> getAllRecommendedNewApplication(
@@ -746,36 +747,8 @@ public class LicenseIssuanceController {
 		if(EncryptionUtil.decrypt(id) != null)
 			id = EncryptionUtil.decrypt(id);
 		System.out.println(id);
-		List<LicenseDetails> li = licenseDetailsServ.getAllLicenseDetailsByUsername(id);
-		
-		System.out.println(li.size());
-		
-		LicenseDetails liDetails = null;
-		
-		Date expiryDate = null;
-		
-		
-		
-		if(li.size()>0) {
-			liDetails = li.get(0);
-			expiryDate = liDetails.getExpiryDate();
-			
-			if (expiryDate != null) {
-		        // Convert Date to LocalDate
-		        LocalDate localExpiryDate = expiryDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
-		        // Subtract 45 days
-		        LocalDate newDate = localExpiryDate.minus(45, ChronoUnit.DAYS);
-
-		        // Convert back to Date
-		        expiryDate = Date.from(newDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-		    }
-		
-		}
-		
-		
-		
-		return new ResponseEntity<>(EncryptionUtil.encrypt(expiryDate.toString()), HttpStatus.OK);
+		Date startDate = renewalWindowServ.legacyStartDate(id);
+		return new ResponseEntity<>(EncryptionUtil.encrypt(startDate.toString()), HttpStatus.OK);
 		
 		}catch(Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.OK);
