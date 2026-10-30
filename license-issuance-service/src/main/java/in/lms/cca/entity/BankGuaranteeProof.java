@@ -115,7 +115,32 @@ public class BankGuaranteeProof extends AbstractTimestampEntity{
 	public void setUpdatedBy(String updatedBy) {
 		this.updatedBy = updatedBy;
 	}
+	
+	@Column(name = "issuing_bank_name", length = 100)
+	// Inside your BankGuaranteeProof entity class:
+	private String issuingBankName;
 
+	// Getter
+	public String getIssuingBankName() {
+	    return issuingBankName;
+	}
+
+	// Setter
+	public void setIssuingBankName(String issuingBankName) {
+	    this.issuingBankName = issuingBankName;
+	}
+
+    @Column(name = "bank_guarantee_issue_date")
+    private Date bankGuaranteeIssueDate; // This maps to the actual BG issue date
+
+
+    public Date getBankGuaranteeIssueDate() {
+        return bankGuaranteeIssueDate;
+    }
+
+    public void setBankGuaranteeIssueDate(Date bankGuaranteeIssueDate) {
+        this.bankGuaranteeIssueDate = bankGuaranteeIssueDate;
+    }
     
 	
 }
