@@ -2,6 +2,7 @@ package in.lms.cca.service.Impl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,10 +14,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import in.lms.cca.entity.ApplicationAuditorsEntity;
-import in.lms.cca.entity.AuditScheduleEntity;
+import in.lms.cca.entity.AuditControlEntity;
 import in.lms.cca.payload.AuditCriteriaPayload;
 import in.lms.cca.repository.ApplicationAuditorsRepository;
 import in.lms.cca.service.ApplicationAuditorsService;
+import in.lms.cca.service.AuditControlSelectionService;
+import in.lms.cca.util.global.AnnualAuditContext;
 
 @Service
 @Transactional
@@ -27,6 +30,9 @@ public class ApplicationAuditorsServiceImpl implements ApplicationAuditorsServic
 	
 	 @Autowired
 	 private RestTemplate restTemplate;
+
+	@Autowired
+	private AuditControlSelectionService auditControlSelectionService;
 	 
 	 @Value("${apigateway.service.url}")
 		private String apigatewayServiceUrl;
@@ -57,6 +63,18 @@ public class ApplicationAuditorsServiceImpl implements ApplicationAuditorsServic
 	public Optional<ApplicationAuditorsEntity> downloadfile(Long id) {
 		// TODO Auto-generated method stub
 		return applicationAuditorsRepository.downloadfile(id);
+	}
+
+	@Override
+	public Optional<ApplicationAuditorsEntity> downloadfiles(String undertakingDocument) {
+		// Multiple Active auditor rows share the same undertaking document after
+		// multi-auditor submit; Optional single-result queries fail with NonUniqueResult.
+		List<ApplicationAuditorsEntity> matches =
+				applicationAuditorsRepository.findActiveByUndertakingDocument(undertakingDocument);
+		if (matches == null || matches.isEmpty()) {
+			return Optional.empty();
+		}
+		return Optional.of(matches.get(0));
 	}
 
 	@Override
@@ -120,7 +138,12 @@ public class ApplicationAuditorsServiceImpl implements ApplicationAuditorsServic
 
 	@Override
 	public List<AuditCriteriaPayload> getAllDatas(String userName) {
-	    String uriTemplate = apigatewayServiceUrl + "/api/admin-service/data?userName=" + userName;
+	    String selectedCriteriaIds = selectedCriteriaIdsForReport(userName);
+	    String uriTemplate = apigatewayServiceUrl + "/api/admin-service/data?userName=" + userName
+	            + "&includeAllControls=true";
+	    if (!selectedCriteriaIds.isEmpty()) {
+	        uriTemplate += "&selectedCriteriaIds=" + selectedCriteriaIds;
+	    }
 
 	    ResponseEntity<List<AuditCriteriaPayload>> response = restTemplate.exchange(
 	        uriTemplate,
@@ -130,5 +153,19 @@ public class ApplicationAuditorsServiceImpl implements ApplicationAuditorsServic
 	    );
 
 	    return response.getBody();
+	}
+
+	private String selectedCriteriaIdsForReport(String userName) {
+	    List<AuditControlEntity> controls = auditControlSelectionService.getActiveControls(userName,
+	            AnnualAuditContext.getAuditScheduleId());
+	    if (controls == null || controls.isEmpty()) {
+	        return "";
+	    }
+	    return controls.stream()
+	            .filter(control -> control != null && control.getControlId() != null
+	                    && control.getControlId() >= 1 && control.getControlId() <= 11)
+	            .map(control -> String.valueOf(control.getControlId()))
+	            .distinct()
+	            .collect(Collectors.joining(","));
 	}
 }

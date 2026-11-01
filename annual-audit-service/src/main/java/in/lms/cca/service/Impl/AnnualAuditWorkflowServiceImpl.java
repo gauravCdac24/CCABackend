@@ -11,9 +11,11 @@ import org.springframework.stereotype.Service;
 
 import in.lms.cca.dto.AnnualAuditWorkflowDTO;
 import in.lms.cca.entity.AnnualAuditScheduleEntity;
+import in.lms.cca.entity.ApplicantActionTakenEntity;
 import in.lms.cca.entity.ApplicationAuditorsEntity;
 import in.lms.cca.entity.AuditAgencySelectionEntity;
 import in.lms.cca.entity.AuditNCSEntity;
+import in.lms.cca.entity.AuditReportCriteriaEntity;
 import in.lms.cca.entity.AuditReportDocumentEntity;
 import in.lms.cca.entity.AuditScheduleEntity;
 import in.lms.cca.entity.LicenseeAuditEntity;
@@ -22,9 +24,12 @@ import in.lms.cca.repository.AuditNCSRepository;
 import in.lms.cca.repository.AuditReportDocumentRepository;
 import in.lms.cca.repository.AuditScheduleRepository;
 import in.lms.cca.service.AnnualAuditWorkflowService;
+import in.lms.cca.service.ApplicationActionTakenService;
 import in.lms.cca.service.ApplicationAuditService;
 import in.lms.cca.service.AuditAgencySelectionService;
+import in.lms.cca.service.AuditReportCriteriaService;
 import in.lms.cca.service.LicenseeAuditservice;
+import in.lms.cca.util.global.Constant;
 
 @Service
 public class AnnualAuditWorkflowServiceImpl implements AnnualAuditWorkflowService {
@@ -68,6 +73,12 @@ public class AnnualAuditWorkflowServiceImpl implements AnnualAuditWorkflowServic
 	@Autowired
 	private AuditNCSRepository auditNCSRepository;
 
+	@Autowired
+	private ApplicationActionTakenService actionTakenService;
+
+	@Autowired
+	private AuditReportCriteriaService auditReportCriteriaService;
+
 	@Override
 	public Long resolveActiveScheduleId(String userName) {
 		List<AnnualAuditScheduleEntity> schedules =
@@ -96,6 +107,7 @@ public class AnnualAuditWorkflowServiceImpl implements AnnualAuditWorkflowServic
 			workflow.setCurrentStep(STEP_COMPLETED);
 			workflow.setReadOnly(true);
 			workflow.setAllowedActions(List.of("VIEW"));
+			syncScheduleStatus(schedule, Constant.STATUS_COMPLETED);
 			return workflow;
 		}
 
@@ -109,23 +121,30 @@ public class AnnualAuditWorkflowServiceImpl implements AnnualAuditWorkflowServic
 			return workflow;
 		}
 
-		Long activeScheduleId = resolveActiveScheduleId(schedule.getUserName());
-		if (activeScheduleId == null || !activeScheduleId.equals(schedule.getAuditScheduleId())) {
-			workflow.setScheduleState(STATE_NOT_STARTED);
-			workflow.setCurrentStep(STATE_NOT_STARTED);
-			workflow.setReadOnly(true);
-			workflow.setAllowedActions(List.of());
-			return workflow;
+		// Licensee works one active schedule at a time. Audit agencies (and later
+		// reviewers) must still open schedules already assigned to them even when
+		// the licensee has another concurrent schedule window.
+		if (!isAuditAgencyRole(role) && !isCcaRole(role) && !isReviewCommitteeRole(role)) {
+			Long activeScheduleId = resolveActiveScheduleId(schedule.getUserName());
+			if (activeScheduleId == null || !activeScheduleId.equals(schedule.getAuditScheduleId())) {
+				workflow.setScheduleState(STATE_NOT_STARTED);
+				workflow.setCurrentStep(STATE_NOT_STARTED);
+				workflow.setReadOnly(true);
+				workflow.setAllowedActions(List.of());
+				return workflow;
+			}
 		}
 
 		workflow.setScheduleState(STATE_ACTIVE);
-		String currentStep = resolveCurrentStep(schedule.getAuditScheduleId());
-		workflow.setCurrentStep(currentStep);
 		String ccaReviewStatus = resolveCcaUndertakingReviewStatus(schedule.getAuditScheduleId());
+		String currentStep = resolveCurrentStep(schedule.getAuditScheduleId(), ccaReviewStatus);
+		workflow.setCurrentStep(currentStep);
 		boolean reviewCompleted = CCA_REVIEW_APPROVED.equals(ccaReviewStatus)
 				|| CCA_REVIEW_REJECTED.equals(ccaReviewStatus);
 		workflow.setReadOnly(reviewCompleted && isCcaRole(role));
-		workflow.setAllowedActions(resolveAllowedActions(role, currentStep, schedule.getAuditScheduleId()));
+		workflow.setAllowedActions(
+				resolveAllowedActions(role, currentStep, schedule.getAuditScheduleId(), ccaReviewStatus));
+		syncScheduleStatus(schedule, resolveDisplayStatus(currentStep, ccaReviewStatus));
 		return workflow;
 	}
 
@@ -139,7 +158,23 @@ public class AnnualAuditWorkflowServiceImpl implements AnnualAuditWorkflowServic
 				|| "CCAOFFICER".equals(normalizedRole);
 	}
 
-	private String resolveCurrentStep(Long auditScheduleId) {
+	private boolean isAuditAgencyRole(String role) {
+		if (role == null) {
+			return false;
+		}
+		String normalizedRole = role.toUpperCase().replace('-', '_');
+		return "AUDIT_AGENCY".equals(normalizedRole) || "AUDITAGENCY".equals(normalizedRole);
+	}
+
+	private boolean isReviewCommitteeRole(String role) {
+		if (role == null) {
+			return false;
+		}
+		String normalizedRole = role.toUpperCase().replace('-', '_');
+		return "REVIEW_COMMITTEE".equals(normalizedRole) || "REVIEWCOMMITTEE".equals(normalizedRole);
+	}
+
+	private String resolveCurrentStep(Long auditScheduleId, String ccaReviewStatus) {
 		LicenseeAuditEntity activeAudit =
 				applicationAuditService.findActiveByAuditScheduleId(auditScheduleId);
 		if (activeAudit == null) {
@@ -164,21 +199,200 @@ public class AnnualAuditWorkflowServiceImpl implements AnnualAuditWorkflowServic
 			return STEP_SCOPE_SCHEDULE;
 		}
 
-		AuditReportDocumentEntity report =
-				auditReportDocumentRepository.getByAuditId(activeAudit);
-		if (report == null) {
-			return STEP_AUDIT_REPORT;
+		// Mirror fresh audit: agency fills NC only after CCA approves undertaking.
+		if (!CCA_REVIEW_APPROVED.equals(ccaReviewStatus)) {
+			return STEP_SCOPE_SCHEDULE;
+		}
+
+		OptionalScheduleStatus scheduleStatus = readScheduleStatus(auditScheduleId);
+		if (scheduleStatus.isNcActionTakenOrReview()) {
+			return STEP_NC_VERIFICATION;
 		}
 
 		AuditNCSEntity ncs = auditNCSRepository.findByAuditId(activeAudit.getLicenseeAuditId());
-		if (ncs == null) {
+		AuditReportDocumentEntity report =
+				auditReportDocumentRepository.getByAuditId(activeAudit);
+
+		// Applicant responded via per-control action_taken (fresh parity) or legacy audit_ncs.
+		if (hasApplicantNcActionTaken(activeAudit) || ncs != null) {
+			return STEP_NC_VERIFICATION;
+		}
+
+		// NC already issued to licensee — agency waits / views until applicant responds.
+		if (scheduleStatus.isNcIssued() || hasAuditorNcCriteria(activeAudit)) {
+			return STEP_NC_ACTION;
+		}
+
+		// CCA approved, no NC fill yet → agency conducts audit / fills NCs.
+		if (report == null) {
 			return STEP_AUDIT_REPORT;
 		}
 
 		return STEP_NC_ACTION;
 	}
 
-	private List<String> resolveAllowedActions(String role, String currentStep, Long auditScheduleId) {
+	private OptionalScheduleStatus readScheduleStatus(Long auditScheduleId) {
+		if (auditScheduleId == null) {
+			return OptionalScheduleStatus.empty();
+		}
+		return licenseeAuditservice.getAnnualAuditScheduleById(auditScheduleId)
+				.map(OptionalScheduleStatus::from)
+				.orElseGet(OptionalScheduleStatus::empty);
+	}
+
+	private boolean hasApplicantNcActionTaken(LicenseeAuditEntity activeAudit) {
+		if (activeAudit == null) {
+			return false;
+		}
+		String userName = activeAudit.getApplicantUserName();
+		if (userName != null && !userName.isBlank()) {
+			List<ApplicantActionTakenEntity> byUser =
+					actionTakenService.getAllApplicationTakenAnyStatus(userName.trim());
+			if (byUser != null && !byUser.isEmpty()) {
+				return true;
+			}
+		}
+		List<AuditReportCriteriaEntity> criteria =
+				auditReportCriteriaService.findByAuditId(activeAudit.getLicenseeAuditId());
+		if (criteria == null || criteria.isEmpty()) {
+			return false;
+		}
+		for (AuditReportCriteriaEntity row : criteria) {
+			if (row == null) {
+				continue;
+			}
+			ApplicantActionTakenEntity action = actionTakenService.getAllByReportCriteria(row);
+			if (action != null) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean hasAuditorNcCriteria(LicenseeAuditEntity activeAudit) {
+		if (activeAudit == null || activeAudit.getLicenseeAuditId() == null) {
+			return false;
+		}
+		List<AuditReportCriteriaEntity> criteria =
+				auditReportCriteriaService.findByAuditId(activeAudit.getLicenseeAuditId());
+		if (criteria == null || criteria.isEmpty()) {
+			return false;
+		}
+		for (AuditReportCriteriaEntity row : criteria) {
+			if (row == null) {
+				continue;
+			}
+			boolean hasPayload = (row.getCompliance() != null && !row.getCompliance().isBlank())
+					|| (row.getDocument() != null && !row.getDocument().isBlank())
+					|| (row.getRemarks() != null && !row.getRemarks().isBlank());
+			if (hasPayload) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private static final class OptionalScheduleStatus {
+		private final String status;
+
+		private OptionalScheduleStatus(String status) {
+			this.status = status;
+		}
+
+		static OptionalScheduleStatus empty() {
+			return new OptionalScheduleStatus(null);
+		}
+
+		static OptionalScheduleStatus from(AnnualAuditScheduleEntity schedule) {
+			return new OptionalScheduleStatus(schedule == null ? null : schedule.getStatus());
+		}
+
+		boolean isNcActionTakenOrReview() {
+			return Constant.STATUS_NC_ACTION_TAKEN.equalsIgnoreCase(status)
+					|| Constant.STATUS_REVIEW_NC_REPORT.equalsIgnoreCase(status);
+		}
+
+		boolean isNcIssued() {
+			return Constant.STATUS_NC_ISSUED.equalsIgnoreCase(status);
+		}
+	}
+
+	private String resolveDisplayStatus(String currentStep, String ccaReviewStatus) {
+		switch (currentStep) {
+		case STEP_AGENCY_SELECTION:
+			return Constant.STATUS_AGENCY_SELECTION;
+		case STEP_AUDIT_FORM:
+		case STEP_SCOPE_SCHEDULE:
+			if (CCA_REVIEW_PENDING.equals(ccaReviewStatus)) {
+				return Constant.STATUS_RECOMMENDED_FOR_AUDIT_AGENCY;
+			}
+			if (CCA_REVIEW_REJECTED.equals(ccaReviewStatus)) {
+				return Constant.STATUS_AGENCY_SELECTION;
+			}
+			return Constant.STATUS_AGENCY_SELECTION;
+		case STEP_AUDIT_REPORT:
+		case STEP_NC_ACTION:
+			return Constant.STATUS_APPROVE_FROM_CCA;
+		case STEP_NC_VERIFICATION:
+		case STEP_REVIEW:
+			return Constant.STATUS_NC_ACTION_TAKEN;
+		case STEP_COMPLETED:
+			return Constant.STATUS_COMPLETED;
+		default:
+			return Constant.STATUS_INITIATED;
+		}
+	}
+
+	private void syncScheduleStatus(AnnualAuditScheduleEntity schedule, String targetStatus) {
+		if (schedule == null || schedule.getAuditScheduleId() == null
+				|| targetStatus == null || targetStatus.isBlank()) {
+			return;
+		}
+		String currentStatus = schedule.getStatus();
+		if (targetStatus.equals(currentStatus)) {
+			return;
+		}
+		// Never downgrade an explicitly advanced status (e.g. NC Issued → Approve From CCA).
+		if (statusRank(currentStatus) > statusRank(targetStatus)) {
+			return;
+		}
+		licenseeAuditservice.updateScheduleStatus(schedule.getAuditScheduleId(), targetStatus);
+		schedule.setStatus(targetStatus);
+	}
+
+	private int statusRank(String status) {
+		if (status == null || status.isBlank()) {
+			return 0;
+		}
+		if (Constant.STATUS_INITIATED.equalsIgnoreCase(status)) {
+			return 1;
+		}
+		if (Constant.STATUS_AGENCY_SELECTION.equalsIgnoreCase(status)) {
+			return 2;
+		}
+		if (Constant.STATUS_RECOMMENDED_FOR_AUDIT_AGENCY.equalsIgnoreCase(status)) {
+			return 3;
+		}
+		if (Constant.STATUS_APPROVE_FROM_CCA.equalsIgnoreCase(status)) {
+			return 4;
+		}
+		if (Constant.STATUS_NC_ISSUED.equalsIgnoreCase(status)) {
+			return 5;
+		}
+		if (Constant.STATUS_NC_ACTION_TAKEN.equalsIgnoreCase(status)
+				|| Constant.STATUS_REVIEW_NC_REPORT.equalsIgnoreCase(status)) {
+			return 6;
+		}
+		if (Constant.STATUS_COMPLETED.equalsIgnoreCase(status)
+				|| "Closed".equalsIgnoreCase(status)
+				|| "Complete".equalsIgnoreCase(status)) {
+			return 7;
+		}
+		return 0;
+	}
+
+	private List<String> resolveAllowedActions(
+			String role, String currentStep, Long auditScheduleId, String ccaReviewStatus) {
 		List<String> actions = new ArrayList<>();
 		String normalizedRole = role == null ? "LICENSEE" : role.toUpperCase();
 
@@ -188,7 +402,7 @@ public class AnnualAuditWorkflowServiceImpl implements AnnualAuditWorkflowServic
 			break;
 		case "AUDIT_AGENCY":
 		case "AUDITAGENCY":
-			addAuditAgencyActions(actions, currentStep);
+			addAuditAgencyActions(actions, currentStep, ccaReviewStatus);
 			break;
 		case "CCA":
 		case "CCA_OFFICER":
@@ -235,16 +449,30 @@ public class AnnualAuditWorkflowServiceImpl implements AnnualAuditWorkflowServic
 		}
 	}
 
-	private void addAuditAgencyActions(List<String> actions, String currentStep) {
+	private void addAuditAgencyActions(List<String> actions, String currentStep, String ccaReviewStatus) {
 		switch (currentStep) {
 		case STEP_AUDIT_FORM:
-		case STEP_SCOPE_SCHEDULE:
 			actions.add("SUBMIT_UNDERTAKING");
 			break;
+		case STEP_SCOPE_SCHEDULE:
+			// Undertaking already submitted; wait for CCA unless rejected.
+			if (CCA_REVIEW_REJECTED.equals(ccaReviewStatus) || CCA_REVIEW_NOT_SUBMITTED.equals(ccaReviewStatus)) {
+				actions.add("SUBMIT_UNDERTAKING");
+			} else {
+				actions.add("VIEW");
+			}
+			break;
 		case STEP_AUDIT_REPORT:
-			actions.add("SUBMIT_REPORT");
+			// Fresh parity: after CCA approve → Fill NC / Conduct audit.
+			actions.add("FILL_NC");
+			break;
+		case STEP_NC_ACTION:
+			// NC issued / waiting on licensee response — keep visible as view-only here.
+			// Fill NC remains on the Conduct Audit list while still filling.
+			actions.add("VIEW");
 			break;
 		case STEP_NC_VERIFICATION:
+			// Fresh parity: after licensee NC action taken → Review / verify NC report.
 			actions.add("VERIFY_NC");
 			break;
 		default:
@@ -301,7 +529,8 @@ public class AnnualAuditWorkflowServiceImpl implements AnnualAuditWorkflowServic
 	}
 
 	private void addReviewCommitteeActions(List<String> actions, String currentStep) {
-		if (STEP_NC_ACTION.equals(currentStep) || STEP_NC_VERIFICATION.equals(currentStep)) {
+		if (STEP_NC_ACTION.equals(currentStep) || STEP_NC_VERIFICATION.equals(currentStep)
+				|| STEP_REVIEW.equals(currentStep)) {
 			actions.add("REVIEW");
 		} else {
 			actions.add("VIEW");

@@ -47,7 +47,7 @@ public class AnnualAuditScheduleEntity extends AbstractTimestampEntity{
 	    @Column(name = "date_of_completion")
 	    private Date dateOfCompletion;
 	    
-	    @Column(name = "status", length =20)
+	    @Column(name = "status", length = 74)
 	    private String status;
 
 	    @Column(name = "created_by",length = 74)

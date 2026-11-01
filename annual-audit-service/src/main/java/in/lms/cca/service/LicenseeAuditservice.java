@@ -21,4 +21,8 @@ public interface LicenseeAuditservice {
 
 	Optional<AnnualAuditScheduleEntity> getAnnualAuditScheduleById(Long auditScheduleId);
 
+	Optional<AnnualAuditScheduleEntity> updateScheduleStatus(Long auditScheduleId, String status);
+
+	Optional<AnnualAuditScheduleEntity> updateScheduleStatusByUserName(String userName, String status);
+
 }

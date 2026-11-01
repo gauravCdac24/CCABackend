@@ -27,10 +27,10 @@ public class IntentApplication extends AbstractTimestampEntity{
 	@Column(name = "user_name", length = 74)
 	private String userName;
 	
-	@Column(name = "acknowledgementno", length = 30)
+	@Column(name = "acknowledgementno", length = 100)
 	private String acknowledgementNo;
 	
-	@Column(name = "application_status", length = 30)
+	@Column(name = "application_status", length = 200)
 	private String applicationStatus;
 	
 	@Column(name = "created_by", length = 74)

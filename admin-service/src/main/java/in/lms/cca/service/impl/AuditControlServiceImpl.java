@@ -209,15 +209,21 @@ public class AuditControlServiceImpl implements IAuditControlService{
 
 	@Override
 	public List<AuditRequestDTO> getAllAuditRequestByUserName(String userName) {
-	    String uriTemplate = apigatewayServiceUrl + "/api/audit-service/audit-controls/{userName}";
-	    
+	    List<AuditRequestDTO> fromAuditService = fetchAuditRequests(
+	            apigatewayServiceUrl + "/api/audit-service/audit-controls/{userName}", userName);
+	    if (!fromAuditService.isEmpty()) {
+	        return fromAuditService;
+	    }
+	    return fetchAuditRequests(
+	            apigatewayServiceUrl + "/api/annual-audit-service/audit-controls/{userName}", userName);
+	}
+
+	private List<AuditRequestDTO> fetchAuditRequests(String uriTemplate, String userName) {
 	    Map<String, String> uriVariables = new HashMap<>();
 	    uriVariables.put("userName", userName);
-
 	    try {
-	        ResponseEntity<AuditRequestDTO[]> response = restTemplate.getForEntity(uriTemplate, AuditRequestDTO[].class, uriVariables);
-	        
-	        // Handle null body or empty response
+	        ResponseEntity<AuditRequestDTO[]> response =
+	                restTemplate.getForEntity(uriTemplate, AuditRequestDTO[].class, uriVariables);
 	        if (response.getBody() == null) {
 	            return new ArrayList<>();
 	        }

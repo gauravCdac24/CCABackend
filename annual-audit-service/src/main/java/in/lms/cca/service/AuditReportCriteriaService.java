@@ -38,4 +38,8 @@ public interface AuditReportCriteriaService {
 
 	AuditReportCriteriaEntity getAllDataByControlId(String controlId, Long appAuditId);
 
+	AuditReportCriteriaEntity findActiveByAppAuditIdAndControlId(Long appAuditId, String auditControlId);
+
+	List<AuditReportCriteriaEntity> findActiveByAppAuditId(Long appAuditId);
+
 }

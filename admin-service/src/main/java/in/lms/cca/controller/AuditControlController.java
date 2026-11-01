@@ -298,23 +298,60 @@ public class AuditControlController {
 
 	@GetMapping(AuditControlServiceAPIs.DATA)
 	public List<AuditCriteriaPayload> getData(@RequestParam String userName,
-			@RequestParam(value = "includeAllControls", required = false, defaultValue = "false") boolean includeAllControls) {
+			@RequestParam(value = "includeAllControls", required = false, defaultValue = "false") boolean includeAllControls,
+			@RequestParam(value = "selectedCriteriaIds", required = false) String selectedCriteriaIdsParam) {
 		
 		System.out.println("userNAme=-=->"+userName);
 
 	    List<AuditRequestDTO> auditRequestDTOs = auditControlServ.getAllAuditRequestByUserName(userName);
 
 	    List<AuditControl> auditControlList = auditControlServ.getAllActiveAuditControl();
-	    List<AuditSubCriteria> auditSubCriterias = auditSubCriteriaServ.getAllEnabledForAuditorView();
 	    List<AuditCriteria> auditCriterias = auditServ.getAllActiveAuditCriteria();
 
+	    Set<Long> assignedControlIds = auditRequestDTOs.stream()
+	            .filter(dto -> dto != null && dto.getControlId() != null)
+	            .map(dto -> Long.valueOf(dto.getControlId()))
+	            .collect(Collectors.toSet());
+
+	    Set<Long> criteriaIds = auditCriterias.stream()
+	            .map(AuditCriteria::getAuditCriteriaId)
+	            .collect(Collectors.toSet());
+
+	    // Checked groups on Audit Agency selection are audit criteria ids.
+	    Set<Long> selectedCriteriaIds = assignedControlIds.stream()
+	            .filter(criteriaIds::contains)
+	            .collect(Collectors.toSet());
+	    if (selectedCriteriaIdsParam != null && !selectedCriteriaIdsParam.isBlank()) {
+	        for (String part : selectedCriteriaIdsParam.split(",")) {
+	            String trimmed = part == null ? "" : part.trim();
+	            if (trimmed.isEmpty()) {
+	                continue;
+	            }
+	            try {
+	                Long criteriaId = Long.valueOf(trimmed);
+	                if (criteriaIds.contains(criteriaId)) {
+	                    selectedCriteriaIds.add(criteriaId);
+	                }
+	            } catch (NumberFormatException ignored) {
+	                // Ignore values that are not criteria ids.
+	            }
+	        }
+	    }
+
+	    List<AuditSubCriteria> auditSubCriterias = new ArrayList<>(auditSubCriteriaServ.getAllEnabledForAuditorView());
 	    Set<Long> enabledSubCriteriaIds = auditSubCriterias.stream()
 	            .map(AuditSubCriteria::getAuditSubCriteriaId)
 	            .collect(Collectors.toSet());
-
-	    Set<Long> assignedControlIds = auditRequestDTOs.stream()
-	            .map(dto -> Long.valueOf(dto.getControlId()))
-	            .collect(Collectors.toSet());
+	    for (AuditSubCriteria subCriteria : auditSubCriteriaServ.getAllActiveAuditSubCriteria()) {
+	        if (subCriteria == null || subCriteria.getAuditSubCriteriaId() == null
+	                || subCriteria.getAuditCriteriaId() == null) {
+	            continue;
+	        }
+	        if (selectedCriteriaIds.contains(subCriteria.getAuditCriteriaId().getAuditCriteriaId())
+	                && enabledSubCriteriaIds.add(subCriteria.getAuditSubCriteriaId())) {
+	            auditSubCriterias.add(subCriteria);
+	        }
+	    }
 
 	    Set<Long> requestedCriteriaIds = auditControlList.stream()
 	            .filter(control -> control.getAuditParameterId() != null
@@ -325,6 +362,8 @@ public class AuditControlController {
 	            .map(control -> control.getAuditParameterId().getAuditSubCriteriaId().getAuditCriteriaId()
 	                    .getAuditCriteriaId())
 	            .collect(Collectors.toSet());
+
+	    requestedCriteriaIds.addAll(selectedCriteriaIds);
 
 	    if (includeAllControls || requestedCriteriaIds.isEmpty()) {
 	    	requestedCriteriaIds = auditCriterias.stream()
@@ -353,15 +392,17 @@ public class AuditControlController {
 	            .collect(Collectors.groupingBy(subCriteria -> subCriteria.getAuditCriteriaId().getAuditCriteriaId()));
 
 	    final Set<Long> criteriaIdsToShow = requestedCriteriaIds;
+	    final Set<Long> criteriaIdsSelectedByApplicant = selectedCriteriaIds;
 	    return auditCriterias.stream()
 	            .filter(criteria -> criteriaIdsToShow.contains(criteria.getAuditCriteriaId()))
 	            .map(criteria -> {
 	                AuditCriteriaPayload criteriaPayload = new AuditCriteriaPayload();
+	                criteriaPayload.setAuditCriteriaId(String.valueOf(criteria.getAuditCriteriaId()));
 	                criteriaPayload.setAuditCriteria(criteria.getAuditCriteriaTitle());
 
 	                List<AuditSubCriteriaPayload> subCriteriaPayloads = subCriteriaMap.getOrDefault(criteria.getAuditCriteriaId(), List.of())
 	                        .stream()
-	                        .filter(this::isEnabledAuditSubCriteria)
+	                        .filter(subCriteria -> isSubCriteriaIncluded(subCriteria, criteriaIdsSelectedByApplicant))
 	                        .map(subCriteria -> {
 	                            AuditSubCriteriaPayload subPayload = new AuditSubCriteriaPayload();
 	                            subPayload.setAuditSubCriteriaId(String.valueOf(subCriteria.getAuditSubCriteriaId()));
@@ -391,15 +432,28 @@ public class AuditControlController {
 	                return criteriaPayload;
 	            })
 	            .filter(criteriaPayload -> criteriaPayload.getAuditSubCriteria() != null
-	                    && !criteriaPayload.getAuditSubCriteria().isEmpty())
+	                    && (!criteriaPayload.getAuditSubCriteria().isEmpty()
+	                            || (criteriaPayload.getAuditCriteriaId() != null
+	                                    && criteriaIdsSelectedByApplicant.contains(
+	                                            Long.valueOf(criteriaPayload.getAuditCriteriaId())))))
 	            .collect(Collectors.toList());
 	}
 
-	private boolean isEnabledAuditSubCriteria(AuditSubCriteria subCriteria) {
+	private boolean isSubCriteriaIncluded(AuditSubCriteria subCriteria, Set<Long> selectedCriteriaIds) {
+		if (!isActiveSubCriteria(subCriteria)) {
+			return false;
+		}
+		if (subCriteria.isVisible()) {
+			return true;
+		}
+		return subCriteria.getAuditCriteriaId() != null
+				&& selectedCriteriaIds.contains(subCriteria.getAuditCriteriaId().getAuditCriteriaId());
+	}
+
+	private boolean isActiveSubCriteria(AuditSubCriteria subCriteria) {
 		return subCriteria != null
 				&& subCriteria.getStatus() != null
-				&& "Active".equalsIgnoreCase(subCriteria.getStatus().trim())
-				&& subCriteria.isVisible();
+				&& "Active".equalsIgnoreCase(subCriteria.getStatus().trim());
 	}
 
 	private AuditControlPayload mapControlToPayload(AuditControl control) {

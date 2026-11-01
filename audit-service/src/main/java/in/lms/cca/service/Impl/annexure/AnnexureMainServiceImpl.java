@@ -29,7 +29,11 @@ public class AnnexureMainServiceImpl implements IAnnexureMainService{
 		if (intentAppId != null) {
 			return repo.findAnnexureByStatusUsernameAndIntentAppId(status, username, intentAppId);
 		}
-		return repo.findAnnexureByStatusAndUsername(status, username);
+		AnnexureMain fresh = repo.findAnnexureByStatusAndUsername(status, username);
+		if (fresh != null) {
+			return fresh;
+		}
+		return activeRenewalAnnexure(username);
 	}
 
 	@Override
@@ -54,8 +58,20 @@ public class AnnexureMainServiceImpl implements IAnnexureMainService{
 		if (active != null) {
 			return active;
 		}
+		AnnexureMain renewal = activeRenewalAnnexure(normalized);
+		if (renewal != null) {
+			return renewal;
+		}
 		List<AnnexureMain> rows = repo.findFreshByUserNameOrderByIdDesc(normalized);
 		return rows.isEmpty() ? null : rows.get(0);
+	}
+
+	private AnnexureMain activeRenewalAnnexure(String username) {
+		if (username == null || username.isBlank()) {
+			return null;
+		}
+		List<AnnexureMain> renewalRows = repo.findActiveRenewalByUsername(username);
+		return renewalRows.isEmpty() ? null : renewalRows.get(0);
 	}
 
 	@Override

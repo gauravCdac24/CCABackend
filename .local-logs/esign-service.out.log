@@ -8,19 +8,19 @@
 [INFO] >>> spring-boot:3.3.1:run (default-cli) > test-compile @ eSign-service >>>
 [INFO] 
 [INFO] --- resources:3.3.1:resources (default-resources) @ eSign-service ---
-[INFO] Copying 5 resources from src\main\resources to target\classes
-[INFO] Copying 3 resources from src\main\resources to target\classes
+[INFO] Copying 5 resources from src/main/resources to target/classes
+[INFO] Copying 3 resources from src/main/resources to target/classes
 [INFO] 
 [INFO] --- compiler:3.13.0:compile (default-compile) @ eSign-service ---
 [INFO] Recompiling the module because of changed source code.
-[INFO] Compiling 26 source files with javac [debug parameters release 17] to target\classes
+[INFO] Compiling 26 source files with javac [debug parameters release 17] to target/classes
 [INFO] 
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ eSign-service ---
-[INFO] skip non existing resourceDirectory C:\Users\hp\Documents\CCAB\esign-service\src\test\resources
+[INFO] skip non existing resourceDirectory /home/gaurav/Documents/CCABackend/esign-service/src/test/resources
 [INFO] 
 [INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ eSign-service ---
 [INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 1 source file with javac [debug parameters release 17] to target\test-classes
+[INFO] Compiling 1 source file with javac [debug parameters release 17] to target/test-classes
 [INFO] 
 [INFO] <<< spring-boot:3.3.1:run (default-cli) < test-compile @ eSign-service <<<
 [INFO] 
@@ -48,47 +48,66 @@
 |                                                                                                                           |
 =============================================================================================================================
 
-2026-10-22 11:02:49 - Starting ESignServiceApplication using Java 17.0.10 with PID 21936 (C:\Users\hp\Documents\CCAB\esign-service\target\classes started by hp in C:\Users\hp\Documents\CCAB\esign-service)
-2026-10-22 11:02:49 - Running with Spring Boot v3.3.1, Spring v6.1.10
-2026-10-22 11:02:49 - The following 1 profile is active: "test"
-2026-10-22 11:02:50 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2026-10-22 11:02:50 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2026-10-22 11:02:54 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-10-22 11:02:55 - Finished Spring Data repository scanning in 425 ms. Found 2 JPA repository interfaces.
-2026-10-22 11:02:55 - BeanFactory id=170c4a65-22e4-387e-9f30-f1f9cbe410cf
-2026-10-22 11:02:55 - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [annotationActionEndpointMapping] is declared through a non-static factory method on that class; consider declaring it as static instead.
-2026-10-22 11:02:56 - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
-2026-10-22 11:02:56 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
-2026-10-22 11:02:56 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
-2026-10-22 11:02:56 - Tomcat initialized with port 7781 (http)
-2026-10-22 11:02:56 - Starting service [Tomcat]
-2026-10-22 11:02:56 - Starting Servlet engine: [Apache Tomcat/10.1.25]
-2026-10-22 11:02:57 - Initializing Spring embedded WebApplicationContext
-2026-10-22 11:02:57 - Root WebApplicationContext: initialization completed in 6881 ms
-2026-10-22 11:02:57 - HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-10-22 11:02:57 - HHH000412: Hibernate ORM core version 6.5.2.Final
-2026-10-22 11:02:57 - HHH000026: Second-level cache disabled
-2026-10-22 11:02:58 - No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-10-22 11:02:58 - HikariPool-1 - Starting...
-2026-10-22 11:02:58 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@ea3da09
-2026-10-22 11:02:58 - HikariPool-1 - Start completed.
-2026-10-22 11:02:58 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-10-22 11:03:00 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-01 22:51:50 - Starting ESignServiceApplication using Java 17.0.21 with PID 13128 (/home/gaurav/Documents/CCABackend/esign-service/target/classes started by gaurav in /home/gaurav/Documents/CCABackend/esign-service)
+2026-11-01 22:51:50 - Running with Spring Boot v3.3.1, Spring v6.1.10
+2026-11-01 22:51:50 - The following 1 profile is active: "test"
+2026-11-01 22:51:50 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-11-01 22:51:50 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-11-01 22:51:51 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-01 22:51:51 - Finished Spring Data repository scanning in 98 ms. Found 2 JPA repository interfaces.
+2026-11-01 22:51:51 - BeanFactory id=170c4a65-22e4-387e-9f30-f1f9cbe410cf
+2026-11-01 22:51:51 - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [annotationActionEndpointMapping] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-11-01 22:51:51 - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+2026-11-01 22:51:51 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-11-01 22:51:51 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-11-01 22:51:51 - Tomcat initialized with port 7781 (http)
+2026-11-01 22:51:51 - Starting service [Tomcat]
+2026-11-01 22:51:51 - Starting Servlet engine: [Apache Tomcat/10.1.25]
+2026-11-01 22:51:51 - Initializing Spring embedded WebApplicationContext
+2026-11-01 22:51:51 - Root WebApplicationContext: initialization completed in 1324 ms
+2026-11-01 22:51:52 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-11-01 22:51:52 - HHH000412: Hibernate ORM core version 6.5.2.Final
+2026-11-01 22:51:52 - HHH000026: Second-level cache disabled
+2026-11-01 22:51:52 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-01 22:51:52 - HikariPool-1 - Starting...
+2026-11-01 22:51:52 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@49bbd452
+2026-11-01 22:51:52 - HikariPool-1 - Start completed.
+2026-11-01 22:51:52 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-11-01 22:51:53 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
 Hibernate: alter table if exists esign_dsc_management.esign_request alter column auth_token set data type TEXT
 Hibernate: alter table if exists esign_dsc_management.esign_request alter column document_path set data type TEXT
 Hibernate: alter table if exists esign_dsc_management.esign_request alter column redirect_url set data type TEXT
 Hibernate: alter table if exists esign_dsc_management.esign_request alter column service_url set data type TEXT
 Hibernate: alter table if exists esign_dsc_management.esign_response alter column signature_value set data type TEXT
-2026-10-22 11:03:00 - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-10-22 11:03:00 - Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-10-22 11:03:02 - Unable to start LiveReload server
-2026-10-22 11:03:03 - Eureka HTTP Client uses RestTemplate.
-2026-10-22 11:03:03 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
-2026-10-22 11:03:03 - Setting initial instance status as: STARTING
-2026-10-22 11:03:03 - Initializing Eureka in region us-east-1
-2026-10-22 11:03:03 - Client configured to neither register nor query for data.
-2026-10-22 11:03:03 - Discovery Client initialized at timestamp 1792647183586 with initial instances count: 0
-2026-10-22 11:03:03 - Registering application ESIGN-SERVICE with eureka with status UP
-2026-10-22 11:03:03 - Tomcat started on port 7781 (http) with context path '/'
-2026-10-22 11:03:03 - Updating port to 7781
-2026-10-22 11:03:04 - Started ESignServiceApplication in 22.72 seconds (process running for 27.498)
+2026-11-01 22:51:53 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-01 22:51:53 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-11-01 22:51:54 - Unable to start LiveReload server
+2026-11-01 22:51:55 - Eureka HTTP Client uses RestTemplate.
+2026-11-01 22:51:55 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-11-01 22:51:55 - Setting initial instance status as: STARTING
+2026-11-01 22:51:55 - Initializing Eureka in region us-east-1
+2026-11-01 22:51:55 - Client configured to neither register nor query for data.
+2026-11-01 22:51:55 - Discovery Client initialized at timestamp 1793553715682 with initial instances count: 0
+2026-11-01 22:51:55 - Registering application ESIGN-SERVICE with eureka with status UP
+2026-11-01 22:51:55 - Tomcat started on port 7781 (http) with context path '/'
+2026-11-01 22:51:55 - Updating port to 7781
+2026-11-01 22:51:56 - Started ESignServiceApplication in 6.485 seconds (process running for 6.844)
+2026-11-01 22:52:00 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-11-01 22:52:00 - Initializing Servlet 'dispatcherServlet'
+2026-11-01 22:52:00 - Completed initialization in 3 ms
+Done creating XML File
+XML to String using BufferedReader : 
+Hibernate: insert into esign_dsc_management.esign_request (auth_mode,auth_token,created,doc_info,document_hash,document_path,ekyc_id_type,e_sign_version,file_name,fullname,orginal_file_id,redirect_url,request_timestamp,response_sig_type,service_name,service_url,transaction_id,updated,user_name) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) returning esign_request_id
+Hibernate: select er1_0.esign_request_id,er1_0.auth_mode,er1_0.auth_token,er1_0.created,er1_0.doc_info,er1_0.document_hash,er1_0.document_path,er1_0.ekyc_id_type,er1_0.e_sign_version,er1_0.file_name,er1_0.fullname,er1_0.orginal_file_id,er1_0.redirect_url,er1_0.request_timestamp,er1_0.response_sig_type,er1_0.service_name,er1_0.service_url,er1_0.transaction_id,er1_0.updated,er1_0.user_name from esign_dsc_management.esign_request er1_0 where er1_0.transaction_id=?
+Hibernate: insert into esign_dsc_management.esign_response (digest_value,esign_request_id,esign_status,err_code,err_msg,file_name,rescode,response_timestamp,signature_value) values (?,?,?,?,?,?,?,?,?) returning esign_response_id
+resId-=-->6j+uNnX/WNLgt4df1wfAEw==   86
+Hibernate: select er1_0.esign_response_id,er1_0.digest_value,er1_0.esign_request_id,er1_0.esign_status,er1_0.err_code,er1_0.err_msg,er1_0.file_name,er1_0.rescode,er1_0.response_timestamp,er1_0.signature_value from esign_dsc_management.esign_response er1_0 where er1_0.esign_response_id=?
+Hibernate: select er1_0.esign_request_id,er1_0.auth_mode,er1_0.auth_token,er1_0.created,er1_0.doc_info,er1_0.document_hash,er1_0.document_path,er1_0.ekyc_id_type,er1_0.e_sign_version,er1_0.file_name,er1_0.fullname,er1_0.orginal_file_id,er1_0.redirect_url,er1_0.request_timestamp,er1_0.response_sig_type,er1_0.service_name,er1_0.service_url,er1_0.transaction_id,er1_0.updated,er1_0.user_name from esign_dsc_management.esign_request er1_0 where er1_0.esign_request_id=?
+filePath-=-->/home/gaurav/Documents/CCABackend/esign-service/src/main/webapp/esignresponse/document/E002311012026225240161.pdf
+resource-=-->URL [file:///home/gaurav/Documents/CCABackend/esign-service/src/main/webapp/esignresponse/document/E002311012026225240161.pdf]
+2026-11-01 23:22:30 - Unregistering application ESIGN-SERVICE with eureka with status DOWN
+2026-11-01 23:22:30 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-11-01 23:22:30 - HikariPool-1 - Shutdown initiated...
+2026-11-01 23:22:30 - HikariPool-1 - Shutdown completed.
+2026-11-01 23:22:30 - Shutting down DiscoveryClient ...
+2026-11-01 23:22:30 - Completed shut down of DiscoveryClient

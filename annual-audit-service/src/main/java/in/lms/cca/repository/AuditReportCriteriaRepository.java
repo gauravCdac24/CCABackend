@@ -22,6 +22,10 @@ public interface AuditReportCriteriaRepository extends JpaRepository<AuditReport
 	@Query("SELECT d FROM AuditReportCriteriaEntity d WHERE d.licenseeAuditId.LicenseeAuditId=:appAuditId AND d.status='Active'")
 	List<AuditReportCriteriaEntity> findByAuditId(@Param("appAuditId") Long appAuditId);
 
+	@Query("SELECT d FROM AuditReportCriteriaEntity d WHERE d.licenseeAuditId.LicenseeAuditId=:appAuditId AND d.auditControlId=:auditControlId AND d.status='Active'")
+	AuditReportCriteriaEntity findActiveByAppAuditIdAndControlId(@Param("appAuditId") Long appAuditId,
+			@Param("auditControlId") String auditControlId);
+
 	@Query("SELECT d FROM AuditReportCriteriaEntity d WHERE d.auditControlId=:controlId AND d.licenseeAuditId.LicenseeAuditId=:appAuditId AND d.status='Active'")
 	AuditReportCriteriaEntity getAllDataByControlId(@Param("controlId") String controlId, @Param("appAuditId") Long appAuditId);
 

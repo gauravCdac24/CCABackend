@@ -24,10 +24,12 @@ import in.lms.cca.entity.LicenseeAuditEntity;
 import in.lms.cca.payload.AuditAgencySelectionDTO;
 import in.lms.cca.payload.SelectionData;
 import in.lms.cca.service.ApplicationAuditService;
+import in.lms.cca.service.AuditAgencyIdentityService;
 import in.lms.cca.service.AuditAgencySelectionService;
 import in.lms.cca.service.LicenseeAuditservice;
 import in.lms.cca.util.api.AuditAgencySelectionAPIs;
 import in.lms.cca.util.api.AuditServiceAPIs;
+import in.lms.cca.util.global.Constant;
 import in.lms.cca.util.global.EncryptionUtil;
 
 
@@ -46,6 +48,9 @@ public class AuditAgencySelectionController {
 
 	@Autowired
 	private LicenseeAuditservice licenseeAuditservice;
+
+	@Autowired
+	private AuditAgencyIdentityService auditAgencyIdentityService;
 	
 	
 	@PostMapping(AuditAgencySelectionAPIs.AUDIT_AGENCY_SELECTION)
@@ -68,6 +73,7 @@ public class AuditAgencySelectionController {
 	                    existingSelection.setAuditAgencyName(selectionData.getAuditAgencyName());
 	                    existingSelection.setUpdated(new Date());
 	                    selectionServ.upDateData(existingSelection);
+	                    syncScheduleAgency(auditScheduleId, selectionData.getAuditAgencyId());
 	                    return new ResponseEntity<>(
 	                            "Audit Agency Selection successfully updated.", HttpStatus.OK);
 	                }
@@ -83,6 +89,7 @@ public class AuditAgencySelectionController {
 	                    return new ResponseEntity<>("Error saving Audit Agency Selection.",
 	                            HttpStatus.INTERNAL_SERVER_ERROR);
 	                }
+	                syncScheduleAgency(auditScheduleId, selectionData.getAuditAgencyId());
 	                return new ResponseEntity<>("Audit Agency Selection successfully added.",
 	                        HttpStatus.OK);
 	            }
@@ -142,6 +149,10 @@ public class AuditAgencySelectionController {
 	                                        HttpStatus.INTERNAL_SERVER_ERROR);
 	        }
 
+	        if (auditScheduleId != null) {
+	            syncScheduleAgency(auditScheduleId, selectionData.getAuditAgencyId());
+	        }
+
 	        return new ResponseEntity<>("Audit Agency Selection successfully added.", HttpStatus.OK);
 
 	    } catch (Exception e) {
@@ -149,6 +160,22 @@ public class AuditAgencySelectionController {
 	        return new ResponseEntity<>("An error occurred while processing the request.",
 	                                    HttpStatus.INTERNAL_SERVER_ERROR);
 	    }
+	}
+
+	private void syncScheduleAgency(Long auditScheduleId, String auditAgencyId) {
+		if (auditScheduleId == null || auditAgencyId == null || auditAgencyId.isBlank()) {
+			return;
+		}
+		Optional<AnnualAuditScheduleEntity> scheduleOpt =
+				licenseeAuditservice.getAnnualAuditScheduleById(auditScheduleId);
+		if (scheduleOpt.isEmpty()) {
+			return;
+		}
+		AnnualAuditScheduleEntity schedule = scheduleOpt.get();
+		schedule.setAuditAgencyId(auditAgencyId.trim());
+		schedule.setStatus(Constant.STATUS_AGENCY_SELECTION);
+		schedule.setUpdated(new Date());
+		licenseeAuditservice.addAnnualAudit(schedule);
 	}
 
 	@GetMapping(AuditAgencySelectionAPIs.GET_AUDIT_AGENCY_SELECTION_BY_SCHEDULE)
@@ -202,10 +229,17 @@ public class AuditAgencySelectionController {
 	      try {
 	          // Decrypt the userId
 	          String decryptedUserId = EncryptionUtil.decrypt(userId);
+	          if (decryptedUserId == null || decryptedUserId.isBlank()) {
+	        	  decryptedUserId = userId;
+	          }
 
-	          // Fetch all agency selection entities for the given userId
-	          List<AuditAgencySelectionEntity> agencySelectionEntities = 
-	                  selectionServ.getAllDetailsByAuditAgencyId(decryptedUserId);
+	          String auditAgencyId = auditAgencyIdentityService.resolveAuditAgencyId(decryptedUserId);
+	          List<AuditAgencySelectionEntity> agencySelectionEntities =
+	                  selectionServ.getAllDetailsByAuditAgencyId(auditAgencyId);
+	          if ((agencySelectionEntities == null || agencySelectionEntities.isEmpty())
+	        		  && auditAgencyId != null && !auditAgencyId.equals(decryptedUserId)) {
+	        	  agencySelectionEntities = selectionServ.getAllDetailsByAuditAgencyId(decryptedUserId);
+	          }
 
 	          // If no entities are found, return a NOT_FOUND response
 	          if (agencySelectionEntities == null || agencySelectionEntities.isEmpty()) {

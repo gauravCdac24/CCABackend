@@ -23,7 +23,7 @@ public class ApplicationTimeLine extends AbstractTimestampEntity{
 	@JoinColumn(name = "intent_app_id", referencedColumnName = "intent_app_id")
 	private IntentApplication intentAppId;
 	
-	@Column(name = "application_status", length = 50)
+	@Column(name = "application_status", length = 100)
 	private String applicationStatus;
 	
 	@Column(name = "initiated_by", length = 74)

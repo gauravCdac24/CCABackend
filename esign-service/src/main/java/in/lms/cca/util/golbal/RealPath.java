@@ -11,7 +11,8 @@ public class RealPath {
 
 	// public static final String REAL_PATH = "C:\\Users\\hp\\Documents\\CCABackend\\esign-service\\src\\main\\webapp";
 	// public static final String REAL_PATH = "/home/dashboard/CCABackend/esign-service/src/main/webapp";
-	public static final String REAL_PATH = "C:\\Users\\hp\\Documents\\CCAB\\esign-service\\src\\main\\webapp";
+	// public static final String REAL_PATH = "C:\\Users\\hp\\Documents\\CCAB\\esign-service\\src\\main\\webapp";
+	public static final String REAL_PATH = "/home/gaurav/Documents/CCABackend/esign-service/src/main/webapp";
 
 	public static final String REQUEST_DOCUMENT_DIR = REAL_PATH + "/esignrequest/document";
 	public static final String REQUEST_XML_DIR = REAL_PATH + "/esignrequest/xml";

@@ -10,10 +10,13 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -48,6 +51,7 @@ import in.lms.cca.dto.AnnualAuditAgencySelectionListDTO;
 import in.lms.cca.dto.AnnualAuditScheduleDTO;
 import in.lms.cca.dto.AnnualAuditWorkflowDTO;
 import in.lms.cca.entity.AnnualAuditScheduleEntity;
+import in.lms.cca.entity.ApplicantActionTakenEntity;
 import in.lms.cca.entity.ApplicantShortcomingsReportEntity;
 import in.lms.cca.entity.ApplicationAuditorsEntity;
 import in.lms.cca.entity.AuditAgencySelectionEntity;
@@ -69,6 +73,7 @@ import in.lms.cca.payload.UserLoginDTO;
 import in.lms.cca.service.AnnualAuditScheduleListService;
 import in.lms.cca.service.AnnualAuditWorkflowService;
 import in.lms.cca.service.ApplicantShortcomingsReportService;
+import in.lms.cca.service.ApplicationActionTakenService;
 import in.lms.cca.service.Impl.AnnualAuditWorkflowServiceImpl;
 import in.lms.cca.service.ApplicationAuditService;
 import in.lms.cca.service.ApplicationAuditorsService;
@@ -128,6 +133,9 @@ public class ApplicationAuditController {
 	private LicenseeAuditservice licenseeAuditservice;
 
 	@Autowired
+	private ApplicationActionTakenService actionTakenService;
+
+	@Autowired
 	private AnnualAuditWorkflowService annualAuditWorkflowService;
 
 	@Autowired
@@ -146,21 +154,19 @@ public class ApplicationAuditController {
 			
 			String startDateString = annualAuditScheduleDTO.getStartDate(); // e.g. "2024-12-28"
 
-			if (startDateString != null && !startDateString.isEmpty()) {
-			    // Add time to match full datetime format
-			    startDateString += " 00:00:00";
-
-			    // Define formatter with date and time
-			    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-			    // Parse the complete string
-			    Date startDate = formatter.parse(startDateString);
-
-			    // Debug print in desired format
-			    System.out.println("Parsed startDate ---> " + formatter.format(startDate));
-
-			    // Set to entity
+			if (startDateString != null && !startDateString.isBlank() && !"-".equals(startDateString.trim())) {
+			    Date startDate = parseAnnualAuditStartDate(startDateString.trim());
+			    if (startDate == null) {
+			    	return new ResponseEntity<>(
+			    			"Invalid annual audit start date. Please select the date again.",
+			    			HttpStatus.BAD_REQUEST);
+			    }
+			    System.out.println("Parsed startDate ---> " + startDate);
 			    newAnnualAuditScheduleEntity.setScheduleStartDate(startDate);
+			} else {
+				return new ResponseEntity<>(
+						"Please select the annual audit start date.",
+						HttpStatus.BAD_REQUEST);
 			}
 		            newAnnualAuditScheduleEntity.setLicenseId(annualAuditScheduleDTO.getLicenseId());
 		            newAnnualAuditScheduleEntity.setUserName(annualAuditScheduleDTO.getUserName());
@@ -331,103 +337,122 @@ public class ApplicationAuditController {
 	@PostMapping(value = "/submit")
 	public ResponseEntity<?> submitAuditForm(@ModelAttribute AuditAgencyFormDto auditAgencyFormDto) {
 	    try {
-	        // Generate a random number for file naming
+	        if (auditAgencyFormDto == null || auditAgencyFormDto.getApplicantUserName() == null
+	                || auditAgencyFormDto.getApplicantUserName().isBlank()) {
+	            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Applicant username is required.");
+	        }
+	        if (auditAgencyFormDto.getUndertakingFile() == null
+	                || auditAgencyFormDto.getUndertakingFile().isEmpty()) {
+	            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Undertaking file is required.");
+	        }
+	        List<AuditAgencyFormDto.AuditorDescription> auditorDescriptions =
+	                auditAgencyFormDto.getAuditorDesscription();
+	        if (auditorDescriptions == null || auditorDescriptions.size() < 2) {
+	            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+	                    .body("Minimum 2 Auditor Details are Required");
+	        }
+	        List<AuditAgencyFormDto.AuditScope> auditScopes = auditAgencyFormDto.getAuditScope();
+	        if (auditScopes == null || auditScopes.isEmpty()) {
+	            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+	                    .body("Please add at least one audit schedule.");
+	        }
+
 	        Random rand = new Random();
 	        Integer rnum = rand.nextInt(1000);
 
-	        System.out.println(auditAgencyFormDto.getApplicantUserName());
-	        
-	        
-	        // Get the application audit entity by applicant username
 	        LicenseeAuditEntity applicationAuditEntity = applicationAuditServ
 	                .getByApplicantUserName(auditAgencyFormDto.getApplicantUserName());
-
-	        
 	        if (applicationAuditEntity == null) {
-	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Application not found for username: " + auditAgencyFormDto.getApplicantUserName());
+	            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+	                    .body("Application not found for username: " + auditAgencyFormDto.getApplicantUserName());
 	        }
-	        System.out.println(applicationAuditEntity.getLicenseeAuditId());
-	        // Update all auditors' status to "Inactive"
+
 	        List<ApplicationAuditorsEntity> applicationAuditorsEntities = applicationAuditorsService
 	                .getAllDataByAuditId(applicationAuditEntity.getLicenseeAuditId());
-
-	        System.out.println(applicationAuditorsEntities.size());
-	        
 	        for (ApplicationAuditorsEntity auditorsEntity : applicationAuditorsEntities) {
 	            auditorsEntity.setStatus("Inactive");
 	            auditorsEntity.setUpdated(new Date());
 	            applicationAuditorsService.updateData(auditorsEntity);
-	            
-	            System.out.println(applicationAuditEntity.getLicenseeAuditId());
-
-	            // Set audit schedule status to "Inactive"
-	            List<AuditScheduleEntity> auditScheduleEntities = auditScheduleService
-	                    .getAllDataByAuditId(applicationAuditEntity.getLicenseeAuditId());
-
-	            for (AuditScheduleEntity scheduleEntity : auditScheduleEntities) {
-	                scheduleEntity.setStatus("Inactive");
-	                scheduleEntity.setUpdated(new Date());
-	                auditScheduleService.updateData(scheduleEntity);
-	                
-	                System.out.println(applicationAuditEntity.getLicenseeAuditId());
-	            }
 	        }
 
-	        // Save the auditor description documents
-	        for (AuditAgencyFormDto.AuditorDescription auditorDescription : auditAgencyFormDto.getAuditorDesscription()) {
-	            String filename = DocumentFileUtil.saveFile(auditorDescription.getFile(), "AuditorDecription", rnum.toString(), "AuditorDecription");
+	        // Deactivate existing schedules once (not once per prior auditor row).
+	        List<AuditScheduleEntity> existingSchedules = auditScheduleService
+	                .getAllDataByAuditId(applicationAuditEntity.getLicenseeAuditId());
+	        for (AuditScheduleEntity scheduleEntity : existingSchedules) {
+	            scheduleEntity.setStatus("Inactive");
+	            scheduleEntity.setUpdated(new Date());
+	            auditScheduleService.updateData(scheduleEntity);
+	        }
 
-	            // Create a new auditor description entity
+	        String undertakingFilename = DocumentFileUtil.saveFile(auditAgencyFormDto.getUndertakingFile(),
+	                "AuditorUndertaking", rnum.toString(), "AuditorUndertaking");
+	        if (undertakingFilename == null) {
+	            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Unable to save undertaking file.");
+	        }
+
+	        SimpleDateFormat auditorDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	        for (AuditAgencyFormDto.AuditorDescription auditorDescription : auditorDescriptions) {
+	            if (auditorDescription.getFile() == null || auditorDescription.getFile().isEmpty()) {
+	                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+	                        .body("Certificate file is required for each auditor.");
+	            }
+	            String filename = DocumentFileUtil.saveFile(auditorDescription.getFile(), "AuditorDecription",
+	                    rnum.toString(), "AuditorDecription");
+	            if (filename == null) {
+	                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+	                        .body("Unable to save certificate file for auditor "
+	                                + auditorDescription.getAuditorName());
+	            }
+
 	            ApplicationAuditorsEntity auditorEntity = new ApplicationAuditorsEntity();
 	            auditorEntity.setFullName(auditorDescription.getAuditorName());
 	            auditorEntity.setCertificationType(auditorDescription.getCertificateType());
 	            auditorEntity.setCertificateDocument(filename);
 	            auditorEntity.setLicenseeAuditId(applicationAuditEntity);
-
-	            // Save the undertaking file
-	            String undertakingFilename = DocumentFileUtil.saveFile(auditAgencyFormDto.getUndertakingFile(), "AuditorUndertaking", rnum.toString(), "AuditorUndertaking");
 	            auditorEntity.setUndertakingDocument(undertakingFilename);
 	            auditorEntity.setStatus("Active");
 
-	            // Save auditor data
+	            String expiryRaw = auditorDescription.getCertificateExpiry();
+	            if (expiryRaw != null && !expiryRaw.trim().isEmpty()) {
+	                try {
+	                    auditorEntity.setCertificateExpiry(auditorDateFormat.parse(expiryRaw.trim()));
+	                } catch (Exception parseEx) {
+	                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+	                            "Invalid certificate expiry date for auditor "
+	                                    + auditorDescription.getAuditorName()
+	                                    + ". Use yyyy-MM-dd.");
+	                }
+	            }
+
 	            applicationAuditorsService.processAuditForm(auditorEntity);
 	        }
 
-	        // Save audit scope data
-	        for (AuditAgencyFormDto.AuditScope auditScope : auditAgencyFormDto.getAuditScope()) {
+	        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	        for (AuditAgencyFormDto.AuditScope auditScope : auditScopes) {
 	            AuditScheduleEntity auditScheduleEntity = new AuditScheduleEntity();
 	            auditScheduleEntity.setAuditType(auditScope.getAuditTitle());
 	            auditScheduleEntity.setDescription(auditScope.getDescription());
 	            auditScheduleEntity.setLicenseeAuditId(applicationAuditEntity);
 	            auditScheduleEntity.setStatus("Active");
-
-	            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-	            // Parse and set the start date
-	            if (auditScope.getStartDate() != null) {
-	                Date startDate = dateFormat.parse(auditScope.getStartDate());
-	                auditScheduleEntity.setStartDate(startDate);
+	            if (auditScope.getStartDate() != null && !auditScope.getStartDate().isBlank()) {
+	                auditScheduleEntity.setStartDate(dateFormat.parse(auditScope.getStartDate().trim()));
 	            }
-
-	            // Parse and set the end date
-	            if (auditScope.getEndDate() != null) {
-	                Date endDate = dateFormat.parse(auditScope.getEndDate());
-	                auditScheduleEntity.setEndDate(endDate);
+	            if (auditScope.getEndDate() != null && !auditScope.getEndDate().isBlank()) {
+	                auditScheduleEntity.setEndDate(dateFormat.parse(auditScope.getEndDate().trim()));
 	            }
-
-	            // Save the audit schedule data
 	            auditScheduleService.saveData(auditScheduleEntity);
 	        }
 
-	        // Update application audit status
-	       // applicationAuditServ.changeIntentStatusByUserName(auditAgencyFormDto.getApplicantUserName());
+	        // Fresh parity: undertaking submitted → awaiting CCA approval.
+	        updateAnnualScheduleStatus(
+	        		applicationAuditEntity,
+	        		auditAgencyFormDto.getApplicantUserName(),
+	        		Constant.STATUS_RECOMMENDED_FOR_AUDIT_AGENCY);
 
-	        // Return success response
 	        return ResponseEntity.ok("Form submitted successfully");
 
 	    } catch (Exception e) {
 	        e.printStackTrace();
-	        // Handle any errors that occur during the process
 	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error processing form: " + e.getMessage());
 	    }
 	}
@@ -566,6 +591,40 @@ public class ApplicationAuditController {
 		}
 	}
 
+	@GetMapping("/downloadFiles")
+	public ResponseEntity<Resource> viewFiles(@RequestParam("id") String cpsDocuId) {
+		String id = EncryptionUtil.decrypt(cpsDocuId);
+		try {
+			Optional<ApplicationAuditorsEntity> cpsDocumentOpt = applicationAuditorsService.downloadfiles(id);
+			if (cpsDocumentOpt.isEmpty()) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+			}
+
+			ApplicationAuditorsEntity auditor = cpsDocumentOpt.get();
+			String undertakingName = auditor.getUndertakingDocument();
+			if (undertakingName == null || undertakingName.isBlank()) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+			}
+
+			Path filePath = Paths.get(Constant.REAL_PATH, "AuditorUndertaking")
+					.resolve(undertakingName).normalize();
+			Resource resource = new UrlResource(filePath.toUri());
+			if (!resource.exists()) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+			}
+
+			String contentType = Files.probeContentType(filePath);
+			return ResponseEntity.ok()
+					.contentType(MediaType
+							.parseMediaType(contentType != null ? contentType : "application/octet-stream"))
+					.header("Content-Disposition", "attachment; filename=\"" + resource.getFilename() + "\"")
+					.body(resource);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
+	}
+
 	@PostMapping(value = "/approveSubmit")
 	public ResponseEntity<?> approveAuditForm(@ModelAttribute AuditAgencyFormDto auditAgencyFormDto) {
 		try {
@@ -588,7 +647,12 @@ public class ApplicationAuditController {
 				applicationAuditorsService.aprovedAuditForm(auditorDescriptiones);
 			}
 
-			applicationAuditServ.approvedByUserName(auditAgencyFormDto.getApplicantUserName());
+			LicenseeAuditEntity approvedAudit = applicationAuditServ
+					.getByApplicantUserName(auditAgencyFormDto.getApplicantUserName());
+			updateAnnualScheduleStatus(
+					approvedAudit,
+					auditAgencyFormDto.getApplicantUserName(),
+					Constant.STATUS_APPROVE_FROM_CCA);
 
 			sendAuditAgencySelectionSms(auditAgencyFormDto.getApplicantUserName());
 
@@ -628,10 +692,12 @@ public class ApplicationAuditController {
 				auditScheduleService.aprovedData(auditScheduleEntity);
 			}
 
-			if (auditAgencyFormDto.getApplicantUserName() != null
-					&& !auditAgencyFormDto.getApplicantUserName().trim().isEmpty()) {
-				applicationAuditServ.rejectedByUserName(auditAgencyFormDto.getApplicantUserName().trim());
-			}
+			LicenseeAuditEntity rejectedAudit = applicationAuditServ
+					.getByApplicantUserName(auditAgencyFormDto.getApplicantUserName());
+			updateAnnualScheduleStatus(
+					rejectedAudit,
+					auditAgencyFormDto.getApplicantUserName(),
+					Constant.STATUS_AGENCY_SELECTION);
 
 			sendAuditAgencySelectionSms(auditAgencyFormDto.getApplicantUserName());
 
@@ -714,6 +780,7 @@ public class ApplicationAuditController {
 	    newEntity.setLicenseeAuditId(applicationAuditEntity);
 	    newEntity.setAuditControlId(auditorControlsNC.getControlId());
 	    newEntity.setCompliance(auditorControlsNC.getCompliance());
+	    newEntity.setRemarks(auditorControlsNC.getRemarks());
 	    newEntity.setStatus("Active");
 
 	    Optional<AuditReportCriteriaEntity> savedEntity = auditReportCriteriaService.saveData(newEntity);
@@ -737,6 +804,7 @@ public class ApplicationAuditController {
 	    existingEntity.setDocument(newFilename);
 	    existingEntity.setAuditControlId(auditorControlsNC.getControlId());
 	    existingEntity.setCompliance(auditorControlsNC.getCompliance());
+	    existingEntity.setRemarks(auditorControlsNC.getRemarks());
 	    existingEntity.setStatus("Active");
 	    existingEntity.setUpdated(new Date());
 
@@ -785,6 +853,33 @@ public class ApplicationAuditController {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.body("An error occurred while retrieving the data.");
+		}
+	}
+
+	@GetMapping("/get-All-Audit-Report-Criteria-Details")
+	public ResponseEntity<?> getByApplicantUserNames(
+			@RequestParam("applicantUserName") String applicantUserName) {
+		try {
+			LicenseeAuditEntity applicationAuditEntity =
+					applicationAuditServ.getByApplicantUserName(applicantUserName);
+			if (applicationAuditEntity == null) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body("Application audit entity not found for username: " + applicantUserName);
+			}
+			List<AuditReportCriteriaEntity> auditReportCriteriaEntity =
+					auditReportCriteriaService.findByAuditId(applicationAuditEntity.getLicenseeAuditId());
+			if (auditReportCriteriaEntity == null) {
+				return ResponseEntity.ok(List.of());
+			}
+			// Agency often submits one overall NC remark (application_audit.applicant_remarks)
+			// while older per-control rows have remarks=null. Expose that text in the table Remarks column.
+			applyOverallAuditorRemarksFallback(auditReportCriteriaEntity,
+					applicationAuditEntity.getApplicantRemarks());
+			return ResponseEntity.ok(auditReportCriteriaEntity);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("An error occurred while retrieving audit report criteria.");
 		}
 	}
 
@@ -839,12 +934,16 @@ public class ApplicationAuditController {
 			applicationAuditEntity.setUpdated(new Date());
 			applicationAuditServ.updateAuditor(applicationAuditEntity);
 
-			// Retrieve audit report criteria
+			// Retrieve audit report criteria and copy overall auditor remarks onto NC rows
+			// so licensee table "Remarks" column is populated (same as fresh audit per-control remarks).
 			List<AuditReportCriteriaEntity> auditReportCriteriaEntities = auditReportCriteriaService
 					.findByAuditId(applicationAuditEntity.getLicenseeAuditId());
+			persistOverallAuditorRemarksOntoCriteria(auditReportCriteriaEntities, remarks);
 
-			// Send notification to the applicant
-			auditReportCriteriaService.sendTheApplicantUserName(applicantUserName);
+			updateAnnualScheduleStatus(
+					applicationAuditEntity,
+					applicantUserName,
+					Constant.STATUS_NC_ISSUED);
 
 			// Construct the notification
 			String title = "NC Raised By Auditor";
@@ -897,59 +996,145 @@ public class ApplicationAuditController {
 	@PostMapping("/applicant-remarks-by-applicant-UserName")
 	public ResponseEntity<?> getApplicantRemarksByApplicantUserName(
 			@RequestParam("applicantUserName") String applicantUserName, @RequestParam("remarks") String remarks,
-			@RequestParam("file") MultipartFile file) {
-
+			@RequestParam("file") MultipartFile file, @RequestParam("controlId") String auditControlId) {
 		try {
+			if (applicantUserName == null || applicantUserName.isEmpty() || auditControlId == null
+					|| auditControlId.isEmpty()) {
+				return ResponseEntity.badRequest().body("Invalid input parameters");
+			}
 
-			Random rand = new Random();
-			Integer rnum = rand.nextInt(1000);
-			// Fetch the application audit entity
+			int randomNum = new Random().nextInt(1000);
+			String filename = DocumentFileUtil.saveFile(file, "ApplicantActionTakenFile", String.valueOf(randomNum),
+					"ApplicantActionTakenFile");
+
+			AuditReportCriteriaEntity reportCriteriaEntity = resolveReportCriteriaForApplicant(applicantUserName,
+					auditControlId);
+			if (reportCriteriaEntity == null) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body("No matching audit report found for control ID: " + auditControlId);
+			}
+
+			ApplicantActionTakenEntity existingActionEntity = actionTakenService
+					.getAllByReportCriteria(reportCriteriaEntity);
+			ApplicantActionTakenEntity actionTakenEntity = new ApplicantActionTakenEntity();
+
+			if (existingActionEntity != null) {
+				actionTakenEntity.setActionTakenId(existingActionEntity.getActionTakenId());
+				actionTakenEntity.setCreated(existingActionEntity.getCreated());
+				actionTakenEntity.setUpdated(new Date());
+			} else {
+				actionTakenEntity.setCreated(new Date());
+			}
+
+			actionTakenEntity.setActionReport(filename);
+			actionTakenEntity.setRemarks(remarks);
+			actionTakenEntity.setStatus("Active");
+			actionTakenEntity.setUserName(applicantUserName);
+			actionTakenEntity.setAuditReportCriteriaEntity(reportCriteriaEntity);
+
+			if (existingActionEntity != null) {
+				actionTakenService.updateData(actionTakenEntity);
+			} else {
+				actionTakenService.saveData(actionTakenEntity);
+			}
+
+			LicenseeAuditEntity applicationAuditEntity = reportCriteriaEntity.getLicenseeAuditId();
+			if (applicationAuditEntity == null) {
+				applicationAuditEntity = applicationAuditServ.getByApplicantUserName(applicantUserName);
+			}
+
+			AuditAgencySelectionEntity agencySelectionEntity = applicationAuditEntity != null
+					? selectionServ.findbyAuditId(applicationAuditEntity)
+					: null;
+			if (agencySelectionEntity != null && agencySelectionEntity.getAuditAgencyId() != null) {
+				UserLoginDTO userLoginDTO = auditReportCriteriaService
+						.findbyAgencyId(agencySelectionEntity.getAuditAgencyId());
+				if (userLoginDTO != null && userLoginDTO.getUserName() != null) {
+					NotificationsRequest notification = new NotificationsRequest();
+					notification.setUsername(userLoginDTO.getUserName());
+					notification.setMessage(
+							"Dear Sir, We have attached the document and written our remarks. Please check and review it: "
+									+ remarks);
+					notification.setSubject("NC Action Taken By Applicant");
+					notification.setNotificationType("Email & Dashboard");
+					notification.setNotificationDescription("NC Action Taken By Applicant");
+					notification.setRole("ROLE_AUDIT_AGENCY");
+					notificationServ.sendNotification(notification);
+				}
+			}
+
+			return ResponseEntity.ok("Remarks updated and notification sent successfully.");
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("An error occurred while processing the request: " + ex.getMessage());
+		}
+	}
+
+	@PostMapping("/change-the-status-by-applicant-UserName")
+	public ResponseEntity<?> changeTheStatusByApplicantUserName(
+			@RequestParam("applicantUserName") String applicantUserName) {
+		try {
 			LicenseeAuditEntity applicationAuditEntity = applicationAuditServ
 					.getByApplicantUserName(applicantUserName);
 			if (applicationAuditEntity == null) {
 				return ResponseEntity.status(HttpStatus.NOT_FOUND)
 						.body("Application audit entity not found for username: " + applicantUserName);
 			}
-			AuditNCSEntity auditNCSEntity = new AuditNCSEntity();
-			String filename = DocumentFileUtil.saveFile(file, "ApplicantNCActionFile", rnum.toString(),
-					"ApplicantNCActionFile");
-			auditNCSEntity.setNcs(filename);
-			auditNCSEntity.setRemarks(remarks);
-			auditNCSEntity.setStatus("Active");
-			auditNCSEntity.setLicenseeAuditId(applicationAuditEntity);
-
-			auditNCSService.saveData(auditNCSEntity);
-
-			AuditAgencySelectionEntity agencySelectionEntity = selectionServ.findbyAuditId(applicationAuditEntity);
-
-//System.out.println(EncryptionUtil.encrypt(agencySelectionEntity.getAuditAgencyId()));
-			UserLoginDTO userLoginDTO = auditReportCriteriaService
-					.findbyAgencyId(agencySelectionEntity.getAuditAgencyId());
-
-			// Construct the notification
-			String title = "NC Action Taken By Applicant";
-			String message = "Dear Sir, We have Attached the Document and write Our remarks in Our Application. Please Check and Review it: "
-					+ remarks;
-
-			NotificationsRequest notification = new NotificationsRequest();
-			notification.setUsername(userLoginDTO.getUserName());
-			notification.setMessage(message);
-			notification.setSubject(title);
-			notification.setNotificationType("Email & Dashboard");
-			notification.setNotificationDescription("NC Action Taken By Applicant");
-			notification.setRole("ROLE_AUDIT_AGENCY");
-
-			notificationServ.sendNotification(notification);
-			// Send notification to the applicant
-			auditReportCriteriaService.changedTheApplicantUserName(applicantUserName);
-
+			updateAnnualScheduleStatus(
+					applicationAuditEntity,
+					applicantUserName,
+					Constant.STATUS_NC_ACTION_TAKEN);
 			return ResponseEntity.ok("Remarks updated and notification sent successfully.");
-
 		} catch (Exception ex) {
-			// Log and handle the error
 			ex.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.body("An error occurred while processing the request: " + ex.getMessage());
+		}
+	}
+
+	@GetMapping("/get-All-Applicant-Action-Taken-details")
+	public ResponseEntity<?> getByApplicationActionTaken(
+			@RequestParam("applicantUserName") String applicantUserName) {
+		try {
+			List<ApplicantActionTakenEntity> actionTakenEntity = actionTakenService
+					.getAllApplicationTaken(applicantUserName);
+			if (actionTakenEntity == null) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body("Application audit entity not found for username: " + applicantUserName);
+			}
+			return ResponseEntity.ok(actionTakenEntity);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body("An error occurred while fetching remarks: " + ex.getMessage());
+		}
+	}
+
+	@GetMapping("/applicant-action-taken-document-name")
+	public ResponseEntity<?> viewApplicantActionTaken(@RequestParam("documentName") String documentName) {
+		try {
+			Optional<ApplicantActionTakenEntity> optional = actionTakenService
+					.downloadfileBydDocumentName(EncryptionUtil.decrypt(documentName));
+			if (optional.isPresent()) {
+				ApplicantActionTakenEntity c = optional.get();
+				Path filePath = Paths.get(Constant.REAL_PATH + "//ApplicantActionTakenFile")
+						.resolve(c.getActionReport()).normalize();
+				Resource resource = new UrlResource(filePath.toUri());
+				if (resource.exists()) {
+					String contentType = Files.probeContentType(filePath);
+					return ResponseEntity.ok()
+							.contentType(MediaType
+									.parseMediaType(contentType != null ? contentType : "application/octet-stream"))
+							.header("Content-Disposition", "attachment; filename=\"" + resource.getFilename() + "\"")
+							.body(resource);
+				}
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+			}
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 		}
 	}
 
@@ -1754,6 +1939,166 @@ public class ApplicationAuditController {
 	    }
 	}
 
-	
+	private void applyOverallAuditorRemarksFallback(List<AuditReportCriteriaEntity> criteriaList,
+			String overallRemarks) {
+		if (criteriaList == null || criteriaList.isEmpty() || overallRemarks == null
+				|| overallRemarks.isBlank()) {
+			return;
+		}
+		String trimmed = overallRemarks.trim();
+		for (AuditReportCriteriaEntity entity : criteriaList) {
+			if (entity == null) {
+				continue;
+			}
+			if (entity.getRemarks() == null || entity.getRemarks().isBlank()) {
+				entity.setRemarks(trimmed);
+			}
+		}
+	}
+
+	private void persistOverallAuditorRemarksOntoCriteria(List<AuditReportCriteriaEntity> criteriaList,
+			String overallRemarks) {
+		if (criteriaList == null || criteriaList.isEmpty() || overallRemarks == null
+				|| overallRemarks.isBlank()) {
+			return;
+		}
+		String trimmed = overallRemarks.trim();
+		Date now = new Date();
+		for (AuditReportCriteriaEntity entity : criteriaList) {
+			if (entity == null) {
+				continue;
+			}
+			boolean hasNcPayload = (entity.getCompliance() != null && !entity.getCompliance().isBlank())
+					|| (entity.getDocument() != null && !entity.getDocument().isBlank());
+			if (!hasNcPayload) {
+				continue;
+			}
+			if (entity.getRemarks() != null && !entity.getRemarks().isBlank()) {
+				continue;
+			}
+			entity.setRemarks(trimmed);
+			entity.setUpdated(now);
+			auditReportCriteriaService.updateData(entity);
+		}
+	}
+
+	private AuditReportCriteriaEntity resolveReportCriteriaForApplicant(String applicantUserName,
+			String auditControlId) {
+		LicenseeAuditEntity applicationAuditEntity = applicationAuditServ.getByApplicantUserName(applicantUserName);
+		if (applicationAuditEntity == null || applicationAuditEntity.getLicenseeAuditId() == null) {
+			return null;
+		}
+		Long appAuditId = applicationAuditEntity.getLicenseeAuditId();
+
+		AuditReportCriteriaEntity exact = auditReportCriteriaService.findActiveByAppAuditIdAndControlId(appAuditId,
+				auditControlId);
+		if (exact != null) {
+			return exact;
+		}
+
+		List<AuditReportCriteriaEntity> scoped = auditReportCriteriaService.findActiveByAppAuditId(appAuditId);
+		return findMatchingReportCriteria(scoped, auditControlId);
+	}
+
+	private String masterControlId(String auditControlId) {
+		if (auditControlId == null) {
+			return "";
+		}
+		String value = auditControlId.trim();
+		int lastDash = value.lastIndexOf('-');
+		if (lastDash >= 0 && lastDash < value.length() - 1) {
+			return value.substring(lastDash + 1).trim();
+		}
+		return "";
+	}
+
+	private AuditReportCriteriaEntity findMatchingReportCriteria(List<AuditReportCriteriaEntity> entities,
+			String auditControlId) {
+		if (auditControlId == null || entities == null || entities.isEmpty()) {
+			return null;
+		}
+
+		for (AuditReportCriteriaEntity entity : entities) {
+			if (auditControlId.equals(entity.getAuditControlId())) {
+				return entity;
+			}
+		}
+
+		String inputMasterId = masterControlId(auditControlId);
+		if (!inputMasterId.isEmpty()) {
+			for (AuditReportCriteriaEntity entity : entities) {
+				String storedId = entity.getAuditControlId() == null ? "" : entity.getAuditControlId().trim();
+				if (inputMasterId.equals(masterControlId(storedId)) || inputMasterId.equals(storedId)) {
+					return entity;
+				}
+			}
+		}
+
+		Set<String> inputParts = Arrays.stream(auditControlId.split("-")).map(String::trim)
+				.filter(part -> !part.isEmpty()).collect(Collectors.toSet());
+
+		for (AuditReportCriteriaEntity entity : entities) {
+			if (entity.getAuditControlId() == null) {
+				continue;
+			}
+			Set<String> entityParts = Arrays.stream(entity.getAuditControlId().split("-")).map(String::trim)
+					.filter(part -> !part.isEmpty()).collect(Collectors.toSet());
+
+			if (entityParts.equals(inputParts) || entityParts.containsAll(inputParts)) {
+				return entity;
+			}
+		}
+		return null;
+	}
+
+	private void updateAnnualScheduleStatus(
+			LicenseeAuditEntity applicationAuditEntity, String applicantUserName, String status) {
+		if (status == null || status.isBlank()) {
+			return;
+		}
+		try {
+			if (applicationAuditEntity != null && applicationAuditEntity.getAuditScheduleId() != null
+					&& applicationAuditEntity.getAuditScheduleId().getAuditScheduleId() != null) {
+				licenseeAuditservice.updateScheduleStatus(
+						applicationAuditEntity.getAuditScheduleId().getAuditScheduleId(), status);
+				return;
+			}
+			if (applicantUserName != null && !applicantUserName.isBlank()) {
+				licenseeAuditservice.updateScheduleStatusByUserName(applicantUserName.trim(), status);
+			}
+		} catch (Exception ex) {
+			System.err.println("Unable to update annual schedule status to " + status + ": " + ex.getMessage());
+		}
+	}
+
+	/**
+	 * Accepts API dates (yyyy-MM-dd) and UI display dates (e.g. 17-Feb-2026 5:30 AM).
+	 */
+	private Date parseAnnualAuditStartDate(String raw) {
+		String value = raw == null ? "" : raw.trim();
+		if (value.isEmpty() || "-".equals(value)) {
+			return null;
+		}
+		String[] patterns = {
+				"yyyy-MM-dd HH:mm:ss",
+				"yyyy-MM-dd",
+				"dd-MMM-yyyy h:mm a",
+				"d-MMM-yyyy h:mm a",
+				"dd-MMM-yyyy hh:mm a",
+				"d-MMM-yyyy hh:mm a",
+				"dd-MMM-yyyy",
+				"d-MMM-yyyy"
+		};
+		for (String pattern : patterns) {
+			try {
+				SimpleDateFormat formatter = new SimpleDateFormat(pattern, java.util.Locale.ENGLISH);
+				formatter.setLenient(false);
+				return formatter.parse(value);
+			} catch (Exception ignored) {
+				// try next pattern
+			}
+		}
+		return null;
+	}
 	
 }

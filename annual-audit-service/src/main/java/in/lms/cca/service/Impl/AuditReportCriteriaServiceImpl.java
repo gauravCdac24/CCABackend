@@ -174,5 +174,20 @@ public class AuditReportCriteriaServiceImpl implements AuditReportCriteriaServic
 		return auditReportCriteriaRepository.getAllDataByControlId(controlId, appAuditId);
 	}
 
-	
+	@Override
+	public AuditReportCriteriaEntity findActiveByAppAuditIdAndControlId(Long appAuditId, String auditControlId) {
+		if (appAuditId == null || auditControlId == null || auditControlId.isBlank()) {
+			return null;
+		}
+		return auditReportCriteriaRepository.findActiveByAppAuditIdAndControlId(appAuditId, auditControlId);
+	}
+
+	@Override
+	public List<AuditReportCriteriaEntity> findActiveByAppAuditId(Long appAuditId) {
+		if (appAuditId == null) {
+			return List.of();
+		}
+		return auditReportCriteriaRepository.findByAuditId(appAuditId);
+	}
+
 }

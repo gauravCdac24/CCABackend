@@ -33,7 +33,7 @@ public class PaymentVerification extends AbstractTimestampEntity {
     @Column(name = "amount", length = 6)
     private Integer amount;
 
-    @Column(name = "payment_verification_proof", length = 30)
+    @Column(name = "payment_verification_proof", length = 100)
     private String paymentVerificationProof;
 
     @Column(name = "verified_by", length = 74)

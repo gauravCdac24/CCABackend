@@ -15,51 +15,51 @@ import in.lms.cca.util.global.Constant;
 
 public class DocumentFileUtil {
 
-	public static String saveFile(MultipartFile file, String documentName, String uniqueCode, String folderPath) throws IOException {
+	public static String saveFile(MultipartFile file, String documentName, String uniqueCode, String folderPath)
+			throws IOException {
 
-	    String originalFileName = file.getOriginalFilename();
-	    String fileExtension = originalFileName != null ? originalFileName.substring(originalFileName.lastIndexOf(".")) : "";
+		if (file == null || file.isEmpty()) {
+			return null;
+		}
 
-	    Date cdate = new Date();
-	    SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyHHmmss");
-	    String currentDate = sdf.format(cdate);
+		String originalFileName = file.getOriginalFilename();
+		String fileExtension = "";
+		if (originalFileName != null && originalFileName.lastIndexOf('.') >= 0) {
+			fileExtension = originalFileName.substring(originalFileName.lastIndexOf('.'));
+		}
 
-	    String uniqueFileName;
-	    Path filePath;
-	    Path directoryPath = Paths.get(Constant.REAL_PATH, folderPath);
+		String currentDate = new SimpleDateFormat("ddMMyyyyHHmmss").format(new Date());
+		Path directoryPath = Paths.get(Constant.REAL_PATH, folderPath);
+		Files.createDirectories(directoryPath);
 
-	    // Create the directory if it doesn't exist
-	    Files.createDirectories(directoryPath);
+		// UUID prevents same-second collisions (multiple auditor files on one submit)
+		// from spinning forever in Files.exists().
+		String uniqueFileName;
+		Path filePath;
+		int attempts = 0;
+		do {
+			uniqueFileName = documentName + currentDate + (uniqueCode == null ? "" : uniqueCode)
+					+ UUID.randomUUID().toString().replace("-", "") + fileExtension;
+			filePath = directoryPath.resolve(uniqueFileName);
+			attempts++;
+		} while (Files.exists(filePath) && attempts < 5);
 
-	    do {
-	        // Generate a unique file name
-	        uniqueFileName = documentName + currentDate + uniqueCode + fileExtension;
-	        filePath = directoryPath.resolve(uniqueFileName);
-	    } while (Files.exists(filePath)); // Ensure the file name is unique
-	    
-	    // Save the file 
-	    try (OutputStream outputStream = Files.newOutputStream(filePath)) {
-	        outputStream.write(file.getBytes());
-	        return uniqueFileName;
-	    }catch(Exception e) {
-	    	return null;
-	    }
+		if (Files.exists(filePath)) {
+			throw new IOException("Unable to allocate a unique file name for " + documentName);
+		}
 
-	    
+		try (OutputStream outputStream = Files.newOutputStream(filePath)) {
+			outputStream.write(file.getBytes());
+			return uniqueFileName;
+		}
 	}
-	
+
 	public static void deleteFile(String fileName, String filepath) {
-		
-		 Path filePath = Paths.get(Constant.REAL_PATH, filepath+"//"+fileName);
-		
+		Path filePath = Paths.get(Constant.REAL_PATH, filepath, fileName);
 		try {
 			Files.deleteIfExists(filePath);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 	}
-		
-
-	
 }

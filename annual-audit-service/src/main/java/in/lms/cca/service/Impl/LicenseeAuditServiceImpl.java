@@ -74,4 +74,60 @@ public class LicenseeAuditServiceImpl implements LicenseeAuditservice {
 		return licenseeAuditRepository.findById(auditScheduleId);
 	}
 
+	@Override
+	public Optional<AnnualAuditScheduleEntity> updateScheduleStatus(Long auditScheduleId, String status) {
+		if (auditScheduleId == null || status == null || status.isBlank()) {
+			return Optional.empty();
+		}
+		Optional<AnnualAuditScheduleEntity> scheduleOpt = licenseeAuditRepository.findById(auditScheduleId);
+		if (scheduleOpt.isEmpty()) {
+			return Optional.empty();
+		}
+		AnnualAuditScheduleEntity schedule = scheduleOpt.get();
+		if (status.equals(schedule.getStatus())) {
+			return scheduleOpt;
+		}
+		schedule.setStatus(status.trim());
+		schedule.setUpdated(new Date());
+		return Optional.of(licenseeAuditRepository.save(schedule));
+	}
+
+	@Override
+	public Optional<AnnualAuditScheduleEntity> updateScheduleStatusByUserName(String userName, String status) {
+		if (userName == null || userName.isBlank() || status == null || status.isBlank()) {
+			return Optional.empty();
+		}
+		List<AnnualAuditScheduleEntity> schedules =
+				licenseeAuditRepository.findStartedByUsername(userName.trim(), new Date());
+		if (schedules == null || schedules.isEmpty()) {
+			schedules = licenseeAuditRepository.findByUsername(userName.trim());
+		}
+		if (schedules == null || schedules.isEmpty()) {
+			return Optional.empty();
+		}
+		AnnualAuditScheduleEntity schedule = schedules.get(0);
+		if (schedules.size() > 1) {
+			// Prefer active (non-completed) schedule with latest start date.
+			schedule = schedules.stream()
+					.filter(item -> item.getDateOfCompletion() == null)
+					.sorted((a, b) -> {
+						Date aDate = a.getScheduleStartDate();
+						Date bDate = b.getScheduleStartDate();
+						if (aDate == null && bDate == null) {
+							return 0;
+						}
+						if (aDate == null) {
+							return 1;
+						}
+						if (bDate == null) {
+							return -1;
+						}
+						return bDate.compareTo(aDate);
+					})
+					.findFirst()
+					.orElse(schedules.get(0));
+		}
+		return updateScheduleStatus(schedule.getAuditScheduleId(), status);
+	}
+
 }

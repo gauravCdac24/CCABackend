@@ -4,8 +4,16 @@ import java.util.List;
 
 public class AuditCriteriaPayload {
 	
+	private String auditCriteriaId;
 	private String auditCriteria;
 	private List<AuditSubCriteriaPayload> auditSubCriteria;
+
+	public String getAuditCriteriaId() {
+		return auditCriteriaId;
+	}
+	public void setAuditCriteriaId(String auditCriteriaId) {
+		this.auditCriteriaId = auditCriteriaId;
+	}
 	public String getAuditCriteria() {
 		return auditCriteria;
 	}

@@ -23,4 +23,7 @@ public interface ApplicationAuditorsRepository extends JpaRepository<Application
 	@Query("SELECT d FROM ApplicationAuditorsEntity d WHERE d.status='Active'")
 	List<ApplicationAuditorsEntity> getAllActiveActiveAuditor();
 
+	@Query("SELECT d FROM ApplicationAuditorsEntity d WHERE d.undertakingDocument = :id AND d.status='Active'")
+	List<ApplicationAuditorsEntity> findActiveByUndertakingDocument(@Param("id") String id);
+
 }

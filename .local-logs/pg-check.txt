@@ -1,0 +1,26 @@
+++ echo pglog:
+pglog:
+++ tail -30 /home/gaurav/Documents/CCABackend/.local-logs/pg.log
+setpriv: setresuid failed: Invalid argument
+++ echo ss:
+ss:
+++ ss -ltn
+++ grep --color=auto 5432
+++ echo none
+none
+++ echo pgrep:
+pgrep:
+++ pgrep -a postgres
+++ head -5
+810 /usr/lib/postgresql/14/bin/postgres -D /var/lib/postgresql/14/main -c config_file=/etc/postgresql/14/main/postgresql.conf
+832 postgres: 14/main: checkpointer                                                                                          
+833 postgres: 14/main: background writer                                                                                     
+834 postgres: 14/main: walwriter                                                                                             
+835 postgres: 14/main: autovacuum launcher                                                                                   
+++ echo psql:
+psql:
+++ PGPASSWORD=root
+++ psql -h 127.0.0.1 -U postgres -d cca_db -c 'SELECT 1'
+++ head -5
+psql: error: connection to server at "127.0.0.1", port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?

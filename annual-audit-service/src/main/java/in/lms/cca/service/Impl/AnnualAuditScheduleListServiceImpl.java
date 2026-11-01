@@ -2,6 +2,7 @@ package in.lms.cca.service.Impl;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import in.lms.cca.entity.LicenseeAuditEntity;
 import in.lms.cca.service.AnnualAuditScheduleListService;
 import in.lms.cca.service.AnnualAuditWorkflowService;
 import in.lms.cca.service.ApplicationAuditService;
+import in.lms.cca.service.AuditAgencyIdentityService;
 import in.lms.cca.service.AuditAgencySelectionService;
 import in.lms.cca.service.LicenseeAuditservice;
 
@@ -33,6 +35,9 @@ public class AnnualAuditScheduleListServiceImpl implements AnnualAuditScheduleLi
 	@Autowired
 	private AuditAgencySelectionService auditAgencySelectionService;
 
+	@Autowired
+	private AuditAgencyIdentityService auditAgencyIdentityService;
+
 	@Override
 	public List<AnnualAuditScheduleListDTO> getScheduleList(String id, String role) {
 		String normalizedRole = role == null ? "LICENSEE" : role.toUpperCase().replace('-', '_');
@@ -45,7 +50,6 @@ public class AnnualAuditScheduleListServiceImpl implements AnnualAuditScheduleLi
 			dto.setAuditScheduleId(String.valueOf(schedule.getAuditScheduleId()));
 			dto.setLicenseId(schedule.getLicenseId());
 			dto.setUserName(schedule.getUserName());
-			dto.setStatus(schedule.getStatus());
 			if (schedule.getScheduleStartDate() != null) {
 				dto.setScheduleStartDate(dateFormat.format(schedule.getScheduleStartDate()));
 			}
@@ -63,6 +67,8 @@ public class AnnualAuditScheduleListServiceImpl implements AnnualAuditScheduleLi
 
 			AnnualAuditWorkflowDTO workflow =
 					annualAuditWorkflowService.buildWorkflow(schedule, normalizedRole);
+			// Prefer status synced by workflow (self-heals stuck "Initiated" rows).
+			dto.setStatus(schedule.getStatus());
 			dto.setScheduleState(workflow.getScheduleState());
 			dto.setCurrentStep(workflow.getCurrentStep());
 			dto.setReadOnly(workflow.isReadOnly());
@@ -79,7 +85,17 @@ public class AnnualAuditScheduleListServiceImpl implements AnnualAuditScheduleLi
 			return licenseeAuditservice.getStartedAnnualAuditDetailsByUsername(id);
 		case "AUDIT_AGENCY":
 		case "AUDITAGENCY":
-			return licenseeAuditservice.getStartedAnnualAuditSchedulesByAuditAgencyId(id);
+			String auditAgencyId = auditAgencyIdentityService.resolveAuditAgencyId(id);
+			List<AnnualAuditScheduleEntity> byAgencyId =
+					licenseeAuditservice.getStartedAnnualAuditSchedulesByAuditAgencyId(auditAgencyId);
+			if (byAgencyId != null && !byAgencyId.isEmpty()) {
+				return byAgencyId;
+			}
+			// Fallback for older rows that may have stored the login username directly.
+			if (auditAgencyId != null && !auditAgencyId.equals(id)) {
+				return licenseeAuditservice.getStartedAnnualAuditSchedulesByAuditAgencyId(id);
+			}
+			return byAgencyId == null ? Collections.emptyList() : byAgencyId;
 		case "CCA":
 		case "CCA_OFFICER":
 		case "CCAOFFICER":

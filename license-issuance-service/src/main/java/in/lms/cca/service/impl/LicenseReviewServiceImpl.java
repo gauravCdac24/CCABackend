@@ -99,7 +99,8 @@ public class LicenseReviewServiceImpl implements ILicenseReviewService {
 			dto.setExpiryDate(expiryDate.toString());
 			dto.setSerialNo(LicenseSerialNumber.build(issueDate, expiryDate, allocation.caSerial, allocation.keySequence));
 		} else if (LicenseReview.RENEWAL.equals(allocation.kind)) {
-			dto.setSerialNo(allocation.previousSerialNo == null ? "" : allocation.previousSerialNo);
+			// Admin enters the renewal serial; do not pre-fill previous or generated values.
+			dto.setSerialNo("");
 		}
 		return dto;
 	}
@@ -135,8 +136,9 @@ public class LicenseReviewServiceImpl implements ILicenseReviewService {
 			throw new IllegalArgumentException("These license details are already pending CCA review.");
 		}
 
-		int caSerial = open != null && open.getCaSerial() != null ? open.getCaSerial() : allocation.caSerial;
-		int keySequence = open != null && open.getKeySequence() != null ? open.getKeySequence() : allocation.keySequence;
+		int caSerial;
+		int keySequence;
+		String resolvedSerial;
 		if (LicenseReview.FRESH.equals(allocation.kind)) {
 			LocalDate approvalDate = parseDate(context.getInPrincipleApprovalDate());
 			if (approvalDate == null) {
@@ -145,19 +147,35 @@ public class LicenseReviewServiceImpl implements ILicenseReviewService {
 			if (!issue.equals(approvalDate)) {
 				throw new IllegalArgumentException("Issue date must be the in-principle approval date.");
 			}
+			caSerial = open != null && open.getCaSerial() != null ? open.getCaSerial() : allocation.caSerial;
+			keySequence = open != null && open.getKeySequence() != null ? open.getKeySequence() : allocation.keySequence;
+			resolvedSerial = LicenseSerialNumber.build(issue, expiry, caSerial, keySequence);
+			if (serialNo == null || !resolvedSerial.equals(serialNo.trim())) {
+				throw new IllegalArgumentException(
+						"License serial number does not match the required 24-character format. Expected "
+								+ resolvedSerial + ".");
+			}
+		} else {
+			// Renewal: admin-supplied serial (not auto-generated like fresh applications).
+			resolvedSerial = serialNo == null ? "" : serialNo.trim();
+			if (!LicenseSerialNumber.isNumeric24(resolvedSerial)) {
+				throw new IllegalArgumentException("Please enter a valid 24-digit license serial number.");
+			}
+			String expectedFromDates = LicenseSerialNumber.build(issue, expiry,
+					LicenseSerialNumber.caSerial(resolvedSerial), LicenseSerialNumber.nnn(resolvedSerial));
+			if (!resolvedSerial.equals(expectedFromDates)) {
+				throw new IllegalArgumentException(
+						"License serial number must use the selected issue year and expiry date (DDMMYY).");
+			}
+			caSerial = LicenseSerialNumber.caSerial(resolvedSerial);
+			keySequence = LicenseSerialNumber.nnn(resolvedSerial);
 		}
-
-		String expectedSerial = LicenseSerialNumber.build(issue, expiry, caSerial, keySequence);
-		if (serialNo == null || !expectedSerial.equals(serialNo.trim())) {
-			throw new IllegalArgumentException("License serial number does not match the required 24-character format. Expected "
-					+ expectedSerial + ".");
-		}
-		assertSerialAvailable(expectedSerial, EncryptionUtil.encrypt(plainIntentId));
+		assertSerialAvailable(resolvedSerial, EncryptionUtil.encrypt(plainIntentId));
 
 		LicenseReview review = open == null ? new LicenseReview() : open;
 		review.setIntentAppId(EncryptionUtil.encrypt(plainIntentId));
 		review.setUserName(username);
-		review.setSerialNo(expectedSerial);
+		review.setSerialNo(resolvedSerial);
 		review.setIssueDate(toDate(issue));
 		review.setExpiryDate(toDate(expiry));
 		review.setPublicKey(key);

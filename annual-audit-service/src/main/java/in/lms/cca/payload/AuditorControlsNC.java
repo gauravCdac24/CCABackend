@@ -10,6 +10,7 @@ public class AuditorControlsNC {
 	private String controlId;
 	private String compliance;
 	private String applicantUserName;
+	private String remarks;
 	public String getAuditorControlsNCId() {
 		return auditorControlsNCId;
 	}
@@ -47,11 +48,17 @@ public class AuditorControlsNC {
 	public void setSelectedMultipartFile(String selectedMultipartFile) {
 		this.selectedMultipartFile = selectedMultipartFile;
 	}
+	public String getRemarks() {
+		return remarks;
+	}
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
 	@Override
 	public String toString() {
 		return "AuditorControlsNC [auditorControlsNCId=" + auditorControlsNCId + ", file=" + file
 				+ ", selectedMultipartFile=" + selectedMultipartFile + ", controlId=" + controlId + ", compliance="
-				+ compliance + ", applicantUserName=" + applicantUserName + "]";
+				+ compliance + ", applicantUserName=" + applicantUserName + ", remarks=" + remarks + "]";
 	}
 	
 	

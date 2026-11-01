@@ -14,6 +14,8 @@ public interface ApplicationAuditorsService {
 
 	Optional<ApplicationAuditorsEntity> downloadfile(Long id );
 
+	Optional<ApplicationAuditorsEntity> downloadfiles(String undertakingDocument);
+
 	Optional<ApplicationAuditorsEntity> aprovedAuditForm(ApplicationAuditorsEntity auditorDescriptiones);
 
 	Optional<ApplicationAuditorsEntity> updateData(ApplicationAuditorsEntity auditorsEntity);

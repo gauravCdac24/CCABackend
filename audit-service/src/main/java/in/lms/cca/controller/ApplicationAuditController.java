@@ -2142,6 +2142,18 @@ public class ApplicationAuditController {
 		return findMatchingReportCriteria(scoped, auditControlId);
 	}
 
+	private String masterControlId(String auditControlId) {
+		if (auditControlId == null) {
+			return "";
+		}
+		String value = auditControlId.trim();
+		int lastDash = value.lastIndexOf('-');
+		if (lastDash >= 0 && lastDash < value.length() - 1) {
+			return value.substring(lastDash + 1).trim();
+		}
+		return "";
+	}
+
 	private AuditReportCriteriaEntity findMatchingReportCriteria(List<AuditReportCriteriaEntity> entities,
 			String auditControlId) {
 		if (auditControlId == null || entities == null || entities.isEmpty()) {
@@ -2151,6 +2163,19 @@ public class ApplicationAuditController {
 		for (AuditReportCriteriaEntity entity : entities) {
 			if (auditControlId.equals(entity.getAuditControlId())) {
 				return entity;
+			}
+		}
+
+		// The prefix (for example 3.1.2.1) is the control's position in the current
+		// screen list and changes when that list is filtered. The id after the last
+		// hyphen is the audit control primary key and stays stable.
+		String inputMasterId = masterControlId(auditControlId);
+		if (!inputMasterId.isEmpty()) {
+			for (AuditReportCriteriaEntity entity : entities) {
+				String storedId = entity.getAuditControlId() == null ? "" : entity.getAuditControlId().trim();
+				if (inputMasterId.equals(masterControlId(storedId)) || inputMasterId.equals(storedId)) {
+					return entity;
+				}
 			}
 		}
 
@@ -2263,18 +2288,9 @@ public class ApplicationAuditController {
 				&& !"null".equalsIgnoreCase(value.trim());
 	}
 
-	private boolean isValidComplianceValue(String value) {
-		if (!hasReportText(value)) {
-			return false;
-		}
-		String normalized = value.trim();
-		return "Yes".equalsIgnoreCase(normalized) || "No".equalsIgnoreCase(normalized)
-				|| "N/A".equalsIgnoreCase(normalized) || "NA".equalsIgnoreCase(normalized);
-	}
-
 	/**
-	 * NC control belongs in the audit report only when the applicant submitted
-	 * action-taken data and the auditor completed Approve/Reject review.
+	 * A control belongs in Summary of Observation and the NC rows only after the
+	 * auditor asked the applicant to respond and later completed Approve/Reject.
 	 */
 	private boolean isApplicantFilledAndAuditorReviewed(AuditReportCriteriaEntity reportCriteria,
 			ApplicantActionTakenEntity applicantAction) {
@@ -2283,9 +2299,13 @@ public class ApplicationAuditController {
 		}
 		boolean applicantFilled = hasReportText(applicantAction.getActionReport())
 				|| hasReportText(applicantAction.getRemarks());
-		boolean auditorReviewed = hasReportText(applicantAction.getAuditorRemarks())
-				|| isValidComplianceValue(reportCriteria.getCompliance());
-		return applicantFilled && auditorReviewed;
+		// Compliance is saved when the auditor first asks for a response. Approve and
+		// Reject are the later review: they write auditor remarks, and Reject also
+		// marks the action Inactive.
+		boolean laterReviewed = applicantAction.getAuditorRemarks() != null
+				|| "Inactive".equalsIgnoreCase(
+						applicantAction.getStatus() == null ? "" : applicantAction.getStatus().trim());
+		return applicantFilled && laterReviewed;
 	}
 
 	private boolean shouldIncludeAnnexureSection(String auditorVerification) {
@@ -2347,27 +2367,7 @@ public class ApplicationAuditController {
 
 		AnnexureMain amain = resolveAnnexureForReport(username);
 		if (amain == null) {
-			
-
-			contentBuilder.append("<p><b>2. Internal Audit Details</b></p>");
-
-			contentBuilder.append("<table>").append("<tr>").append("<th>S. No.</th>").append("<th>Description</th>")
-					.append("<th>From</th>").append("<th>To</th>")
-					.append("<th>Brief details of open observation (max 50 words)</th>")
-					.append("<th>Details of Auditors</th>").append("</tr>");
-			for (int i = 0; i < 4; i++) {
-				contentBuilder.append("<tr>").append("<td>").append(" ").append("</td>") // Serial Number
-						.append("<td>").append(" ").append("</td>").append("<td>").append(" ").append("</td>")
-						.append("<td>").append(" ").append("</td>").append("<td>").append(" ").append("</td>")
-						.append("<td>").append(" ").append("</td>").append("</tr>");
-			}
-			contentBuilder.append("<tr><td colspan = 6 style='text-align: left;'><b>Auditor Remarks: </b></td></tr>");
-
-			contentBuilder.append("</table>");
-
-		
-			return contentBuilder.toString();
-
+			return "";
 		} else {
 
 			InternalAuditMain mainObj = internalMainServ.getByAnnexureId(amain.getAnnexureMainId());
@@ -3028,26 +3028,7 @@ contentBuilder.append("<h3 style='color: red;'>12. Details of ASP</h3>");
 		// Fetch Annexure and eKYC Audit Details
 		AnnexureMain amain = resolveAnnexureForReport(username);
 		if (amain == null) {
-		
-
-			// Title
-			contentBuilder.append("<p><b>13. Public Information maintained at the website of CA</b></p>");
-
-			// Table Header
-			contentBuilder.append("<table>").append("<tr>").append("<th>S. No.</th>").append("<th>Description</th>")
-					.append("<th>Website Link</th>").append("</tr>");
-			for (int i = 0; i < 4; i++) {
-				contentBuilder.append("<tr>").append("<td>").append(" ").append("</td>") // Serial Number
-						.append("<td>").append(" ").append("</td>").append("<td>").append(" ").append("</td>")
-						.append("</tr>");
-			}
-			contentBuilder.append("<tr><td colspan = 3 style='text-align: left;'><b>Auditor Remarks: </b></td></tr>");
-
-			contentBuilder.append("</table>");
-
-			
-			return contentBuilder.toString();
-
+			return "";
 		} else {
 
 			PublicInfoMain mainObj = publicInfoMainServ.getByAnnexureId(amain.getAnnexureMainId());
@@ -3154,48 +3135,7 @@ contentBuilder.append("<h3 style='color: red;'>14. Cost of Certificates issued d
 		StringBuilder contentBuilder = new StringBuilder();
 		AnnexureMain amain = resolveAnnexureForReport(username);
 		if (amain == null) {
-			
-
-			contentBuilder.append("<h3>15. CA Self-assessment for audit period</h3>");
-
-			contentBuilder.append("<table>").append("<tr>").append("<th>S. No.</th>").append("<th>Name</th>")
-					.append("<th>Details</th>").append("</tr>");
-
-			contentBuilder.append("<tr>").append("<td>1</td>").append(
-					"<td>No of DSC issued without any DSC application Forms, if any & reason for non-compliance.</td>")
-					.append("<td>").append(" ").append("</td>")
-					.append("</tr>");
-
-			contentBuilder.append("<tr>").append("<td>2</td>")
-					.append("<td>No of DSC issued without charging fee, if any & details.</td>").append("<td>")
-					.append(" ").append("</td>").append("</tr>");
-
-			contentBuilder.append("<tr>").append("<td>3</td>").append(
-					"<td>No DSC issued without having physical verification(video/Biometric Aadhaar) if any</td>")
-					.append("<td>").append(" ").append("</td>").append("</tr>");
-
-			contentBuilder.append("<tr>").append("<td>4</td>").append(
-					"<td>No of DSC issued(except for foreign nationals) whose name is not matching with as that of in Aadhaar or PAN, if any & reason for noncompliance</td>")
-					.append("<td>").append(" ").append("</td>").append("</tr>");
-
-			contentBuilder.append("<tr>").append("<td>5</td>").append(
-					"<td>Whether CA system allows sending common OTP to many customers? If Yes, reason for such non-compliance</td>")
-					.append("<td>").append(" ").append("</td>").append("</tr>");
-
-			contentBuilder.append("<tr>").append("<td>6</td>").append(
-					"<td>Whether access to CA system is based on single URL-point or allows Link based access. If link-based access allowed, provide details in respect of coverage of such access in the security audit, annual audit & internal audit. The details of vulnerabilities and non-compliance noted for each type of links.</td>")
-					.append("<td>").append(" ").append("</td>").append("</tr>");
-
-			contentBuilder.append("<tr>").append("<td>7</td>").append(
-					"<td>The effort taken by CA to find out the own-noncompliance and action Taken during the audit period.</td>")
-					.append("<td>").append(" ").append("</td>").append("</tr>");
-
-			contentBuilder.append("<tr><td colspan = 3 style='text-align: left;'><b>Auditor Remarks: </b></td></tr>");
-
-			contentBuilder.append("</table>");
-
-			
-			return contentBuilder.toString();
+			return "";
 		} else {
 
 			SelfAssessmentMain mainObj14 = selfServ.getByAnnexureId(amain.getAnnexureMainId());
@@ -3529,8 +3469,15 @@ contentBuilder.append("<h3 style='color: red;'>15. CA Self-assessment for audit 
 	                }
 	            }
 
-	            for (AuditReportCriteriaEntity entity : auditReportCriteriaEntities) {
-	                if (entity != null && entity.getDocument() != null && !entity.getDocument().isEmpty()) {
+	        Map<Long, ApplicantActionTakenEntity> reviewedActionLookup = buildApplicantActionLookup(normalizedUserName);
+	        for (AuditReportCriteriaEntity entity : auditReportCriteriaEntities) {
+	                ApplicantActionTakenEntity reviewedAction = entity != null && entity.getCriteriaId() != null
+	                        ? reviewedActionLookup.get(entity.getCriteriaId())
+	                        : null;
+	                if (!isApplicantFilledAndAuditorReviewed(entity, reviewedAction)) {
+	                    continue;
+	                }
+	                if (entity.getDocument() != null && !entity.getDocument().isEmpty()) {
 	                    String documentData = entity.getDocument().trim();
 
 	                    // Optional: skip if it's not likely base64 (doesn't contain only base64-safe chars)
@@ -3663,6 +3610,7 @@ contentBuilder.append("<h3 style='color: red;'>15. CA Self-assessment for audit 
 		for (AuditCriteriaPayload criteria : criteriaPayload) {
 			StringBuilder criteriaHtml = new StringBuilder();
 			boolean criteriaHasRows = false;
+			boolean criteriaSelected = isSelectedAuditCriteria(criteria, selectedControlIds);
 
 			int subCriteriaIndex = 1;
 			for (AuditSubCriteriaPayload subCriteria : criteria.getAuditSubCriteria()) {
@@ -3684,8 +3632,10 @@ contentBuilder.append("<h3 style='color: red;'>15. CA Self-assessment for audit 
 										? applicantActionLookup.get(matchingEntity.getCriteriaId())
 										: null;
 
-						if (isApplicantSelectedControl(control, selectedControlIds)
-								|| isApplicantFilledAndAuditorReviewed(matchingEntity, applicantAction)) {
+						boolean applicantSelectedThisControl = criteriaSelected
+								|| isApplicantSelectedControl(control, selectedControlIds);
+						if (applicantSelectedThisControl
+								&& isApplicantFilledAndAuditorReviewed(matchingEntity, applicantAction)) {
 							parameterHasRows = true;
 							parameterRows.append("<tr><td style='width:7%'>").append(escapeHtml(controlKey)).append("</td>")
 									.append("<td style='width:16%'>")
@@ -3742,7 +3692,7 @@ contentBuilder.append("<h3 style='color: red;'>15. CA Self-assessment for audit 
 		}
 
 		if (!anyDetailedControl) {
-			contentBuilder.append("<p>No audit controls selected by the applicant.</p>");
+			contentBuilder.append("<p>No auditor-reviewed controls for the audit controls selected by the applicant.</p>");
 		}
 
 		// Annexure A2: only sections filled by applicant and reviewed by auditor
@@ -3794,9 +3744,10 @@ contentBuilder.append("<h3 style='color: red;'>15. CA Self-assessment for audit 
 	}
 
 	/**
-	 * Active controls the applicant saved for this audit, including rows stored
-	 * against a schedule after the audit agency was chosen. The preview request
-	 * often has no schedule header, so this does not depend on that header.
+	 * Ids the applicant checked after selecting the audit agency. Those ids are
+	 * the audit-criteria checkboxes (the guideline groups) and may also include
+	 * individual control ids. A checked group only contributes rows the auditor
+	 * asked the applicant to answer and later reviewed.
 	 */
 	private Set<String> loadApplicantSelectedControlIds(String userName) {
 		Set<String> selectedIds = new HashSet<>();
@@ -3813,6 +3764,29 @@ contentBuilder.append("<h3 style='color: red;'>15. CA Self-assessment for audit 
 			}
 		}
 		return selectedIds;
+	}
+
+	private boolean isSelectedAuditCriteria(AuditCriteriaPayload criteria, Set<String> selectedControlIds) {
+		if (criteria == null || selectedControlIds == null || selectedControlIds.isEmpty()) {
+			return false;
+		}
+		if (criteria.getAuditCriteriaId() != null
+				&& selectedControlIds.contains(criteria.getAuditCriteriaId().trim())) {
+			return true;
+		}
+		if (criteria.getAuditSubCriteria() == null) {
+			return false;
+		}
+		for (AuditSubCriteriaPayload subCriteria : criteria.getAuditSubCriteria()) {
+			if (subCriteria == null || subCriteria.getAuditCriteriaId() == null) {
+				continue;
+			}
+			String criteriaId = subCriteria.getAuditCriteriaId().trim();
+			if (!criteriaId.isEmpty() && selectedControlIds.contains(criteriaId)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private boolean isApplicantSelectedControl(AuditControlPayload control, Set<String> selectedControlIds) {

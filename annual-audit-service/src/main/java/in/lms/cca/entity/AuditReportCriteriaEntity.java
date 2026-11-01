@@ -31,6 +31,9 @@ public class AuditReportCriteriaEntity extends AbstractTimestampEntity{
 	 
 	 @Column(name = "compliance", length = 3)
 	    private String compliance;
+
+	 @Column(name = "remarks", columnDefinition = "TEXT")
+	    private String remarks;
 	 
 	 @Column(name = "document", length = 100)
 	    private String document;
@@ -71,6 +74,12 @@ public class AuditReportCriteriaEntity extends AbstractTimestampEntity{
 		public void setCompliance(String compliance) {
 			this.compliance = compliance;
 		}
+		public String getRemarks() {
+			return remarks;
+		}
+		public void setRemarks(String remarks) {
+			this.remarks = remarks;
+		}
 		public String getDocument() {
 			return document;
 		}
@@ -99,8 +108,9 @@ public class AuditReportCriteriaEntity extends AbstractTimestampEntity{
 		@Override
 		public String toString() {
 			return "AuditReportCriteriaEntity [criteriaId=" + criteriaId + ", auditControlId=" + auditControlId
-					+ ", licenseeAuditId=" + licenseeAuditId + ", compliance=" + compliance + ", document=" + document
-					+ ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + ", status=" + status + "]";
+					+ ", licenseeAuditId=" + licenseeAuditId + ", compliance=" + compliance + ", remarks=" + remarks
+					+ ", document=" + document + ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + ", status="
+					+ status + "]";
 		}
 	    
 	    

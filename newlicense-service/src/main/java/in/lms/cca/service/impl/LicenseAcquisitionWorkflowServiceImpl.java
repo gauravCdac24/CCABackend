@@ -312,6 +312,8 @@ public class LicenseAcquisitionWorkflowServiceImpl implements LicenseAcquisition
 		if (status.equals(ApplicationStatusUtil.normalize(ApplicationStatusUtil.RECOMMENDED_FOR_AUDIT_AGENCY))
 				|| status.equals(ApplicationStatusUtil.normalize(ApplicationStatusUtil.AGENCY_SELECTION))) {
 			actions.add("SUBMIT_UNDERTAKING");
+		} else if (status.equals(ApplicationStatusUtil.normalize(ApplicationStatusUtil.APPROVE_FROM_CCA))) {
+			actions.add("FILL_NC");
 		} else if (status.equals(ApplicationStatusUtil.normalize(ApplicationStatusUtil.REVIEW_AUDIT_REPORT))) {
 			actions.add("SUBMIT_AUDIT_REPORT");
 		} else if (status.equals(ApplicationStatusUtil.normalize(ApplicationStatusUtil.NC_ACTION_TAKEN))) {

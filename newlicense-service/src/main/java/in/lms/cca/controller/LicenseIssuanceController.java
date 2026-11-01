@@ -43,7 +43,8 @@ public class LicenseIssuanceController {
 			@RequestParam(value = "createdBy", required = true) String createdBy,
 	        @RequestParam(value = "bankGuarantee", required = true) MultipartFile bankGuarantee,
 	        @RequestParam(value = "csr", required = true) MultipartFile csr,
-	        @RequestParam(value = "agreement", required = true) MultipartFile agreement
+	        @RequestParam(value = "agreement", required = true) MultipartFile agreement,
+	        @RequestParam(value = "crossCertificationArrangement", required = false) MultipartFile crossCertificationArrangement
 	        ){
 	        
 	
@@ -60,8 +61,11 @@ public class LicenseIssuanceController {
 				//save the file
 				
 				String bankGuaranteeFileName = DocumentFileUtil.saveFile(bankGuarantee, "BankGuarantee", appId, "IssuanceDocuments/Document");
-				String csrFileName = DocumentFileUtil.saveFile(bankGuarantee, "CSR", appId, "IssuanceDocuments/Document");
-				String agreementFileName = DocumentFileUtil.saveFile(bankGuarantee, "Agreement", appId, "IssuanceDocuments/Document");
+				String csrFileName = DocumentFileUtil.saveFile(csr, "CSR", appId, "IssuanceDocuments/Document");
+				String agreementFileName = DocumentFileUtil.saveFile(agreement, "Agreement", appId, "IssuanceDocuments/Document");
+				String crossCertificationFileName = crossCertificationArrangement == null || crossCertificationArrangement.isEmpty()
+						? null
+						: DocumentFileUtil.saveFile(crossCertificationArrangement, "CrossCertification", appId, "IssuanceDocuments/Document");
 				
 				IntentApplication intent =  intentService.getIntentByIntentAppId(Long.parseLong(appId));
 				
@@ -97,6 +101,17 @@ public class LicenseIssuanceController {
 					app2.setUpdatedBy(cby);
 					
 					applicationDocServ.addApplicationDocument(app2);
+
+					if (crossCertificationFileName != null) {
+						ApplicationDocument crossCertification = new ApplicationDocument();
+						crossCertification.setCreatedBy(cby);
+						crossCertification.setDocumentTitle("Cross Certification Arrangement");
+						crossCertification.setFileName(crossCertificationFileName);
+						crossCertification.setIntentAppId(intent);
+						crossCertification.setStatus("Active");
+						crossCertification.setUpdatedBy(cby);
+						applicationDocServ.addApplicationDocument(crossCertification);
+					}
 					
 					
 					//add application timeline

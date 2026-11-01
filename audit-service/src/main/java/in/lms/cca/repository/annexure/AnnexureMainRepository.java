@@ -18,6 +18,9 @@ public interface AnnexureMainRepository extends JpaRepository<AnnexureMain, Long
 	@Query("FROM AnnexureMain a WHERE a.status = :status AND a.userName = :username AND a.intentAppId = :intentAppId AND a.auditScheduleId IS NULL")
 	AnnexureMain findAnnexureByStatusUsernameAndIntentAppId(String status, String username, Long intentAppId);
 
+	@Query("FROM AnnexureMain a WHERE a.status = 'Active' AND a.userName = :username AND a.auditScheduleId IS NULL AND a.intentAppId IS NOT NULL ORDER BY a.annexureMainId DESC")
+	List<AnnexureMain> findActiveRenewalByUsername(String username);
+
 	@Query("FROM AnnexureMain a WHERE a.userName = :username AND a.auditScheduleId IS NULL AND a.intentAppId IS NULL ORDER BY a.annexureMainId DESC")
 	List<AnnexureMain> findFreshByUserNameOrderByIdDesc(String username);
 
