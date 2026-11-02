@@ -45,6 +45,9 @@ public class ApplicantActionTakenEntity extends AbstractTimestampEntity {
 	@Column(name = "auditor_remarks", columnDefinition = "TEXT")
 	private String auditorRemarks;
 
+	@Column(name = "auditor_closure_document", length = 100)
+	private String auditorClosureDocument;
+
 	@Column(name = "status", length = 15)
 	private String status;
 
@@ -126,6 +129,14 @@ public class ApplicantActionTakenEntity extends AbstractTimestampEntity {
 
 	public void setAuditorRemarks(String auditorRemarks) {
 		this.auditorRemarks = auditorRemarks;
+	}
+
+	public String getAuditorClosureDocument() {
+		return auditorClosureDocument;
+	}
+
+	public void setAuditorClosureDocument(String auditorClosureDocument) {
+		this.auditorClosureDocument = auditorClosureDocument;
 	}
 
 	@Override

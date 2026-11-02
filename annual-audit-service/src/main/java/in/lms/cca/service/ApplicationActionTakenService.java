@@ -21,4 +21,6 @@ public interface ApplicationActionTakenService {
 	List<ApplicantActionTakenEntity> getAllApplicationTakenAnyStatus(String applicantUserName);
 
 	Optional<ApplicantActionTakenEntity> downloadfileBydDocumentName(String documentName);
+
+	Optional<ApplicantActionTakenEntity> downloadClosureDocument(String documentName);
 }

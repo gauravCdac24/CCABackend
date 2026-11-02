@@ -25,4 +25,6 @@ public interface LicenseeAuditservice {
 
 	Optional<AnnualAuditScheduleEntity> updateScheduleStatusByUserName(String userName, String status);
 
+	Optional<AnnualAuditScheduleEntity> recordLicenseeEsign(String userName, String signedDocumentId);
+
 }

@@ -860,22 +860,31 @@ public class ApplicationAuditController {
 	public ResponseEntity<?> getByApplicantUserNames(
 			@RequestParam("applicantUserName") String applicantUserName) {
 		try {
-			LicenseeAuditEntity applicationAuditEntity =
-					applicationAuditServ.getByApplicantUserName(applicantUserName);
-			if (applicationAuditEntity == null) {
-				return ResponseEntity.status(HttpStatus.NOT_FOUND)
-						.body("Application audit entity not found for username: " + applicantUserName);
+			List<LicenseeAuditEntity> audits = applicationAuditServ.getByApplicantUserNames(applicantUserName);
+			if (audits == null || audits.isEmpty()) {
+				LicenseeAuditEntity active = applicationAuditServ.getByApplicantUserName(applicantUserName);
+				if (active == null) {
+					return ResponseEntity.status(HttpStatus.NOT_FOUND)
+							.body("Application audit entity not found for username: " + applicantUserName);
+				}
+				audits = List.of(active);
 			}
-			List<AuditReportCriteriaEntity> auditReportCriteriaEntity =
-					auditReportCriteriaService.findByAuditId(applicationAuditEntity.getLicenseeAuditId());
-			if (auditReportCriteriaEntity == null) {
-				return ResponseEntity.ok(List.of());
+			// A new active annual audit can be opened after NC controls were saved on the
+			// previous row for the same CA. The closure review must still see those controls.
+			List<AuditReportCriteriaEntity> combined = new ArrayList<>();
+			for (LicenseeAuditEntity audit : audits) {
+				if (audit == null || audit.getLicenseeAuditId() == null) {
+					continue;
+				}
+				List<AuditReportCriteriaEntity> rows =
+						auditReportCriteriaService.findByAuditId(audit.getLicenseeAuditId());
+				if (rows == null || rows.isEmpty()) {
+					continue;
+				}
+				applyOverallAuditorRemarksFallback(rows, audit.getApplicantRemarks());
+				combined.addAll(rows);
 			}
-			// Agency often submits one overall NC remark (application_audit.applicant_remarks)
-			// while older per-control rows have remarks=null. Expose that text in the table Remarks column.
-			applyOverallAuditorRemarksFallback(auditReportCriteriaEntity,
-					applicationAuditEntity.getApplicantRemarks());
-			return ResponseEntity.ok(auditReportCriteriaEntity);
+			return ResponseEntity.ok(combined);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -1111,6 +1120,115 @@ public class ApplicationAuditController {
 		}
 	}
 
+	@GetMapping("/get-All-Applicant-Action-Taken-any-status")
+	public ResponseEntity<?> getByApplicationActionTakenAnyStatus(
+			@RequestParam("applicantUserName") String applicantUserName) {
+		try {
+			List<ApplicantActionTakenEntity> actionTakenEntity = actionTakenService
+					.getAllApplicationTakenAnyStatus(applicantUserName);
+			if (actionTakenEntity == null) {
+				return ResponseEntity.ok(List.of());
+			}
+			return ResponseEntity.ok(actionTakenEntity);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body("An error occurred while fetching remarks: " + ex.getMessage());
+		}
+	}
+
+	@PostMapping("/auditor-accept-nc")
+	public ResponseEntity<?> getAuditorApprovedData(@RequestParam("applicantUserName") String applicantUserName,
+			@RequestParam("remarks") String remarks, @RequestParam("controlId") String auditControlId,
+			@RequestParam("compliance") String compliance,
+			@RequestParam(value = "file", required = false) MultipartFile file) {
+		return reviewApplicantNc(applicantUserName, remarks, auditControlId, compliance, file, false);
+	}
+
+	@PostMapping("/auditor-reject-nc")
+	public ResponseEntity<?> getAuditorRejectedData(@RequestParam("applicantUserName") String applicantUserName,
+			@RequestParam("remarks") String remarks, @RequestParam("controlId") String auditControlId,
+			@RequestParam(value = "file", required = false) MultipartFile file) {
+		return reviewApplicantNc(applicantUserName, remarks, auditControlId, null, file, true);
+	}
+
+	private ResponseEntity<?> reviewApplicantNc(String applicantUserName, String remarks, String auditControlId,
+			String compliance, MultipartFile file, boolean reject) {
+		try {
+			if (applicantUserName == null || applicantUserName.isEmpty() || auditControlId == null
+					|| auditControlId.isEmpty()) {
+				return ResponseEntity.badRequest().body("Invalid input parameters");
+			}
+
+			AuditReportCriteriaEntity reportCriteriaEntity = resolveReportCriteriaForApplicant(applicantUserName,
+					auditControlId);
+			if (reportCriteriaEntity == null) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body("No matching audit report found for control ID: " + auditControlId);
+			}
+
+			if (!reject) {
+				reportCriteriaEntity.setCompliance(compliance);
+				auditReportCriteriaService.updateData(reportCriteriaEntity);
+			}
+
+			ApplicantActionTakenEntity existingActionEntity = actionTakenService
+					.getAllByReportCriteria(reportCriteriaEntity);
+			if (existingActionEntity == null) {
+				existingActionEntity = createActionFromOverallNc(applicantUserName, reportCriteriaEntity);
+			}
+			if (existingActionEntity == null) {
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+						.body("Applicant has not submitted action taken for this control.");
+			}
+
+			existingActionEntity.setAuditorRemarks(remarks);
+			existingActionEntity.setUpdated(new Date());
+			if (reject) {
+				existingActionEntity.setStatus("Inactive");
+			}
+			if (file != null && !file.isEmpty()) {
+				String filename = DocumentFileUtil.saveFile(file, "AuditorNCClosure",
+						String.valueOf(new Random().nextInt(1000)), "AuditorNCClosure");
+				existingActionEntity.setAuditorClosureDocument(filename);
+			}
+			actionTakenService.updateData(existingActionEntity);
+
+			return ResponseEntity.ok("Remarks updated and notification sent successfully.");
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("An error occurred while processing the request: " + ex.getMessage());
+		}
+	}
+
+	@GetMapping("/auditor-closure-document-name")
+	public ResponseEntity<?> viewAuditorClosureDocument(@RequestParam("documentName") String documentName) {
+		try {
+			Optional<ApplicantActionTakenEntity> optional = actionTakenService
+					.downloadClosureDocument(EncryptionUtil.decrypt(documentName));
+			if (optional.isPresent()) {
+				ApplicantActionTakenEntity c = optional.get();
+				Path filePath = Paths.get(Constant.REAL_PATH + "//AuditorNCClosure")
+						.resolve(c.getAuditorClosureDocument()).normalize();
+				Resource resource = new UrlResource(filePath.toUri());
+				if (resource.exists()) {
+					String contentType = Files.probeContentType(filePath);
+					return ResponseEntity.ok()
+							.contentType(MediaType
+									.parseMediaType(contentType != null ? contentType : "application/octet-stream"))
+							.header("Content-Disposition", "attachment; filename=\"" + resource.getFilename() + "\"")
+							.body(resource);
+				}
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+			}
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
+	}
+
 	@GetMapping("/applicant-action-taken-document-name")
 	public ResponseEntity<?> viewApplicantActionTaken(@RequestParam("documentName") String documentName) {
 		try {
@@ -1207,7 +1325,7 @@ public class ApplicationAuditController {
 	        @RequestParam("applicantUserName") String applicantUserName, 
 	        @RequestParam("userName") String userName, 
 	        @RequestParam("remarks") String remarks,
-	        @RequestParam("file") MultipartFile file) {
+	        @RequestParam(value = "file", required = false) MultipartFile file) {
 
 	    try {
 	        Random rand = new Random();
@@ -1224,47 +1342,81 @@ public class ApplicationAuditController {
 	        // Check if document entity exists
 	        AuditReportDocumentEntity documentEntity = auditReportDocumentService.getByAuditId(applicationAuditEntity);
 
-	        if (documentEntity != null) {
-	            // Set status to Inactive for the existing record
-	            documentEntity.setStatus("Inactive");
-	            documentEntity.setUpdated(new Date());
-	            auditReportDocumentService.updateData(documentEntity);
+	        if (file != null && !file.isEmpty()) {
+	            if (documentEntity != null) {
+	                documentEntity.setStatus("Inactive");
+	                documentEntity.setUpdated(new Date());
+	                auditReportDocumentService.updateData(documentEntity);
+	            }
+
+	            AuditReportDocumentEntity auditReportDocumentEntity = new AuditReportDocumentEntity();
+	            String filename = DocumentFileUtil.saveFile(file, "AuditorNCReport", rnum.toString(), "AuditorNCReport");
+	            auditReportDocumentEntity.setDocument(filename);
+	            auditReportDocumentEntity.setRemarks(remarks);
+	            auditReportDocumentEntity.setStatus("Active");
+	            auditReportDocumentEntity.setLicenseeAuditId(applicationAuditEntity);
+	            auditReportDocumentService.saveData(auditReportDocumentEntity);
 	        }
 
-	        // Create a new document entity
-	        AuditReportDocumentEntity auditReportDocumentEntity = new AuditReportDocumentEntity();
-	        String filename = DocumentFileUtil.saveFile(file, "AuditorNCReport", rnum.toString(), "AuditorNCReport");
-	        auditReportDocumentEntity.setDocument(filename);
-	        auditReportDocumentEntity.setRemarks(remarks);
-	        auditReportDocumentEntity.setStatus("Active");
-	        auditReportDocumentEntity.setLicenseeAuditId(applicationAuditEntity);
-	        auditReportDocumentService.saveData(auditReportDocumentEntity);
+	        updateAnnualScheduleStatus(
+	                applicationAuditEntity, applicantUserName, Constant.STATUS_PENDING_LICENSEE_ESIGN);
 
-	        // Handle agency selection and notification
-	        AuditAgencySelectionEntity agencySelectionEntity = selectionServ.findbyAuditId(applicationAuditEntity);
-	        UserLoginDTO userLoginDTO = auditReportCriteriaService.findbyAgencyId(agencySelectionEntity.getAuditAgencyId());
-
-	        String title = "Review NC Report";
-	        String message = "Dear Sir, We have Attached the Document and write Our remarks in Our Application. Please Check and Review it: " + remarks;
+	        String title = "eSign Annual Audit Report";
+	        String message = "The audit agency has verified the action-taken report. Please login and digitally sign the annual audit report.";
 
 	        NotificationsRequest notification = new NotificationsRequest();
-	        notification.setUsername(userName);
+	        notification.setUsername(applicantUserName);
 	        notification.setMessage(message);
 	        notification.setSubject(title);
 	        notification.setNotificationType("Email & Dashboard");
-	        notification.setNotificationDescription("Review NC Report");
-	        notification.setRole("ROLE_APPLICATION_REVIEW_COMMITTEE");
+	        notification.setNotificationDescription("eSign Annual Audit Report");
+	        notification.setRole("ROLE_LICENSEE");
 
 	        notificationServ.sendNotification(notification);
-	        auditReportCriteriaService.changedTheStatus(applicantUserName);
 
-	        return ResponseEntity.ok("Remarks updated and notification sent successfully.");
+	        return ResponseEntity.ok("NC verification submitted. The licensee can now eSign the audit report.");
 
 	    } catch (Exception ex) {
 	        ex.printStackTrace();
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 	                .body("An error occurred while processing the request: " + ex.getMessage());
 	    }
+	}
+
+	@GetMapping("/licensee-esign-audit-report")
+	public ResponseEntity<?> licenseeEsignAuditReport(
+	        @RequestParam("id") String id,
+	        @RequestParam("did") String did) {
+	    String applicantUserName = id;
+	    try {
+	        String decrypted = EncryptionUtil.decrypt(id);
+	        if (decrypted != null && !decrypted.isBlank()) {
+	            applicantUserName = decrypted;
+	        }
+	    } catch (Exception ignored) {
+	        applicantUserName = id;
+	    }
+	    if (applicantUserName == null || applicantUserName.isBlank()) {
+	        return ResponseEntity.badRequest().body("Licensee username is required");
+	    }
+
+	    Optional<AnnualAuditScheduleEntity> saved =
+	            licenseeAuditservice.recordLicenseeEsign(applicantUserName.trim(), did);
+	    if (saved.isEmpty()) {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Annual audit schedule not found");
+	    }
+
+	    NotificationsRequest notification = new NotificationsRequest();
+	    notification.setUsername(applicantUserName.trim());
+	    notification.setMessage(
+	            "The licensee has digitally signed the annual audit report. Please review the report, the non-conformities, and the action-taken report.");
+	    notification.setSubject("Review Annual Audit Report");
+	    notification.setNotificationType("Email & Dashboard");
+	    notification.setNotificationDescription("Review Annual Audit Report");
+	    notification.setRole("ROLE_APPLICATION_REVIEW_COMMITTEE");
+	    notificationServ.sendNotification(notification);
+
+	    return ResponseEntity.ok("Licensee eSign recorded. The report is with the Report Review Committee.");
 	}
 
 	
@@ -1682,11 +1834,30 @@ public class ApplicationAuditController {
 	    try {
 	        List<AuditCriteriaPayload> criteriaPayload = applicationAuditorsService.getAllDatas(sanitizedUserName);
 	        LicenseeAuditEntity applicationAuditEntity = applicationAuditServ.getByApplicantUserName(sanitizedUserName);
+	        List<LicenseeAuditEntity> licenseeAudits = applicationAuditServ.getByApplicantUserNames(sanitizedUserName);
+	        if (applicationAuditEntity == null && licenseeAudits != null && !licenseeAudits.isEmpty()) {
+	            applicationAuditEntity = licenseeAudits.get(0);
+	        }
 	        if (applicationAuditEntity == null) {
 	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No audit data found for user: " + sanitizedUserName);
 	        }
-	        List<AuditReportCriteriaEntity> auditReportCriteriaEntities = auditReportCriteriaService
-	                .findByAuditId(applicationAuditEntity.getLicenseeAuditId());
+	        List<AuditReportCriteriaEntity> auditReportCriteriaEntities = new ArrayList<>();
+	        if (licenseeAudits != null) {
+	            for (LicenseeAuditEntity audit : licenseeAudits) {
+	                List<AuditReportCriteriaEntity> rows =
+	                        auditReportCriteriaService.findByAuditId(audit.getLicenseeAuditId());
+	                if (rows != null) {
+	                    auditReportCriteriaEntities.addAll(rows);
+	                }
+	            }
+	        }
+	        if (auditReportCriteriaEntities.isEmpty()) {
+	            List<AuditReportCriteriaEntity> activeRows =
+	                    auditReportCriteriaService.findByAuditId(applicationAuditEntity.getLicenseeAuditId());
+	            if (activeRows != null) {
+	                auditReportCriteriaEntities.addAll(activeRows);
+	            }
+	        }
 
 	        System.out.println("abdg-=-=->" + criteriaPayload.size());
 
@@ -1734,11 +1905,15 @@ public class ApplicationAuditController {
 
 	        // After all PDFs are merged, add page numbers (if needed)
 
-	        // Return the final PDF file as a response to the client
+	        byte[] reportBytes = mergedPdfOutputStream.toByteArray();
+	        if (reportBytes.length == 0) {
+	            reportBytes = pdfBytes;
+	        }
+
 	        return ResponseEntity.ok()
 	                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=AuditorReport.pdf")
 	                .contentType(MediaType.APPLICATION_PDF)
-	                .body(mergedPdfOutputStream.toByteArray());
+	                .body(reportBytes);
 
 	    } catch (Exception e) {
 	        // Handle any errors that occur during the report generation process
@@ -1882,7 +2057,7 @@ public class ApplicationAuditController {
 	                throw new RuntimeException("Error reading the file to merge: " + e.getMessage());
 	            }
 	        } else {
-	            throw new RuntimeException("File not found or not readable: " + filePath);
+	            System.out.println("NC attachment not found, continuing with the audit report: " + filePath);
 	        }
 
 	    
@@ -1982,22 +2157,65 @@ public class ApplicationAuditController {
 		}
 	}
 
-	private AuditReportCriteriaEntity resolveReportCriteriaForApplicant(String applicantUserName,
-			String auditControlId) {
-		LicenseeAuditEntity applicationAuditEntity = applicationAuditServ.getByApplicantUserName(applicantUserName);
-		if (applicationAuditEntity == null || applicationAuditEntity.getLicenseeAuditId() == null) {
+	private ApplicantActionTakenEntity createActionFromOverallNc(String applicantUserName,
+			AuditReportCriteriaEntity reportCriteriaEntity) {
+		LicenseeAuditEntity owner = reportCriteriaEntity.getLicenseeAuditId();
+		AuditNCSEntity ncs = owner == null || owner.getLicenseeAuditId() == null ? null
+				: auditNCSService.findByAuditId(owner.getLicenseeAuditId());
+		if (ncs == null) {
+			LicenseeAuditEntity active = applicationAuditServ.getByApplicantUserName(applicantUserName);
+			if (active != null && active.getLicenseeAuditId() != null) {
+				ncs = auditNCSService.findByAuditId(active.getLicenseeAuditId());
+			}
+		}
+		if (ncs == null) {
 			return null;
 		}
-		Long appAuditId = applicationAuditEntity.getLicenseeAuditId();
+		ApplicantActionTakenEntity actionTakenEntity = new ApplicantActionTakenEntity();
+		actionTakenEntity.setCreated(new Date());
+		actionTakenEntity.setActionReport(ncs.getNcs());
+		actionTakenEntity.setRemarks(ncs.getRemarks());
+		actionTakenEntity.setStatus("Active");
+		actionTakenEntity.setUserName(applicantUserName);
+		actionTakenEntity.setAuditReportCriteriaEntity(reportCriteriaEntity);
+		actionTakenEntity.setAuditNCId(ncs);
+		return actionTakenService.saveData(actionTakenEntity).orElse(null);
+	}
 
-		AuditReportCriteriaEntity exact = auditReportCriteriaService.findActiveByAppAuditIdAndControlId(appAuditId,
-				auditControlId);
-		if (exact != null) {
-			return exact;
+	private AuditReportCriteriaEntity resolveReportCriteriaForApplicant(String applicantUserName,
+			String auditControlId) {
+		List<LicenseeAuditEntity> audits = applicationAuditServ.getByApplicantUserNames(applicantUserName);
+		if (audits == null || audits.isEmpty()) {
+			LicenseeAuditEntity active = applicationAuditServ.getByApplicantUserName(applicantUserName);
+			audits = active == null ? List.of() : List.of(active);
 		}
+		List<LicenseeAuditEntity> ordered = new ArrayList<>(audits);
+		ordered.sort((left, right) -> {
+			boolean leftActive = left != null && "Active".equalsIgnoreCase(left.getStatus());
+			boolean rightActive = right != null && "Active".equalsIgnoreCase(right.getStatus());
+			if (leftActive == rightActive) {
+				return 0;
+			}
+			return leftActive ? -1 : 1;
+		});
 
-		List<AuditReportCriteriaEntity> scoped = auditReportCriteriaService.findActiveByAppAuditId(appAuditId);
-		return findMatchingReportCriteria(scoped, auditControlId);
+		for (LicenseeAuditEntity audit : ordered) {
+			if (audit == null || audit.getLicenseeAuditId() == null) {
+				continue;
+			}
+			Long appAuditId = audit.getLicenseeAuditId();
+			AuditReportCriteriaEntity exact = auditReportCriteriaService
+					.findActiveByAppAuditIdAndControlId(appAuditId, auditControlId);
+			if (exact != null) {
+				return exact;
+			}
+			List<AuditReportCriteriaEntity> scoped = auditReportCriteriaService.findActiveByAppAuditId(appAuditId);
+			AuditReportCriteriaEntity matched = findMatchingReportCriteria(scoped, auditControlId);
+			if (matched != null) {
+				return matched;
+			}
+		}
+		return null;
 	}
 
 	private String masterControlId(String auditControlId) {

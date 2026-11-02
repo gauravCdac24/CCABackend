@@ -44,6 +44,7 @@ public class AnnualAuditWorkflowServiceImpl implements AnnualAuditWorkflowServic
 	public static final String STEP_AUDIT_REPORT = "AUDIT_REPORT";
 	public static final String STEP_NC_ACTION = "NC_ACTION";
 	public static final String STEP_NC_VERIFICATION = "NC_VERIFICATION";
+	public static final String STEP_LICENSEE_ESIGN = "LICENSEE_ESIGN";
 	public static final String STEP_REVIEW = "REVIEW_COMMITTEE";
 	public static final String STEP_COMPLETED = "COMPLETED";
 
@@ -205,7 +206,13 @@ public class AnnualAuditWorkflowServiceImpl implements AnnualAuditWorkflowServic
 		}
 
 		OptionalScheduleStatus scheduleStatus = readScheduleStatus(auditScheduleId);
-		if (scheduleStatus.isNcActionTakenOrReview()) {
+		if (scheduleStatus.isPendingLicenseeEsign()) {
+			return STEP_LICENSEE_ESIGN;
+		}
+		if (scheduleStatus.isReviewCommittee()) {
+			return STEP_REVIEW;
+		}
+		if (scheduleStatus.isNcActionTaken()) {
 			return STEP_NC_VERIFICATION;
 		}
 
@@ -307,9 +314,16 @@ public class AnnualAuditWorkflowServiceImpl implements AnnualAuditWorkflowServic
 			return new OptionalScheduleStatus(schedule == null ? null : schedule.getStatus());
 		}
 
-		boolean isNcActionTakenOrReview() {
-			return Constant.STATUS_NC_ACTION_TAKEN.equalsIgnoreCase(status)
-					|| Constant.STATUS_REVIEW_NC_REPORT.equalsIgnoreCase(status);
+		boolean isNcActionTaken() {
+			return Constant.STATUS_NC_ACTION_TAKEN.equalsIgnoreCase(status);
+		}
+
+		boolean isPendingLicenseeEsign() {
+			return Constant.STATUS_PENDING_LICENSEE_ESIGN.equalsIgnoreCase(status);
+		}
+
+		boolean isReviewCommittee() {
+			return Constant.STATUS_REVIEW_NC_REPORT.equalsIgnoreCase(status);
 		}
 
 		boolean isNcIssued() {
@@ -334,8 +348,11 @@ public class AnnualAuditWorkflowServiceImpl implements AnnualAuditWorkflowServic
 		case STEP_NC_ACTION:
 			return Constant.STATUS_APPROVE_FROM_CCA;
 		case STEP_NC_VERIFICATION:
-		case STEP_REVIEW:
 			return Constant.STATUS_NC_ACTION_TAKEN;
+		case STEP_LICENSEE_ESIGN:
+			return Constant.STATUS_PENDING_LICENSEE_ESIGN;
+		case STEP_REVIEW:
+			return Constant.STATUS_REVIEW_NC_REPORT;
 		case STEP_COMPLETED:
 			return Constant.STATUS_COMPLETED;
 		default:
@@ -379,14 +396,19 @@ public class AnnualAuditWorkflowServiceImpl implements AnnualAuditWorkflowServic
 		if (Constant.STATUS_NC_ISSUED.equalsIgnoreCase(status)) {
 			return 5;
 		}
-		if (Constant.STATUS_NC_ACTION_TAKEN.equalsIgnoreCase(status)
-				|| Constant.STATUS_REVIEW_NC_REPORT.equalsIgnoreCase(status)) {
+		if (Constant.STATUS_NC_ACTION_TAKEN.equalsIgnoreCase(status)) {
 			return 6;
+		}
+		if (Constant.STATUS_PENDING_LICENSEE_ESIGN.equalsIgnoreCase(status)) {
+			return 7;
+		}
+		if (Constant.STATUS_REVIEW_NC_REPORT.equalsIgnoreCase(status)) {
+			return 8;
 		}
 		if (Constant.STATUS_COMPLETED.equalsIgnoreCase(status)
 				|| "Closed".equalsIgnoreCase(status)
 				|| "Complete".equalsIgnoreCase(status)) {
-			return 7;
+			return 9;
 		}
 		return 0;
 	}
@@ -442,6 +464,9 @@ public class AnnualAuditWorkflowServiceImpl implements AnnualAuditWorkflowServic
 		case STEP_NC_ACTION:
 		case STEP_NC_VERIFICATION:
 			actions.add("VIEW");
+			break;
+		case STEP_LICENSEE_ESIGN:
+			actions.add("ESIGN_REPORT");
 			break;
 		default:
 			actions.add("VIEW");
@@ -529,8 +554,7 @@ public class AnnualAuditWorkflowServiceImpl implements AnnualAuditWorkflowServic
 	}
 
 	private void addReviewCommitteeActions(List<String> actions, String currentStep) {
-		if (STEP_NC_ACTION.equals(currentStep) || STEP_NC_VERIFICATION.equals(currentStep)
-				|| STEP_REVIEW.equals(currentStep)) {
+		if (STEP_REVIEW.equals(currentStep)) {
 			actions.add("REVIEW");
 		} else {
 			actions.add("VIEW");

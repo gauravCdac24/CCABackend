@@ -77,4 +77,12 @@ public class ApplicationActionTakenServiceImpl implements ApplicationActionTaken
 		}
 		return actionTakenRepository.downloadfileBydDocumentName(documentName.trim());
 	}
+
+	@Override
+	public Optional<ApplicantActionTakenEntity> downloadClosureDocument(String documentName) {
+		if (documentName == null || documentName.isBlank()) {
+			return Optional.empty();
+		}
+		return actionTakenRepository.downloadClosureDocument(documentName.trim());
+	}
 }

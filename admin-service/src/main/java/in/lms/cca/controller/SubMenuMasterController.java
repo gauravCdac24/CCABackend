@@ -161,10 +161,12 @@ public class SubMenuMasterController {
 	    allRoutes.addAll(routesInternal);
 
 	    boolean isValidRoute = false;
+	    String requestedPath = normalizeRoute(pathName);
 	    
 	    for(RoutesDTO r: allRoutes) {
-	    	if(r.getRoutePath().equals(pathName)) {
+	    	if(r.getRoutePath() != null && normalizeRoute(r.getRoutePath()).equals(requestedPath)) {
 	    		isValidRoute = true;
+	    		break;
 	    	}
 	    }
 	    
@@ -173,6 +175,17 @@ public class SubMenuMasterController {
 	    }
 		
 		return new ResponseEntity<>(EncryptionUtil.encrypt("false"), HttpStatus.OK);
+	}
+
+	private String normalizeRoute(String path) {
+		if (path == null) {
+			return "";
+		}
+		String value = path.trim().replace("\"", "");
+		if (!value.startsWith("/")) {
+			value = "/" + value;
+		}
+		return value.replaceAll("/{2,}", "/");
 	}
 	
 	

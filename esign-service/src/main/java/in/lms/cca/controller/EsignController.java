@@ -15,6 +15,7 @@ import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 import javax.security.auth.x500.X500Principal;
 import javax.xml.parsers.DocumentBuilder;
@@ -138,15 +139,18 @@ public class EsignController {
 	        String timestamp = dateFormats.format(new Date());
             String dfilename = "E" +userName.substring(8)+timestamp;
         
-        	File pdfFilePath = new File(RealPath.REQUEST_DOCUMENT_DIR, dfilename +".pdf");
-        	file.transferTo(pdfFilePath);
+        	Path pdfFilePath = Paths.get(RealPath.REQUEST_DOCUMENT_DIR, dfilename + ".pdf").toAbsolutePath();
+        	Files.createDirectories(pdfFilePath.getParent());
+        	try (java.io.InputStream pdfInput = file.getInputStream()) {
+        		Files.copy(pdfInput, pdfFilePath, StandardCopyOption.REPLACE_EXISTING);
+        	}
         	
         	rsaPrivateKey = encryption.getPrivateKey(certPath);
         	
             // Prepare PDF with signature placeholder; hash the byte-range CDAC will sign
             fileHash = PdfEmbedder.prepareForSigning(
-                    pdfFilePath.getAbsolutePath(),
-                    pdfFilePath.getAbsolutePath(),
+                    pdfFilePath.toString(),
+                    pdfFilePath.toString(),
                     fullName);
             transactionId = TXI.transactionId();
 

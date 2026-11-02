@@ -25,4 +25,7 @@ public interface ApplicationActionTakenRepository extends JpaRepository<Applican
 
 	@Query("SELECT d FROM ApplicantActionTakenEntity d WHERE d.actionReport=:documentName AND d.status='Active'")
 	Optional<ApplicantActionTakenEntity> downloadfileBydDocumentName(@Param("documentName") String documentName);
+
+	@Query("SELECT d FROM ApplicantActionTakenEntity d WHERE d.auditorClosureDocument=:documentName")
+	Optional<ApplicantActionTakenEntity> downloadClosureDocument(@Param("documentName") String documentName);
 }

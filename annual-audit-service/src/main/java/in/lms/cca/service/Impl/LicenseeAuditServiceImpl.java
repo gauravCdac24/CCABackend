@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import in.lms.cca.entity.AnnualAuditScheduleEntity;
 import in.lms.cca.repository.LicenseeAuditRepository;
 import in.lms.cca.service.LicenseeAuditservice;
+import in.lms.cca.util.global.Constant;
 
 @Service
 @Transactional
@@ -128,6 +129,20 @@ public class LicenseeAuditServiceImpl implements LicenseeAuditservice {
 					.orElse(schedules.get(0));
 		}
 		return updateScheduleStatus(schedule.getAuditScheduleId(), status);
+	}
+
+	@Override
+	public Optional<AnnualAuditScheduleEntity> recordLicenseeEsign(String userName, String signedDocumentId) {
+		Optional<AnnualAuditScheduleEntity> scheduleOpt =
+				updateScheduleStatusByUserName(userName, Constant.STATUS_REVIEW_NC_REPORT);
+		if (scheduleOpt.isEmpty()) {
+			return Optional.empty();
+		}
+		AnnualAuditScheduleEntity schedule = scheduleOpt.get();
+		schedule.setStatus(Constant.STATUS_REVIEW_NC_REPORT);
+		schedule.setEsignDocumentId(signedDocumentId);
+		schedule.setUpdated(new Date());
+		return Optional.of(licenseeAuditRepository.save(schedule));
 	}
 
 }

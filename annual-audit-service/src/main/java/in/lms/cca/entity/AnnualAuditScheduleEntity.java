@@ -50,6 +50,9 @@ public class AnnualAuditScheduleEntity extends AbstractTimestampEntity{
 	    @Column(name = "status", length = 74)
 	    private String status;
 
+	    @Column(name = "esign_document_id", length = 50)
+	    private String esignDocumentId;
+
 	    @Column(name = "created_by",length = 74)
 	    private String createdBy;
 
@@ -129,6 +132,14 @@ public class AnnualAuditScheduleEntity extends AbstractTimestampEntity{
 
 		public void setDateOfCompletion(Date dateOfCompletion) {
 			this.dateOfCompletion = dateOfCompletion;
+		}
+
+		public String getEsignDocumentId() {
+			return esignDocumentId;
+		}
+
+		public void setEsignDocumentId(String esignDocumentId) {
+			this.esignDocumentId = esignDocumentId;
 		}
 
 		public String getStatus() {
