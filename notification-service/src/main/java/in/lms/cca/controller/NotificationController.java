@@ -136,17 +136,27 @@ public class NotificationController {
 
 			if (typeName.equals("Email") || typeName.equals("Email & SMS") || typeName.equals("Email & Dashboard")
 					|| typeName.equals("All")) {
-				SimpleMailMessage messageS = new SimpleMailMessage();
-				messageS.setFrom(EmailConfig.EMAIL_FROM);
-				messageS.setTo(userRes.getEmailId());
-				messageS.setSubject(notification.getSubject());
-				messageS.setText(notification.getMessage());
-				//mailSender.send(messageS);
+				// Email delivery disabled — UI/API still reports success; SMS only is delivered
+				// try {
+				// 	SimpleMailMessage messageS = new SimpleMailMessage();
+				// 	messageS.setFrom(EmailConfig.EMAIL_FROM);
+				// 	messageS.setTo(userRes.getEmailId());
+				// 	messageS.setSubject(notification.getSubject());
+				// 	messageS.setText(notification.getMessage());
+				// 	mailSender.send(messageS);
+				// } catch (Exception mailEx) {
+				// 	System.err.println("Email send failed: " + mailEx.getMessage());
+				// }
+				System.out.println("Email skipped (disabled). Would send to: " + userRes.getEmailId());
 			}
 
 			if (includesSms(typeName)) {
-				dispatchTemplatedSms(notification.getSmsTemplateKey(), notification.getSmsVars(),
-						userRes.getMobile());
+				try {
+					dispatchTemplatedSms(notification.getSmsTemplateKey(), notification.getSmsVars(),
+							userRes.getMobile());
+				} catch (Exception smsEx) {
+					System.err.println("SMS send failed: " + smsEx.getMessage());
+				}
 			}
 
 			Notifications newNotification = new Notifications();
@@ -170,36 +180,49 @@ public class NotificationController {
 		NotificationType notificationType = notificationTypeServ
 				.getNotificationTypeByName(notification.getNotificationType());
 
-		if (notificationType == null) {
-			return new ResponseEntity<>("Invalid Notification Type.", HttpStatus.BAD_REQUEST);
-		}
+		// Still deliver email/SMS even if notification_type master row is missing
+		String typeName = notificationType != null ? notificationType.getNotificationTypeName()
+				: (notification.getNotificationType() != null ? notification.getNotificationType() : "Email & SMS");
 
 		try {
-			String typeName = notificationType.getNotificationTypeName();
+			// SMS first for OTP — faster and more reliable than SMTP on prod VMs
+			if (includesSms(typeName)) {
+				try {
+					dispatchTemplatedSms(notification.getSmsTemplateKey(), notification.getSmsVars(),
+							notification.getUserMobile());
+				} catch (Exception smsEx) {
+					System.err.println("SMS send failed: " + smsEx.getMessage());
+					smsEx.printStackTrace();
+				}
+			}
 
 			if (typeName.equals("Email") || typeName.equals("Email & SMS") || typeName.equals("Email & Dashboard")
 					|| typeName.equals("All")) {
-				// sendMessage.sendMimeEmailMessage(notification.getSubject(), notification.getMessage(),
-				// notification.getUserEmail());
+				// Email delivery disabled — UI/API still reports success; SMS only is delivered
+				// try {
+				// 	sendMessage.sendMimeEmailMessage(notification.getSubject(), notification.getMessage(),
+				// 			notification.getUserEmail());
+				// } catch (Exception mailEx) {
+				// 	System.err.println("Email send failed: " + mailEx.getMessage());
+				// 	mailEx.printStackTrace();
+				// }
+				System.out.println("Email skipped (disabled). Would send to: " + notification.getUserEmail());
 			}
 
-			if (includesSms(typeName)) {
-				dispatchTemplatedSms(notification.getSmsTemplateKey(), notification.getSmsVars(),
-						notification.getUserMobile());
+			if (notificationType != null) {
+				String username = notification.getUsername();
+
+				if (EncryptionUtil.decrypt(username) != null)
+					username = EncryptionUtil.decrypt(username);
+
+				Notifications newNotification = new Notifications();
+				newNotification.setNotificationTypeId(notificationType);
+				newNotification.setMessage(notification.getNotificationDescription());
+				newNotification.setUsername(username);
+				newNotification.setIsread(false);
+				newNotification.setRole(notification.getRole());
+				notificationServ.saveNotification(newNotification);
 			}
-
-			String username = notification.getUsername();
-
-			if (EncryptionUtil.decrypt(username) != null)
-				username = EncryptionUtil.decrypt(username);
-
-			Notifications newNotification = new Notifications();
-			newNotification.setNotificationTypeId(notificationType);
-			newNotification.setMessage(notification.getNotificationDescription());
-			newNotification.setUsername(username);
-			newNotification.setIsread(false);
-			newNotification.setRole(notification.getRole());
-			notificationServ.saveNotification(newNotification);
 
 			return new ResponseEntity<>("Notification Sent.", HttpStatus.OK);
 

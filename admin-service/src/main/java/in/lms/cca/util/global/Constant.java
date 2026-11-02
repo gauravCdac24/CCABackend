@@ -4,9 +4,8 @@ public class Constant {
 
 //public static final String REAL_PATH = "C://Users//hp//Desktop//Latest20052025//CCABackendCode.zip_expanded//admin-service";                                    //"/home/admin/microservices/admin-service";
 
-//public static final String REAL_PATH = "C:\\Users\\hp\\Documents\\CCAB\\admin-service\\src\\main\\webapp";
-//public static final String REAL_PATH = "/home/dashboard/CCABackend/admin-service/src/main/webapp";
-public static final String REAL_PATH = "/home/gaurav/Documents/CCABackend/admin-service/src/main/webapp";
+//public static final String REAL_PATH = "C:\\Users\\hp\\Documents\\CCA_Shikhar\\CCA_Backend\\CCABackend\\admin-service\\src\\main";
+public static final String REAL_PATH = "E:\\CCA_PROD\\CCAB\\admin-service\\src\\main\\webapp";
 	
 		public static final String CREATED="Created";
 		public static final String UPDATED="Updated";

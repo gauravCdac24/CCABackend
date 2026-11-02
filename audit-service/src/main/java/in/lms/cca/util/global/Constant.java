@@ -7,9 +7,7 @@ public class Constant {
 	//public static final String REAL_PATH = "E:\\CCA Backup All Data 24122025 updated\\CCABackend\\admin-service\\src\\main\\webapp";
 	
 	//public static final String REAL_PATH = "C:\\Users\\hp\\Documents\\CCA_Shikhar\\CCA_Backend\\CCABackend\\audit-service\\src\\main\\webapp";
-	//public static final String REAL_PATH = "/home/dashboard/CCABackend/audit-service/src/main/webapp";
-	//public static final String REAL_PATH = "C:\\Users\\hp\\Documents\\CCAB\\audit-service\\src\\main\\webapp";
-	public static final String REAL_PATH = "/home/gaurav/Documents/CCABackend/audit-service/src/main/webapp";
+	public static final String REAL_PATH = "E:\\CCA_PROD\\CCAB\\audit-service\\src\\main\\webapp";
 
 
 		public static final String CREATED="Created";

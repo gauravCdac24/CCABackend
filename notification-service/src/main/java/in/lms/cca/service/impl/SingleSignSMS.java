@@ -6,6 +6,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.*;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
@@ -22,7 +23,14 @@ public class SingleSignSMS {
 	@Value("${sms.api.url}")
 	private String smsApiUrl;
 
-	private final RestTemplate restTemplate = new RestTemplate();
+	private final RestTemplate restTemplate;
+
+	public SingleSignSMS() {
+		SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
+		factory.setConnectTimeout(5000);
+		factory.setReadTimeout(15000);
+		this.restTemplate = new RestTemplate(factory);
+	}
 
 	/**
 	 * Send Single text SMS (MSDG sendSingleSMS — smsservicetype=singlemsg).

@@ -1,7 +1,5 @@
 package in.lms.cca.util.global;
 
-import java.io.File;
-
 public class Constant {
 	
 	//public static String REAL_PATH="/home/admin/microservices/annual-audit-service";
@@ -9,30 +7,7 @@ public class Constant {
 	//public static final String REAL_PATH = "C:\\Users\\hp\\Documents\\CCABackend\\annual-audit-service\\src\\main\\webapp";
 	//public static final String REAL_PATH = "/home/dashboard/CCABackend/annual-audit-service/src/main/webapp";
 	//public static final String REAL_PATH = "C:\\Users\\hp\\Documents\\CCAB\\annual-audit-service\\src\\main\\webapp";
-	public static final String REAL_PATH = resolveDocumentRoot();
-
-	private static String resolveDocumentRoot() {
-		String configured = System.getProperty("annual.audit.document.root");
-		if (configured == null || configured.isBlank()) {
-			configured = System.getenv("ANNUAL_AUDIT_DOCUMENT_ROOT");
-		}
-		String[] candidates = {
-				configured,
-				"C:\\Users\\hp\\Documents\\CCABackend\\CCABackend\\annual-audit-service\\src\\main\\webapp",
-				"/home/gaurav/Documents/CCABackend/annual-audit-service/src/main/webapp",
-				"C:\\Users\\hp\\Documents\\CCABackend\\annual-audit-service\\src\\main\\webapp"
-		};
-		for (String candidate : candidates) {
-			if (candidate == null || candidate.isBlank()) {
-				continue;
-			}
-			File directory = new File(candidate);
-			if (directory.isDirectory()) {
-				return directory.getAbsolutePath();
-			}
-		}
-		return "/home/gaurav/Documents/CCABackend/annual-audit-service/src/main/webapp";
-	}
+	public static final String REAL_PATH = "E:\\CCA_PROD\\CCAB\\annual-audit-service\\src\\main\\webapp";
 
 	
 

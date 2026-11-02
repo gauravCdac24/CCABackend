@@ -104,3 +104,894 @@ Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_ty
 Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
 Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
 Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Sending message: Dear Applicant, NCs observed in your Audit Report, please login and submit the clarifications at the earliest. CCA-MeitY
+mobileNumber: 8447260570
+username: ccalmsdelhi
+templateId: 1407174245455070954
+smsservicetype: singlemsg
+Unexpected error: I/O error on POST request for "https://msdgweb.mgov.gov.in/esms/sendsmsrequestDLT": PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+2026-11-02 12:55:52 - Restarting due to 34 class path changes (0 additions, 29 deletions, 5 modifications)
+2026-11-02 12:55:52 - Unregistering application NOTIFICATION-SERVICE with eureka with status DOWN
+2026-11-02 12:55:53 - The acceptor thread [http-nio-7780-Acceptor] did not stop cleanly
+2026-11-02 12:55:53 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-11-02 12:55:53 - HikariPool-1 - Shutdown initiated...
+2026-11-02 12:55:53 - HikariPool-1 - Shutdown completed.
+2026-11-02 12:55:53 - Shutting down DiscoveryClient ...
+2026-11-02 12:55:54 - Completed shut down of DiscoveryClient
+=============================================================================================================================       
+|                                                                                                                           |
+|        ____      ____    _    ____                                                                                        |
+|       / ___|    |  _ \  / \  / ___|                                                                                       |
+|      | |   _____| | | |/ _ \| |                                                                                           |
+|      | |__|_____| |_| / ___ \ |___                                                                                        |
+|       \____|    |____/_/   \_\____|                                                                                       |
+|                                                                                                                           |
+|                                                                                                                           |                               
+|   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++      |
+|   +                                                                                                                +      |
+|   + P o w e r e d  B y   e - G o v e r n a n c e   S o l u t i o n s   G r o u p ,  C - D A C   N e w   D e l h i  +      |
+|   +                                                                                                                +      |
+|   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++      |
+|                                                                                                                           | 
+|                                                                                                                           | 
+|   Notification Service for CCA                                                              |
+|   Spring Boot V3.3.2                                                                                     |
+|                                                                                                                           |
+=============================================================================================================================
+
+2026-11-02 12:55:54 - Starting NotificationServiceApplication using Java 17.0.10 with PID 21988 (C:\Users\hp\Documents\CCABackend\CCABackend\notification-service\target\classes started by hp in C:\Users\hp\Documents\CCABackend\CCABackend\notification-service)
+2026-11-02 12:55:54 - Running with Spring Boot v3.3.2, Spring v6.1.11
+2026-11-02 12:55:54 - The following 1 profile is active: "test"
+2026-11-02 12:55:54 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-02 12:55:54 - Finished Spring Data repository scanning in 11 ms. Found 2 JPA repository interfaces.
+2026-11-02 12:55:54 - BeanFactory id=2e3ec25c-6f23-3851-a3bc-77935416696e
+2026-11-02 12:55:54 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-11-02 12:55:54 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-11-02 12:55:54 - Tomcat initialized with port 7780 (http)
+2026-11-02 12:55:54 - Starting service [Tomcat]
+2026-11-02 12:55:54 - Starting Servlet engine: [Apache Tomcat/10.1.26]
+2026-11-02 12:55:54 - Initializing Spring embedded WebApplicationContext
+2026-11-02 12:55:54 - Root WebApplicationContext: initialization completed in 437 ms
+2026-11-02 12:55:54 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-11-02 12:55:54 - HHH000026: Second-level cache disabled
+2026-11-02 12:55:54 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-02 12:55:54 - HikariPool-2 - Starting...
+2026-11-02 12:55:55 - HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@27ebe2b
+2026-11-02 12:55:55 - HikariPool-2 - Start completed.
+2026-11-02 12:55:55 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-11-02 12:55:55 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-02 12:55:55 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-02 12:55:55 - Unable to start LiveReload server
+2026-11-02 12:55:55 - Eureka HTTP Client uses RestTemplate.
+2026-11-02 12:55:55 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-11-02 12:55:55 - Setting initial instance status as: STARTING
+2026-11-02 12:55:55 - Initializing Eureka in region us-east-1
+2026-11-02 12:55:55 - Client configured to neither register nor query for data.
+2026-11-02 12:55:55 - Discovery Client initialized at timestamp 1793604355939 with initial instances count: 0
+2026-11-02 12:55:55 - Registering application NOTIFICATION-SERVICE with eureka with status UP
+2026-11-02 12:55:55 - Tomcat started on port 7780 (http) with context path '/'
+2026-11-02 12:55:55 - Updating port to 7780
+2026-11-02 12:55:56 - Started NotificationServiceApplication in 2.09 seconds (process running for 11344.002)
+2026-11-02 12:55:56 - Condition evaluation unchanged
+2026-11-02 12:55:56 - Restarting due to 29 class path changes (29 additions, 0 deletions, 0 modifications)
+2026-11-02 12:55:56 - Unregistering application NOTIFICATION-SERVICE with eureka with status DOWN
+2026-11-02 12:55:58 - The acceptor thread [http-nio-7780-Acceptor] did not stop cleanly
+2026-11-02 12:55:58 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-11-02 12:55:58 - HikariPool-2 - Shutdown initiated...
+2026-11-02 12:55:58 - HikariPool-2 - Shutdown completed.
+2026-11-02 12:55:58 - Shutting down DiscoveryClient ...
+2026-11-02 12:55:58 - Completed shut down of DiscoveryClient
+=============================================================================================================================       
+|                                                                                                                           |
+|        ____      ____    _    ____                                                                                        |
+|       / ___|    |  _ \  / \  / ___|                                                                                       |
+|      | |   _____| | | |/ _ \| |                                                                                           |
+|      | |__|_____| |_| / ___ \ |___                                                                                        |
+|       \____|    |____/_/   \_\____|                                                                                       |
+|                                                                                                                           |
+|                                                                                                                           |                               
+|   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++      |
+|   +                                                                                                                +      |
+|   + P o w e r e d  B y   e - G o v e r n a n c e   S o l u t i o n s   G r o u p ,  C - D A C   N e w   D e l h i  +      |
+|   +                                                                                                                +      |
+|   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++      |
+|                                                                                                                           | 
+|                                                                                                                           | 
+|   Notification Service for CCA                                                              |
+|   Spring Boot V3.3.2                                                                                     |
+|                                                                                                                           |
+=============================================================================================================================
+
+2026-11-02 12:55:58 - Starting NotificationServiceApplication using Java 17.0.10 with PID 21988 (C:\Users\hp\Documents\CCABackend\CCABackend\notification-service\target\classes started by hp in C:\Users\hp\Documents\CCABackend\CCABackend\notification-service)
+2026-11-02 12:55:58 - Running with Spring Boot v3.3.2, Spring v6.1.11
+2026-11-02 12:55:58 - The following 1 profile is active: "test"
+2026-11-02 12:55:58 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-02 12:55:58 - Finished Spring Data repository scanning in 12 ms. Found 2 JPA repository interfaces.
+2026-11-02 12:55:58 - BeanFactory id=2e3ec25c-6f23-3851-a3bc-77935416696e
+2026-11-02 12:55:58 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-11-02 12:55:58 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-11-02 12:55:58 - Tomcat initialized with port 7780 (http)
+2026-11-02 12:55:58 - Starting service [Tomcat]
+2026-11-02 12:55:58 - Starting Servlet engine: [Apache Tomcat/10.1.26]
+2026-11-02 12:55:58 - Initializing Spring embedded WebApplicationContext
+2026-11-02 12:55:58 - Root WebApplicationContext: initialization completed in 330 ms
+2026-11-02 12:55:58 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-11-02 12:55:58 - HHH000026: Second-level cache disabled
+2026-11-02 12:55:58 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-02 12:55:58 - HikariPool-3 - Starting...
+2026-11-02 12:55:58 - HikariPool-3 - Added connection org.postgresql.jdbc.PgConnection@365c07f1
+2026-11-02 12:55:58 - HikariPool-3 - Start completed.
+2026-11-02 12:55:58 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-11-02 12:55:59 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-02 12:55:59 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-02 12:55:59 - Unable to start LiveReload server
+2026-11-02 12:55:59 - Eureka HTTP Client uses RestTemplate.
+2026-11-02 12:55:59 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-11-02 12:55:59 - Setting initial instance status as: STARTING
+2026-11-02 12:55:59 - Initializing Eureka in region us-east-1
+2026-11-02 12:55:59 - Client configured to neither register nor query for data.
+2026-11-02 12:55:59 - Discovery Client initialized at timestamp 1793604359942 with initial instances count: 0
+2026-11-02 12:55:59 - Registering application NOTIFICATION-SERVICE with eureka with status UP
+2026-11-02 12:55:59 - Tomcat started on port 7780 (http) with context path '/'
+2026-11-02 12:55:59 - Updating port to 7780
+2026-11-02 12:56:00 - Started NotificationServiceApplication in 2.026 seconds (process running for 11348.051)
+2026-11-02 12:56:00 - Condition evaluation unchanged
+2026-11-02 12:57:33 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-11-02 12:57:33 - Initializing Servlet 'dispatcherServlet'
+2026-11-02 12:57:33 - Completed initialization in 1 ms
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+DEBUG: Jakarta Mail version 2.1.3
+DEBUG: URL jar:file:/C:/Users/hp/.m2/repository/org/eclipse/angus/jakarta.mail/2.0.3/jakarta.mail-2.0.3.jar!/META-INF/javamail.providers
+DEBUG: successfully loaded resource: jar:file:/C:/Users/hp/.m2/repository/org/eclipse/angus/jakarta.mail/2.0.3/jakarta.mail-2.0.3.jar!/META-INF/javamail.providers
+DEBUG: successfully loaded resource: /META-INF/javamail.default.providers
+DEBUG: Tables of loaded providers
+DEBUG: Providers Listed By Class Name: {org.eclipse.angus.mail.imap.IMAPStore=jakarta.mail.Provider[STORE,imap,org.eclipse.angus.mail.imap.IMAPStore,Oracle], org.eclipse.angus.mail.smtp.SMTPTransport=jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle], org.eclipse.angus.mail.pop3.POP3Store=jakarta.mail.Provider[STORE,pop3,org.eclipse.angus.mail.pop3.POP3Store,Oracle], org.eclipse.angus.mail.pop3.POP3SSLStore=jakarta.mail.Provider[STORE,pop3s,org.eclipse.angus.mail.pop3.POP3SSLStore,Oracle], org.eclipse.angus.mail.smtp.SMTPSSLTransport=jakarta.mail.Provider[TRANSPORT,smtps,org.eclipse.angus.mail.smtp.SMTPSSLTransport,Oracle], org.eclipse.angus.mail.imap.IMAPSSLStore=jakarta.mail.Provider[STORE,imaps,org.eclipse.angus.mail.imap.IMAPSSLStore,Oracle]}
+DEBUG: Providers Listed By Protocol: {imap=jakarta.mail.Provider[STORE,imap,org.eclipse.angus.mail.imap.IMAPStore,Oracle], smtp=jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle], pop3=jakarta.mail.Provider[STORE,pop3,org.eclipse.angus.mail.pop3.POP3Store,Oracle], imaps=jakarta.mail.Provider[STORE,imaps,org.eclipse.angus.mail.imap.IMAPSSLStore,Oracle], smtps=jakarta.mail.Provider[TRANSPORT,smtps,org.eclipse.angus.mail.smtp.SMTPSSLTransport,Oracle], pop3s=jakarta.mail.Provider[STORE,pop3s,org.eclipse.angus.mail.pop3.POP3SSLStore,Oracle]}
+DEBUG: successfully loaded resource: /META-INF/javamail.default.address.map
+DEBUG: URL jar:file:/C:/Users/hp/.m2/repository/org/eclipse/angus/jakarta.mail/2.0.3/jakarta.mail-2.0.3.jar!/META-INF/javamail.address.map
+DEBUG: successfully loaded resource: jar:file:/C:/Users/hp/.m2/repository/org/eclipse/angus/jakarta.mail/2.0.3/jakarta.mail-2.0.3.jar!/META-INF/javamail.address.map
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.mgovcloud.in", port 465, isSSL true
+220 smtp.mgovcloud.in SMTP Server ready November 2, 2026 12:57:34 PM IST
+DEBUG SMTP: connected to host "smtp.mgovcloud.in", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.mgovcloud.in Hello DESKTOP-QLTPTK0 (164.100.39.160 (164.100.39.160))
+250-AUTH LOGIN PLAIN
+250-SMTPUTF8
+250 SIZE 53477376
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN"
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "SIZE", arg "53477376"
+DEBUG SMTP: protocolConnect login, host=smtp.mgovcloud.in, user=info@cca.gov.in, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN failed
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.mgovcloud.in", port 465, isSSL true
+220 smtp.mgovcloud.in SMTP Server ready November 2, 2026 12:57:37 PM IST
+DEBUG SMTP: connected to host "smtp.mgovcloud.in", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.mgovcloud.in Hello DESKTOP-QLTPTK0 (164.100.39.160 (164.100.39.160))
+250-AUTH LOGIN PLAIN
+250-SMTPUTF8
+250 SIZE 53477376
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN"
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "SIZE", arg "53477376"
+DEBUG SMTP: protocolConnect login, host=smtp.mgovcloud.in, user=info@cca.gov.in, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN failed
+2026-11-02 15:45:22 - Restarting due to 34 class path changes (0 additions, 29 deletions, 5 modifications)
+2026-11-02 15:45:22 - Unregistering application NOTIFICATION-SERVICE with eureka with status DOWN
+2026-11-02 15:45:23 - The acceptor thread [http-nio-7780-Acceptor] did not stop cleanly
+2026-11-02 15:45:23 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-11-02 15:45:23 - HikariPool-3 - Shutdown initiated...
+2026-11-02 15:45:23 - HikariPool-3 - Shutdown completed.
+2026-11-02 15:45:23 - Shutting down DiscoveryClient ...
+2026-11-02 15:45:23 - Completed shut down of DiscoveryClient
+=============================================================================================================================       
+|                                                                                                                           |
+|        ____      ____    _    ____                                                                                        |
+|       / ___|    |  _ \  / \  / ___|                                                                                       |
+|      | |   _____| | | |/ _ \| |                                                                                           |
+|      | |__|_____| |_| / ___ \ |___                                                                                        |
+|       \____|    |____/_/   \_\____|                                                                                       |
+|                                                                                                                           |
+|                                                                                                                           |                               
+|   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++      |
+|   +                                                                                                                +      |
+|   + P o w e r e d  B y   e - G o v e r n a n c e   S o l u t i o n s   G r o u p ,  C - D A C   N e w   D e l h i  +      |
+|   +                                                                                                                +      |
+|   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++      |
+|                                                                                                                           | 
+|                                                                                                                           | 
+|   Notification Service for CCA                                                              |
+|   Spring Boot V3.3.2                                                                                     |
+|                                                                                                                           |
+=============================================================================================================================
+
+2026-11-02 15:45:24 - Starting NotificationServiceApplication using Java 17.0.10 with PID 21988 (C:\Users\hp\Documents\CCABackend\CCABackend\notification-service\target\classes started by hp in C:\Users\hp\Documents\CCABackend\CCABackend\notification-service)
+2026-11-02 15:45:24 - Running with Spring Boot v3.3.2, Spring v6.1.11
+2026-11-02 15:45:24 - The following 1 profile is active: "test"
+2026-11-02 15:45:24 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-02 15:45:24 - Finished Spring Data repository scanning in 14 ms. Found 2 JPA repository interfaces.
+2026-11-02 15:45:24 - BeanFactory id=2e3ec25c-6f23-3851-a3bc-77935416696e
+2026-11-02 15:45:24 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-11-02 15:45:24 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-11-02 15:45:24 - Tomcat initialized with port 7780 (http)
+2026-11-02 15:45:24 - Starting service [Tomcat]
+2026-11-02 15:45:24 - Starting Servlet engine: [Apache Tomcat/10.1.26]
+2026-11-02 15:45:24 - Initializing Spring embedded WebApplicationContext
+2026-11-02 15:45:24 - Root WebApplicationContext: initialization completed in 464 ms
+2026-11-02 15:45:24 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-11-02 15:45:24 - HHH000026: Second-level cache disabled
+2026-11-02 15:45:24 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-02 15:45:24 - HikariPool-4 - Starting...
+2026-11-02 15:45:25 - HikariPool-4 - Added connection org.postgresql.jdbc.PgConnection@2bdd867b
+2026-11-02 15:45:25 - HikariPool-4 - Start completed.
+2026-11-02 15:45:25 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-11-02 15:45:25 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-02 15:45:25 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-02 15:45:25 - Unable to start LiveReload server
+2026-11-02 15:45:26 - Eureka HTTP Client uses RestTemplate.
+2026-11-02 15:45:26 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-11-02 15:45:26 - Setting initial instance status as: STARTING
+2026-11-02 15:45:26 - Initializing Eureka in region us-east-1
+2026-11-02 15:45:26 - Client configured to neither register nor query for data.
+2026-11-02 15:45:26 - Discovery Client initialized at timestamp 1793614526320 with initial instances count: 0
+2026-11-02 15:45:26 - Registering application NOTIFICATION-SERVICE with eureka with status UP
+2026-11-02 15:45:26 - Tomcat started on port 7780 (http) with context path '/'
+2026-11-02 15:45:26 - Updating port to 7780
+2026-11-02 15:45:26 - Started NotificationServiceApplication in 2.635 seconds (process running for 21514.549)
+2026-11-02 15:45:26 - Condition evaluation unchanged
+2026-11-02 15:45:26 - Restarting due to 29 class path changes (29 additions, 0 deletions, 0 modifications)
+2026-11-02 15:45:26 - Unregistering application NOTIFICATION-SERVICE with eureka with status DOWN
+2026-11-02 15:45:29 - The acceptor thread [http-nio-7780-Acceptor] did not stop cleanly
+2026-11-02 15:45:29 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-11-02 15:45:29 - HikariPool-4 - Shutdown initiated...
+2026-11-02 15:45:29 - HikariPool-4 - Shutdown completed.
+2026-11-02 15:45:29 - Shutting down DiscoveryClient ...
+2026-11-02 15:45:29 - Completed shut down of DiscoveryClient
+=============================================================================================================================       
+|                                                                                                                           |
+|        ____      ____    _    ____                                                                                        |
+|       / ___|    |  _ \  / \  / ___|                                                                                       |
+|      | |   _____| | | |/ _ \| |                                                                                           |
+|      | |__|_____| |_| / ___ \ |___                                                                                        |
+|       \____|    |____/_/   \_\____|                                                                                       |
+|                                                                                                                           |
+|                                                                                                                           |                               
+|   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++      |
+|   +                                                                                                                +      |
+|   + P o w e r e d  B y   e - G o v e r n a n c e   S o l u t i o n s   G r o u p ,  C - D A C   N e w   D e l h i  +      |
+|   +                                                                                                                +      |
+|   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++      |
+|                                                                                                                           | 
+|                                                                                                                           | 
+|   Notification Service for CCA                                                              |
+|   Spring Boot V3.3.2                                                                                     |
+|                                                                                                                           |
+=============================================================================================================================
+
+2026-11-02 15:45:29 - Starting NotificationServiceApplication using Java 17.0.10 with PID 21988 (C:\Users\hp\Documents\CCABackend\CCABackend\notification-service\target\classes started by hp in C:\Users\hp\Documents\CCABackend\CCABackend\notification-service)
+2026-11-02 15:45:29 - Running with Spring Boot v3.3.2, Spring v6.1.11
+2026-11-02 15:45:29 - The following 1 profile is active: "test"
+2026-11-02 15:45:30 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-02 15:45:30 - Finished Spring Data repository scanning in 9 ms. Found 2 JPA repository interfaces.
+2026-11-02 15:45:30 - BeanFactory id=2e3ec25c-6f23-3851-a3bc-77935416696e
+2026-11-02 15:45:30 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-11-02 15:45:30 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-11-02 15:45:30 - Tomcat initialized with port 7780 (http)
+2026-11-02 15:45:30 - Starting service [Tomcat]
+2026-11-02 15:45:30 - Starting Servlet engine: [Apache Tomcat/10.1.26]
+2026-11-02 15:45:30 - Initializing Spring embedded WebApplicationContext
+2026-11-02 15:45:30 - Root WebApplicationContext: initialization completed in 252 ms
+2026-11-02 15:45:30 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-11-02 15:45:30 - HHH000026: Second-level cache disabled
+2026-11-02 15:45:30 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-02 15:45:30 - HikariPool-5 - Starting...
+2026-11-02 15:45:30 - HikariPool-5 - Added connection org.postgresql.jdbc.PgConnection@6bbda4e4
+2026-11-02 15:45:30 - HikariPool-5 - Start completed.
+2026-11-02 15:45:30 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-11-02 15:45:30 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-02 15:45:30 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-02 15:45:30 - Unable to start LiveReload server
+2026-11-02 15:45:31 - Eureka HTTP Client uses RestTemplate.
+2026-11-02 15:45:31 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-11-02 15:45:31 - Setting initial instance status as: STARTING
+2026-11-02 15:45:31 - Initializing Eureka in region us-east-1
+2026-11-02 15:45:31 - Client configured to neither register nor query for data.
+2026-11-02 15:45:31 - Discovery Client initialized at timestamp 1793614531159 with initial instances count: 0
+2026-11-02 15:45:31 - Registering application NOTIFICATION-SERVICE with eureka with status UP
+2026-11-02 15:45:31 - Tomcat started on port 7780 (http) with context path '/'
+2026-11-02 15:45:31 - Updating port to 7780
+2026-11-02 15:45:31 - Started NotificationServiceApplication in 1.795 seconds (process running for 21519.253)
+2026-11-02 15:45:31 - Condition evaluation unchanged
+2026-11-02 16:11:37 - Restarting due to 34 class path changes (0 additions, 29 deletions, 5 modifications)
+2026-11-02 16:11:37 - Unregistering application NOTIFICATION-SERVICE with eureka with status DOWN
+2026-11-02 16:11:38 - The acceptor thread [http-nio-7780-Acceptor] did not stop cleanly
+2026-11-02 16:11:38 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-11-02 16:11:38 - HikariPool-5 - Shutdown initiated...
+2026-11-02 16:11:38 - HikariPool-5 - Shutdown completed.
+2026-11-02 16:11:38 - Shutting down DiscoveryClient ...
+2026-11-02 16:11:38 - Completed shut down of DiscoveryClient
+=============================================================================================================================       
+|                                                                                                                           |
+|        ____      ____    _    ____                                                                                        |
+|       / ___|    |  _ \  / \  / ___|                                                                                       |
+|      | |   _____| | | |/ _ \| |                                                                                           |
+|      | |__|_____| |_| / ___ \ |___                                                                                        |
+|       \____|    |____/_/   \_\____|                                                                                       |
+|                                                                                                                           |
+|                                                                                                                           |                               
+|   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++      |
+|   +                                                                                                                +      |
+|   + P o w e r e d  B y   e - G o v e r n a n c e   S o l u t i o n s   G r o u p ,  C - D A C   N e w   D e l h i  +      |
+|   +                                                                                                                +      |
+|   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++      |
+|                                                                                                                           | 
+|                                                                                                                           | 
+|   Notification Service for CCA                                                              |
+|   Spring Boot V3.3.2                                                                                     |
+|                                                                                                                           |
+=============================================================================================================================
+
+2026-11-02 16:11:39 - Starting NotificationServiceApplication using Java 17.0.10 with PID 21988 (C:\Users\hp\Documents\CCABackend\CCABackend\notification-service\target\classes started by hp in C:\Users\hp\Documents\CCABackend\CCABackend\notification-service)
+2026-11-02 16:11:39 - Running with Spring Boot v3.3.2, Spring v6.1.11
+2026-11-02 16:11:39 - The following 1 profile is active: "test"
+2026-11-02 16:11:39 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-02 16:11:39 - Finished Spring Data repository scanning in 11 ms. Found 2 JPA repository interfaces.
+2026-11-02 16:11:39 - BeanFactory id=2e3ec25c-6f23-3851-a3bc-77935416696e
+2026-11-02 16:11:39 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-11-02 16:11:39 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-11-02 16:11:39 - Tomcat initialized with port 7780 (http)
+2026-11-02 16:11:39 - Starting service [Tomcat]
+2026-11-02 16:11:39 - Starting Servlet engine: [Apache Tomcat/10.1.26]
+2026-11-02 16:11:39 - Initializing Spring embedded WebApplicationContext
+2026-11-02 16:11:39 - Root WebApplicationContext: initialization completed in 438 ms
+2026-11-02 16:11:39 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-11-02 16:11:39 - HHH000026: Second-level cache disabled
+2026-11-02 16:11:39 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-02 16:11:39 - HikariPool-6 - Starting...
+2026-11-02 16:11:39 - HikariPool-6 - Added connection org.postgresql.jdbc.PgConnection@575ab363
+2026-11-02 16:11:39 - HikariPool-6 - Start completed.
+2026-11-02 16:11:39 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-11-02 16:11:39 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-02 16:11:39 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-02 16:11:40 - Unable to start LiveReload server
+2026-11-02 16:11:40 - Eureka HTTP Client uses RestTemplate.
+2026-11-02 16:11:40 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-11-02 16:11:40 - Setting initial instance status as: STARTING
+2026-11-02 16:11:40 - Initializing Eureka in region us-east-1
+2026-11-02 16:11:40 - Client configured to neither register nor query for data.
+2026-11-02 16:11:40 - Discovery Client initialized at timestamp 1793616100810 with initial instances count: 0
+2026-11-02 16:11:40 - Registering application NOTIFICATION-SERVICE with eureka with status UP
+2026-11-02 16:11:40 - Tomcat started on port 7780 (http) with context path '/'
+2026-11-02 16:11:40 - Updating port to 7780
+2026-11-02 16:11:41 - Started NotificationServiceApplication in 2.296 seconds (process running for 23088.88)
+2026-11-02 16:11:41 - Condition evaluation unchanged
+2026-11-02 16:11:41 - Restarting due to 29 class path changes (29 additions, 0 deletions, 0 modifications)
+2026-11-02 16:11:41 - Unregistering application NOTIFICATION-SERVICE with eureka with status DOWN
+2026-11-02 16:11:42 - The acceptor thread [http-nio-7780-Acceptor] did not stop cleanly
+2026-11-02 16:11:42 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-11-02 16:11:42 - HikariPool-6 - Shutdown initiated...
+2026-11-02 16:11:42 - HikariPool-6 - Shutdown completed.
+2026-11-02 16:11:42 - Shutting down DiscoveryClient ...
+2026-11-02 16:11:42 - Completed shut down of DiscoveryClient
+=============================================================================================================================       
+|                                                                                                                           |
+|        ____      ____    _    ____                                                                                        |
+|       / ___|    |  _ \  / \  / ___|                                                                                       |
+|      | |   _____| | | |/ _ \| |                                                                                           |
+|      | |__|_____| |_| / ___ \ |___                                                                                        |
+|       \____|    |____/_/   \_\____|                                                                                       |
+|                                                                                                                           |
+|                                                                                                                           |                               
+|   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++      |
+|   +                                                                                                                +      |
+|   + P o w e r e d  B y   e - G o v e r n a n c e   S o l u t i o n s   G r o u p ,  C - D A C   N e w   D e l h i  +      |
+|   +                                                                                                                +      |
+|   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++      |
+|                                                                                                                           | 
+|                                                                                                                           | 
+|   Notification Service for CCA                                                              |
+|   Spring Boot V3.3.2                                                                                     |
+|                                                                                                                           |
+=============================================================================================================================
+
+2026-11-02 16:11:43 - Starting NotificationServiceApplication using Java 17.0.10 with PID 21988 (C:\Users\hp\Documents\CCABackend\CCABackend\notification-service\target\classes started by hp in C:\Users\hp\Documents\CCABackend\CCABackend\notification-service)
+2026-11-02 16:11:43 - Running with Spring Boot v3.3.2, Spring v6.1.11
+2026-11-02 16:11:43 - The following 1 profile is active: "test"
+2026-11-02 16:11:43 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-02 16:11:43 - Finished Spring Data repository scanning in 6 ms. Found 2 JPA repository interfaces.
+2026-11-02 16:11:43 - BeanFactory id=2e3ec25c-6f23-3851-a3bc-77935416696e
+2026-11-02 16:11:43 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-11-02 16:11:43 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-11-02 16:11:43 - Tomcat initialized with port 7780 (http)
+2026-11-02 16:11:43 - Starting service [Tomcat]
+2026-11-02 16:11:43 - Starting Servlet engine: [Apache Tomcat/10.1.26]
+2026-11-02 16:11:43 - Initializing Spring embedded WebApplicationContext
+2026-11-02 16:11:43 - Root WebApplicationContext: initialization completed in 278 ms
+2026-11-02 16:11:43 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-11-02 16:11:43 - HHH000026: Second-level cache disabled
+2026-11-02 16:11:43 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-02 16:11:43 - HikariPool-7 - Starting...
+2026-11-02 16:11:43 - HikariPool-7 - Added connection org.postgresql.jdbc.PgConnection@5d0a7937
+2026-11-02 16:11:43 - HikariPool-7 - Start completed.
+2026-11-02 16:11:43 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-11-02 16:11:43 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-02 16:11:43 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-02 16:11:43 - Unable to start LiveReload server
+2026-11-02 16:11:44 - Eureka HTTP Client uses RestTemplate.
+2026-11-02 16:11:44 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-11-02 16:11:44 - Setting initial instance status as: STARTING
+2026-11-02 16:11:44 - Initializing Eureka in region us-east-1
+2026-11-02 16:11:44 - Client configured to neither register nor query for data.
+2026-11-02 16:11:44 - Discovery Client initialized at timestamp 1793616104535 with initial instances count: 0
+2026-11-02 16:11:44 - Registering application NOTIFICATION-SERVICE with eureka with status UP
+2026-11-02 16:11:44 - Tomcat started on port 7780 (http) with context path '/'
+2026-11-02 16:11:44 - Updating port to 7780
+2026-11-02 16:11:44 - Started NotificationServiceApplication in 1.832 seconds (process running for 23092.604)
+2026-11-02 16:11:44 - Condition evaluation unchanged
+2026-11-02 16:14:58 - Restarting due to 34 class path changes (0 additions, 29 deletions, 5 modifications)
+2026-11-02 16:14:58 - Unregistering application NOTIFICATION-SERVICE with eureka with status DOWN
+2026-11-02 16:15:00 - The acceptor thread [http-nio-7780-Acceptor] did not stop cleanly
+2026-11-02 16:15:00 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-11-02 16:15:00 - HikariPool-7 - Shutdown initiated...
+2026-11-02 16:15:00 - HikariPool-7 - Shutdown completed.
+2026-11-02 16:15:00 - Shutting down DiscoveryClient ...
+2026-11-02 16:15:00 - Completed shut down of DiscoveryClient
+=============================================================================================================================       
+|                                                                                                                           |
+|        ____      ____    _    ____                                                                                        |
+|       / ___|    |  _ \  / \  / ___|                                                                                       |
+|      | |   _____| | | |/ _ \| |                                                                                           |
+|      | |__|_____| |_| / ___ \ |___                                                                                        |
+|       \____|    |____/_/   \_\____|                                                                                       |
+|                                                                                                                           |
+|                                                                                                                           |                               
+|   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++      |
+|   +                                                                                                                +      |
+|   + P o w e r e d  B y   e - G o v e r n a n c e   S o l u t i o n s   G r o u p ,  C - D A C   N e w   D e l h i  +      |
+|   +                                                                                                                +      |
+|   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++      |
+|                                                                                                                           | 
+|                                                                                                                           | 
+|   Notification Service for CCA                                                              |
+|   Spring Boot V3.3.2                                                                                     |
+|                                                                                                                           |
+=============================================================================================================================
+
+2026-11-02 16:15:02 - Starting NotificationServiceApplication using Java 17.0.10 with PID 21988 (C:\Users\hp\Documents\CCABackend\CCABackend\notification-service\target\classes started by hp in C:\Users\hp\Documents\CCABackend\CCABackend\notification-service)
+2026-11-02 16:15:02 - Running with Spring Boot v3.3.2, Spring v6.1.11
+2026-11-02 16:15:02 - The following 1 profile is active: "test"
+2026-11-02 16:15:04 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-02 16:15:04 - Finished Spring Data repository scanning in 47 ms. Found 2 JPA repository interfaces.
+2026-11-02 16:15:04 - BeanFactory id=2e3ec25c-6f23-3851-a3bc-77935416696e
+2026-11-02 16:15:04 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-11-02 16:15:04 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-11-02 16:15:05 - Tomcat initialized with port 7780 (http)
+2026-11-02 16:15:05 - Starting service [Tomcat]
+2026-11-02 16:15:05 - Starting Servlet engine: [Apache Tomcat/10.1.26]
+2026-11-02 16:15:05 - Initializing Spring embedded WebApplicationContext
+2026-11-02 16:15:05 - Root WebApplicationContext: initialization completed in 2473 ms
+2026-11-02 16:15:05 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-11-02 16:15:05 - HHH000026: Second-level cache disabled
+2026-11-02 16:15:05 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-02 16:15:05 - HikariPool-8 - Starting...
+2026-11-02 16:15:05 - HikariPool-8 - Added connection org.postgresql.jdbc.PgConnection@286cfa77
+2026-11-02 16:15:05 - HikariPool-8 - Start completed.
+2026-11-02 16:15:05 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-11-02 16:15:05 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-02 16:15:05 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-02 16:15:07 - Unable to start LiveReload server
+2026-11-02 16:15:10 - Restarting due to 29 class path changes (29 additions, 0 deletions, 0 modifications)
+2026-11-02 16:15:10 - Eureka HTTP Client uses RestTemplate.
+2026-11-02 16:15:10 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-11-02 16:15:11 - Setting initial instance status as: STARTING
+2026-11-02 16:15:11 - Initializing Eureka in region us-east-1
+2026-11-02 16:15:11 - Client configured to neither register nor query for data.
+2026-11-02 16:15:11 - Discovery Client initialized at timestamp 1793616311004 with initial instances count: 0
+2026-11-02 16:15:11 - Registering application NOTIFICATION-SERVICE with eureka with status UP
+2026-11-02 16:15:11 - Tomcat started on port 7780 (http) with context path '/'
+2026-11-02 16:15:11 - Updating port to 7780
+2026-11-02 16:15:11 - Unregistering application NOTIFICATION-SERVICE with eureka with status DOWN
+2026-11-02 16:15:11 - Started NotificationServiceApplication in 11.422 seconds (process running for 23299.743)
+2026-11-02 16:15:11 - Condition evaluation unchanged
+2026-11-02 16:15:14 - The acceptor thread [http-nio-7780-Acceptor] did not stop cleanly
+2026-11-02 16:15:14 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-11-02 16:15:14 - HikariPool-8 - Shutdown initiated...
+2026-11-02 16:15:14 - HikariPool-8 - Shutdown completed.
+2026-11-02 16:15:14 - Shutting down DiscoveryClient ...
+2026-11-02 16:15:14 - Completed shut down of DiscoveryClient
+=============================================================================================================================       
+|                                                                                                                           |
+|        ____      ____    _    ____                                                                                        |
+|       / ___|    |  _ \  / \  / ___|                                                                                       |
+|      | |   _____| | | |/ _ \| |                                                                                           |
+|      | |__|_____| |_| / ___ \ |___                                                                                        |
+|       \____|    |____/_/   \_\____|                                                                                       |
+|                                                                                                                           |
+|                                                                                                                           |                               
+|   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++      |
+|   +                                                                                                                +      |
+|   + P o w e r e d  B y   e - G o v e r n a n c e   S o l u t i o n s   G r o u p ,  C - D A C   N e w   D e l h i  +      |
+|   +                                                                                                                +      |
+|   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++      |
+|                                                                                                                           | 
+|                                                                                                                           | 
+|   Notification Service for CCA                                                              |
+|   Spring Boot V3.3.2                                                                                     |
+|                                                                                                                           |
+=============================================================================================================================
+
+2026-11-02 16:15:16 - Starting NotificationServiceApplication using Java 17.0.10 with PID 21988 (C:\Users\hp\Documents\CCABackend\CCABackend\notification-service\target\classes started by hp in C:\Users\hp\Documents\CCABackend\CCABackend\notification-service)
+2026-11-02 16:15:16 - Running with Spring Boot v3.3.2, Spring v6.1.11
+2026-11-02 16:15:16 - The following 1 profile is active: "test"
+2026-11-02 16:15:16 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-02 16:15:16 - Finished Spring Data repository scanning in 16 ms. Found 2 JPA repository interfaces.
+2026-11-02 16:15:16 - BeanFactory id=2e3ec25c-6f23-3851-a3bc-77935416696e
+2026-11-02 16:15:16 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-11-02 16:15:16 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-11-02 16:15:16 - Tomcat initialized with port 7780 (http)
+2026-11-02 16:15:16 - Starting service [Tomcat]
+2026-11-02 16:15:16 - Starting Servlet engine: [Apache Tomcat/10.1.26]
+2026-11-02 16:15:16 - Initializing Spring embedded WebApplicationContext
+2026-11-02 16:15:16 - Root WebApplicationContext: initialization completed in 802 ms
+2026-11-02 16:15:16 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-11-02 16:15:16 - HHH000026: Second-level cache disabled
+2026-11-02 16:15:16 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-02 16:15:16 - HikariPool-9 - Starting...
+2026-11-02 16:15:17 - HikariPool-9 - Added connection org.postgresql.jdbc.PgConnection@516e09df
+2026-11-02 16:15:17 - HikariPool-9 - Start completed.
+2026-11-02 16:15:17 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-11-02 16:15:17 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-02 16:15:17 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-02 16:15:17 - Unable to start LiveReload server
+2026-11-02 16:15:18 - Eureka HTTP Client uses RestTemplate.
+2026-11-02 16:15:18 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-11-02 16:15:18 - Setting initial instance status as: STARTING
+2026-11-02 16:15:18 - Initializing Eureka in region us-east-1
+2026-11-02 16:15:18 - Client configured to neither register nor query for data.
+2026-11-02 16:15:18 - Discovery Client initialized at timestamp 1793616318199 with initial instances count: 0
+2026-11-02 16:15:18 - Registering application NOTIFICATION-SERVICE with eureka with status UP
+2026-11-02 16:15:18 - Tomcat started on port 7780 (http) with context path '/'
+2026-11-02 16:15:18 - Updating port to 7780
+2026-11-02 16:15:18 - Started NotificationServiceApplication in 3.817 seconds (process running for 23306.293)
+2026-11-02 16:15:18 - Condition evaluation unchanged
+2026-11-02 16:34:23 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-11-02 16:34:23 - Initializing Servlet 'dispatcherServlet'
+2026-11-02 16:34:23 - Completed initialization in 1 ms

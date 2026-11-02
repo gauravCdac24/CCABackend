@@ -691,9 +691,7 @@ public class UserLoginController {
 				
 				if(ulogin.isPresent()){
 					
-		
-					
-					otpService.generateOtp(username);
+					otpService.generateOtp(ulogin.get().getUserName());
 					
 					return new ResponseEntity<>("Otp has been sent to your email id.", HttpStatus.CREATED);
 
