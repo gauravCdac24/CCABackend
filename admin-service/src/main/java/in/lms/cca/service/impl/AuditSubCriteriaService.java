@@ -185,7 +185,16 @@ public class AuditSubCriteriaService implements IAuditSubCriteriaService{
 
 	@Override
 	public AuditSubCriteria getAuditSubCriteriaByTitle(String title) {
-		return auditSubCriteriaRepo.findAuditSubCriteriaByTitle(title);
+		List<AuditSubCriteria> matches = auditSubCriteriaRepo.findAllAuditSubCriteriaByTitle(title);
+		if (matches == null || matches.isEmpty()) {
+			return null;
+		}
+		return matches.get(0);
+	}
+
+	@Override
+	public List<AuditSubCriteria> getAllAuditSubCriteriaByTitle(String title) {
+		return auditSubCriteriaRepo.findAllAuditSubCriteriaByTitle(title);
 	}
 
 }

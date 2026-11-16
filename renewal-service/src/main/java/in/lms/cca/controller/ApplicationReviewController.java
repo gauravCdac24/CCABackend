@@ -818,35 +818,13 @@ String status="Active";
 	@GetMapping(ApplicationReviewAPIs.GET_ALL_NEW_APPLICATIONS_IN_AUDT_APPLICATION)
 	public ResponseEntity<?> getAllApplicationsByAuditApplication(@RequestParam("userName") String userName) {
 	    try {
-	       
-	        UserLoginDTO userLoginDTO = appTimeLineServ.getAllDetailsByUserName(userName);
-	        
-	       // System.out.println("userLoginDTO=-=--=->"+userLoginDTO.getUserId());
-	        
-//	        if (userLoginDTO == null) {
-//	            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-//	                    .body("No user details found for username: " + userName);
-//	        }
-
-	        if (userLoginDTO == null) {
-	            System.out.println("No user details found for username: " + userName);
-	            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-	                    .body("No user details found for username: " + userName);
+	        UserLoginDTO userLoginDTO = null;
+	        try {
+	            userLoginDTO = appTimeLineServ.getAllDetailsByUserName(userName);
+	        } catch (Exception e) {
+	            System.out.println("User lookup failed for username " + userName + ": " + e.getMessage());
 	        }
-	        System.out.println("userLoginDTO=-=--=->"+userLoginDTO.getUserId());
-	        System.out.println("userLoginDTO: " + userLoginDTO);
 
-	       
-//	        List<AuditAgencySelectionDTO> agencySelectionDTOs = appTimeLineServ.getAllData(userLoginDTO.getUserId());
-
-//	        String decryptedAgencyId = EncryptionUtil.decrypt(userLoginDTO.getUserId());
-//	        List<AuditAgencySelectionDTO> agencySelectionDTOs = appTimeLineServ.getAllData(decryptedAgencyId);
-//	        if (agencySelectionDTOs == null || agencySelectionDTOs.isEmpty()) {
-//	            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-//	                    .body("No agency selection details found for user: " + userName);
-//	        }
-	        
-	     // ...
 	        List<AuditAgencySelectionDTO> agencySelectionDTOs = new ArrayList<>();
 
 	        try {
@@ -857,8 +835,19 @@ String status="Active";
 
 	        if (agencySelectionDTOs == null || agencySelectionDTOs.isEmpty()) {
 	            try {
+	                agencySelectionDTOs = appTimeLineServ.getAllData(userName);
+	            } catch (Exception e) {
+	                System.out.println("Audit lookup with plain username failed: " + e.getMessage());
+	            }
+	        }
+
+	        if ((agencySelectionDTOs == null || agencySelectionDTOs.isEmpty()) && userLoginDTO != null
+	                && userLoginDTO.getUserId() != null) {
+	            try {
 	                String decryptedAgencyId = EncryptionUtil.decrypt(userLoginDTO.getUserId());
-	                agencySelectionDTOs = appTimeLineServ.getAllData(decryptedAgencyId);
+	                if (decryptedAgencyId != null && !decryptedAgencyId.isBlank()) {
+	                    agencySelectionDTOs = appTimeLineServ.getAllData(decryptedAgencyId);
+	                }
 	            } catch (Exception e) {
 	                System.out.println("No assigned applications found for audit agency: " + userName);
 	            }
@@ -877,50 +866,56 @@ String status="Active";
 
 	        
 	        for (AuditAgencySelectionDTO selectionDTO : agencySelectionDTOs) {
+	            if (selectionDTO.getAplicantUserName() == null || selectionDTO.getAplicantUserName().isBlank()) {
+	                continue;
+	            }
 
-	          
-	            List<IntentApplication> intentApplications = intentAppServ.getAllIntentApplicationByApplicantUserName(selectionDTO.getAplicantUserName());
+	            List<IntentApplication> intentApplications;
+	            try {
+	                intentApplications = intentAppServ.getAllIntentApplicationByApplicantUserName(selectionDTO.getAplicantUserName());
+	            } catch (Exception e) {
+	                System.out.println("Intent lookup failed for " + selectionDTO.getAplicantUserName() + ": " + e.getMessage());
+	                continue;
+	            }
+	            if (intentApplications == null || intentApplications.isEmpty()) {
+	                continue;
+	            }
 
-	            System.out.println("intentApplications size: " + intentApplications.size());
-
-	          
 	            for (IntentApplication app : intentApplications) {
+	                try {
+	                    if (app.getIntentAppId() == null) {
+	                        continue;
+	                    }
 
-	                ApplicationDTO application = new ApplicationDTO();
+	                    ApplicationDTO application = new ApplicationDTO();
+	                    application.setAcknowledgementNo(app.getAcknowledgementNo());
+	                    application.setApplicantUserName(app.getUserName());
+	                    application.setApplicationCurrentStatus(app.getApplicationStatus());
+	                    application.setApplicationInitiatedOn(app.getCreated());
+	                    application.setApplicationType(app.getAppTypeMasterId());
+	                    application.setIntentAppId(app.getIntentAppId().toString());
+	                    application.setStatusInitiatedOn(null);
 
-	                application.setAcknowledgementNo(app.getAcknowledgementNo());
-	                application.setApplicantUserName(app.getUserName());
-	                application.setApplicationCurrentStatus(app.getApplicationStatus());
-	                application.setApplicationInitiatedOn(app.getCreated());
-	                application.setApplicationType(app.getAppTypeMasterId());
-	                application.setIntentAppId(app.getIntentAppId().toString());
-	                application.setStatusInitiatedOn(null);
+	                    String status = "Active";
+	                    if ("1".equals(app.getAppTypeMasterId())) {
+	                        application.setApplicantName(indAppFormServ.getFullNameByIntentAppId(app.getIntentAppId()));
+	                    } else if ("2".equals(app.getAppTypeMasterId()) || "3".equals(app.getAppTypeMasterId())) {
+	                        application.setApplicantName(firmApplicationServ.getFirmNameByIntentAppId(app.getIntentAppId(), status));
+	                    } else if ("4".equals(app.getAppTypeMasterId())) {
+	                        application.setApplicantName(governmentAgencyServ.getOrganizationNameByIntentAppId(app.getIntentAppId()));
+	                    }
 
-	               
-	                String status = "Active";
-	                if ("1".equals(app.getAppTypeMasterId())) {
-	                    String fullName = indAppFormServ.getFullNameByIntentAppId(app.getIntentAppId());
-	                    application.setApplicantName(fullName);
-	                } else if ("2".equals(app.getAppTypeMasterId()) || "3".equals(app.getAppTypeMasterId())) {
-	                    String fullName = firmApplicationServ.getFirmNameByIntentAppId(app.getIntentAppId(), status);
-	                    System.out.println(fullName);
-	                    System.out.println(app.getAppTypeMasterId());
-	                    application.setApplicantName(fullName);
-	                } else if ("4".equals(app.getAppTypeMasterId())) {
-	                    String fullName = governmentAgencyServ.getOrganizationNameByIntentAppId(app.getIntentAppId());
-	                    application.setApplicantName(fullName);
+	                    List<ApplicationTimeLine> list = appTimeLineServ.getByIntentApplicationId(app.getIntentAppId());
+	                    if (list != null && !list.isEmpty()) {
+	                        application.setStatusInitiatedOn(list.get(0).getCreated());
+	                    } else {
+	                        application.setStatusInitiatedOn(app.getUpdated());
+	                    }
+
+	                    applicationDTOs.add(application);
+	                } catch (Exception e) {
+	                    System.out.println("Skipping application " + app.getIntentAppId() + ": " + e.getMessage());
 	                }
-
-	               
-	                List<ApplicationTimeLine> list = appTimeLineServ.getByIntentApplicationId(app.getIntentAppId());
-	                if (list != null && !list.isEmpty()) {
-	                    application.setStatusInitiatedOn(list.get(0).getCreated());
-	                } else {
-	                    application.setStatusInitiatedOn(app.getUpdated());
-	                }
-
-	               
-	                applicationDTOs.add(application);
 	            }
 	        }
 

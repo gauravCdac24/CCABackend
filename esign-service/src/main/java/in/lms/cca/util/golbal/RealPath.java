@@ -7,16 +7,20 @@ import java.nio.file.Paths;
 
 public class RealPath {
 
-	// public static final String REAL_PATH = "/home/admin/microservices/esign-service";
+	 // Linux / server path
+	 // public static final String REAL_PATH = "/home/dashboard/CCABackend/esign-service";
 
-	// public static final String REAL_PATH = "C:\\Users\\hp\\Documents\\CCABackend\\esign-service\\src\\main\\webapp";
-	public static final String REAL_PATH = "E:\\CCA_PROD\\CCAB\\esign-service\\src\\main\\webapp";
+	 // Local Windows (this machine)
+	 public static final String REAL_PATH = "C:\\Users\\hp\\Documents\\CCABackend\\CCABackend\\esign-service";
+
+	 // public static final String REAL_PATH = "C:\\Users\\hp\\Documents\\CCABackend\\esign-service\\src\\main\\webapp";
+	 //public static final String REAL_PATH = "E:\\CCA_PROD\\CCAB\\esign-service\\src\\main\\webapp";
 
 	public static final String REQUEST_DOCUMENT_DIR = REAL_PATH + "/esignrequest/document";
 	public static final String REQUEST_XML_DIR = REAL_PATH + "/esignrequest/xml";
 	public static final String RESPONSE_DOCUMENT_DIR = REAL_PATH + "/esignresponse/document";
 	public static final String RESPONSE_XML_DIR = REAL_PATH + "/esignresponse/xml";
-	public static final String CERT_DIR = REAL_PATH + "/cert";
+	public static final String CERT_DIR = REAL_PATH + "/src/main/webapp/cert";
 
 	/**
 	 * Creates all required eSign storage folders if they do not exist.

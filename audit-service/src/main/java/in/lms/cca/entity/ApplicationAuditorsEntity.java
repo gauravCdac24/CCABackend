@@ -52,6 +52,11 @@ public class ApplicationAuditorsEntity extends AbstractTimestampEntity{
 
        @Column(name="status",length = 15)
        private String status;
+
+	/** PENDING / COMPLETED — audit report multi-auditor eSign progress */
+	@Column(name = "audit_report_esign_status", length = 20)
+	private String auditReportEsignStatus;
+
 	public Long getAppAuditorId() {
 		return appAuditorId;
 	}
@@ -106,6 +111,14 @@ public class ApplicationAuditorsEntity extends AbstractTimestampEntity{
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getAuditReportEsignStatus() {
+		return auditReportEsignStatus;
+	}
+
+	public void setAuditReportEsignStatus(String auditReportEsignStatus) {
+		this.auditReportEsignStatus = auditReportEsignStatus;
 	}
 	
 	public String getCreatedBy() {

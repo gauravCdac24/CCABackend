@@ -15,6 +15,9 @@ import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.security.auth.x500.X500Principal;
 import javax.xml.parsers.DocumentBuilder;
@@ -110,7 +113,7 @@ public class EsignController {
     	// Create XML File for eSign
         String hashDocId = "1";
         String transactionId = "";
-        String resUrl = "https://ccalms.cca.gov.in/api/esign-service/esignresponse";
+        String resUrl = "http://localhost:8080/api/esign-service/esignresponse";
         String fileHash = "";
         String xmlData = "";
         String xmlasstring = "";
@@ -206,11 +209,17 @@ public class EsignController {
         
         String eSignResponse = request.getParameter("eSignResponse");
         String espTxnID = request.getParameter("espTxnID");
-        
-       
+        boolean localSkip = "true".equalsIgnoreCase(request.getHeader("X-Local-Esign-Skip"));
         
         ESignRequest ereqquest = requestRepo.findByTransactionId(espTxnID);
-       
+        if (ereqquest == null) {
+            return new ResponseEntity<>("Invalid Transaction ID", HttpStatus.BAD_REQUEST);
+        }
+
+        // Local npm-start flow: SPA posts only espTxnID + X-Local-Esign-Skip (no CDAC XML).
+        if (localSkip) {
+            return completeLocalEsignSkip(request, ereqquest);
+        }
         
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -356,18 +365,89 @@ public class EsignController {
             e.printStackTrace();
             String pid =  EncryptionUtil.encrypt(ereqquest.getRedirectUrl());
             String id = EncryptionUtil.encrypt("failed");
-            
-            String urlToRedirect = CrossOrigins.Origins + "/esignresponse" + "?id="+id+"&pid="+pid;
-            URI location = URI.create(urlToRedirect);
-            HttpHeaders headers = new HttpHeaders();
-            headers.setLocation(location);
-            return new ResponseEntity<>(headers, HttpStatus.FOUND);
+            return buildEsignCallbackResponse(request, id, pid, "failed");
         }
 
     }
-    
-    
-    
+
+    /**
+     * Completes eSign locally without CDAC: copies the prepared PDF, saves a success
+     * response, notifies the calling service, and returns JSON for the SPA.
+     */
+    private ResponseEntity<?> completeLocalEsignSkip(HttpServletRequest request, ESignRequest ereqquest) {
+        try {
+            SimpleDateFormat dateFormats = new SimpleDateFormat("MMddyyyyHHmmssSSS");
+            String timestamp = dateFormats.format(new Date());
+            String dfilename = "E" + ereqquest.getUserName().substring(8) + timestamp;
+
+            RealPath.ensureDirectories();
+
+            Path src = Paths.get(RealPath.REQUEST_DOCUMENT_DIR, ereqquest.getFileName() + ".pdf");
+            Path dest = Paths.get(RealPath.RESPONSE_DOCUMENT_DIR, dfilename + ".pdf");
+            if (!Files.exists(src)) {
+                return new ResponseEntity<>("Source PDF not found for local eSign skip", HttpStatus.BAD_REQUEST);
+            }
+            Files.copy(src, dest, StandardCopyOption.REPLACE_EXISTING);
+
+            ESignResponse esignResponse = new ESignResponse();
+            esignResponse.setDigestValue(ereqquest.getDocumentHash());
+            esignResponse.setErrCode("00");
+            esignResponse.setErrMsg("Local skip success");
+            esignResponse.seteSignRequestId(ereqquest);
+            esignResponse.seteSignStatus(1);
+            esignResponse.setFileName(dfilename);
+            esignResponse.setRescode("00");
+            esignResponse.setResponseTimeStamp(new Date());
+            esignResponse.setSignatureValue("LOCAL_ESIGN_SKIP");
+            ESignResponse res = responseRepo.save(esignResponse);
+
+            if (ereqquest.getServiceName() != null && ereqquest.getServiceUrl() != null) {
+                clientServ.eSignDocument(
+                        ereqquest.getServiceName() + ereqquest.getServiceUrl(),
+                        ereqquest.getOrgFileId(),
+                        res.geteSignResponseId().toString(),
+                        ereqquest.getAuthToken());
+            }
+
+            String pid = EncryptionUtil.encrypt(ereqquest.getRedirectUrl());
+            String id = EncryptionUtil.encrypt("signed_success");
+            return buildEsignCallbackResponse(request, id, pid, "signed_success");
+        } catch (Exception e) {
+            e.printStackTrace();
+            String pid = EncryptionUtil.encrypt(ereqquest.getRedirectUrl());
+            String id = EncryptionUtil.encrypt("failed");
+            Map<String, String> body = new HashMap<>();
+            body.put("status", "failed");
+            body.put("id", id);
+            body.put("pid", pid);
+            body.put("message", e.getMessage() != null ? e.getMessage() : "Local eSign skip failed");
+            return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Local/mock skip uses header X-Local-Esign-Skip=true and returns JSON so the
+     * SPA can navigate without depending on browser form-post + 302 callback URL.
+     * Normal CDAC/form flow still gets HTTP 302 Location redirect.
+     */
+    private ResponseEntity<?> buildEsignCallbackResponse(HttpServletRequest request, String id, String pid,
+            String status) {
+        boolean localSkip = "true".equalsIgnoreCase(request.getHeader("X-Local-Esign-Skip"));
+        String urlToRedirect = CrossOrigins.Origins + "/esignresponse?id=" + id + "&pid=" + pid;
+        if (localSkip) {
+            Map<String, String> body = new HashMap<>();
+            body.put("status", status);
+            body.put("id", id);
+            body.put("pid", pid);
+            body.put("redirectUrl", "/esignresponse?id=" + id + "&pid=" + pid);
+            return new ResponseEntity<>(body, HttpStatus.OK);
+        }
+        URI location = URI.create(urlToRedirect);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(location);
+        headers.add(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, HttpHeaders.LOCATION);
+        return new ResponseEntity<>(headers, HttpStatus.FOUND);
+    }
     
     @GetMapping(EsignServiceAPIs.GET_DIGITALLY_SIGNED_DOCUMENT)
 	public ResponseEntity<?> getDigitallySignedDocument(@RequestParam("id") String id)

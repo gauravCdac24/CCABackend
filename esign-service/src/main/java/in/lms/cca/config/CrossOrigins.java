@@ -5,9 +5,9 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 public class CrossOrigins {
 
 	// Browser redirect Location after eSign callback (EsignController).
-	// Must match the public frontend origin used in production.
-	public static final String Origins = "https://ccalms.cca.gov.in";
-	public static final String Origins1 = "https://45.127.74.108:443";
+	// Local/dev frontend origin (production uses https://ccalms.cca.gov.in).
+	public static final String Origins = "http://localhost:3000";
+	public static final String Origins1 = "http://127.0.0.1:3000";
 
 	public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**")

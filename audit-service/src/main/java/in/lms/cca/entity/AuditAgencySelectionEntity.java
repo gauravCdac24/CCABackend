@@ -19,7 +19,7 @@ public class AuditAgencySelectionEntity extends AbstractTimestampEntity{
     @Column(name = "agency_selection_id",length = 11)
     private Long agencySelectionId;
     
-    @Column(name = "audit_agency_id",length =11)
+    @Column(name = "audit_agency_id", length = 74)
     private String auditAgencyId;
     
     @ManyToOne

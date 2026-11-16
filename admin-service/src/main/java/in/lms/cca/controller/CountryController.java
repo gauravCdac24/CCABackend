@@ -95,6 +95,14 @@ public class CountryController {
 		return new ResponseEntity<>(countryList, HttpStatus.OK); 
 		
 	}
+
+	@GetMapping(CountryServiceAPIs.GET_ALL_ACTIVE_COUNTRY)
+	public ResponseEntity<?> getAllActiveCountry(){
+
+		List<Country> countryList = countryServ.getAllActiveCountry();
+		return new ResponseEntity<>(countryList, HttpStatus.OK);
+
+	}
 	
 	@GetMapping(CountryServiceAPIs.CHANGE_COUNTRY_STATUS)
 	public void changeCountryStatus(@RequestParam("id") String countryId) {

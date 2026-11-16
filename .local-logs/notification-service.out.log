@@ -8,17 +8,19 @@
 [INFO] >>> spring-boot:3.3.2:run (default-cli) > test-compile @ notification-service >>>
 [INFO] 
 [INFO] --- resources:3.3.1:resources (default-resources) @ notification-service ---
-[INFO] Copying 5 resources from src/main/resources to target/classes
-[INFO] Copying 3 resources from src/main/resources to target/classes
+[INFO] Copying 5 resources from src\main\resources to target\classes
+[INFO] Copying 3 resources from src\main\resources to target\classes
 [INFO] 
 [INFO] --- compiler:3.13.0:compile (default-compile) @ notification-service ---
-[INFO] Nothing to compile - all classes are up to date.
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 27 source files with javac [debug parameters release 17] to target\classes
 [INFO] 
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ notification-service ---
-[INFO] skip non existing resourceDirectory /home/gaurav/Documents/CCABackend/notification-service/src/test/resources
+[INFO] Copying 0 resource from src\test\resources to target\test-classes
 [INFO] 
 [INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ notification-service ---
-[INFO] Nothing to compile - all classes are up to date.
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug parameters release 17] to target\test-classes
 [INFO] 
 [INFO] <<< spring-boot:3.3.2:run (default-cli) < test-compile @ notification-service <<<
 [INFO] 
@@ -46,483 +48,882 @@
 |                                                                                                                           |
 =============================================================================================================================
 
-2026-11-01 22:26:51 - Starting NotificationServiceApplication using Java 17.0.21 with PID 7559 (/home/gaurav/Documents/CCABackend/notification-service/target/classes started by gaurav in /home/gaurav/Documents/CCABackend/notification-service)
-2026-11-01 22:26:51 - Running with Spring Boot v3.3.2, Spring v6.1.11
-2026-11-01 22:26:51 - The following 1 profile is active: "test"
-2026-11-01 22:26:51 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2026-11-01 22:26:51 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2026-11-01 22:26:52 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-11-01 22:26:52 - Finished Spring Data repository scanning in 189 ms. Found 2 JPA repository interfaces.
-2026-11-01 22:26:52 - BeanFactory id=2e3ec25c-6f23-3851-a3bc-77935416696e
-2026-11-01 22:26:52 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
-2026-11-01 22:26:52 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
-2026-11-01 22:26:53 - Tomcat initialized with port 7780 (http)
-2026-11-01 22:26:53 - Starting service [Tomcat]
-2026-11-01 22:26:53 - Starting Servlet engine: [Apache Tomcat/10.1.26]
-2026-11-01 22:26:53 - Initializing Spring embedded WebApplicationContext
-2026-11-01 22:26:53 - Root WebApplicationContext: initialization completed in 1947 ms
-2026-11-01 22:26:53 - HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-11-01 22:26:53 - HHH000412: Hibernate ORM core version 6.5.2.Final
-2026-11-01 22:26:53 - HHH000026: Second-level cache disabled
-2026-11-01 22:26:53 - No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-11-01 22:26:53 - HikariPool-1 - Starting...
-2026-11-01 22:26:53 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@21f968fe
-2026-11-01 22:26:53 - HikariPool-1 - Start completed.
-2026-11-01 22:26:53 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-11-01 22:26:54 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-11-01 22:26:54 - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-11-01 22:26:54 - Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-11-01 22:26:55 - Unable to start LiveReload server
-2026-11-01 22:26:56 - Eureka HTTP Client uses RestTemplate.
-2026-11-01 22:26:56 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
-2026-11-01 22:26:56 - Setting initial instance status as: STARTING
-2026-11-01 22:26:56 - Initializing Eureka in region us-east-1
-2026-11-01 22:26:56 - Client configured to neither register nor query for data.
-2026-11-01 22:26:56 - Discovery Client initialized at timestamp 1793552216780 with initial instances count: 0
-2026-11-01 22:26:56 - Registering application NOTIFICATION-SERVICE with eureka with status UP
-2026-11-01 22:26:56 - Tomcat started on port 7780 (http) with context path '/'
-2026-11-01 22:26:56 - Updating port to 7780
-2026-11-01 22:26:57 - Started NotificationServiceApplication in 7.31 seconds (process running for 7.747)
-2026-11-01 22:29:20 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-11-01 22:29:20 - Initializing Servlet 'dispatcherServlet'
-2026-11-01 22:29:20 - Completed initialization in 2 ms
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+2026-11-16 10:39:12 - Starting NotificationServiceApplication using Java 17.0.10 with PID 22132 (C:\Users\hp\Documents\CCABackend\CCABackend\notification-service\target\classes started by hp in C:\Users\hp\Documents\CCABackend\CCABackend\notification-service)
+2026-11-16 10:39:12 - Running with Spring Boot v3.3.2, Spring v6.1.11
+2026-11-16 10:39:12 - The following 1 profile is active: "test"
+2026-11-16 10:39:12 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-11-16 10:39:12 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-11-16 10:39:13 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-16 10:39:13 - Finished Spring Data repository scanning in 190 ms. Found 2 JPA repository interfaces.
+2026-11-16 10:39:13 - BeanFactory id=2e3ec25c-6f23-3851-a3bc-77935416696e
+2026-11-16 10:39:13 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-11-16 10:39:13 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-11-16 10:39:14 - Tomcat initialized with port 7780 (http)
+2026-11-16 10:39:14 - Starting service [Tomcat]
+2026-11-16 10:39:14 - Starting Servlet engine: [Apache Tomcat/10.1.26]
+2026-11-16 10:39:14 - Initializing Spring embedded WebApplicationContext
+2026-11-16 10:39:14 - Root WebApplicationContext: initialization completed in 1989 ms
+2026-11-16 10:39:14 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-11-16 10:39:14 - HHH000412: Hibernate ORM core version 6.5.2.Final
+2026-11-16 10:39:14 - HHH000026: Second-level cache disabled
+2026-11-16 10:39:15 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-16 10:39:15 - HikariPool-1 - Starting...
+2026-11-16 10:39:15 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@14bdb47
+2026-11-16 10:39:15 - HikariPool-1 - Start completed.
+2026-11-16 10:39:15 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-11-16 10:39:16 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-16 10:39:16 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-16 10:39:16 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-11-16 10:39:17 - Unable to start LiveReload server
+2026-11-16 10:39:18 - Eureka HTTP Client uses RestTemplate.
+2026-11-16 10:39:18 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-11-16 10:39:18 - Setting initial instance status as: STARTING
+2026-11-16 10:39:18 - Initializing Eureka in region us-east-1
+2026-11-16 10:39:18 - Client configured to neither register nor query for data.
+2026-11-16 10:39:18 - Discovery Client initialized at timestamp 1794805758500 with initial instances count: 0
+2026-11-16 10:39:18 - Registering application NOTIFICATION-SERVICE with eureka with status UP
+2026-11-16 10:39:18 - Tomcat started on port 7780 (http) with context path '/'
+2026-11-16 10:39:18 - Updating port to 7780
+2026-11-16 10:39:18 - Started NotificationServiceApplication in 7.035 seconds (process running for 7.503)
+2026-11-16 10:41:21 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-11-16 10:41:21 - Initializing Servlet 'dispatcherServlet'
+2026-11-16 10:41:21 - Completed initialization in 0 ms
 Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Sending message: Dear Applicant, NCs observed in your Audit Report, please login and submit the clarifications at the earliest. CCA-MeitY
-mobileNumber: 8844772605
-username: ccalmsdelhi
-templateId: 1407174245455070954
-smsservicetype: singlemsg
-SMS API response: 402,MsgID = 011120261793552441834ccalmsdelhi
+DEBUG: Jakarta Mail version 2.1.3
+DEBUG: URL jar:file:/C:/Users/hp/.m2/repository/org/eclipse/angus/jakarta.mail/2.0.3/jakarta.mail-2.0.3.jar!/META-INF/javamail.providers
+DEBUG: successfully loaded resource: jar:file:/C:/Users/hp/.m2/repository/org/eclipse/angus/jakarta.mail/2.0.3/jakarta.mail-2.0.3.jar!/META-INF/javamail.providers
+DEBUG: successfully loaded resource: /META-INF/javamail.default.providers
+DEBUG: Tables of loaded providers
+DEBUG: Providers Listed By Class Name: {org.eclipse.angus.mail.imap.IMAPStore=jakarta.mail.Provider[STORE,imap,org.eclipse.angus.mail.imap.IMAPStore,Oracle], org.eclipse.angus.mail.smtp.SMTPTransport=jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle], org.eclipse.angus.mail.pop3.POP3Store=jakarta.mail.Provider[STORE,pop3,org.eclipse.angus.mail.pop3.POP3Store,Oracle], org.eclipse.angus.mail.pop3.POP3SSLStore=jakarta.mail.Provider[STORE,pop3s,org.eclipse.angus.mail.pop3.POP3SSLStore,Oracle], org.eclipse.angus.mail.smtp.SMTPSSLTransport=jakarta.mail.Provider[TRANSPORT,smtps,org.eclipse.angus.mail.smtp.SMTPSSLTransport,Oracle], org.eclipse.angus.mail.imap.IMAPSSLStore=jakarta.mail.Provider[STORE,imaps,org.eclipse.angus.mail.imap.IMAPSSLStore,Oracle]}
+DEBUG: Providers Listed By Protocol: {imap=jakarta.mail.Provider[STORE,imap,org.eclipse.angus.mail.imap.IMAPStore,Oracle], smtp=jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle], pop3=jakarta.mail.Provider[STORE,pop3,org.eclipse.angus.mail.pop3.POP3Store,Oracle], imaps=jakarta.mail.Provider[STORE,imaps,org.eclipse.angus.mail.imap.IMAPSSLStore,Oracle], smtps=jakarta.mail.Provider[TRANSPORT,smtps,org.eclipse.angus.mail.smtp.SMTPSSLTransport,Oracle], pop3s=jakarta.mail.Provider[STORE,pop3s,org.eclipse.angus.mail.pop3.POP3SSLStore,Oracle]}
+DEBUG: successfully loaded resource: /META-INF/javamail.default.address.map
+DEBUG: URL jar:file:/C:/Users/hp/.m2/repository/org/eclipse/angus/jakarta.mail/2.0.3/jakarta.mail-2.0.3.jar!/META-INF/javamail.address.map
+DEBUG: successfully loaded resource: jar:file:/C:/Users/hp/.m2/repository/org/eclipse/angus/jakarta.mail/2.0.3/jakarta.mail-2.0.3.jar!/META-INF/javamail.address.map
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP d2e1a72fcca58-8bececcce6bsm3095920b3a.1 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK d2e1a72fcca58-8bececcce6bsm3095920b3a.1 - gsmtp
+RCPT TO:<gauravcdac24@gmail.com>
+250 2.1.5 OK d2e1a72fcca58-8bececcce6bsm3095920b3a.1 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   gauravcdac24@gmail.com
+DATA
+354 Go ahead d2e1a72fcca58-8bececcce6bsm3095920b3a.1 - gsmtp
+Date: Mon, 16 Nov 2026 10:41:25 +0530 (IST)
+From: info@cca.gov.in
+To: gauravcdac24@gmail.com
+Message-ID: <2042322432.0.1794805885186@DESKTOP-QLTPTK0>
+Subject: Annual Audit Reminder
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Sending message: Dear Applicant, NCs observed in your Audit Report, please login and submit the clarifications at the earliest. CCA-MeitY
-mobileNumber: 8844772605
-username: ccalmsdelhi
-templateId: 1407174245455070954
-smsservicetype: singlemsg
-SMS API response: 402,MsgID = 011120261793553838804ccalmsdelhi
+Dear Licensee, 
 
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Sending message: Dear Applicant, application no. 43 for renewal of CA License No. 202654460111310000000000 has been approved in-principle, subject to submission of Agreement, PBG & CSR submission. CCA-MeitY
-mobileNumber: 8844772605
-username: ccalmsdelhi
-templateId: 1407174245588855486
-smsservicetype: singlemsg
-SMS API response: 402,MsgID = 011120261793553887975ccalmsdelhi
+This is a reminder that your annual audit is due. Please make sure to complete the necessary audit procedures as per the schedule. If you haven't started the audit yet, we recommend initiating it as soon as possible.
 
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Sending message: Dear Applicant, application no. 43 for renewal of License no. 202654560111310000000000 has been approved. CCA-MeitY
-mobileNumber: 8844772605
-username: ccalmsdelhi
-templateId: 1407174245600648226
-smsservicetype: singlemsg
-SMS API response: 402,MsgID = 011120261793555204701ccalmsdelhi
+For more details and the audit schedule, please check your email or log into your dashboard.
 
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Sending message: Dear Applicant, CCA has observations in your selection of Audit Agency/ Auditors for the audit, please login and clarify the same at the earliest. CCA-MeitY
-mobileNumber: 6388956241
-username: ccalmsdelhi
-templateId: 1407174245434511953
-smsservicetype: singlemsg
-SMS API response: 402,MsgID = 021120261793558778493ccalmsdelhi
+If you have any questions or need help, feel free to reach out to our support team.
 
+Best regards,
+The Audit Team
+.
+250 2.0.0 OK  1794805886 d2e1a72fcca58-8bececcce6bsm3095920b3a.1 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection d2e1a72fcca58-8bececcce6bsm3095920b3a.1 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP 98e67ed59e1d1-3b1b3d279d8sm7562421a91.2 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK 98e67ed59e1d1-3b1b3d279d8sm7562421a91.2 - gsmtp
+RCPT TO:<raj@cdac.in>
+250 2.1.5 OK 98e67ed59e1d1-3b1b3d279d8sm7562421a91.2 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   raj@cdac.in
+DATA
+354 Go ahead 98e67ed59e1d1-3b1b3d279d8sm7562421a91.2 - gsmtp
+Date: Mon, 16 Nov 2026 10:41:28 +0530 (IST)
+From: info@cca.gov.in
+To: raj@cdac.in
+Message-ID: <1060941880.1.1794805888586@DESKTOP-QLTPTK0>
+Subject: Annual Audit Reminder
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Dear Licensee, 
+
+This is a reminder that your annual audit is due. Please make sure to complete the necessary audit procedures as per the schedule. If you haven't started the audit yet, we recommend initiating it as soon as possible.
+
+For more details and the audit schedule, please check your email or log into your dashboard.
+
+If you have any questions or need help, feel free to reach out to our support team.
+
+Best regards,
+The Audit Team
+.
+250 2.0.0 OK  1794805889 98e67ed59e1d1-3b1b3d279d8sm7562421a91.2 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection 98e67ed59e1d1-3b1b3d279d8sm7562421a91.2 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP 98e67ed59e1d1-3b1aed76745sm15745510a91.16 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK 98e67ed59e1d1-3b1aed76745sm15745510a91.16 - gsmtp
+RCPT TO:<gauravcdac24@gmail.com>
+250 2.1.5 OK 98e67ed59e1d1-3b1aed76745sm15745510a91.16 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   gauravcdac24@gmail.com
+DATA
+354 Go ahead 98e67ed59e1d1-3b1aed76745sm15745510a91.16 - gsmtp
+Date: Mon, 16 Nov 2026 10:41:31 +0530 (IST)
+From: info@cca.gov.in
+To: gauravcdac24@gmail.com
+Message-ID: <1608257824.2.1794805891507@DESKTOP-QLTPTK0>
+Subject: Annual Audit Reminder
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Dear Licensee, 
+
+This is a reminder that your annual audit is due. Please make sure to complete the necessary audit procedures as per the schedule. If you haven't started the audit yet, we recommend initiating it as soon as possible.
+
+For more details and the audit schedule, please check your email or log into your dashboard.
+
+If you have any questions or need help, feel free to reach out to our support team.
+
+Best regards,
+The Audit Team
+.
+250 2.0.0 OK  1794805892 98e67ed59e1d1-3b1aed76745sm15745510a91.16 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection 98e67ed59e1d1-3b1aed76745sm15745510a91.16 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP 98e67ed59e1d1-3b1bfb607e7sm5294115a91.3 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK 98e67ed59e1d1-3b1bfb607e7sm5294115a91.3 - gsmtp
+RCPT TO:<kanil@cdac.in>
+250 2.1.5 OK 98e67ed59e1d1-3b1bfb607e7sm5294115a91.3 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   kanil@cdac.in
+DATA
+354 Go ahead 98e67ed59e1d1-3b1bfb607e7sm5294115a91.3 - gsmtp
+Date: Mon, 16 Nov 2026 10:41:35 +0530 (IST)
+From: info@cca.gov.in
+To: kanil@cdac.in
+Message-ID: <439559343.3.1794805895487@DESKTOP-QLTPTK0>
+Subject: Annual Audit Reminder
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Dear Licensee, 
+
+This is a reminder that your annual audit is due. Please make sure to complete the necessary audit procedures as per the schedule. If you haven't started the audit yet, we recommend initiating it as soon as possible.
+
+For more details and the audit schedule, please check your email or log into your dashboard.
+
+If you have any questions or need help, feel free to reach out to our support team.
+
+Best regards,
+The Audit Team
+.
+250 2.0.0 OK  1794805896 98e67ed59e1d1-3b1bfb607e7sm5294115a91.3 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection 98e67ed59e1d1-3b1bfb607e7sm5294115a91.3 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP d2e1a72fcca58-8bececce013sm3285634b3a.6 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK d2e1a72fcca58-8bececce013sm3285634b3a.6 - gsmtp
+RCPT TO:<kanil@cdac.in>
+250 2.1.5 OK d2e1a72fcca58-8bececce013sm3285634b3a.6 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   kanil@cdac.in
+DATA
+354 Go ahead d2e1a72fcca58-8bececce013sm3285634b3a.6 - gsmtp
+Date: Mon, 16 Nov 2026 10:41:38 +0530 (IST)
+From: info@cca.gov.in
+To: kanil@cdac.in
+Message-ID: <28012086.4.1794805898521@DESKTOP-QLTPTK0>
+Subject: Annual Audit Reminder
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Dear Licensee, 
+
+This is a reminder that your annual audit is due. Please make sure to complete the necessary audit procedures as per the schedule. If you haven't started the audit yet, we recommend initiating it as soon as possible.
+
+For more details and the audit schedule, please check your email or log into your dashboard.
+
+If you have any questions or need help, feel free to reach out to our support team.
+
+Best regards,
+The Audit Team
+.
+250 2.0.0 OK  1794805899 d2e1a72fcca58-8bececce013sm3285634b3a.6 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection d2e1a72fcca58-8bececce013sm3285634b3a.6 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP 98e67ed59e1d1-3b1b21c609esm6496062a91.0 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK 98e67ed59e1d1-3b1b21c609esm6496062a91.0 - gsmtp
+RCPT TO:<kanil@cdac.in>
+250 2.1.5 OK 98e67ed59e1d1-3b1b21c609esm6496062a91.0 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   kanil@cdac.in
+DATA
+354 Go ahead 98e67ed59e1d1-3b1b21c609esm6496062a91.0 - gsmtp
+Date: Mon, 16 Nov 2026 10:41:41 +0530 (IST)
+From: info@cca.gov.in
+To: kanil@cdac.in
+Message-ID: <1692573883.5.1794805901869@DESKTOP-QLTPTK0>
+Subject: Annual Audit Reminder
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Dear Licensee, 
+
+This is a reminder that your annual audit is due. Please make sure to complete the necessary audit procedures as per the schedule. If you haven't started the audit yet, we recommend initiating it as soon as possible.
+
+For more details and the audit schedule, please check your email or log into your dashboard.
+
+If you have any questions or need help, feel free to reach out to our support team.
+
+Best regards,
+The Audit Team
+.
+250 2.0.0 OK  1794805903 98e67ed59e1d1-3b1b21c609esm6496062a91.0 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection 98e67ed59e1d1-3b1b21c609esm6496062a91.0 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP 98e67ed59e1d1-3b1aec63b9bsm15153390a91.12 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK 98e67ed59e1d1-3b1aec63b9bsm15153390a91.12 - gsmtp
+RCPT TO:<qwec@gmail.com>
+250 2.1.5 OK 98e67ed59e1d1-3b1aec63b9bsm15153390a91.12 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   qwec@gmail.com
+DATA
+354 Go ahead 98e67ed59e1d1-3b1aec63b9bsm15153390a91.12 - gsmtp
+Date: Mon, 16 Nov 2026 10:41:45 +0530 (IST)
+From: info@cca.gov.in
+To: qwec@gmail.com
+Message-ID: <1424122858.6.1794805905148@DESKTOP-QLTPTK0>
+Subject: Annual Audit Reminder
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Dear Licensee, 
+
+This is a reminder that your annual audit is due. Please make sure to complete the necessary audit procedures as per the schedule. If you haven't started the audit yet, we recommend initiating it as soon as possible.
+
+For more details and the audit schedule, please check your email or log into your dashboard.
+
+If you have any questions or need help, feel free to reach out to our support team.
+
+Best regards,
+The Audit Team
+.
+250 2.0.0 OK  1794805906 98e67ed59e1d1-3b1aec63b9bsm15153390a91.12 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection 98e67ed59e1d1-3b1aec63b9bsm15153390a91.12 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP 98e67ed59e1d1-3b197c6dd2dsm19426091a91.2 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK 98e67ed59e1d1-3b197c6dd2dsm19426091a91.2 - gsmtp
+RCPT TO:<abcde@gmail.com>
+250 2.1.5 OK 98e67ed59e1d1-3b197c6dd2dsm19426091a91.2 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   abcde@gmail.com
+DATA
+354 Go ahead 98e67ed59e1d1-3b197c6dd2dsm19426091a91.2 - gsmtp
+Date: Mon, 16 Nov 2026 10:41:48 +0530 (IST)
+From: info@cca.gov.in
+To: abcde@gmail.com
+Message-ID: <1766487412.7.1794805908174@DESKTOP-QLTPTK0>
+Subject: Annual Audit Reminder
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Dear Licensee, 
+
+This is a reminder that your annual audit is due. Please make sure to complete the necessary audit procedures as per the schedule. If you haven't started the audit yet, we recommend initiating it as soon as possible.
+
+For more details and the audit schedule, please check your email or log into your dashboard.
+
+If you have any questions or need help, feel free to reach out to our support team.
+
+Best regards,
+The Audit Team
+.
+250 2.0.0 OK  1794805909 98e67ed59e1d1-3b197c6dd2dsm19426091a91.2 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection 98e67ed59e1d1-3b197c6dd2dsm19426091a91.2 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP d2e1a72fcca58-8bed12a8f63sm3181748b3a.9 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK d2e1a72fcca58-8bed12a8f63sm3181748b3a.9 - gsmtp
+RCPT TO:<abcd@gmail.com>
+250 2.1.5 OK d2e1a72fcca58-8bed12a8f63sm3181748b3a.9 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   abcd@gmail.com
+DATA
+354 Go ahead d2e1a72fcca58-8bed12a8f63sm3181748b3a.9 - gsmtp
+Date: Mon, 16 Nov 2026 10:41:51 +0530 (IST)
+From: info@cca.gov.in
+To: abcd@gmail.com
+Message-ID: <1644230388.8.1794805911127@DESKTOP-QLTPTK0>
+Subject: Annual Audit Reminder
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Dear Licensee, 
+
+This is a reminder that your annual audit is due. Please make sure to complete the necessary audit procedures as per the schedule. If you haven't started the audit yet, we recommend initiating it as soon as possible.
+
+For more details and the audit schedule, please check your email or log into your dashboard.
+
+If you have any questions or need help, feel free to reach out to our support team.
+
+Best regards,
+The Audit Team
+.
+250 2.0.0 OK  1794805912 d2e1a72fcca58-8bed12a8f63sm3181748b3a.9 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection d2e1a72fcca58-8bed12a8f63sm3181748b3a.9 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Sending message: Please do not share your OTP with anyone, your OTP is 123456.
+mobileNumber: 6388956267
+username: ccalmsdelhi
+templateId: 1477178841413978234
+smsservicetype: otpmsg
+Unexpected error: I/O error on POST request for "https://msdgweb.mgov.gov.in/esms/sendsmsrequestDLT": PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP d9443c01a7336-2ee0f75dde9sm32014295ad.22 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK d9443c01a7336-2ee0f75dde9sm32014295ad.22 - gsmtp
+RCPT TO:<blackbirdraj887@gmail.com>
+250 2.1.5 OK d9443c01a7336-2ee0f75dde9sm32014295ad.22 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   blackbirdraj887@gmail.com
+DATA
+354 Go ahead d9443c01a7336-2ee0f75dde9sm32014295ad.22 - gsmtp
+Date: Mon, 16 Nov 2026 10:58:41 +0530 (IST)
+From: info@cca.gov.in
+To: blackbirdraj887@gmail.com
+Message-ID: <227041935.9.1794806921212@DESKTOP-QLTPTK0>
+Subject: CCA Login OTP
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+Please do not share your OTP with anyone, your OTP is 123456.
+.
+250 2.0.0 OK  1794806922 d9443c01a7336-2ee0f75dde9sm32014295ad.22 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection d9443c01a7336-2ee0f75dde9sm32014295ad.22 - gsmtp
 Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
 Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
 Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
 Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
 Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
 Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Sending message: Please do not share your OTP with anyone, your OTP is 123456.
+mobileNumber: 9891739232
+username: ccalmsdelhi
+templateId: 1477178841413978234
+smsservicetype: otpmsg
+Unexpected error: I/O error on POST request for "https://msdgweb.mgov.gov.in/esms/sendsmsrequestDLT": PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP 98e67ed59e1d1-3b1aec622b6sm16677235a91.11 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK 98e67ed59e1d1-3b1aec622b6sm16677235a91.11 - gsmtp
+RCPT TO:<gauravcdac2333@gmail.com>
+250 2.1.5 OK 98e67ed59e1d1-3b1aec622b6sm16677235a91.11 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   gauravcdac2333@gmail.com
+DATA
+354 Go ahead 98e67ed59e1d1-3b1aec622b6sm16677235a91.11 - gsmtp
+Date: Mon, 16 Nov 2026 10:59:18 +0530 (IST)
+From: info@cca.gov.in
+To: gauravcdac2333@gmail.com
+Message-ID: <1104979789.10.1794806958286@DESKTOP-QLTPTK0>
+Subject: CCA Login OTP
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+Please do not share your OTP with anyone, your OTP is 123456.
+.
+250 2.0.0 OK  1794806959 98e67ed59e1d1-3b1aec622b6sm16677235a91.11 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection 98e67ed59e1d1-3b1aec622b6sm16677235a91.11 - gsmtp
 Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
 Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
 Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
 Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
 Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
 Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
-Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Sending message: Please do not share your OTP with anyone, your OTP is 123456.
+mobileNumber: 8565985685
+username: ccalmsdelhi
+templateId: 1477178841413978234
+smsservicetype: otpmsg
+Unexpected error: I/O error on POST request for "https://msdgweb.mgov.gov.in/esms/sendsmsrequestDLT": PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP d9443c01a7336-2ee0f868203sm31049735ad.49 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK d9443c01a7336-2ee0f868203sm31049735ad.49 - gsmtp
+RCPT TO:<ravikumar@gmail.com>
+250 2.1.5 OK d9443c01a7336-2ee0f868203sm31049735ad.49 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   ravikumar@gmail.com
+DATA
+354 Go ahead d9443c01a7336-2ee0f868203sm31049735ad.49 - gsmtp
+Date: Mon, 16 Nov 2026 10:59:47 +0530 (IST)
+From: info@cca.gov.in
+To: ravikumar@gmail.com
+Message-ID: <12078933.11.1794806987438@DESKTOP-QLTPTK0>
+Subject: CCA Login OTP
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+Please do not share your OTP with anyone, your OTP is 123456.
+.
+250 2.0.0 OK  1794806988 d9443c01a7336-2ee0f868203sm31049735ad.49 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection d9443c01a7336-2ee0f868203sm31049735ad.49 - gsmtp
 Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
 Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
 Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
 Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
 Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
 Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
-Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
 Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
 Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
 Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Sending message: Please do not share your OTP with anyone, your OTP is 123456.
+mobileNumber: 8565985685
+username: ccalmsdelhi
+templateId: 1477178841413978234
+smsservicetype: otpmsg
+Unexpected error: I/O error on POST request for "https://msdgweb.mgov.gov.in/esms/sendsmsrequestDLT": PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP d9443c01a7336-2ee0f7cf7bbsm38039635ad.29 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK d9443c01a7336-2ee0f7cf7bbsm38039635ad.29 - gsmtp
+RCPT TO:<ravikumar@gmail.com>
+250 2.1.5 OK d9443c01a7336-2ee0f7cf7bbsm38039635ad.29 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   ravikumar@gmail.com
+DATA
+354 Go ahead d9443c01a7336-2ee0f7cf7bbsm38039635ad.29 - gsmtp
+Date: Mon, 16 Nov 2026 18:27:32 +0530 (IST)
+From: info@cca.gov.in
+To: ravikumar@gmail.com
+Message-ID: <1812307694.12.1794833857537@DESKTOP-QLTPTK0>
+Subject: CCA Login OTP
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+Please do not share your OTP with anyone, your OTP is 123456.
+.
+250 2.0.0 OK  1794833858 d9443c01a7336-2ee0f7cf7bbsm38039635ad.29 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection d9443c01a7336-2ee0f7cf7bbsm38039635ad.29 - gsmtp
 Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
 Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
 Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
@@ -530,7 +931,9 @@ Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_
 Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
 Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
 Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
 Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
 Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
 Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
 Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?

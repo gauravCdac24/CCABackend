@@ -30,6 +30,8 @@ public interface AuditReportCriteriaService {
 
 	void changedTheStatus(String applicantUserName);
 
+	void changedTheStatusToPendingAuditAcceptance(String applicantUserName);
+
 	void changedTheAproveOfRejection(String applicantUserName);
 
 	void changedTheStatusApprove(String applicantUserName);

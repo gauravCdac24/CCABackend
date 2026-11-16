@@ -59,7 +59,7 @@ public class AuditAgencyMobileServiceImpl implements IAuditAgencyMobileService{
 	            
 	            // NEW CODE: Pass clientHostname to the constructor or use a setter
 	            AuditAgencyMobileLogs mobileLog = new AuditAgencyMobileLogs(savedAuditAgencyMobile, ipAddress, Constant.CREATED, usernameFromToken);
-	            mobileLog.setClientHostName(clientHostname); // Use the variable calculated on Line 51
+	            mobileLog.setClientHostName(clientHostname != null && !clientHostname.isBlank() ? clientHostname : "unknown"); // Use the variable calculated on Line 51
 	            
 	            log.save(mobileLog);
 	        }
@@ -94,7 +94,9 @@ public class AuditAgencyMobileServiceImpl implements IAuditAgencyMobileService{
 	        String usernameFromToken = "1";
 	        AuditAgencyMobile savedAuditAgencyMobile = mobileRepo.save(auditAgencyMobile);
 	        if (usernameFromToken != null) {
-	            log.save(new AuditAgencyMobileLogs(savedAuditAgencyMobile, ipAddress, Constant.CREATED, usernameFromToken));
+	            AuditAgencyMobileLogs mobileLog = new AuditAgencyMobileLogs(savedAuditAgencyMobile, ipAddress, Constant.UPDATED, usernameFromToken);
+	            mobileLog.setClientHostName(clientHostname != null && !clientHostname.isBlank() ? clientHostname : "unknown");
+	            log.save(mobileLog);
 	        }
 	        System.out.println("Client Hostnames: " + clientHostname);
 	        System.out.println("Client IP Address: " + ipAddress);

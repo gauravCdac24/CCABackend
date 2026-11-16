@@ -29,9 +29,7 @@ public class SendMessage {
 		messageS.setTo(emailTo);
 		messageS.setSubject(title);
 		messageS.setText(msg);
-		// Email delivery disabled — callers may still show "email sent" alerts; SMS only is delivered
-		// mailSender.send(messageS);
-		System.out.println("Email skipped (disabled). Would send simple mail to: " + emailTo);
+		mailSender.send(messageS);
 	}
 	
 	public void sendMimeEmailMessage(String title, String msg, String emailTo) {
@@ -43,9 +41,7 @@ public class SendMessage {
 	        messageS.setSubject(title);
 	        messageS.setContent(msg, "text/html; charset=utf-8");
 	        
-	        // Email delivery disabled — callers may still show "email sent" alerts; SMS only is delivered
-	        // mailSender.send(messageS);
-	        System.out.println("Email skipped (disabled). Would send mime mail to: " + emailTo);
+	        mailSender.send(messageS);
 	    } catch (MessagingException e) {
 	        e.printStackTrace();
 	    }

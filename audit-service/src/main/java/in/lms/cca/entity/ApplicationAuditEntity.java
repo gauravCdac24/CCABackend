@@ -20,7 +20,7 @@ public class ApplicationAuditEntity extends AbstractTimestampEntity{
     @Column(name = "app_audit_id",length = 11)
     private Long appAuditId;
 	
-	@Column(name = "intent_app_id",length = 11)
+	@Column(name = "intent_app_id", columnDefinition = "TEXT")
     private String intentAppId;
 	  
     @Column(name = "remarks", columnDefinition = "TEXT")
@@ -52,6 +52,13 @@ public class ApplicationAuditEntity extends AbstractTimestampEntity{
     
     @Column(name = "applicant_remarks", columnDefinition = "TEXT")
     private String applicantRemarks;
+
+	/** NONE / DOWNLOADED / UPLOADED / SIGNED — applicant audit acceptance letter */
+	@Column(name = "acceptance_letter_status", length = 20)
+	private String acceptanceLetterStatus;
+
+	@Column(name = "acceptance_letter_file", length = 150)
+	private String acceptanceLetterFile;
 
 	public Long getAppAuditId() {
 		return appAuditId;
@@ -148,9 +155,21 @@ public class ApplicationAuditEntity extends AbstractTimestampEntity{
 	public void setApplicantRemarks(String applicantRemarks) {
 		this.applicantRemarks = applicantRemarks;
 	}
-    
 
-    
+	public String getAcceptanceLetterStatus() {
+		return acceptanceLetterStatus;
+	}
 
-	
+	public void setAcceptanceLetterStatus(String acceptanceLetterStatus) {
+		this.acceptanceLetterStatus = acceptanceLetterStatus;
+	}
+
+	public String getAcceptanceLetterFile() {
+		return acceptanceLetterFile;
+	}
+
+	public void setAcceptanceLetterFile(String acceptanceLetterFile) {
+		this.acceptanceLetterFile = acceptanceLetterFile;
+	}
+
 }

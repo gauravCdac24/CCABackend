@@ -16,6 +16,9 @@ public interface IntentApplicationRepository extends JpaRepository<IntentApplica
 
 	@Query("FROM IntentApplication a WHERE a.intentAppId=:intentAppId")
 	IntentApplication findByIntentAppId(Long intentAppId);
+
+	@Query("SELECT a.applicationStatus FROM IntentApplication a WHERE a.intentAppId=:intentAppId")
+	String findApplicationStatusByIntentAppId(@Param("intentAppId") Long intentAppId);
 	
 	@Query(value = "SELECT ia.* " +
             "FROM new_license_management.intent_application ia " +

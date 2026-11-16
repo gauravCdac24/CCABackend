@@ -26,6 +26,7 @@ public final class ApplicationStatusUtil {
 	public static final String SEND_TO_REJECTION = "Send To Rejection";
 	public static final String NC_ISSUED = "NC Issued By Auditor";
 	public static final String NC_ACTION_TAKEN = "NC Action taken By Applicant";
+	public static final String PENDING_AUDIT_ACCEPTANCE = "Pending Audit Acceptance";
 	public static final String REVIEW_NC_REPORT = "Review NC Report";
 	public static final String REVIEW_AUDIT_REPORT = "Review Audit Report";
 
@@ -36,7 +37,15 @@ public final class ApplicationStatusUtil {
 		if (status == null) {
 			return "";
 		}
-		return status.replaceAll("\\s+", "").toLowerCase();
+		return status.replace("%20", " ").replaceAll("\\s+", "").toLowerCase();
+	}
+
+	/** Statuses from which admin fills or CCA reviews license details. */
+	public static boolean isProtectedLicenseQueueStatus(String status) {
+		String normalized = normalize(status);
+		return normalized.equals(normalize(BANK_GUARANTEE_UPLOADED))
+				|| normalized.equals(normalize(LICENSE_DETAILS_PENDING_CCA))
+				|| normalized.equals(normalize(LICENSE_DETAILS_SENT_TO_ADMIN));
 	}
 
 	public static boolean isPaymentProofReceived(String status) {

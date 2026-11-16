@@ -68,7 +68,11 @@ public class UserLoginService implements IUserLoginService {
 		notification.setSmsTemplateKey(SmsTemplateKey.INTENT_REGISTRATION);
 		notification.setSmsVars(List.of(displayName));
 		
-		notificationServ.sendNotificationUsingDetails(notification);
+		try {
+			notificationServ.sendNotificationUsingDetails(notification);
+		} catch (Exception notificationError) {
+			System.out.println("Credential notification failed, user will still be created: " + notificationError.getMessage());
+		}
 		
 		UserLogin ul = userLoginRepository.save(ulogin);
 		

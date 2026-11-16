@@ -1,7 +1,19 @@
 -- Restores the admin submenu pages created from Menu Management:
--- Bank Guarantee Proof, Agreement, and Cross Certification Arrangement.
+-- Bank Guarantee Proof, Agreement, Cross Certification Arrangement, and Audit Acceptance.
 -- Safe to run more than once. Rows are added only when missing, under the
 -- active ADMIN role menu named Application Management (role path admin).
+
+UPDATE admin_user_management.sub_menu_master sm
+SET submenu_path = 'auditacceptance',
+    submenu_name = 'Audit Acceptance',
+    tracker_heading = 'Audit Acceptance',
+    updated = NOW()
+FROM admin_user_management.menu_master m
+JOIN admin_user_management.role_master r ON r.role_id = m.role_id
+WHERE sm.menu_id = m.menu_id
+  AND sm.submenu_path IN ('/auditacceptance', 'auditacceptance')
+  AND m.menu_name = 'Application Management'
+  AND LOWER(TRIM(COALESCE(r.path, ''))) = 'admin';
 
 INSERT INTO admin_user_management.sub_menu_master (
     menu_id,
@@ -36,7 +48,8 @@ JOIN (
     VALUES
         ('Bank Guarantee Proof', 'bankguaranteeproof', 'Bank Guarantee Proof', 1),
         ('Agreement', 'agreement', 'Agreement', 2),
-        ('Cross Certification Arrangement', 'crosscertificationarrangement', 'Cross Certification Arrangement', 3)
+        ('Cross Certification Arrangement', 'crosscertificationarrangement', 'Cross Certification Arrangement', 3),
+        ('Audit Acceptance', 'auditacceptance', 'Audit Acceptance', 4)
 ) AS seed(submenu_name, submenu_path, tracker_heading, order_offset) ON TRUE
 WHERE m.status = 'Active'
   AND r.status = 'Active'
@@ -80,7 +93,9 @@ JOIN (
         ('agreement', 'Add Agreement Template', 'addagreementtemplate', 'Add Agreement Template'),
         ('agreement', 'Edit Agreement Template', 'editagreementtemplate', 'Edit Agreement Template'),
         ('crosscertificationarrangement', 'Add Cross Certification', 'addcrosscertificationtemplate', 'Add Cross Certification'),
-        ('crosscertificationarrangement', 'Edit Cross Certification', 'editcrosscertificationtemplate', 'Edit Cross Certification')
+        ('crosscertificationarrangement', 'Edit Cross Certification', 'editcrosscertificationtemplate', 'Edit Cross Certification'),
+        ('auditacceptance', 'Add Audit Acceptance', 'addauditacceptance', 'Add Audit Acceptance'),
+        ('auditacceptance', 'Edit Audit Acceptance', 'editauditacceptance', 'Edit Audit Acceptance')
 ) AS seed(submenu_path, internal_name, internal_path, tracker_heading)
     ON sm.submenu_path = seed.submenu_path
 WHERE m.status = 'Active'

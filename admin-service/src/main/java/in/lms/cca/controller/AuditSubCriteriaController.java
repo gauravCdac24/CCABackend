@@ -1,5 +1,7 @@
 package in.lms.cca.controller;
 
+import java.text.ParseException;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -55,8 +57,9 @@ public class AuditSubCriteriaController {
 				
 				
 		//Check for Unique Audit Criteria Title
-		AuditSubCriteria cobj = auditSubCriteriaServ.getAuditSubCriteriaByTitle(auditSubCriteriaObj.getAuditSubCriteriaTitle().trim());
-		if(cobj != null) {
+		List<AuditSubCriteria> existingTitles = auditSubCriteriaServ
+				.getAllAuditSubCriteriaByTitle(auditSubCriteriaObj.getAuditSubCriteriaTitle().trim());
+		if(existingTitles != null && !existingTitles.isEmpty()) {
 			return new ResponseEntity<>("Duplicate Audit Sub Criteria Title is not allowed.", HttpStatus.BAD_REQUEST);
 		}
 		
@@ -170,9 +173,14 @@ public class AuditSubCriteriaController {
 				}
 						
 						
-				//Check for Unique Audit Criteria Title
-				AuditSubCriteria cobj = auditSubCriteriaServ.getAuditSubCriteriaByTitle(auditSubCriteriaObj.getAuditSubCriteriaTitle().trim());
-				if(cobj != null && cobj.getAuditSubCriteriaId() != aid) {
+				// Reject only when the title is being changed to one already used by another record.
+				// An unchanged title is allowed, including rows that already share a title.
+				String newTitle = auditSubCriteriaObj.getAuditSubCriteriaTitle().trim();
+				AuditSubCriteria current = auditSubCriteriaServ.getByAuditSubCriteriaId(aid);
+				String currentTitle = current != null && current.getAuditSubCriteriaTitle() != null
+						? current.getAuditSubCriteriaTitle().trim()
+						: "";
+				if(!newTitle.equals(currentTitle) && titleUsedByAnotherRecord(newTitle, aid)) {
 					return new ResponseEntity<>("Duplicate Audit Sub Criteria Title is not allowed.", HttpStatus.BAD_REQUEST);
 				}
 				
@@ -190,8 +198,7 @@ public class AuditSubCriteriaController {
 					obj.setAuditSubCriteriaId(aid);
 					
 					//
-					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
-					Date cdate = sdf.parse(auditSubCriteriaObj.getCreated());	
+					Date cdate = parseCreatedDate(auditSubCriteriaObj.getCreated());
 					obj.setCreated(cdate);
 					
 					
@@ -218,6 +225,44 @@ public class AuditSubCriteriaController {
 	
 	
 	
+	private boolean titleUsedByAnotherRecord(String title, Long auditSubCriteriaId) {
+		List<AuditSubCriteria> matches = auditSubCriteriaServ.getAllAuditSubCriteriaByTitle(title);
+		if (matches == null || matches.isEmpty()) {
+			return false;
+		}
+		for (AuditSubCriteria match : matches) {
+			if (match.getAuditSubCriteriaId() == null
+					|| auditSubCriteriaId == null
+					|| match.getAuditSubCriteriaId().longValue() != auditSubCriteriaId.longValue()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private Date parseCreatedDate(String created) throws ParseException {
+		String value = created == null ? "" : created.trim();
+		if (value.matches("\\d+")) {
+			return new Date(Long.parseLong(value));
+		}
+		String[] patterns = {
+				"yyyy-MM-dd'T'HH:mm:ss.SSSXXX",
+				"yyyy-MM-dd'T'HH:mm:ssXXX",
+				"yyyy-MM-dd'T'HH:mm:ss.SSS",
+				"yyyy-MM-dd'T'HH:mm:ss"
+		};
+		for (String pattern : patterns) {
+			SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+			sdf.setLenient(false);
+			ParsePosition pos = new ParsePosition(0);
+			Date date = sdf.parse(value, pos);
+			if (date != null && pos.getIndex() == value.length()) {
+				return date;
+			}
+		}
+		throw new ParseException("Unparseable created date: " + value, 0);
+	}
+
 	@GetMapping(AuditSubCriteriaServiceAPIs.GET_ENABLED_AUDIT_SUB_CRITERIA_FOR_AUDITOR)
 	public ResponseEntity<List<AuditSubCriteriaDTO>> getEnabledAuditSubCriteriaForAuditor() {
 		List<AuditSubCriteriaDTO> enabledList = auditSubCriteriaServ.getAllEnabledForAuditorView().stream()

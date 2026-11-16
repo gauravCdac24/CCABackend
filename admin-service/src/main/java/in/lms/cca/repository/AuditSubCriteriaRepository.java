@@ -56,5 +56,8 @@ public interface AuditSubCriteriaRepository extends JpaRepository<AuditSubCriter
 		@Query("FROM AuditSubCriteria a WHERE a.auditSubCriteriaTitle=:auditSubCriteriaTitle")
 		AuditSubCriteria findAuditSubCriteriaByTitle(String auditSubCriteriaTitle);
 
+		@Query("FROM AuditSubCriteria a WHERE a.auditSubCriteriaTitle=:auditSubCriteriaTitle")
+		List<AuditSubCriteria> findAllAuditSubCriteriaByTitle(String auditSubCriteriaTitle);
+
 	
 }

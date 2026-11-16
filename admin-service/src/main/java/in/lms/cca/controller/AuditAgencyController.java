@@ -1,6 +1,9 @@
 package in.lms.cca.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -366,6 +369,7 @@ public class AuditAgencyController {
 
 	    // Iterate over the list of audit agencies
 	    for (AuditAgency auditAgency : auditAgencyList) {
+	      try {
 	        // Create DTO for each audit agency
 	        AuditAgencyDTO auditAgencyDTO = new AuditAgencyDTO();
 	        
@@ -390,8 +394,9 @@ public class AuditAgencyController {
 	        List<Auditors> auditorsList = auditorsServ.findByAuditAgencyId(auditAgency.getAuditAgencyId());
 	        
 	        // Fetch address using addressId
-            Long addressId = auditAgency.getAddressId().getAddressId(); // Ensure this returns a Long
-            Address address = addressServ.getAddressById(addressId);
+            Address linkedAddress = auditAgency.getAddressId();
+            Long addressId = linkedAddress != null ? linkedAddress.getAddressId() : null;
+            Address address = addressId != null ? addressServ.getAddressById(addressId) : null;
 
             if (address != null) {
                 auditAgencyDTO.setBlockNo(address.getBlockNo());
@@ -465,6 +470,9 @@ public class AuditAgencyController {
 	        auditAgencyDTO.setPhoneRecord(auditAgencyMobileDTOList);
 	        
 	        auditAgencyDTOList.add(auditAgencyDTO);
+	      } catch (Exception ex) {
+	        ex.printStackTrace();
+	      }
 	    }
 
 	    // Return the response with the list of DTOs
@@ -479,10 +487,73 @@ public class AuditAgencyController {
 	    }
 	    @SuppressWarnings("unchecked")
 	    List<AuditAgencyDTO> auditAgencyDTOList = (List<AuditAgencyDTO>) allAgenciesResponse.getBody();
+	    LocalDate today = LocalDate.now(ZoneId.of("Asia/Kolkata"));
 	    List<AuditAgencyDTO> activeAuditAgencyDTOList = auditAgencyDTOList.stream()
-	            .filter(agency -> agency.getStatus() != null && "Active".equalsIgnoreCase(agency.getStatus()))
+	            .filter(agency -> isCurrentlyEmpanelled(agency, today))
 	            .collect(Collectors.toList());
 	    return new ResponseEntity<>(activeAuditAgencyDTOList, HttpStatus.OK);
+	}
+
+	private boolean isCurrentlyEmpanelled(AuditAgencyDTO agency, LocalDate today) {
+	    if (agency.getStatus() == null || !"active".equalsIgnoreCase(agency.getStatus().trim())) {
+	        return false;
+	    }
+	    LocalDate effectiveFrom = parseAgencyDate(agency.getEffectiveFrom());
+	    LocalDate effectiveTo = parseAgencyDate(agency.getEffectiveTo());
+	    if (effectiveFrom != null && effectiveFrom.isAfter(today)) {
+	        return false;
+	    }
+	    return effectiveTo == null || !effectiveTo.isBefore(today);
+	}
+
+	private Long resolveAddressId(String rawAddressId, AuditAgency existingAgency) {
+	    if (rawAddressId != null && rawAddressId.trim().matches("\\d+")) {
+	        return Long.valueOf(rawAddressId.trim());
+	    }
+	    if (existingAgency.getAddressId() != null && existingAgency.getAddressId().getAddressId() != null) {
+	        return existingAgency.getAddressId().getAddressId();
+	    }
+	    throw new IllegalArgumentException("Address id is missing.");
+	}
+
+	private Long resolveAuditAgencyId(String raw) {
+	    if (raw == null || raw.isBlank()) {
+	        return null;
+	    }
+	    String current = raw.trim();
+	    for (int attempt = 0; attempt < 3 && !current.matches("\\d+"); attempt++) {
+	        String decrypted = EncryptionUtil.decrypt(current);
+	        if (decrypted == null || decrypted.isBlank() || decrypted.trim().equals(current)) {
+	            break;
+	        }
+	        current = decrypted.trim();
+	    }
+	    if (!current.matches("\\d+")) {
+	        return null;
+	    }
+	    return Long.valueOf(current);
+	}
+
+	private Date resolveCreatedDate(String rawCreated, Date existingCreated, SimpleDateFormat dateFormat) {
+	    if (rawCreated != null && rawCreated.matches("\\d{4}-\\d{2}-\\d{2}")) {
+	        try {
+	            return dateFormat.parse(rawCreated);
+	        } catch (ParseException ex) {
+	            return existingCreated != null ? existingCreated : new Date();
+	        }
+	    }
+	    return existingCreated != null ? existingCreated : new Date();
+	}
+
+	private LocalDate parseAgencyDate(String value) {
+	    if (value == null || value.isBlank()) {
+	        return null;
+	    }
+	    try {
+	        return LocalDate.parse(value.substring(0, Math.min(10, value.length())));
+	    } catch (DateTimeParseException ex) {
+	        return null;
+	    }
 	}
 
 	@PostMapping(AuditAgencyServiceAPIs.UPDATE_AUDIT_AGENCY)
@@ -664,50 +735,62 @@ public class AuditAgencyController {
 	        newAddress.setCountryId(country);
 	        newAddress.setStateId(state);
 	        newAddress.setCityId(city);
-	        
-	        newAddress.setAddressId(Long.valueOf(auditAgencyObj.getAddressId()));
+
+	        Long auditAgencyId = resolveAuditAgencyId(auditAgencyObj.getAuditAgencyId());
+	        if (auditAgencyId == null) {
+	            return new ResponseEntity<>("Invalid audit agency id.", HttpStatus.BAD_REQUEST);
+	        }
+	        AuditAgency existingAgency = auditAgencyServ.getAuditAgencyById(auditAgencyId);
+	        if (existingAgency == null) {
+	            return new ResponseEntity<>("Audit Agency not found", HttpStatus.NOT_FOUND);
+	        }
+	        newAddress.setAddressId(resolveAddressId(auditAgencyObj.getAddressId(), existingAgency));
 	        newAddress.setAddressTypeId(addressTypeServ.getAddressTypeByName("Permanent"));
 	        newAddress.setBlockNo(auditAgencyObj.getBlockNo());
 	        newAddress.setSubDivision(auditAgencyObj.getSubDivision());
 	        newAddress.setPostOffice(auditAgencyObj.getPostOffice());
 	        newAddress.setVillage(auditAgencyObj.getVillage());
 	        newAddress.setPincode(auditAgencyObj.getPin());
-	        Date date=new Date();
-	        newAddress.setUpdated(date);
-	        Date created = dateFormat.parse(auditAgencyObj.getCreated());
-	        newAddress.setCreated(created);
-	        Optional<Address> addressObj = addressServ.updateAddress(newAddress);
-	 
-	        AuditAgency newAuditAgency = new AuditAgency();
-	        newAuditAgency.setAddressId(addressObj.get());
+        Date date=new Date();
+        newAddress.setUpdated(date);
+        Date created = resolveCreatedDate(auditAgencyObj.getCreated(), existingAgency.getCreated(), dateFormat);
+        newAddress.setCreated(created);
+        Optional<Address> addressObj = addressServ.updateAddress(newAddress);
+        if (addressObj.isEmpty()) {
+            return new ResponseEntity<>("An error occurred while updated the audit agency.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+ 
+        AuditAgency newAuditAgency = new AuditAgency();
+        newAuditAgency.setAddressId(addressObj.get());
 
-	      
-	        try {
-	            Date effectiveFromParsed = dateFormat.parse(auditAgencyObj.getEffectiveFrom());
-	            Date effectiveToParsed = dateFormat.parse(auditAgencyObj.getEffectiveTo());
+      
+        try {
+            Date effectiveFromParsed = dateFormat.parse(auditAgencyObj.getEffectiveFrom());
+            Date effectiveToParsed = dateFormat.parse(auditAgencyObj.getEffectiveTo());
 
-	            newAuditAgency.setEffectiveFrom(effectiveFromParsed);
-	            newAuditAgency.setEffectiveTo(effectiveToParsed);
-	        }catch (ParseException e) {
-	            return new ResponseEntity<>("Error parsing dates", HttpStatus.BAD_REQUEST);
-	        }
-	        newAuditAgency.setAgencyName(auditAgencyObj.getAuditAgencyName());
-	        
-	        String decryptedAuditAgencyId = EncryptionUtil.decrypt(auditAgencyObj.getAuditAgencyId());
-	        
-	        AuditAgency a = auditAgencyServ.getAuditAgencyById(Long.valueOf(decryptedAuditAgencyId));
-	        
-	        newAuditAgency.setAuditAgencyId(Long.valueOf(decryptedAuditAgencyId)); 
-	        newAuditAgency.setUpdated(date);
-	        newAuditAgency.setCreated(created);
-	        newAuditAgency.setStatus(a.getStatus());
+            newAuditAgency.setEffectiveFrom(effectiveFromParsed);
+            newAuditAgency.setEffectiveTo(effectiveToParsed);
+        }catch (ParseException e) {
+            return new ResponseEntity<>("Error parsing dates", HttpStatus.BAD_REQUEST);
+        }
+        newAuditAgency.setAgencyName(auditAgencyObj.getAuditAgencyName());
 
-	        Optional<AuditAgency> auditAgency = auditAgencyServ.updateAddress(newAuditAgency);
+        newAuditAgency.setAuditAgencyId(auditAgencyId);
+        newAuditAgency.setUpdated(date);
+        newAuditAgency.setCreated(created);
+        newAuditAgency.setStatus(existingAgency.getStatus());
 
-	        // Step 1: Collect the IDs of the mobile records to be updated
-	        List<Long> updatedMobileIds = new ArrayList<>();
+        Optional<AuditAgency> auditAgency = auditAgencyServ.updateAddress(newAuditAgency);
+        if (auditAgency.isEmpty()) {
+            return new ResponseEntity<>("An error occurred while updated the audit agency.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
-	        for (AuditAgencyMobileDTO auditAgencyMobileDTO : auditAgencyObj.getPhoneRecord()) {
+        // Step 1: Collect the IDs of the mobile records to be updated
+        List<Long> updatedMobileIds = new ArrayList<>();
+        List<AuditAgencyMobileDTO> phoneRecords = auditAgencyObj.getPhoneRecord() != null
+                ? auditAgencyObj.getPhoneRecord() : new ArrayList<>();
+
+        for (AuditAgencyMobileDTO auditAgencyMobileDTO : phoneRecords) {
 	            AuditAgencyMobile newAuditAgencyMobile = new AuditAgencyMobile();
 
 	            // If auditAgencyMobileDTO.getAuditAgencyMobileId() is not null, it's an update; otherwise, it's a new record
@@ -741,16 +824,20 @@ public class AuditAgencyController {
 	        List<AuditAgencyEmail> existingEmails = auditAgencyEmailServ.findByAuditAgencyId(newAuditAgency.getAuditAgencyId());
 
 	        // Step 2: Iterate over the DTOs and update or create records
-	        Set<Long> updatedEmailIds = new HashSet<>();
-	        for (AuditAgencyEmailDTO auditAgencyEmailDTO : auditAgencyObj.getEmailId()) {
-	            AuditAgencyEmail newAuditAgencyEmail;
+        Set<Long> updatedEmailIds = new HashSet<>();
+        List<AuditAgencyEmailDTO> emailRecords = auditAgencyObj.getEmailId() != null
+                ? auditAgencyObj.getEmailId() : new ArrayList<>();
+        for (AuditAgencyEmailDTO auditAgencyEmailDTO : emailRecords) {
+            AuditAgencyEmail newAuditAgencyEmail;
 
-	            if (auditAgencyEmailDTO.getAuditAgencyEmailId() != null && !auditAgencyEmailDTO.getAuditAgencyEmailId().isEmpty()) {
-	                // Fetch existing email record for update
-	                newAuditAgencyEmail = auditAgencyEmailServ.getAuditAgencyEmailById(Long.valueOf(auditAgencyEmailDTO.getAuditAgencyEmailId()));
-	                       
+            if (auditAgencyEmailDTO.getAuditAgencyEmailId() != null && !auditAgencyEmailDTO.getAuditAgencyEmailId().isEmpty()) {
+                // Fetch existing email record for update
+                newAuditAgencyEmail = auditAgencyEmailServ.getAuditAgencyEmailById(Long.valueOf(auditAgencyEmailDTO.getAuditAgencyEmailId()));
+                if (newAuditAgencyEmail == null) {
+                    return new ResponseEntity<>("Email record not found.", HttpStatus.BAD_REQUEST);
+                }
 
-	                // Update existing email record
+                // Update existing email record
 	                newAuditAgencyEmail.setEmailType(auditAgencyEmailDTO.getEmailType());
 	                newAuditAgencyEmail.setEmail(auditAgencyEmailDTO.getEmail());
 	                newAuditAgencyEmail.setUpdated(date);
@@ -792,15 +879,20 @@ public class AuditAgencyController {
 
 
 	        // Step 1: Collect the IDs of the auditors to be updated
-	        List<Long> updatedAuditorsIds = new ArrayList<>();
+        List<Long> updatedAuditorsIds = new ArrayList<>();
+        List<AuditorsDTO> auditorRecords = auditAgencyObj.getAuditors() != null
+                ? auditAgencyObj.getAuditors() : new ArrayList<>();
 
-	        for (AuditorsDTO auditorsDTO : auditAgencyObj.getAuditors()) {
-	            Auditors newAuditors = new Auditors();
-	            
-	            // If auditorsDTO.getAuditorsId() is null, it's a new record; otherwise, it's an update
-	            if (auditorsDTO.getAuditorsId() != null && !auditorsDTO.getAuditorsId().isEmpty()) {
-	            	newAuditors = AuditorServ.getAuditorById(Long.valueOf(auditorsDTO.getAuditorsId()));
-	                newAuditors.setAuditorsId(Long.valueOf(auditorsDTO.getAuditorsId()));
+        for (AuditorsDTO auditorsDTO : auditorRecords) {
+            Auditors newAuditors = new Auditors();
+            
+            // If auditorsDTO.getAuditorsId() is null, it's a new record; otherwise, it's an update
+            if (auditorsDTO.getAuditorsId() != null && !auditorsDTO.getAuditorsId().isEmpty()) {
+            	newAuditors = AuditorServ.getAuditorById(Long.valueOf(auditorsDTO.getAuditorsId()));
+                if (newAuditors == null) {
+                    return new ResponseEntity<>("Auditor record not found.", HttpStatus.BAD_REQUEST);
+                }
+                newAuditors.setAuditorsId(Long.valueOf(auditorsDTO.getAuditorsId()));
 	                newAuditors.setFirstName(auditorsDTO.getFirstName());
 	                newAuditors.setMiddleName(auditorsDTO.getMiddleName());
 	                newAuditors.setLastName(auditorsDTO.getLastName());
@@ -822,9 +914,12 @@ public class AuditAgencyController {
 	            newAuditors.setCreated(created);
 	            newAuditors.setStatus("Active");
 
-	            AuditorServ.addAuditAuditors(newAuditors);
-	        }
-	        }
+            AuditorServ.addAuditAuditors(newAuditors);
+            if (newAuditors.getAuditorsId() != null) {
+                updatedAuditorsIds.add(newAuditors.getAuditorsId());
+            }
+        }
+        }
 	        // Step 2: Fetch existing auditors and set status to "Inactive" for those not in the updated list
 	        List<Auditors> existingAuditors = AuditorServ.findByAuditAgencyId(auditAgency.get().getAuditAgencyId());
 
@@ -879,8 +974,8 @@ public class AuditAgencyController {
 	    auditAgencyDTO.setEffectiveFrom(effectiveFromStr);
 	    auditAgencyDTO.setEffectiveTo(effectiveToStr);
 	    auditAgencyDTO.setStatus(auditAgency.getStatus());
-	    auditAgencyDTO.setCreated(String.valueOf(auditAgency.getCreated()));
-	    auditAgencyDTO.setUpdated(String.valueOf(auditAgency.getUpdated()));
+	    auditAgencyDTO.setCreated(auditAgency.getCreated() != null ? dateFormat.format(auditAgency.getCreated()) : null);
+	    auditAgencyDTO.setUpdated(auditAgency.getUpdated() != null ? dateFormat.format(auditAgency.getUpdated()) : null);
 	    auditAgencyDTO.setCreatedBy(auditAgency.getCreatedBy());
 
 	    // Fetch auditors for the current audit agency
@@ -1160,50 +1255,92 @@ public class AuditAgencyController {
 	
 	//Verify audit agency account
 	@GetMapping(AuditAgencyServiceAPIs.CHANGE_AUDIT_AGENCY_STATUS)
-	public void changeIntentStatus(@RequestParam("id") String intentId, @RequestParam("qid") String username) {
-	    String id = EncryptionUtil.decrypt(intentId);
+	public ResponseEntity<String> changeIntentStatus(@RequestParam("id") String intentId, @RequestParam("qid") String username) {
+	    Long agencyId = resolveAuditAgencyId(intentId);
+	    if (agencyId == null) {
+	        return new ResponseEntity<>("Invalid audit agency id.", HttpStatus.BAD_REQUEST);
+	    }
 
 	    try {
-	    	System.out.println("id=-=->"+id);
-	        AuditAgency c = auditAgencyServ.getAuditAgencyById(Long.parseLong(id));
-	        
-	        System.out.println("c=--->"+c.getStatus());
+	        // Commit Active before the agency is loaded into this request. A later
+	        // flush of a stale Inactive copy was putting the row back.
+	        if (!auditAgencyServ.updateAuditAgencyStatus(agencyId, "Active")) {
+	            return new ResponseEntity<>("Audit Agency not found.", HttpStatus.NOT_FOUND);
+	        }
 
-	        List<AuditAgencyEmail> auditAgencyEmailList = auditAgencyEmailServ.findByAuditAgencyId(c.getAuditAgencyId());
-	        List<AuditAgencyMobile> auditAgencyMobileList = auditAgencyMobileServ.findByAuditAgencyId(c.getAuditAgencyId());
+	        AuditAgency existing = auditAgencyServ.getAuditAgencyById(agencyId);
+	        if (existing == null) {
+	            return new ResponseEntity<>("Audit Agency not found.", HttpStatus.NOT_FOUND);
+	        }
+
+	        List<AuditAgencyEmail> auditAgencyEmailList = auditAgencyEmailServ.findByAuditAgencyId(agencyId);
+	        List<AuditAgencyMobile> auditAgencyMobileList = auditAgencyMobileServ.findByAuditAgencyId(agencyId);
 
 	        UserLoginDTO u = new UserLoginDTO();
 	        u.setCreatedBy(username);
 	        u.setUpdatedBy(username);
-	        
-	        
-	        if (!auditAgencyEmailList.isEmpty()) {
-	            u.setEmailId(String.valueOf(auditAgencyEmailList.get(0).getEmail())); 
-	        }
-	        
-	       
-	        if (!auditAgencyMobileList.isEmpty()) {
-	            u.setMobile(auditAgencyMobileList.get(0).getContactNo());
-	        }
-	        
-	        u.setFirstName(c.getAgencyName());
+	        u.setEmailId(resolveLoginEmail(auditAgencyEmailList));
+	        u.setMobile(resolveLoginMobile(auditAgencyMobileList));
+	        u.setFirstName(existing.getAgencyName());
 	        u.setStatus("Active");
-	        u.setUserId(EncryptionUtil.encrypt(c.getAuditAgencyId().toString()));
-	        
+	        u.setUserId(EncryptionUtil.encrypt(agencyId.toString()));
+
+	        if (u.getEmailId() == null || u.getEmailId().isBlank() || u.getMobile() == null || u.getMobile().isBlank()) {
+	            return new ResponseEntity<>("Audit agency is verified, but email or mobile is missing so the login was not created.", HttpStatus.OK);
+	        }
+
 	        try {
-				userLoginServ.addUserAuditAgency(u);
-			} catch (Exception ex) {
-				// TODO: handle exception
-				System.out.println("User creation skipped (likely exists): " + ex.getMessage());
-			}
-	        
-	       
-	        c.setStatus("Active");
-	        auditAgencyServ.updateAddress(c);
+	            userLoginServ.addUserAuditAgency(u);
+	        } catch (Exception ex) {
+	            String message = ex.getMessage() == null ? "" : ex.getMessage().toLowerCase();
+	            if (!message.contains("already exists")) {
+	                System.out.println("Audit agency login was not created: " + ex.getMessage());
+	                return new ResponseEntity<>("Audit agency is verified, but the login could not be created. Please try again.", HttpStatus.OK);
+	            }
+	        }
+
+	        return new ResponseEntity<>("Audit Agency is verified.", HttpStatus.OK);
 	    } catch (Exception e) {
-	        
 	        e.printStackTrace();
+	        return new ResponseEntity<>("Unable to verify the audit agency.", HttpStatus.INTERNAL_SERVER_ERROR);
 	    }
+	}
+
+	private String resolveLoginEmail(List<AuditAgencyEmail> emails) {
+	    if (emails == null || emails.isEmpty()) {
+	        return null;
+	    }
+	    for (AuditAgencyEmail email : emails) {
+	        if (email.getEmail() != null && !email.getEmail().isBlank()
+	                && "Primary".equalsIgnoreCase(email.getEmailType())) {
+	            return email.getEmail();
+	        }
+	    }
+	    for (AuditAgencyEmail email : emails) {
+	        if (email.getEmail() != null && !email.getEmail().isBlank()) {
+	            return email.getEmail();
+	        }
+	    }
+	    return null;
+	}
+
+	private String resolveLoginMobile(List<AuditAgencyMobile> mobiles) {
+	    if (mobiles == null || mobiles.isEmpty()) {
+	        return null;
+	    }
+	    for (AuditAgencyMobile mobile : mobiles) {
+	        if (mobile.getContactNo() != null && "mobile".equalsIgnoreCase(mobile.getContactType())
+	                && mobile.getContactNo().matches("^[6-9][0-9]{9}$")) {
+	            return mobile.getContactNo();
+	        }
+	    }
+	    for (AuditAgencyMobile mobile : mobiles) {
+	        if (mobile.getContactNo() != null && !mobile.getContactNo().isBlank()
+	                && mobile.getContactNo().length() <= 10) {
+	            return mobile.getContactNo();
+	        }
+	    }
+	    return null;
 	}
 
 

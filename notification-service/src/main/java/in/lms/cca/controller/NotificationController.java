@@ -136,18 +136,16 @@ public class NotificationController {
 
 			if (typeName.equals("Email") || typeName.equals("Email & SMS") || typeName.equals("Email & Dashboard")
 					|| typeName.equals("All")) {
-				// Email delivery disabled — UI/API still reports success; SMS only is delivered
-				// try {
-				// 	SimpleMailMessage messageS = new SimpleMailMessage();
-				// 	messageS.setFrom(EmailConfig.EMAIL_FROM);
-				// 	messageS.setTo(userRes.getEmailId());
-				// 	messageS.setSubject(notification.getSubject());
-				// 	messageS.setText(notification.getMessage());
-				// 	mailSender.send(messageS);
-				// } catch (Exception mailEx) {
-				// 	System.err.println("Email send failed: " + mailEx.getMessage());
-				// }
-				System.out.println("Email skipped (disabled). Would send to: " + userRes.getEmailId());
+				try {
+					SimpleMailMessage messageS = new SimpleMailMessage();
+					messageS.setFrom(EmailConfig.EMAIL_FROM);
+					messageS.setTo(userRes.getEmailId());
+					messageS.setSubject(notification.getSubject());
+					messageS.setText(notification.getMessage());
+					mailSender.send(messageS);
+				} catch (Exception mailEx) {
+					System.err.println("Email send failed: " + mailEx.getMessage());
+				}
 			}
 
 			if (includesSms(typeName)) {
@@ -198,15 +196,13 @@ public class NotificationController {
 
 			if (typeName.equals("Email") || typeName.equals("Email & SMS") || typeName.equals("Email & Dashboard")
 					|| typeName.equals("All")) {
-				// Email delivery disabled — UI/API still reports success; SMS only is delivered
-				// try {
-				// 	sendMessage.sendMimeEmailMessage(notification.getSubject(), notification.getMessage(),
-				// 			notification.getUserEmail());
-				// } catch (Exception mailEx) {
-				// 	System.err.println("Email send failed: " + mailEx.getMessage());
-				// 	mailEx.printStackTrace();
-				// }
-				System.out.println("Email skipped (disabled). Would send to: " + notification.getUserEmail());
+				try {
+					sendMessage.sendMimeEmailMessage(notification.getSubject(), notification.getMessage(),
+							notification.getUserEmail());
+				} catch (Exception mailEx) {
+					System.err.println("Email send failed: " + mailEx.getMessage());
+					mailEx.printStackTrace();
+				}
 			}
 
 			if (notificationType != null) {

@@ -57,7 +57,7 @@ public class AuditAgencyEmailServiceImpl implements IAuditAgencyEmailService{
 	        	AuditAgencyEmailLogs emailLog = new AuditAgencyEmailLogs(savedAuditAgencyEmail, ipAddress, Constant.CREATED, usernameFromToken);
 	            
 	            // Explicitly set the hostname
-	            emailLog.setClientHostName(clientHostname);
+	            emailLog.setClientHostName(clientHostname != null && !clientHostname.isBlank() ? clientHostname : "unknown");
 	           // log.save(new AuditAgencyEmailLogs(savedAuditAgencyEmail, ipAddress, Constant.CREATED, usernameFromToken));
 	            log.save(emailLog);
 	        }
@@ -93,7 +93,9 @@ public class AuditAgencyEmailServiceImpl implements IAuditAgencyEmailService{
 	        String usernameFromToken = "1";
 	        AuditAgencyEmail savedAuditAgencyEmail = emailRepo.save(auditAgencyEmail);
 	        if (usernameFromToken != null) {
-	            log.save(new AuditAgencyEmailLogs(savedAuditAgencyEmail, ipAddress, Constant.UPDATED, usernameFromToken));
+	            AuditAgencyEmailLogs emailLog = new AuditAgencyEmailLogs(savedAuditAgencyEmail, ipAddress, Constant.UPDATED, usernameFromToken);
+	            emailLog.setClientHostName(clientHostname != null && !clientHostname.isBlank() ? clientHostname : "unknown");
+	            log.save(emailLog);
 	        }
 	        System.out.println("Client Hostnames: " + clientHostname);
 	        System.out.println("Client IP Address: " + ipAddress);

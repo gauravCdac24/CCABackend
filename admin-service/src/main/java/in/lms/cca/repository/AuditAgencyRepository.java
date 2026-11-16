@@ -18,8 +18,11 @@ public interface AuditAgencyRepository extends JpaRepository<AuditAgency, Long>{
 		@Query("DELETE FROM AuditAgency a WHERE a.auditAgencyId=:auditAgencyId")
 		void deleteByAuditAgencyId(Long auditAgencyId);
 				
-		//Find all active Audit Agency
-		@Query("FROM AuditAgency WHERE status='Active' order by created DESC")
+		// Active and currently empanelled. Expired rows stay out of the applicant dropdown.
+		@Query("FROM AuditAgency a WHERE lower(a.status) = 'active' "
+				+ "AND (a.effectiveFrom IS NULL OR a.effectiveFrom <= CURRENT_DATE) "
+				+ "AND (a.effectiveTo IS NULL OR a.effectiveTo >= CURRENT_DATE) "
+				+ "ORDER BY a.created DESC")
 		List<AuditAgency> findAllActiveAuditAgency();
 		
 		//Find all inactive Audit Agency
@@ -29,6 +32,11 @@ public interface AuditAgencyRepository extends JpaRepository<AuditAgency, Long>{
 		//Get Audit Agency by Id
 		@Query("FROM AuditAgency a WHERE a.auditAgencyId=:auditAgencyId")
 		AuditAgency findAuditAgencyById(@Param("auditAgencyId")Long auditAgencyId);
+
+		@Modifying(clearAutomatically = true)
+		@Transactional(Transactional.TxType.REQUIRES_NEW)
+		@Query("UPDATE AuditAgency a SET a.status = :status WHERE a.auditAgencyId = :auditAgencyId")
+		int updateAuditAgencyStatus(@Param("auditAgencyId") Long auditAgencyId, @Param("status") String status);
 		
 		//Find Audit Agency by createdBy (user's encrypted username)
 		@Query("FROM AuditAgency a WHERE a.createdBy=:createdBy AND a.status='Active'")

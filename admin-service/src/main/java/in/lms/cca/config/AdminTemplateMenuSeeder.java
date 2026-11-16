@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * Menu Management stores submenu pages in the database, not in source.
- * These three admin pages were created from that screen, so a database on
+ * These admin pages were created from that screen, so a database on
  * another machine does not have them until this runs at startup.
  */
 @Component

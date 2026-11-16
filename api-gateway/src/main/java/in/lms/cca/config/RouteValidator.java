@@ -50,6 +50,7 @@ public class RouteValidator {
 					"/notification-service/**",
 					"/esign-service/**",
 					"/admin-service/get-all-country",
+					"/admin-service/get-all-active-country",
 					"/admin-service/get-all-state",
 					"/admin-service/get-all-city",
 					"/admin-service/get-city-by-state-id",

@@ -13,9 +13,18 @@ public final class LocationMapping {
 		if (raw == null || raw.trim().isEmpty()) {
 			throw new IllegalArgumentException("Location id is missing.");
 		}
-		String decrypted = EncryptionUtil.decrypt(raw.trim());
-		String id = decrypted != null ? decrypted.trim() : raw.trim();
-		return Long.valueOf(id);
+		String current = raw.trim();
+		for (int attempt = 0; attempt < 3 && !current.matches("\\d+"); attempt++) {
+			String decrypted = EncryptionUtil.decrypt(current);
+			if (decrypted == null || decrypted.isBlank() || decrypted.trim().equals(current)) {
+				break;
+			}
+			current = decrypted.trim();
+		}
+		if (!current.matches("\\d+")) {
+			throw new IllegalArgumentException("Invalid location id.");
+		}
+		return Long.valueOf(current);
 	}
 
 	public static void assertMapped(Country country, State state, City city) {

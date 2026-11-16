@@ -143,12 +143,29 @@ public class NewLicenseClientController {
 		
         List<ApplicationDTO> applicationDTO = new ArrayList<>();
         
-        //get all intent applications
+        // Fresh and renewal applications share this table. Include every application
+        // whose status is bank-guarantee proof uploaded, pending CCA review, or sent back to admin.
         List<IntentApplication> intentApplications = intentAppServ.getAllIntentApplication();
         
         for(IntentApplication app: intentApplications) {
-        	
-        	if (isLicenseDetailsQueue(app.getApplicationStatus())) {
+        	if (ApplicationStatusUtil.isLicenseIssued(app.getApplicationStatus())
+        			|| ApplicationStatusUtil.isRejected(app.getApplicationStatus())) {
+        		continue;
+        	}
+
+        	List<ApplicationTimeLine> list = appTimeLineServ.getByIntentApplicationId(app.getIntentAppId());
+        	String latestTimelineStatus = (list != null && !list.isEmpty())
+        			? list.get(0).getApplicationStatus() : null;
+        	String storedStatus = app.getApplicationStatus();
+        	// A later save can overwrite the intent status without a new timeline row.
+        	// Keep the renewal on this queue when bank-guarantee proof, or a return to admin, is still the latest step.
+        	String effectiveStatus = ApplicationStatusUtil.isProtectedLicenseQueueStatus(storedStatus)
+        			? storedStatus
+        			: latestTimelineStatus;
+        	if (!ApplicationStatusUtil.isProtectedLicenseQueueStatus(effectiveStatus)) {
+        		continue;
+        	}
+        	app.setApplicationStatus(effectiveStatus);
         	
 	        	ApplicationDTO application = new ApplicationDTO();
 	        	
@@ -160,18 +177,14 @@ public class NewLicenseClientController {
 	        	application.setIntentAppId(app.getIntentAppId().toString());
 	        	application.setStatusInitiatedOn(null);
 	        	
-	        	//
-	        	List<ApplicationTimeLine> list = appTimeLineServ.getByIntentApplicationId(app.getIntentAppId());
-	        	if(list.size()>0)
+	        	if(list != null && !list.isEmpty())
 	        		application.setStatusInitiatedOn(list.get(0).getCreated());
 	        	else
 	        		application.setStatusInitiatedOn(app.getUpdated());
 
 	        	applyWorkflow(application, app, role);
-	        	
+	        	app.setApplicationStatus(storedStatus);
 	        	applicationDTO.add(application);
-        	
-        	}
         }
         
         return new ResponseEntity<>(applicationDTO, HttpStatus.OK);
@@ -305,15 +318,6 @@ public class NewLicenseClientController {
 			e.printStackTrace();
 			return new ResponseEntity<>("Unable to load license form context.", HttpStatus.BAD_REQUEST);
 		}
-	}
-
-	private boolean isLicenseDetailsQueue(String status) {
-		if (status == null) {
-			return false;
-		}
-		return "BANK_GUARANTEE_PROOF_UPLOADED".equals(status)
-				|| ApplicationStatusUtil.LICENSE_DETAILS_PENDING_CCA.equals(status)
-				|| ApplicationStatusUtil.LICENSE_DETAILS_SENT_TO_ADMIN.equals(status);
 	}
 
 	private String findInPrincipleApprovalDate(Long intentAppId) {

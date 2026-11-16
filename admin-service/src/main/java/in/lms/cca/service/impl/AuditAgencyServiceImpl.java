@@ -9,6 +9,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 
 import in.lms.cca.entity.AuditAgency;
 import in.lms.cca.entity.AuditAgencyMobile;
@@ -177,5 +178,14 @@ public class AuditAgencyServiceImpl implements IAuditAgencyService{
 	@Override
 	public AuditAgency getAuditAgencyByAgencyName(String agencyName) {
 		return auditAgencyRepo.findByAgencyName(agencyName);
+	}
+
+	@Override
+	@org.springframework.transaction.annotation.Transactional(propagation = Propagation.REQUIRES_NEW)
+	public boolean updateAuditAgencyStatus(Long id, String status) {
+		if (id == null || status == null || status.isBlank()) {
+			return false;
+		}
+		return auditAgencyRepo.updateAuditAgencyStatus(id, status) > 0;
 	}
 }

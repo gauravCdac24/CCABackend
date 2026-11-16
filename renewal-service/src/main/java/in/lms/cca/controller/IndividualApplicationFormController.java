@@ -458,11 +458,8 @@ public class IndividualApplicationFormController {
 	        indivAdditionalDetails.setPassportNo(passportNo);
 	        indivAdditionalDetails.setPassportIssuingAuthority(passportIssuingAuthority);
 
-	        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	        Date publishDateParsed;
-	        try {
-	            publishDateParsed = dateFormat.parse(passportExpiryDate);
-	        } catch (ParseException e) {
+	        Date publishDateParsed = parseOptionalPassportExpiry(passportExpiryDate);
+	        if (publishDateParsed == null && hasPassportExpiryValue(passportExpiryDate)) {
 	            return new ResponseEntity<>("Invalid  date format.", HttpStatus.BAD_REQUEST);
 	        }
 	        indivAdditionalDetails.setPassportExpiryDate(publishDateParsed);
@@ -1907,14 +1904,11 @@ List<ApplicationDocument> sortedActiveDocuments = applicationDocument.stream()
 	    	
 	    	 System.out.println("file4====>"+file4);
 	    	
-	        // Parse and validate the expiry date
-	        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	        Date publishDateParsed;
-	        try {
-	            publishDateParsed = dateFormat.parse(passportExpiryDate);
-	        } catch (ParseException e) {
+	        // Passport expiry is optional. Parse it only when a date was entered.
+	        Date publishDateParsed = parseOptionalPassportExpiry(passportExpiryDate);
+	        if (publishDateParsed == null && hasPassportExpiryValue(passportExpiryDate)) {
 	            return new ResponseEntity<>("Invalid date format.", HttpStatus.BAD_REQUEST);
-	        }  
+	        }
 	        IntentApplication intentApp = intentAppServ.findIntentAppById(useName);
 	        
 	        List<IndivAdditionalDetails> indivAdditionalDetailsList = indivAdditionalDetailsServiceServ.findIntentWithoutStatusAppById(intentApp.getIntentAppId());
@@ -1950,11 +1944,8 @@ List<ApplicationDocument> sortedActiveDocuments = applicationDocument.stream()
 	 	        indivAdditionalDetails.setPassportNo(passportNo);
 	 	        indivAdditionalDetails.setPassportIssuingAuthority(passportIssuingAuthority);
 
-	 	        SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
-	 	        Date publishDateParsed1;
-	 	        try {
-	 	            publishDateParsed1 = dateFormat1.parse(passportExpiryDate);
-	 	        } catch (ParseException e) {
+	 	        Date publishDateParsed1 = parseOptionalPassportExpiry(passportExpiryDate);
+	 	        if (publishDateParsed1 == null && hasPassportExpiryValue(passportExpiryDate)) {
 	 	            return new ResponseEntity<>("Invalid  date format.", HttpStatus.BAD_REQUEST);
 	 	        }
 	 	        indivAdditionalDetails.setPassportExpiryDate(publishDateParsed1);
@@ -2475,7 +2466,15 @@ List<ApplicationDocument> sortedActiveDocuments = applicationDocument.stream()
 	        if (cpsDocumentOpt.isPresent()) {
 	        	ApplicationDocument c = cpsDocumentOpt.get();
                 System.out.println(c.getFileName());
-                Path filePath = Paths.get(Constant.REAL_PATH + "//AdditionalDocument//Document").resolve(c.getFileName()).normalize();
+                Path additionalDocPath = Paths.get(Constant.REAL_PATH + "//AdditionalDocument//Document").resolve(c.getFileName()).normalize();
+                Path cpsDocPath = Paths.get(Constant.REAL_PATH + "//CPSDocument//Document").resolve(c.getFileName()).normalize();
+                Path firmDocPath = Paths.get(Constant.REAL_PATH + "//FirmDocuments//Documents").resolve(c.getFileName()).normalize();
+                Path filePath = Files.exists(additionalDocPath) ? additionalDocPath
+                        : Files.exists(cpsDocPath) ? cpsDocPath
+                        : Files.exists(firmDocPath) ? firmDocPath : null;
+                if (filePath == null) {
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+                }
                 System.out.println(filePath);
                 Resource resource = new UrlResource(filePath.toUri());
                 System.out.println(resource);
@@ -2781,6 +2780,27 @@ List<ApplicationDocument> sortedActiveDocuments = applicationDocument.stream()
 			return new ResponseEntity<>("Please enter a valid " + label + ".", HttpStatus.BAD_REQUEST);
 		}
 		return null;
+	}
+
+	private boolean hasPassportExpiryValue(String passportExpiryDate) {
+		if (passportExpiryDate == null) {
+			return false;
+		}
+		String value = passportExpiryDate.trim();
+		return !value.isEmpty() && !"null".equalsIgnoreCase(value) && !"undefined".equalsIgnoreCase(value);
+	}
+
+	private Date parseOptionalPassportExpiry(String passportExpiryDate) {
+		if (!hasPassportExpiryValue(passportExpiryDate)) {
+			return null;
+		}
+		try {
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			dateFormat.setLenient(false);
+			return dateFormat.parse(passportExpiryDate.trim());
+		} catch (ParseException e) {
+			return null;
+		}
 	}
 
 }

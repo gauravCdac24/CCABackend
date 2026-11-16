@@ -19,6 +19,7 @@ import in.lms.cca.entity.IntentApplication;
 import in.lms.cca.payload.LocationDetailsPayload;
 import in.lms.cca.repository.IntentApplicationRepository;
 import in.lms.cca.service.IIntentApplicationService;
+import in.lms.cca.util.global.ApplicationStatusUtil;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -94,7 +95,14 @@ public class IntentApplicationServiceImpl implements IIntentApplicationService{
 			return Optional.empty();
 		}
 			
-		try { 
+		try {
+			String currentStatus = intentAppRepo.findApplicationStatusByIntentAppId(intentApp.getIntentAppId());
+			if (ApplicationStatusUtil.isProtectedLicenseQueueStatus(currentStatus)
+					&& !ApplicationStatusUtil.isProtectedLicenseQueueStatus(intentApp.getApplicationStatus())
+					&& !ApplicationStatusUtil.isLicenseIssued(intentApp.getApplicationStatus())
+					&& !ApplicationStatusUtil.isRejected(intentApp.getApplicationStatus())) {
+				intentApp.setApplicationStatus(currentStatus);
+			}
 			IntentApplication intentApbj = intentAppRepo.save(intentApp);
 	        return Optional.of(intentApbj);
 	    

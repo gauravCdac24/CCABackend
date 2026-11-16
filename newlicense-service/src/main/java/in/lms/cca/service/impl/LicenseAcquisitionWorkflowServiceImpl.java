@@ -136,6 +136,9 @@ public class LicenseAcquisitionWorkflowServiceImpl implements LicenseAcquisition
 	private List<String> resolveAllowedActions(String role, IntentApplication intentApplication,
 			String currentStep) {
 		String normalizedRole = role == null ? "APPLICANT" : role.toUpperCase().replace('-', '_');
+		if (normalizedRole.startsWith("ROLE_")) {
+			normalizedRole = normalizedRole.substring("ROLE_".length());
+		}
 		List<String> actions = new ArrayList<>();
 
 		switch (normalizedRole) {
@@ -226,6 +229,10 @@ public class LicenseAcquisitionWorkflowServiceImpl implements LicenseAcquisition
 		if (ApplicationStatusUtil.normalize(status)
 				.equals(ApplicationStatusUtil.normalize(ApplicationStatusUtil.NC_ISSUED))) {
 			actions.add("NC_ACTION");
+		}
+		if (ApplicationStatusUtil.normalize(status)
+				.equals(ApplicationStatusUtil.normalize(ApplicationStatusUtil.PENDING_AUDIT_ACCEPTANCE))) {
+			actions.add("AUDIT_ACCEPTANCE");
 		}
 	}
 
@@ -332,6 +339,7 @@ public class LicenseAcquisitionWorkflowServiceImpl implements LicenseAcquisition
 				|| normalized.equals(ApplicationStatusUtil.normalize(ApplicationStatusUtil.REVIEW_AUDIT_REPORT))
 				|| normalized.equals(ApplicationStatusUtil.normalize(ApplicationStatusUtil.NC_ISSUED))
 				|| normalized.equals(ApplicationStatusUtil.normalize(ApplicationStatusUtil.NC_ACTION_TAKEN))
+				|| normalized.equals(ApplicationStatusUtil.normalize(ApplicationStatusUtil.PENDING_AUDIT_ACCEPTANCE))
 				|| normalized.equals(ApplicationStatusUtil.normalize(ApplicationStatusUtil.REVIEW_NC_REPORT));
 	}
 

@@ -324,15 +324,34 @@ public class ApplicationReviewController {
 	
 	
 	
+	private ResponseEntity<Map<String, String>> missingMomDocument() {
+	    Map<String, String> body = new HashMap<>();
+	    body.put("message", "Please attach MoM document.");
+	    return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+	}
+
+	private boolean isMomMissing(MultipartFile file) {
+	    return file == null || file.isEmpty();
+	}
+
 	@PostMapping(ApplicationReviewAPIs.ADD_APPLICATION_REVIEW)
 	public ResponseEntity<?> addAllApplicationsReviewData(@ModelAttribute ApplicationReviewDTO applicationReviewDTO) throws IOException, ParseException {
+
+	    if (isMomMissing(applicationReviewDTO.getFile1())) {
+	        return missingMomDocument();
+	    }
 
 	    // Log the received DTO
 	    System.out.println("Received DTO: " + applicationReviewDTO.toString());
 
 	    // Find the IntentApplication entity using the provided userName from the DTO
 	    IntentApplication intentApp = intentAppServ.findIntentAppById(applicationReviewDTO.getUserName());
- 
+	    if (intentApp == null) {
+	        Map<String, String> body = new HashMap<>();
+	        body.put("message", "Application not found.");
+	        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+	    }
+
 	   
 	    // Find existing review applications for the IntentApplication
 	    List<ReviewApplication> reviewApplications = reviewApplicationService.findByIntentId(intentApp);
@@ -493,12 +512,21 @@ public class ApplicationReviewController {
 	@PostMapping(ApplicationReviewAPIs.ADD_GOVERNMENT_AGENCY_APPLICATION_REVIEW)
 	public ResponseEntity<?> addAllGoApplicationsReviewData(@ModelAttribute OrganisationDetailsDTO organisationDetailsDTO) throws IOException, ParseException {
 
+	    if (isMomMissing(organisationDetailsDTO.getFile1())) {
+	        return missingMomDocument();
+	    }
+
 	    // Log the received DTO
 	    System.out.println("Received DTO: " + organisationDetailsDTO.toString());
 
 	    // Find the IntentApplication entity using the provided userName from the DTO
 	    IntentApplication intentApp = intentAppServ.findIntentAppById(organisationDetailsDTO.getUserName());
- 
+	    if (intentApp == null) {
+	        Map<String, String> body = new HashMap<>();
+	        body.put("message", "Application not found.");
+	        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+	    }
+
 	    // Find existing review applications for the IntentApplication
 	    List<ReviewApplication> reviewApplications = reviewApplicationService.findByIntentId(intentApp);
 	    System.out.println("Existing Review Remarks: " + (reviewApplications.isEmpty() ? "No Remarks" : reviewApplications.get(0).getRemarks()));
@@ -636,12 +664,21 @@ public class ApplicationReviewController {
 	@PostMapping(ApplicationReviewAPIs.ADD_INDIVIDUAL_APPLICATION_REVIEW)
 	public ResponseEntity<?> addAllIndividualApplicationReviewData(@ModelAttribute UserDetailsDTO organizationDetailsDTO) throws IOException, ParseException {
 
+	    if (isMomMissing(organizationDetailsDTO.getFile1())) {
+	        return missingMomDocument();
+	    }
+
 	    // Log the received DTO
 	    System.out.println("Received DTO: " + organizationDetailsDTO.toString());
 
 	    // Find the IntentApplication entity using the provided userName from the DTO
 	    IntentApplication intentApp = intentAppServ.findIntentAppById(organizationDetailsDTO.getUserName());
- 
+	    if (intentApp == null) {
+	        Map<String, String> body = new HashMap<>();
+	        body.put("message", "Application not found.");
+	        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+	    }
+
 	    // Find existing review applications for the IntentApplication
 	    List<ReviewApplication> reviewApplications = reviewApplicationService.findByIntentId(intentApp);
 	    System.out.println("Existing Review Remarks: " + (reviewApplications.isEmpty() ? "No Remarks" : reviewApplications.get(0).getRemarks()));
@@ -1555,6 +1592,29 @@ public class ApplicationReviewController {
 				return new ResponseEntity<>("Failed: " + e.getMessage(), HttpStatus.BAD_REQUEST);
 			}
 		}
+
+		@GetMapping("/change-applicant-status-pending-audit-acceptance/{applicantUserName}")
+		public ResponseEntity<?> changeStatusPendingAuditAcceptance(
+				@PathVariable String applicantUserName) {
+			String userName = applicantUserName;
+			try {
+				IntentApplication intentApp = intentAppServ.findIntentAppById(userName);
+				if (intentApp == null) {
+					return new ResponseEntity<>("Application not found for username: " + userName, HttpStatus.NOT_FOUND);
+				}
+				IntentApplication inApp = intentAppServ.getIntentByIntentAppId(intentApp.getIntentAppId());
+				if (inApp == null) {
+					return new ResponseEntity<>("Application details not found", HttpStatus.NOT_FOUND);
+				}
+				inApp.setApplicationStatus(ApplicationStatusUtil.PENDING_AUDIT_ACCEPTANCE);
+				inApp.setUpdated(new Date());
+				intentAppServ.updateIntentApp(inApp);
+				return new ResponseEntity<>("Success", HttpStatus.OK);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return new ResponseEntity<>("Failed: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+			}
+		}
 		
 			@GetMapping("/change-applicant-approve-for-rejection/{applicantUserName}")
 			public ResponseEntity<?> changeStatusApproveForRejection(
@@ -1933,6 +1993,9 @@ public class ApplicationReviewController {
 
 			@PostMapping(value = ApplicationReviewAPIs.APPROVED_DATA, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 			public ResponseEntity<?> addAllApproved(@ModelAttribute Approveddata organizationDetailsDTO) {
+			    if (isMomMissing(organizationDetailsDTO.getFile1())) {
+			        return missingMomDocument();
+			    }
 			    CcaApprovalRequest request = new CcaApprovalRequest();
 			    request.setUserName(organizationDetailsDTO.getUserName());
 			    request.setReviewerUserName(organizationDetailsDTO.getReviewerUserName());

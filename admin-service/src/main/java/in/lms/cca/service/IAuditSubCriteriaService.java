@@ -20,6 +20,7 @@ public interface IAuditSubCriteriaService {
 	List<AuditSubCriteria> getAllInActiveAuditSubCriteria();
 	List<AuditSubCriteria> getAllAuditSubCriteria();
 	AuditSubCriteria getAuditSubCriteriaByTitle(String title);
+	List<AuditSubCriteria> getAllAuditSubCriteriaByTitle(String title);
 
 	
 }

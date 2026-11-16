@@ -27,6 +27,10 @@ public class ESignedDocumentsEntity extends AbstractTimestampEntity {
 	 @Column(name = "status",length = 11)
 	private String status;
 
+	/** Optional: auditor appAuditorId or ACCEPTANCE for applicant acceptance letter */
+	@Column(name = "signer_key", length = 100)
+	private String signerKey;
+
 	public Long geteSignedId() {
 		return eSignedId;
 	}
@@ -61,10 +65,18 @@ public class ESignedDocumentsEntity extends AbstractTimestampEntity {
 		this.status = status;
 	}
 
+	public String getSignerKey() {
+		return signerKey;
+	}
+
+	public void setSignerKey(String signerKey) {
+		this.signerKey = signerKey;
+	}
+
 	@Override
 	public String toString() {
 		return "ESignedDocumentsEntity [eSignedId=" + eSignedId + ", signedDocId=" + signedDocId + ", userName="
-				+ userName + ", status=" + status + "]";
+				+ userName + ", status=" + status + ", signerKey=" + signerKey + "]";
 	}
 	
 	

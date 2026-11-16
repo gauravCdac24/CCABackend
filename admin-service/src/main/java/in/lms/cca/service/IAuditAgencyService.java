@@ -19,6 +19,7 @@ public interface IAuditAgencyService {
 	List<AuditAgency> getAllAuditAgency();
 	AuditAgency getAuditAgencyByCreatedBy(String createdBy);
 	AuditAgency getAuditAgencyByAgencyName(String agencyName);
+	boolean updateAuditAgencyStatus(Long id, String status);
 
 	
 	

@@ -58,7 +58,7 @@ public class AuditorsServiceImpl implements IAuditorsService{
 	        
 	            AuditorsLog auditorsLog = new AuditorsLog(savedAuditors, ipAddress, Constant.CREATED, usernameFromToken);
 	            
-	            auditorsLog.setClientHostName(clientHostname); 
+	            auditorsLog.setClientHostName(clientHostname != null && !clientHostname.isBlank() ? clientHostname : "unknown"); 
 	            
 	            log.save(auditorsLog);
 	        // log.save(new AuditorsLog(savedAuditors, ipAddress, Constant.CREATED, usernameFromToken));
@@ -93,7 +93,9 @@ public class AuditorsServiceImpl implements IAuditorsService{
 	        String usernameFromToken = "1";
 	        Auditors savedAuditors = auditorsRepo.save(auditorObj);
 	        if (usernameFromToken != null) {
-	            log.save(new AuditorsLog(savedAuditors, ipAddress, Constant.UPDATED, usernameFromToken));
+	            AuditorsLog auditorsLog = new AuditorsLog(savedAuditors, ipAddress, Constant.UPDATED, usernameFromToken);
+	            auditorsLog.setClientHostName(clientHostname != null && !clientHostname.isBlank() ? clientHostname : "unknown");
+	            log.save(auditorsLog);
 	        }
 	        System.out.println("Client Hostnames: " + clientHostname);
 	        System.out.println("Client IP Address: " + ipAddress);

@@ -84,6 +84,11 @@ public class BankDraft extends AbstractTimestampEntity {
 		this.draftNo = draftNo;
 	}
 
+	/** Draft number, banker's cheque number, or UTR, whichever the applicant paid with. */
+	public String getDraftNumber() {
+		return draftNo;
+	}
+
 	public Date getIssueDate() {
 		return issueDate;
 	}

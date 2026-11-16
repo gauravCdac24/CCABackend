@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -51,6 +52,7 @@ import com.itextpdf.kernel.utils.PdfMerger;
 
 import in.lms.cca.config.CrossOrigins;
 import in.lms.cca.dto.AddressDTO;
+import in.lms.cca.dto.ApplicationDocumentDTO;
 import in.lms.cca.dto.FileDTO;
 import in.lms.cca.dto.FileDocumentDTO;
 import in.lms.cca.dto.FirmApplicationDTO;
@@ -641,41 +643,10 @@ public class FirmApplicationFormController {
 						HttpStatus.INTERNAL_SERVER_ERROR);
 	            }
 
-	            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
-	            String currentDate = LocalDateTime.now().format(formatter);
-
-	            // Handle file1
-	            if (file1 != null && !file1.isEmpty()) {
-	                ApplicationDocument file1Document = new ApplicationDocument();
-	                file1Document.setDocumentTitle("firmPanCardDocument"); 
-	                String file1FileName = saveFile(file1, "firmPanCardDocument", currentDate);
-	                file1Document.setFileName(file1FileName);
-	                file1Document.setIntentAppId(intentApp); 
-	                file1Document.setStatus("ACTIVE");
-	                applicationDocumentServiceServ.addApplicationDocument(file1Document);
-	            }
-
-	            // Handle file2
-	            if (file2 != null && !file2.isEmpty()) {
-	                ApplicationDocument file2Document = new ApplicationDocument();
-	                file2Document.setDocumentTitle("firmNetWorthDocument"); 
-	                String file2FileName = saveFile(file2, "firmNetWorthDocument", currentDate);
-	                file2Document.setFileName(file2FileName);
-	                file2Document.setIntentAppId(intentApp); 
-	                file2Document.setStatus("ACTIVE");
-	                applicationDocumentServiceServ.addApplicationDocument(file2Document);
-	            }
-
-	            // Handle file3
-	            if (file3 != null && !file3.isEmpty()) {
-	                ApplicationDocument file3Document = new ApplicationDocument();
-	                file3Document.setDocumentTitle("paidUpCapitalDocument"); 
-	                String file3FileName = saveFile(file3, "paidUpCapitalDocument", currentDate);
-	                file3Document.setFileName(file3FileName);
-	                file3Document.setIntentAppId(intentApp); 
-	                file3Document.setStatus("ACTIVE");
-	                applicationDocumentServiceServ.addApplicationDocument(file3Document);
-	            }
+	            // file1 is the PAN card, file2 is paid-up capital, file3 is net worth.
+	            saveFinancialDocument(intentApp, null, "firmPanCardDocument", file1, new Date());
+	            saveFinancialDocument(intentApp, null, "paidUpCapitalDocument", file2, new Date());
+	            saveFinancialDocument(intentApp, null, "firmNetWorthDocument", file3, new Date());
 
 
 	            return new ResponseEntity<>(result, HttpStatus.OK);
@@ -739,30 +710,11 @@ public class FirmApplicationFormController {
 	         }
 
 	         List<ApplicationDocument> applicationDocuments = applicationDocumentServiceServ.findIntentWithoutStatusAppById(intentApp.getIntentAppId());
-	         System.out.println("applicationDocuments===>" + applicationDocuments.get(0).getFileName());
-	         System.out.println("applicationDocumentsSize()===>" + applicationDocuments.size());
-	         
-	         // Collect all active documents generated today
-	         List<ApplicationDocument> recentActiveDocuments = applicationDocuments.stream()
-	                 .filter(doc -> {
-	                     return (doc.getDocumentTitle().startsWith("firmPanCardDocument") ||
-	                             doc.getDocumentTitle().startsWith("firmNetWorthDocument") ||
-	                             doc.getDocumentTitle().startsWith("paidUpCapitalDocument"));   
-	                 })
-	                 .sorted((b1, b2) -> b2.getCreated().compareTo(b1.getCreated()))
-	                 .collect(Collectors.toList());
-	         
-	         // Add the list of recent active documents to the response
-	         if (!recentActiveDocuments.isEmpty()) {
-	             response.put("applicationDocuments", recentActiveDocuments);
-	         }
-
-	         // Optional: If you want to return the file names, adjust accordingly
-	         List<String> fileNames = applicationDocuments.stream()
-	                 .map(ApplicationDocument::getFileName) 
-	                 .collect(Collectors.toList());
-	         
-	         response.put("fileNames", fileNames);
+	         List<ApplicationDocumentDTO> financialDocuments = financialDocumentsForReview(applicationDocuments);
+	         response.put("applicationDocuments", financialDocuments);
+	         response.put("fileNames", financialDocuments.stream()
+	                 .map(ApplicationDocumentDTO::getFileName)
+	                 .collect(Collectors.toList()));
 	         
 	         return new ResponseEntity<>(response, HttpStatus.OK);
 
@@ -854,41 +806,10 @@ public class FirmApplicationFormController {
 		        }
 
 		        
-		        // Fetch application documents for the intent application
 		        List<ApplicationDocument> applicationDocuments = applicationDocumentServiceServ.findIntentWithoutStatusAppById(intentApp.getIntentAppId());
-		        System.out.println("applicationDocuments===>" + applicationDocuments.get(0).getFileName());
-		        System.out.println("applicationDocumentsSize()===>" + applicationDocuments.size());
-		        
-		        // Get the most recent document
-		        Optional<ApplicationDocument> mostRecentDocument = applicationDocuments.stream()
-		                .filter(doc -> doc.getFileName().startsWith("firmPanCardDocument") ||
-		                               doc.getFileName().startsWith("firmNetWorthDocument"))
-		                .sorted((b1, b2) -> b2.getCreated().compareTo(b1.getCreated()))
-		                .findFirst();
-		        
-		        // Process based on the document status
-		        mostRecentDocument.ifPresentOrElse(applicationDocument -> {
-		            System.out.println("applicationDocument Status===>" + applicationDocument.getStatus());
-		            
-		            try {
-		                if ("Inactive".equals(applicationDocument.getStatus())) {
-		                    // If document is inactive, ADD new files
-		                    processFiles(intentApp, applicationDocument.getFileName(),  applicationDocument.getAppDocId(), file1, file2, file3, date, "Inactive");
-		                } else {
-		                    // If document is not inactive, UPDATE the existing files
-		                    processFiles(intentApp,applicationDocument.getFileName(), applicationDocument.getAppDocId(), file1, file2, file3, date, "Active");
-		                }
-		            } catch (Exception e) {
-		                e.printStackTrace();
-		            }
-		        }, () -> {
-		            // Handle case when there is no document (fallback)
-		            try {
-		              //  processFiles(intentApp,  applicationDocument.getAppDocId(), file1, file2, file3, date, "Inactive");
-		            } catch (Exception e) {
-		                e.printStackTrace();
-		            }
-		        });
+		        saveFinancialDocument(intentApp, applicationDocuments, "firmPanCardDocument", file1, date);
+		        saveFinancialDocument(intentApp, applicationDocuments, "paidUpCapitalDocument", file2, date);
+		        saveFinancialDocument(intentApp, applicationDocuments, "firmNetWorthDocument", file3, date);
 		        
 		        return new ResponseEntity<>("Firm Application updated successfully.", HttpStatus.OK);
 		        
@@ -922,67 +843,123 @@ public class FirmApplicationFormController {
 		   
 		}
 
-		// Helper function to handle file processing
-		private void processFiles(IntentApplication intentApp,String fileName, Long appLocationId, MultipartFile file1, 
-		                          MultipartFile file2, MultipartFile file3, Date date, String firmApplicationStatus) throws Exception {
+		private void saveFinancialDocument(IntentApplication intentApp, List<ApplicationDocument> existing,
+				String documentTitle, MultipartFile file, Date date) throws Exception {
+			if (file == null || file.isEmpty()) {
+				return;
+			}
+			String currentDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
+			String savedFileName = saveFile(file, documentTitle + "_mappedv2", currentDate);
 
-		    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
-		    String currentDate = LocalDateTime.now().format(formatter);
-		    
-		    if ("Inactive".equals(firmApplicationStatus)) {
-		        // Add new files
-		      
-		            ApplicationDocument file1Document = createNewApplicationDocument(appLocationId,fileName, "firmPanCardDocument", currentDate, file1, intentApp, date ,firmApplicationStatus);
-		            applicationDocumentServiceServ.addApplicationDocument(file1Document);
-		        
-		     
-		            ApplicationDocument file2Document = createNewApplicationDocument(appLocationId,fileName, "firmNetWorthDocument", currentDate, file2, intentApp, date,firmApplicationStatus);
-		            applicationDocumentServiceServ.addApplicationDocument(file2Document);
-		        
-		       
-		            ApplicationDocument file3Document = createNewApplicationDocument(appLocationId, fileName,"paidUpCapitalDocument", currentDate, file3, intentApp, date,firmApplicationStatus);
-		            applicationDocumentServiceServ.addApplicationDocument(file3Document);
-		        
-
-		    } else {
-		        // Update existing files
-		     
-		            ApplicationDocument file1Document = createNewApplicationDocument(appLocationId,fileName, "firmPanCardDocument", currentDate, file1, intentApp, date,firmApplicationStatus);
-		            applicationDocumentServiceServ.updateApplicationDocument(file1Document);
-		        
-		       
-		            ApplicationDocument file2Document = createNewApplicationDocument(appLocationId, fileName,"firmNetWorthDocument", currentDate, file2, intentApp, date,firmApplicationStatus);
-		            applicationDocumentServiceServ.updateApplicationDocument(file2Document);
-		        
-		       
-		            ApplicationDocument file3Document = createNewApplicationDocument(appLocationId,fileName, "paidUpCapitalDocument", currentDate, file3, intentApp, date,firmApplicationStatus);
-		            applicationDocumentServiceServ.updateApplicationDocument(file3Document);
-		        
-		    }
+			ApplicationDocument match = null;
+			if (existing != null) {
+				for (ApplicationDocument doc : existing) {
+					boolean sameTitle = doc.getDocumentTitle() != null && doc.getDocumentTitle().startsWith(documentTitle);
+					boolean currentMapping = doc.getFileName() != null && doc.getFileName().contains("mappedv2");
+					if (sameTitle && currentMapping) {
+						if (match == null || (doc.getAppDocId() != null && (match.getAppDocId() == null
+								|| doc.getAppDocId() > match.getAppDocId()))) {
+							match = doc;
+						}
+					}
+				}
+			}
+			if (match != null) {
+				match.setDocumentTitle(documentTitle);
+				match.setFileName(savedFileName);
+				match.setStatus("Active");
+				match.setUpdated(date);
+				match.setIntentAppId(intentApp);
+				applicationDocumentServiceServ.updateApplicationDocument(match);
+				return;
+			}
+			ApplicationDocument document = new ApplicationDocument();
+			document.setDocumentTitle(documentTitle);
+			document.setFileName(savedFileName);
+			document.setIntentAppId(intentApp);
+			document.setStatus("Active");
+			document.setCreated(date);
+			applicationDocumentServiceServ.addApplicationDocument(document);
 		}
 
-		// Helper function to create a new ApplicationDocument
-		private ApplicationDocument createNewApplicationDocument(Long appLocationId,String fileName, String documentType, 
-		                                                         String currentDate, MultipartFile file, 
-		                                                         IntentApplication intentApp, Date date,String firmApplicationStatus) throws Exception {
-		    
-		    ApplicationDocument document = new ApplicationDocument();
-		    if("Active".equals(firmApplicationStatus)) {
-		    document.setAppDocId(Long.valueOf(appLocationId));
-		    }else {
-		    	
-		    }
-		    document.setDocumentTitle(documentType);
-		  		    if (file != null && !file.isEmpty()) {
-		        String savedFileName = saveFile(file, documentType, currentDate);
-		        document.setFileName(savedFileName);
-		    } else {
-		        document.setFileName(fileName);
-		    }
-		    document.setIntentAppId(intentApp);
-		    document.setCreated(date);
-		    document.setStatus("Active");  // Set as Inactive by default or as needed
-		    return document;
+		private List<ApplicationDocumentDTO> financialDocumentsForReview(List<ApplicationDocument> documents) {
+			if (documents == null || documents.isEmpty()) {
+				return Collections.emptyList();
+			}
+			List<ApplicationDocument> sorted = new ArrayList<>(documents);
+			sorted.sort((a, b) -> {
+				if (a.getAppDocId() == null && b.getAppDocId() == null) {
+					return 0;
+				}
+				if (a.getAppDocId() == null) {
+					return 1;
+				}
+				if (b.getAppDocId() == null) {
+					return -1;
+				}
+				return b.getAppDocId().compareTo(a.getAppDocId());
+			});
+			Map<String, ApplicationDocument> latest = new LinkedHashMap<>();
+			for (ApplicationDocument doc : sorted) {
+				if (doc.getStatus() != null && "inactive".equalsIgnoreCase(doc.getStatus())) {
+					continue;
+				}
+				String title = reviewDocumentTitle(doc);
+				if (title != null && !latest.containsKey(title)) {
+					latest.put(title, doc);
+				}
+			}
+			List<ApplicationDocumentDTO> result = new ArrayList<>();
+			for (Map.Entry<String, ApplicationDocument> entry : latest.entrySet()) {
+				ApplicationDocument doc = entry.getValue();
+				ApplicationDocumentDTO dto = new ApplicationDocumentDTO();
+				dto.setAppDocId(doc.getAppDocId());
+				dto.setDocumentTitle(entry.getKey());
+				dto.setFileName(doc.getFileName());
+				dto.setStatus("Active");
+				if (doc.getIntentAppId() != null) {
+					dto.setIntentAppId(doc.getIntentAppId().getIntentAppId());
+				}
+				result.add(dto);
+			}
+			return result;
+		}
+
+		/**
+		 * Older saves stored the paid-up capital file under firmNetWorthDocument and the
+		 * net-worth file under paidUpCapitalDocument. New files are marked mappedv2 and
+		 * already use the title the review screen expects.
+		 */
+		private String reviewDocumentTitle(ApplicationDocument doc) {
+			String title = doc.getDocumentTitle();
+			if (title == null) {
+				return null;
+			}
+			boolean financial = title.startsWith("firmPanCardDocument")
+					|| title.startsWith("firmNetWorthDocument")
+					|| title.startsWith("paidUpCapitalDocument");
+			if (!financial) {
+				return null;
+			}
+			String fileName = doc.getFileName() == null ? "" : doc.getFileName();
+			if (!fileName.contains("mappedv2")) {
+				if (title.startsWith("firmNetWorthDocument")) {
+					return "paidUpCapitalDocument";
+				}
+				if (title.startsWith("paidUpCapitalDocument")) {
+					return "firmNetWorthDocument";
+				}
+			}
+			if (title.startsWith("firmPanCardDocument")) {
+				return "firmPanCardDocument";
+			}
+			if (title.startsWith("firmNetWorthDocument")) {
+				return "firmNetWorthDocument";
+			}
+			if (title.startsWith("paidUpCapitalDocument")) {
+				return "paidUpCapitalDocument";
+			}
+			return null;
 		}
 
 	@PostMapping(FirmApplicationFormAPIs.ADD_FIRM_APPLICATION_FORM_STEP3)
@@ -1101,12 +1078,12 @@ public class FirmApplicationFormController {
 	    firmPartner.setPassportNo(partner.getPassposrtNo());
 	    firmPartner.setPassportIssuingAuthority(partner.getPassportIssuingAthority());
 
-	    // Parse and set passport expiry date
-	    if (partner.getPassportExpirydate() != null && !partner.getPassportExpirydate().isBlank()) {
+	    // Passport expiry is optional. Parse it only when a date was entered.
+	    if (hasPassportExpiryValue(partner.getPassportExpirydate())) {
 	        try {
 	            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	            Date passportExpiryDate = dateFormat.parse(partner.getPassportExpirydate());
-	            firmPartner.setPassportExpiryDate(passportExpiryDate);
+	            dateFormat.setLenient(false);
+	            firmPartner.setPassportExpiryDate(dateFormat.parse(partner.getPassportExpirydate().trim()));
 	        } catch (ParseException e) {
 	            throw new IllegalArgumentException("Invalid passport expiry date: " + partner.getPassportExpirydate(), e);
 	        }
@@ -1422,14 +1399,17 @@ public class FirmApplicationFormController {
 	    firmPartner.setPassportNo(partner.getPassposrtNo());
 	    firmPartner.setPassportIssuingAuthority(partner.getPassportIssuingAthority());
 
-	    // Parse and set passport expiry date
-	    try {
-	        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	        Date passportExpiryDate = dateFormat.parse(partner.getPassportExpirydate());
-	        firmPartner.setPassportExpiryDate(passportExpiryDate);
-	    } catch (ParseException e) {
-	        e.printStackTrace();
-	        firmPartner.setPassportExpiryDate(null); // Handle parse exception
+	    // Passport expiry is optional. Leave it empty when the applicant did not enter a date.
+	    if (hasPassportExpiryValue(partner.getPassportExpirydate())) {
+	        try {
+	            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	            dateFormat.setLenient(false);
+	            firmPartner.setPassportExpiryDate(dateFormat.parse(partner.getPassportExpirydate().trim()));
+	        } catch (ParseException e) {
+	            firmPartner.setPassportExpiryDate(null);
+	        }
+	    } else {
+	        firmPartner.setPassportExpiryDate(null);
 	    }
 
 	    // Set documents and additional details
@@ -2262,6 +2242,14 @@ firmPartner.setStatus("Active");
 		        throw new RuntimeException("Error merging PDFs");
 		    }
 		}
+
+	private boolean hasPassportExpiryValue(String passportExpiryDate) {
+		if (passportExpiryDate == null) {
+			return false;
+		}
+		String value = passportExpiryDate.trim();
+		return !value.isEmpty() && !"null".equalsIgnoreCase(value) && !"undefined".equalsIgnoreCase(value);
+	}
 
 	
 	
