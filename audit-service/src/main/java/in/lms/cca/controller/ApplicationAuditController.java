@@ -4287,6 +4287,11 @@ contentBuilder.append("<h3 style='color: red;'>15. CA Self-assessment for audit 
 	public ResponseEntity<?> prepareAcceptanceEsign(@RequestParam("userName") String userName) {
 		try {
 			String normalized = normalizeReportUsername(userName);
+			// Acceptance form needs the auditor signatures first (minimum 2), then the applicant.
+			if (!allActiveAuditorsHaveEsigned(normalized)) {
+				return ResponseEntity.badRequest()
+						.body("Minimum 2 auditors must eSign the audit report before the applicant can eSign the acceptance form.");
+			}
 			// Applicant eSigns the already auditor-signed full NC report (not the cover letter alone)
 			String signerKey = "ACCEPTANCE_REPORT";
 			Optional<ESignedDocumentsEntity> pending = resolveOrCreatePendingEsignRecord(normalized, signerKey);

@@ -113,7 +113,9 @@ public class EsignController {
     	// Create XML File for eSign
         String hashDocId = "1";
         String transactionId = "";
-        String resUrl = "http://localhost:8080/api/esign-service/esignresponse";
+        // CDAC posts the signed response to this public gateway URL.
+        String resUrl = "https://ccalms.cca.gov.in/api/esign-service/esignresponse";
+        // String resUrl = "http://localhost:8080/api/esign-service/esignresponse";
         String fileHash = "";
         String xmlData = "";
         String xmlasstring = "";
@@ -595,8 +597,8 @@ public class EsignController {
     					+ "CgYIKoZIzj0EAwIDSAAwRQIgOva5NrjXW3/fpojMChIUZ0d5A3wRaV/ssvgeI+UJ\r\n"
     					+ "XIwCIQDLiokOwB9zvCY85Tv3iLZIVwWkYICFR8j1L8V1pUk00Q==";
     			
-            	String src = RealPath.REAL_PATH + "\\esignrequest\\document\\TEST.pdf";
-            	String dest = RealPath.REAL_PATH + "\\esignresponse\\document\\TESTDEST.pdf";
+            	String src = RealPath.REAL_PATH + "/esignrequest/document/TEST.pdf";
+            	String dest = RealPath.REAL_PATH + "/esignresponse/document/TESTDEST.pdf";
             	
             	File pdfFilePath = new File(src);
             	

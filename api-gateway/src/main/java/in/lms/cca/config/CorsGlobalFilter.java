@@ -22,6 +22,9 @@ import reactor.core.publisher.Mono;
 public class CorsGlobalFilter implements GlobalFilter, Ordered {
 
 	private static final List<String> ALLOWED_ORIGINS = List.of(
+			"https://ccalms.cca.gov.in",
+			"https://45.127.74.108:443",
+			"https://esignservice.cdac.in",
 			"http://localhost:3000",
 			"http://127.0.0.1:3000"
 	);

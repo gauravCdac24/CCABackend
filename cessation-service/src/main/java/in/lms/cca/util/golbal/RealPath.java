@@ -6,6 +6,7 @@ public class RealPath {
 
 //public static final String REAL_PATH = "/home/admin/microservices/cessation-service";
 //public static final String REAL_PATH = "C:\\Users\\hp\\Documents\\CCA_Shikhar\\CCA_Backend\\CCABackend\\cessation-service\\src\\main\\webapp";
-public static final String REAL_PATH = "E:\\CCA_PROD\\CCAB\\cessation-service\\src\\main\\webapp";
+//public static final String REAL_PATH = "E:\\CCA_PROD\\CCAB\\cessation-service\\src\\main\\webapp";
+public static final String REAL_PATH = "/home/dashboard/CCABackend/cessation-service/src/main/webapp";
 	
 }

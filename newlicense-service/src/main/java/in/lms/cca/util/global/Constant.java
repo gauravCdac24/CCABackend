@@ -5,7 +5,8 @@ public class Constant {
 //	public static String REAL_PATH =  "/home/admin/microservices/newlicense-service";
 	
 	//public static final String REAL_PATH = "C:\\Users\\hp\\Documents\\CCA_Shikhar\\CCA_Backend\\CCABackend\\newlicense-service\\src\\main\\webapp";
-	public static final String REAL_PATH = "E:\\CCA_PROD\\CCAB\\newlicense-service\\src\\main\\webapp";
+	//public static final String REAL_PATH = "E:\\CCA_PROD\\CCAB\\newlicense-service\\src\\main\\webapp";
+	public static final String REAL_PATH = "/home/dashboard/CCABackend/newlicense-service/src/main/webapp";
 	
 	
 		public static final String CREATED="Created";

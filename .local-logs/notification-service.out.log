@@ -318,3 +318,2303 @@ DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTL
 DEBUG SMTP: Using mechanism LOGIN
 DEBUG SMTP: AUTH LOGIN command trace suppressed
 DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK d9443c01a7336-2efd7abf4f7sm6950165ad.71 - gsmtp
+RCPT TO:<kanil@cdac.in>
+250 2.1.5 OK d9443c01a7336-2efd7abf4f7sm6950165ad.71 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   kanil@cdac.in
+DATA
+354 Go ahead d9443c01a7336-2efd7abf4f7sm6950165ad.71 - gsmtp
+Date: Tue, 17 Nov 2026 09:47:33 +0530 (IST)
+From: info@cca.gov.in
+To: kanil@cdac.in
+Message-ID: <464208992.3.1794889058288@DESKTOP-QLTPTK0>
+Subject: Annual Audit Reminder
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Dear Licensee, 
+
+This is a reminder that your annual audit is due. Please make sure to complete the necessary audit procedures as per the schedule. If you haven't started the audit yet, we recommend initiating it as soon as possible.
+
+For more details and the audit schedule, please check your email or log into your dashboard.
+
+If you have any questions or need help, feel free to reach out to our support team.
+
+Best regards,
+The Audit Team
+.
+250 2.0.0 OK  1794889058 d9443c01a7336-2efd7abf4f7sm6950165ad.71 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection d9443c01a7336-2efd7abf4f7sm6950165ad.71 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP 98e67ed59e1d1-3b3ac255634sm1825997a91.5 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK 98e67ed59e1d1-3b3ac255634sm1825997a91.5 - gsmtp
+RCPT TO:<kanil@cdac.in>
+250 2.1.5 OK 98e67ed59e1d1-3b3ac255634sm1825997a91.5 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   kanil@cdac.in
+DATA
+354 Go ahead 98e67ed59e1d1-3b3ac255634sm1825997a91.5 - gsmtp
+Date: Tue, 17 Nov 2026 09:47:47 +0530 (IST)
+From: info@cca.gov.in
+To: kanil@cdac.in
+Message-ID: <339523561.4.1794889072451@DESKTOP-QLTPTK0>
+Subject: Annual Audit Reminder
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Dear Licensee, 
+
+This is a reminder that your annual audit is due. Please make sure to complete the necessary audit procedures as per the schedule. If you haven't started the audit yet, we recommend initiating it as soon as possible.
+
+For more details and the audit schedule, please check your email or log into your dashboard.
+
+If you have any questions or need help, feel free to reach out to our support team.
+
+Best regards,
+The Audit Team
+.
+250 2.0.0 OK  1794889072 98e67ed59e1d1-3b3ac255634sm1825997a91.5 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection 98e67ed59e1d1-3b3ac255634sm1825997a91.5 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP 98e67ed59e1d1-3b3abec8092sm1862637a91.17 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK 98e67ed59e1d1-3b3abec8092sm1862637a91.17 - gsmtp
+RCPT TO:<kanil@cdac.in>
+250 2.1.5 OK 98e67ed59e1d1-3b3abec8092sm1862637a91.17 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   kanil@cdac.in
+DATA
+354 Go ahead 98e67ed59e1d1-3b3abec8092sm1862637a91.17 - gsmtp
+Date: Tue, 17 Nov 2026 09:48:00 +0530 (IST)
+From: info@cca.gov.in
+To: kanil@cdac.in
+Message-ID: <1799532293.5.1794889085365@DESKTOP-QLTPTK0>
+Subject: Annual Audit Reminder
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Dear Licensee, 
+
+This is a reminder that your annual audit is due. Please make sure to complete the necessary audit procedures as per the schedule. If you haven't started the audit yet, we recommend initiating it as soon as possible.
+
+For more details and the audit schedule, please check your email or log into your dashboard.
+
+If you have any questions or need help, feel free to reach out to our support team.
+
+Best regards,
+The Audit Team
+.
+250 2.0.0 OK  1794889085 98e67ed59e1d1-3b3abec8092sm1862637a91.17 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection 98e67ed59e1d1-3b3abec8092sm1862637a91.17 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP 98e67ed59e1d1-3b1bfb607e7sm7171792a91.3 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK 98e67ed59e1d1-3b1bfb607e7sm7171792a91.3 - gsmtp
+RCPT TO:<qwec@gmail.com>
+250 2.1.5 OK 98e67ed59e1d1-3b1bfb607e7sm7171792a91.3 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   qwec@gmail.com
+DATA
+354 Go ahead 98e67ed59e1d1-3b1bfb607e7sm7171792a91.3 - gsmtp
+Date: Tue, 17 Nov 2026 09:48:14 +0530 (IST)
+From: info@cca.gov.in
+To: qwec@gmail.com
+Message-ID: <183843393.6.1794889099340@DESKTOP-QLTPTK0>
+Subject: Annual Audit Reminder
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Dear Licensee, 
+
+This is a reminder that your annual audit is due. Please make sure to complete the necessary audit procedures as per the schedule. If you haven't started the audit yet, we recommend initiating it as soon as possible.
+
+For more details and the audit schedule, please check your email or log into your dashboard.
+
+If you have any questions or need help, feel free to reach out to our support team.
+
+Best regards,
+The Audit Team
+.
+250 2.0.0 OK  1794889099 98e67ed59e1d1-3b1bfb607e7sm7171792a91.3 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection 98e67ed59e1d1-3b1bfb607e7sm7171792a91.3 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP d2e1a72fcca58-8bed12a7edbsm4425977b3a.18 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK d2e1a72fcca58-8bed12a7edbsm4425977b3a.18 - gsmtp
+RCPT TO:<abcde@gmail.com>
+250 2.1.5 OK d2e1a72fcca58-8bed12a7edbsm4425977b3a.18 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   abcde@gmail.com
+DATA
+354 Go ahead d2e1a72fcca58-8bed12a7edbsm4425977b3a.18 - gsmtp
+Date: Tue, 17 Nov 2026 09:48:28 +0530 (IST)
+From: info@cca.gov.in
+To: abcde@gmail.com
+Message-ID: <930741115.7.1794889113404@DESKTOP-QLTPTK0>
+Subject: Annual Audit Reminder
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Dear Licensee, 
+
+This is a reminder that your annual audit is due. Please make sure to complete the necessary audit procedures as per the schedule. If you haven't started the audit yet, we recommend initiating it as soon as possible.
+
+For more details and the audit schedule, please check your email or log into your dashboard.
+
+If you have any questions or need help, feel free to reach out to our support team.
+
+Best regards,
+The Audit Team
+.
+250 2.0.0 OK  1794889113 d2e1a72fcca58-8bed12a7edbsm4425977b3a.18 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection d2e1a72fcca58-8bed12a7edbsm4425977b3a.18 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP 98e67ed59e1d1-3b3ac4ddecasm1849868a91.14 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK 98e67ed59e1d1-3b3ac4ddecasm1849868a91.14 - gsmtp
+RCPT TO:<abcd@gmail.com>
+250 2.1.5 OK 98e67ed59e1d1-3b3ac4ddecasm1849868a91.14 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   abcd@gmail.com
+DATA
+354 Go ahead 98e67ed59e1d1-3b3ac4ddecasm1849868a91.14 - gsmtp
+Date: Tue, 17 Nov 2026 09:48:41 +0530 (IST)
+From: info@cca.gov.in
+To: abcd@gmail.com
+Message-ID: <874696915.8.1794889126335@DESKTOP-QLTPTK0>
+Subject: Annual Audit Reminder
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Dear Licensee, 
+
+This is a reminder that your annual audit is due. Please make sure to complete the necessary audit procedures as per the schedule. If you haven't started the audit yet, we recommend initiating it as soon as possible.
+
+For more details and the audit schedule, please check your email or log into your dashboard.
+
+If you have any questions or need help, feel free to reach out to our support team.
+
+Best regards,
+The Audit Team
+.
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Sending message: Please do not share your OTP with anyone, your OTP is 123456.
+mobileNumber: 8565985685
+username: ccalmsdelhi
+templateId: 1477178841413978234
+smsservicetype: otpmsg
+Unexpected error: I/O error on POST request for "https://msdgweb.mgov.gov.in/esms/sendsmsrequestDLT": PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP 98e67ed59e1d1-3b3ac254ba6sm1838718a91.4 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+250 2.0.0 OK  1794889127 98e67ed59e1d1-3b3ac4ddecasm1849868a91.14 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection 98e67ed59e1d1-3b3ac4ddecasm1849868a91.14 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK 98e67ed59e1d1-3b3ac254ba6sm1838718a91.4 - gsmtp
+RCPT TO:<ravikumar@gmail.com>
+250 2.1.5 OK 98e67ed59e1d1-3b3ac254ba6sm1838718a91.4 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   ravikumar@gmail.com
+DATA
+354 Go ahead 98e67ed59e1d1-3b3ac254ba6sm1838718a91.4 - gsmtp
+Date: Tue, 17 Nov 2026 09:48:54 +0530 (IST)
+From: info@cca.gov.in
+To: ravikumar@gmail.com
+Message-ID: <1681949112.9.1794889139764@DESKTOP-QLTPTK0>
+Subject: CCA Login OTP
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+Please do not share your OTP with anyone, your OTP is 123456.
+.
+250 2.0.0 OK  1794889140 98e67ed59e1d1-3b3ac254ba6sm1838718a91.4 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection 98e67ed59e1d1-3b3ac254ba6sm1838718a91.4 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Sending message: Please do not share your OTP with anyone, your OTP is 123456.
+mobileNumber: 9891739232
+username: ccalmsdelhi
+templateId: 1477178841413978234
+smsservicetype: otpmsg
+Unexpected error: I/O error on POST request for "https://msdgweb.mgov.gov.in/esms/sendsmsrequestDLT": PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP d9443c01a7336-2efd7a5877bsm7128555ad.48 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK d9443c01a7336-2efd7a5877bsm7128555ad.48 - gsmtp
+RCPT TO:<gauravcdac2333@gmail.com>
+250 2.1.5 OK d9443c01a7336-2efd7a5877bsm7128555ad.48 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   gauravcdac2333@gmail.com
+DATA
+354 Go ahead d9443c01a7336-2efd7a5877bsm7128555ad.48 - gsmtp
+Date: Tue, 17 Nov 2026 09:59:08 +0530 (IST)
+From: info@cca.gov.in
+To: gauravcdac2333@gmail.com
+Message-ID: <377481317.10.1794889753599@DESKTOP-QLTPTK0>
+Subject: CCA Login OTP
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+Please do not share your OTP with anyone, your OTP is 123456.
+.
+250 2.0.0 OK  1794889754 d9443c01a7336-2efd7a5877bsm7128555ad.48 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection d9443c01a7336-2efd7a5877bsm7128555ad.48 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Sending message: Please do not share your OTP with anyone, your OTP is 123456.
+mobileNumber: 8565425656
+username: ccalmsdelhi
+templateId: 1477178841413978234
+smsservicetype: otpmsg
+Unexpected error: I/O error on POST request for "https://msdgweb.mgov.gov.in/esms/sendsmsrequestDLT": PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP 41be03b00d2f7-cde0e3277dfsm773966a12.18 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK 41be03b00d2f7-cde0e3277dfsm773966a12.18 - gsmtp
+RCPT TO:<deepak@cca.in>
+250 2.1.5 OK 41be03b00d2f7-cde0e3277dfsm773966a12.18 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   deepak@cca.in
+DATA
+354 Go ahead 41be03b00d2f7-cde0e3277dfsm773966a12.18 - gsmtp
+Date: Tue, 17 Nov 2026 10:01:01 +0530 (IST)
+From: info@cca.gov.in
+To: deepak@cca.in
+Message-ID: <710228081.11.1794889866931@DESKTOP-QLTPTK0>
+Subject: CCA Login OTP
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+Please do not share your OTP with anyone, your OTP is 123456.
+.
+250 2.0.0 OK  1794889867 41be03b00d2f7-cde0e3277dfsm773966a12.18 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection 41be03b00d2f7-cde0e3277dfsm773966a12.18 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Sending message: Please do not share your OTP with anyone, your OTP is 123456.
+mobileNumber: 8565985685
+username: ccalmsdelhi
+templateId: 1477178841413978234
+smsservicetype: otpmsg
+Unexpected error: I/O error on POST request for "https://msdgweb.mgov.gov.in/esms/sendsmsrequestDLT": PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP d2e1a72fcca58-8bed2055031sm4717998b3a.39 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK d2e1a72fcca58-8bed2055031sm4717998b3a.39 - gsmtp
+RCPT TO:<ravikumar@gmail.com>
+250 2.1.5 OK d2e1a72fcca58-8bed2055031sm4717998b3a.39 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   ravikumar@gmail.com
+DATA
+354 Go ahead d2e1a72fcca58-8bed2055031sm4717998b3a.39 - gsmtp
+Date: Tue, 17 Nov 2026 10:16:19 +0530 (IST)
+From: info@cca.gov.in
+To: ravikumar@gmail.com
+Message-ID: <1318414081.12.1794890784330@DESKTOP-QLTPTK0>
+Subject: CCA Login OTP
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+Please do not share your OTP with anyone, your OTP is 123456.
+.
+250 2.0.0 OK  1794890785 d2e1a72fcca58-8bed2055031sm4717998b3a.39 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection d2e1a72fcca58-8bed2055031sm4717998b3a.39 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Sending message: Please do not share your OTP with anyone, your OTP is 123456.
+mobileNumber: 8565425656
+username: ccalmsdelhi
+templateId: 1477178841413978234
+smsservicetype: otpmsg
+Unexpected error: I/O error on POST request for "https://msdgweb.mgov.gov.in/esms/sendsmsrequestDLT": PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP 98e67ed59e1d1-3b3ac292c53sm2026358a91.7 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK 98e67ed59e1d1-3b3ac292c53sm2026358a91.7 - gsmtp
+RCPT TO:<deepak@cca.in>
+250 2.1.5 OK 98e67ed59e1d1-3b3ac292c53sm2026358a91.7 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   deepak@cca.in
+DATA
+354 Go ahead 98e67ed59e1d1-3b3ac292c53sm2026358a91.7 - gsmtp
+Date: Tue, 17 Nov 2026 10:33:26 +0530 (IST)
+From: info@cca.gov.in
+To: deepak@cca.in
+Message-ID: <2101697288.13.1794891811181@DESKTOP-QLTPTK0>
+Subject: CCA Login OTP
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+Please do not share your OTP with anyone, your OTP is 123456.
+.
+250 2.0.0 OK  1794891812 98e67ed59e1d1-3b3ac292c53sm2026358a91.7 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection 98e67ed59e1d1-3b3ac292c53sm2026358a91.7 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP 98e67ed59e1d1-3b3ac70ea45sm2179927a91.17 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP d2e1a72fcca58-8bed243c34dsm4493954b3a.41 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK 98e67ed59e1d1-3b3ac70ea45sm2179927a91.17 - gsmtp
+RCPT TO:<gauravcdac2333@gmail.com>
+250 2.1.5 OK 98e67ed59e1d1-3b3ac70ea45sm2179927a91.17 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   gauravcdac2333@gmail.com
+DATA
+354 Go ahead 98e67ed59e1d1-3b3ac70ea45sm2179927a91.17 - gsmtp
+Date: Tue, 17 Nov 2026 11:18:22 +0530 (IST)
+From: info@cca.gov.in
+To: gauravcdac2333@gmail.com
+Message-ID: <1880877150.14.1794894507320@DESKTOP-QLTPTK0>
+Subject: NC Report Approve
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Dear Applicant, your application has been approved. Please check your email for more details and review it: All good by reviewer
+.
+250 2.0.0 OK  1794894508 98e67ed59e1d1-3b3ac70ea45sm2179927a91.17 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection 98e67ed59e1d1-3b3ac70ea45sm2179927a91.17 - gsmtp
+Sending message: Dear Applicant, NCs observed in your Audit Report, please login and submit the clarifications at the earliest. CCA-MeitY
+mobileNumber: 9891739232
+username: ccalmsdelhi
+templateId: 1407174245455070954
+smsservicetype: singlemsg
+Unexpected error: I/O error on POST request for "https://msdgweb.mgov.gov.in/esms/sendsmsrequestDLT": PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK d2e1a72fcca58-8bed243c34dsm4493954b3a.41 - gsmtp
+RCPT TO:<gauravcdac2333@gmail.com>
+250 2.1.5 OK d2e1a72fcca58-8bed243c34dsm4493954b3a.41 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   gauravcdac2333@gmail.com
+DATA
+354 Go ahead d2e1a72fcca58-8bed243c34dsm4493954b3a.41 - gsmtp
+Date: Tue, 17 Nov 2026 11:18:30 +0530 (IST)
+From: info@cca.gov.in
+To: gauravcdac2333@gmail.com
+Message-ID: <1446351036.15.1794894515941@DESKTOP-QLTPTK0>
+Subject: NC Report Approve
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Dear Applicant, your application has been approved. Please check your email for more details and review it: All good by reviewer
+.
+250 2.0.0 OK  1794894516 d2e1a72fcca58-8bed243c34dsm4493954b3a.41 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection d2e1a72fcca58-8bed243c34dsm4493954b3a.41 - gsmtp
+Sending message: Dear Applicant, NCs observed in your Audit Report, please login and submit the clarifications at the earliest. CCA-MeitY
+mobileNumber: 9891739232
+username: ccalmsdelhi
+templateId: 1407174245455070954
+smsservicetype: singlemsg
+Unexpected error: I/O error on POST request for "https://msdgweb.mgov.gov.in/esms/sendsmsrequestDLT": PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP d2e1a72fcca58-8bed2053d26sm4512540b3a.36 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK d2e1a72fcca58-8bed2053d26sm4512540b3a.36 - gsmtp
+RCPT TO:<gauravcdac2333@gmail.com>
+250 2.1.5 OK d2e1a72fcca58-8bed2053d26sm4512540b3a.36 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   gauravcdac2333@gmail.com
+DATA
+354 Go ahead d2e1a72fcca58-8bed2053d26sm4512540b3a.36 - gsmtp
+Date: Tue, 17 Nov 2026 11:19:12 +0530 (IST)
+From: info@cca.gov.in
+To: gauravcdac2333@gmail.com
+Message-ID: <128603153.16.1794894557476@DESKTOP-QLTPTK0>
+Subject: CCA: In-Principle Approval Granted
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Dear Applicant, In-Principle Approval has been granted after reviewing your application. Please log in to the portal to submit the bank guarantee, CSR, and agreement.
+.
+250 2.0.0 OK  1794894558 d2e1a72fcca58-8bed2053d26sm4512540b3a.36 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection d2e1a72fcca58-8bed2053d26sm4512540b3a.36 - gsmtp
+Sending message: Dear Applicant, application no. 50 to become a Certifying Authority has been approved in-principle, subject to submission of Agreement, PBG & CSR. CCA-MeitY
+mobileNumber: 9891739232
+username: ccalmsdelhi
+templateId: 1407174245461980784
+smsservicetype: singlemsg
+Unexpected error: I/O error on POST request for "https://msdgweb.mgov.gov.in/esms/sendsmsrequestDLT": PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Sending message: Please do not share your OTP with anyone, your OTP is 123456.
+mobileNumber: 6388956267
+username: ccalmsdelhi
+templateId: 1477178841413978234
+smsservicetype: otpmsg
+Unexpected error: I/O error on POST request for "https://msdgweb.mgov.gov.in/esms/sendsmsrequestDLT": PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP 98e67ed59e1d1-3b3ac292c53sm2237447a91.7 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK 98e67ed59e1d1-3b3ac292c53sm2237447a91.7 - gsmtp
+RCPT TO:<blackbirdraj887@gmail.com>
+250 2.1.5 OK 98e67ed59e1d1-3b3ac292c53sm2237447a91.7 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   blackbirdraj887@gmail.com
+DATA
+354 Go ahead 98e67ed59e1d1-3b3ac292c53sm2237447a91.7 - gsmtp
+Date: Tue, 17 Nov 2026 11:21:45 +0530 (IST)
+From: info@cca.gov.in
+To: blackbirdraj887@gmail.com
+Message-ID: <1558902467.17.1794894709948@DESKTOP-QLTPTK0>
+Subject: CCA Login OTP
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+Please do not share your OTP with anyone, your OTP is 123456.
+.
+250 2.0.0 OK  1794894711 98e67ed59e1d1-3b3ac292c53sm2237447a91.7 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection 98e67ed59e1d1-3b3ac292c53sm2237447a91.7 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Sending message: Please do not share your OTP with anyone, your OTP is 123456.
+mobileNumber: 9891739232
+username: ccalmsdelhi
+templateId: 1477178841413978234
+smsservicetype: otpmsg
+Unexpected error: I/O error on POST request for "https://msdgweb.mgov.gov.in/esms/sendsmsrequestDLT": PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP 98e67ed59e1d1-3b1b3ac294bsm9525192a91.2 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK 98e67ed59e1d1-3b1b3ac294bsm9525192a91.2 - gsmtp
+RCPT TO:<gauravcdac2333@gmail.com>
+250 2.1.5 OK 98e67ed59e1d1-3b1b3ac294bsm9525192a91.2 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   gauravcdac2333@gmail.com
+DATA
+354 Go ahead 98e67ed59e1d1-3b1b3ac294bsm9525192a91.2 - gsmtp
+Date: Tue, 17 Nov 2026 11:22:44 +0530 (IST)
+From: info@cca.gov.in
+To: gauravcdac2333@gmail.com
+Message-ID: <1759078075.18.1794894770764@DESKTOP-QLTPTK0>
+Subject: CCA Login OTP
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+Please do not share your OTP with anyone, your OTP is 123456.
+.
+250 2.0.0 OK  1794894771 98e67ed59e1d1-3b1b3ac294bsm9525192a91.2 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection 98e67ed59e1d1-3b1b3ac294bsm9525192a91.2 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Sending message: Please do not share your OTP with anyone, your OTP is 123456.
+mobileNumber: 6388956267
+username: ccalmsdelhi
+templateId: 1477178841413978234
+smsservicetype: otpmsg
+Unexpected error: I/O error on POST request for "https://msdgweb.mgov.gov.in/esms/sendsmsrequestDLT": PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP 98e67ed59e1d1-3b3abe8b263sm2394640a91.13 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK 98e67ed59e1d1-3b3abe8b263sm2394640a91.13 - gsmtp
+RCPT TO:<blackbirdraj887@gmail.com>
+250 2.1.5 OK 98e67ed59e1d1-3b3abe8b263sm2394640a91.13 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   blackbirdraj887@gmail.com
+DATA
+354 Go ahead 98e67ed59e1d1-3b3abe8b263sm2394640a91.13 - gsmtp
+Date: Tue, 17 Nov 2026 11:24:03 +0530 (IST)
+From: info@cca.gov.in
+To: blackbirdraj887@gmail.com
+Message-ID: <341938550.19.1794894848310@DESKTOP-QLTPTK0>
+Subject: CCA Login OTP
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+Please do not share your OTP with anyone, your OTP is 123456.
+.
+250 2.0.0 OK  1794894849 98e67ed59e1d1-3b3abe8b263sm2394640a91.13 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection 98e67ed59e1d1-3b3abe8b263sm2394640a91.13 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Sending message: Please do not share your OTP with anyone, your OTP is 123456.
+mobileNumber: 8565425656
+username: ccalmsdelhi
+templateId: 1477178841413978234
+smsservicetype: otpmsg
+Unexpected error: I/O error on POST request for "https://msdgweb.mgov.gov.in/esms/sendsmsrequestDLT": PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP d9443c01a7336-2efd7a583b4sm8760785ad.44 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK d9443c01a7336-2efd7a583b4sm8760785ad.44 - gsmtp
+RCPT TO:<deepak@cca.in>
+250 2.1.5 OK d9443c01a7336-2efd7a583b4sm8760785ad.44 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   deepak@cca.in
+DATA
+354 Go ahead d9443c01a7336-2efd7a583b4sm8760785ad.44 - gsmtp
+Date: Tue, 17 Nov 2026 11:52:36 +0530 (IST)
+From: info@cca.gov.in
+To: deepak@cca.in
+Message-ID: <1858167752.20.1794896561677@DESKTOP-QLTPTK0>
+Subject: CCA Login OTP
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+Please do not share your OTP with anyone, your OTP is 123456.
+.
+250 2.0.0 OK  1794896562 d9443c01a7336-2efd7a583b4sm8760785ad.44 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection d9443c01a7336-2efd7a583b4sm8760785ad.44 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Sending message: Please do not share your OTP with anyone, your OTP is 123456.
+mobileNumber: 9891739232
+username: ccalmsdelhi
+templateId: 1477178841413978234
+smsservicetype: otpmsg
+Unexpected error: I/O error on POST request for "https://msdgweb.mgov.gov.in/esms/sendsmsrequestDLT": PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP 98e67ed59e1d1-3b3ac296b5fsm3107606a91.8 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK 98e67ed59e1d1-3b3ac296b5fsm3107606a91.8 - gsmtp
+RCPT TO:<gauravcdac2333@gmail.com>
+250 2.1.5 OK 98e67ed59e1d1-3b3ac296b5fsm3107606a91.8 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   gauravcdac2333@gmail.com
+DATA
+354 Go ahead 98e67ed59e1d1-3b3ac296b5fsm3107606a91.8 - gsmtp
+Date: Tue, 17 Nov 2026 14:18:10 +0530 (IST)
+From: info@cca.gov.in
+To: gauravcdac2333@gmail.com
+Message-ID: <1037319830.21.1794905295391@DESKTOP-QLTPTK0>
+Subject: CCA Login OTP
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+Please do not share your OTP with anyone, your OTP is 123456.
+.
+250 2.0.0 OK  1794905296 98e67ed59e1d1-3b3ac296b5fsm3107606a91.8 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection 98e67ed59e1d1-3b3ac296b5fsm3107606a91.8 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Sending message: Please do not share your OTP with anyone, your OTP is 123456.
+mobileNumber: 8565425656
+username: ccalmsdelhi
+templateId: 1477178841413978234
+smsservicetype: otpmsg
+Unexpected error: I/O error on POST request for "https://msdgweb.mgov.gov.in/esms/sendsmsrequestDLT": PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP 41be03b00d2f7-cde150b8efcsm714583a12.2 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK 41be03b00d2f7-cde150b8efcsm714583a12.2 - gsmtp
+RCPT TO:<deepak@cca.in>
+250 2.1.5 OK 41be03b00d2f7-cde150b8efcsm714583a12.2 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   deepak@cca.in
+DATA
+354 Go ahead 41be03b00d2f7-cde150b8efcsm714583a12.2 - gsmtp
+Date: Tue, 17 Nov 2026 14:56:47 +0530 (IST)
+From: info@cca.gov.in
+To: deepak@cca.in
+Message-ID: <789222098.22.1794907612128@DESKTOP-QLTPTK0>
+Subject: CCA Login OTP
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+Please do not share your OTP with anyone, your OTP is 123456.
+.
+250 2.0.0 OK  1794907614 41be03b00d2f7-cde150b8efcsm714583a12.2 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection 41be03b00d2f7-cde150b8efcsm714583a12.2 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Sending message: Please do not share your OTP with anyone, your OTP is 123456.
+mobileNumber: 6388956267
+username: ccalmsdelhi
+templateId: 1477178841413978234
+smsservicetype: otpmsg
+Unexpected error: I/O error on POST request for "https://msdgweb.mgov.gov.in/esms/sendsmsrequestDLT": PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP 41be03b00d2f7-cddc186fc81sm5702010a12.8 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK 41be03b00d2f7-cddc186fc81sm5702010a12.8 - gsmtp
+RCPT TO:<blackbirdraj887@gmail.com>
+250 2.1.5 OK 41be03b00d2f7-cddc186fc81sm5702010a12.8 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   blackbirdraj887@gmail.com
+DATA
+354 Go ahead 41be03b00d2f7-cddc186fc81sm5702010a12.8 - gsmtp
+Date: Tue, 17 Nov 2026 15:04:06 +0530 (IST)
+From: info@cca.gov.in
+To: blackbirdraj887@gmail.com
+Message-ID: <56169003.23.1794908051284@DESKTOP-QLTPTK0>
+Subject: CCA Login OTP
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+Please do not share your OTP with anyone, your OTP is 123456.
+.
+250 2.0.0 OK  1794908052 41be03b00d2f7-cddc186fc81sm5702010a12.8 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection 41be03b00d2f7-cddc186fc81sm5702010a12.8 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Sending message: Please do not share your OTP with anyone, your OTP is 123456.
+mobileNumber: 8565425656
+username: ccalmsdelhi
+templateId: 1477178841413978234
+smsservicetype: otpmsg
+Unexpected error: I/O error on POST request for "https://msdgweb.mgov.gov.in/esms/sendsmsrequestDLT": PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP d9443c01a7336-2efd7a85f1dsm11733695ad.59 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK d9443c01a7336-2efd7a85f1dsm11733695ad.59 - gsmtp
+RCPT TO:<deepak@cca.in>
+250 2.1.5 OK d9443c01a7336-2efd7a85f1dsm11733695ad.59 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   deepak@cca.in
+DATA
+354 Go ahead d9443c01a7336-2efd7a85f1dsm11733695ad.59 - gsmtp
+Date: Tue, 17 Nov 2026 15:05:50 +0530 (IST)
+From: info@cca.gov.in
+To: deepak@cca.in
+Message-ID: <1886620074.24.1794908155408@DESKTOP-QLTPTK0>
+Subject: CCA Login OTP
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+Please do not share your OTP with anyone, your OTP is 123456.
+.
+250 2.0.0 OK  1794908156 d9443c01a7336-2efd7a85f1dsm11733695ad.59 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection d9443c01a7336-2efd7a85f1dsm11733695ad.59 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP 98e67ed59e1d1-3b3ac2cca15sm3195810a91.11 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK 98e67ed59e1d1-3b3ac2cca15sm3195810a91.11 - gsmtp
+RCPT TO:<gauravcdac2333@gmail.com>
+250 2.1.5 OK 98e67ed59e1d1-3b3ac2cca15sm3195810a91.11 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   gauravcdac2333@gmail.com
+DATA
+354 Go ahead 98e67ed59e1d1-3b3ac2cca15sm3195810a91.11 - gsmtp
+Date: Tue, 17 Nov 2026 15:06:24 +0530 (IST)
+From: info@cca.gov.in
+To: gauravcdac2333@gmail.com
+Message-ID: <1493365181.25.1794908189901@DESKTOP-QLTPTK0>
+Subject: CCA: License issued
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Dear Applicant, Your CA license has issued. You can view your license details after signin to the portal.
+.
+250 2.0.0 OK  1794908191 98e67ed59e1d1-3b3ac2cca15sm3195810a91.11 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection 98e67ed59e1d1-3b3ac2cca15sm3195810a91.11 - gsmtp
+Sending message: Dear Applicant, welcome on-board, your license 202654481711310000000000 has been issued against application no. 50.CCA-MeitY
+mobileNumber: 9891739232
+username: ccalmsdelhi
+templateId: 1407174245469975657
+smsservicetype: singlemsg
+Unexpected error: I/O error on POST request for "https://msdgweb.mgov.gov.in/esms/sendsmsrequestDLT": PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+Sending message: Please do not share your OTP with anyone, your OTP is 123456.
+mobileNumber: 9891739232
+username: ccalmsdelhi
+templateId: 1477178841413978234
+smsservicetype: otpmsg
+Unexpected error: I/O error on POST request for "https://msdgweb.mgov.gov.in/esms/sendsmsrequestDLT": PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP 41be03b00d2f7-cddc13275cfsm5798846a12.0 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK 41be03b00d2f7-cddc13275cfsm5798846a12.0 - gsmtp
+RCPT TO:<gauravcdac2333@gmail.com>
+250 2.1.5 OK 41be03b00d2f7-cddc13275cfsm5798846a12.0 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   gauravcdac2333@gmail.com
+DATA
+354 Go ahead 41be03b00d2f7-cddc13275cfsm5798846a12.0 - gsmtp
+Date: Tue, 17 Nov 2026 15:06:59 +0530 (IST)
+From: info@cca.gov.in
+To: gauravcdac2333@gmail.com
+Message-ID: <1239592044.26.1794908224575@DESKTOP-QLTPTK0>
+Subject: CCA Login OTP
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+Please do not share your OTP with anyone, your OTP is 123456.
+.
+250 2.0.0 OK  1794908225 41be03b00d2f7-cddc13275cfsm5798846a12.0 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection 41be03b00d2f7-cddc13275cfsm5798846a12.0 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP d2e1a72fcca58-8bed263b648sm4713885b3a.46 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK d2e1a72fcca58-8bed263b648sm4713885b3a.46 - gsmtp
+RCPT TO:<abcd@gmail.com>
+250 2.1.5 OK d2e1a72fcca58-8bed263b648sm4713885b3a.46 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   abcd@gmail.com
+DATA
+354 Go ahead d2e1a72fcca58-8bed263b648sm4713885b3a.46 - gsmtp
+Date: Tue, 17 Nov 2026 15:23:38 +0530 (IST)
+From: info@cca.gov.in
+To: abcd@gmail.com
+Message-ID: <1049808225.27.1794909223297@DESKTOP-QLTPTK0>
+Subject: License Renewal Reminder
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Dear Licensee, 
+
+This is a reminder that your license is due for renewal in the next 45 days. Please take the necessary steps to renew your license before it expires to avoid any service disruption.
+
+For renewal instructions and more details, please check your email or visit your account dashboard.
+
+If you have any questions or need assistance, feel free to contact our support team.
+
+Best regards,
+The Licensing Team
+.
+250 2.0.0 OK  1794909224 d2e1a72fcca58-8bed263b648sm4713885b3a.46 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection d2e1a72fcca58-8bed263b648sm4713885b3a.46 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP 98e67ed59e1d1-3b3abeb2517sm3327859a91.15 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK 98e67ed59e1d1-3b3abeb2517sm3327859a91.15 - gsmtp
+RCPT TO:<abcd@gmail.com>
+250 2.1.5 OK 98e67ed59e1d1-3b3abeb2517sm3327859a91.15 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   abcd@gmail.com
+DATA
+354 Go ahead 98e67ed59e1d1-3b3abeb2517sm3327859a91.15 - gsmtp
+Date: Tue, 17 Nov 2026 15:28:02 +0530 (IST)
+From: info@cca.gov.in
+To: abcd@gmail.com
+Message-ID: <413133620.28.1794909487153@DESKTOP-QLTPTK0>
+Subject: License Renewal Reminder
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Dear Licensee, 
+
+This is a reminder that your license is due for renewal in the next 45 days. Please take the necessary steps to renew your license before it expires to avoid any service disruption.
+
+For renewal instructions and more details, please check your email or visit your account dashboard.
+
+If you have any questions or need assistance, feel free to contact our support team.
+
+Best regards,
+The Licensing Team
+.
+250 2.0.0 OK  1794909488 98e67ed59e1d1-3b3abeb2517sm3327859a91.15 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection 98e67ed59e1d1-3b3abeb2517sm3327859a91.15 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select n1_0.notification_id,n1_0.created,n1_0.isread,n1_0.message,n1_0.notification_type_id,n1_0.role,n1_0.updated,n1_0.username from notification_management.notifications n1_0 join notification_management.notification_type nti1_0 on nti1_0.notification_type_id=n1_0.notification_type_id where n1_0.username=? and n1_0.role=? and (nti1_0.notification_type_name='Dashboard' or nti1_0.notification_type_name='Email & Dashboard' or nti1_0.notification_type_name='SMS & Dashboard' or nti1_0.notification_type_name='All') order by n1_0.created desc
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_id=?
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP 41be03b00d2f7-cde0e3277dfsm1413602a12.18 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK 41be03b00d2f7-cde0e3277dfsm1413602a12.18 - gsmtp
+RCPT TO:<gauravcdac24@gmail.com>
+250 2.1.5 OK 41be03b00d2f7-cde0e3277dfsm1413602a12.18 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   gauravcdac24@gmail.com
+DATA
+354 Go ahead 41be03b00d2f7-cde0e3277dfsm1413602a12.18 - gsmtp
+Date: Tue, 17 Nov 2026 16:42:07 +0530 (IST)
+From: info@cca.gov.in
+To: gauravcdac24@gmail.com
+Message-ID: <1255915245.29.1794913931948@DESKTOP-QLTPTK0>
+Subject: Annual Audit Reminder
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Dear Licensee, 
+
+This is a reminder that your annual audit is due. Please make sure to complete the necessary audit procedures as per the schedule. If you haven't started the audit yet, we recommend initiating it as soon as possible.
+
+For more details and the audit schedule, please check your email or log into your dashboard.
+
+If you have any questions or need help, feel free to reach out to our support team.
+
+Best regards,
+The Audit Team
+.
+250 2.0.0 OK  1794913933 41be03b00d2f7-cde0e3277dfsm1413602a12.18 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection 41be03b00d2f7-cde0e3277dfsm1413602a12.18 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP 98e67ed59e1d1-3b3ac292c53sm3715044a91.7 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK 98e67ed59e1d1-3b3ac292c53sm3715044a91.7 - gsmtp
+RCPT TO:<raj@cdac.in>
+250 2.1.5 OK 98e67ed59e1d1-3b3ac292c53sm3715044a91.7 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   raj@cdac.in
+DATA
+354 Go ahead 98e67ed59e1d1-3b3ac292c53sm3715044a91.7 - gsmtp
+Date: Tue, 17 Nov 2026 16:42:19 +0530 (IST)
+From: info@cca.gov.in
+To: raj@cdac.in
+Message-ID: <855736614.30.1794913944658@DESKTOP-QLTPTK0>
+Subject: Annual Audit Reminder
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Dear Licensee, 
+
+This is a reminder that your annual audit is due. Please make sure to complete the necessary audit procedures as per the schedule. If you haven't started the audit yet, we recommend initiating it as soon as possible.
+
+For more details and the audit schedule, please check your email or log into your dashboard.
+
+If you have any questions or need help, feel free to reach out to our support team.
+
+Best regards,
+The Audit Team
+.
+250 2.0.0 OK  1794913945 98e67ed59e1d1-3b3ac292c53sm3715044a91.7 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection 98e67ed59e1d1-3b3ac292c53sm3715044a91.7 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP 98e67ed59e1d1-3b3abe77179sm3702101a91.11 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK 98e67ed59e1d1-3b3abe77179sm3702101a91.11 - gsmtp
+RCPT TO:<gauravcdac24@gmail.com>
+250 2.1.5 OK 98e67ed59e1d1-3b3abe77179sm3702101a91.11 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   gauravcdac24@gmail.com
+DATA
+354 Go ahead 98e67ed59e1d1-3b3abe77179sm3702101a91.11 - gsmtp
+Date: Tue, 17 Nov 2026 16:42:32 +0530 (IST)
+From: info@cca.gov.in
+To: gauravcdac24@gmail.com
+Message-ID: <849024489.31.1794913957471@DESKTOP-QLTPTK0>
+Subject: Annual Audit Reminder
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Dear Licensee, 
+
+This is a reminder that your annual audit is due. Please make sure to complete the necessary audit procedures as per the schedule. If you haven't started the audit yet, we recommend initiating it as soon as possible.
+
+For more details and the audit schedule, please check your email or log into your dashboard.
+
+If you have any questions or need help, feel free to reach out to our support team.
+
+Best regards,
+The Audit Team
+.
+250 2.0.0 OK  1794913958 98e67ed59e1d1-3b3abe77179sm3702101a91.11 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection 98e67ed59e1d1-3b3abe77179sm3702101a91.11 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP 98e67ed59e1d1-3b3ac6016c3sm3747364a91.15 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK 98e67ed59e1d1-3b3ac6016c3sm3747364a91.15 - gsmtp
+RCPT TO:<kanil@cdac.in>
+250 2.1.5 OK 98e67ed59e1d1-3b3ac6016c3sm3747364a91.15 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   kanil@cdac.in
+DATA
+354 Go ahead 98e67ed59e1d1-3b3ac6016c3sm3747364a91.15 - gsmtp
+Date: Tue, 17 Nov 2026 16:42:46 +0530 (IST)
+From: info@cca.gov.in
+To: kanil@cdac.in
+Message-ID: <1543426841.32.1794913971393@DESKTOP-QLTPTK0>
+Subject: Annual Audit Reminder
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Dear Licensee, 
+
+This is a reminder that your annual audit is due. Please make sure to complete the necessary audit procedures as per the schedule. If you haven't started the audit yet, we recommend initiating it as soon as possible.
+
+For more details and the audit schedule, please check your email or log into your dashboard.
+
+If you have any questions or need help, feel free to reach out to our support team.
+
+Best regards,
+The Audit Team
+.
+250 2.0.0 OK  1794913972 98e67ed59e1d1-3b3ac6016c3sm3747364a91.15 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection 98e67ed59e1d1-3b3ac6016c3sm3747364a91.15 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP 98e67ed59e1d1-3b3ac292c53sm3717871a91.7 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK 98e67ed59e1d1-3b3ac292c53sm3717871a91.7 - gsmtp
+RCPT TO:<kanil@cdac.in>
+250 2.1.5 OK 98e67ed59e1d1-3b3ac292c53sm3717871a91.7 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   kanil@cdac.in
+DATA
+354 Go ahead 98e67ed59e1d1-3b3ac292c53sm3717871a91.7 - gsmtp
+Date: Tue, 17 Nov 2026 16:42:59 +0530 (IST)
+From: info@cca.gov.in
+To: kanil@cdac.in
+Message-ID: <431788738.33.1794913984467@DESKTOP-QLTPTK0>
+Subject: Annual Audit Reminder
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Dear Licensee, 
+
+This is a reminder that your annual audit is due. Please make sure to complete the necessary audit procedures as per the schedule. If you haven't started the audit yet, we recommend initiating it as soon as possible.
+
+For more details and the audit schedule, please check your email or log into your dashboard.
+
+If you have any questions or need help, feel free to reach out to our support team.
+
+Best regards,
+The Audit Team
+.
+250 2.0.0 OK  1794913986 98e67ed59e1d1-3b3ac292c53sm3717871a91.7 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection 98e67ed59e1d1-3b3ac292c53sm3717871a91.7 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP 98e67ed59e1d1-3b3ac2b5ec6sm3806657a91.10 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK 98e67ed59e1d1-3b3ac2b5ec6sm3806657a91.10 - gsmtp
+RCPT TO:<kanil@cdac.in>
+250 2.1.5 OK 98e67ed59e1d1-3b3ac2b5ec6sm3806657a91.10 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   kanil@cdac.in
+DATA
+354 Go ahead 98e67ed59e1d1-3b3ac2b5ec6sm3806657a91.10 - gsmtp
+Date: Tue, 17 Nov 2026 16:43:12 +0530 (IST)
+From: info@cca.gov.in
+To: kanil@cdac.in
+Message-ID: <1306393815.34.1794913997738@DESKTOP-QLTPTK0>
+Subject: Annual Audit Reminder
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Dear Licensee, 
+
+This is a reminder that your annual audit is due. Please make sure to complete the necessary audit procedures as per the schedule. If you haven't started the audit yet, we recommend initiating it as soon as possible.
+
+For more details and the audit schedule, please check your email or log into your dashboard.
+
+If you have any questions or need help, feel free to reach out to our support team.
+
+Best regards,
+The Audit Team
+.
+250 2.0.0 OK  1794913999 98e67ed59e1d1-3b3ac2b5ec6sm3806657a91.10 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection 98e67ed59e1d1-3b3ac2b5ec6sm3806657a91.10 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP d9443c01a7336-2efd7abf4f7sm13343295ad.71 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK d9443c01a7336-2efd7abf4f7sm13343295ad.71 - gsmtp
+RCPT TO:<qwec@gmail.com>
+250 2.1.5 OK d9443c01a7336-2efd7abf4f7sm13343295ad.71 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   qwec@gmail.com
+DATA
+354 Go ahead d9443c01a7336-2efd7abf4f7sm13343295ad.71 - gsmtp
+Date: Tue, 17 Nov 2026 16:43:25 +0530 (IST)
+From: info@cca.gov.in
+To: qwec@gmail.com
+Message-ID: <466372624.35.1794914010628@DESKTOP-QLTPTK0>
+Subject: Annual Audit Reminder
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Dear Licensee, 
+
+This is a reminder that your annual audit is due. Please make sure to complete the necessary audit procedures as per the schedule. If you haven't started the audit yet, we recommend initiating it as soon as possible.
+
+For more details and the audit schedule, please check your email or log into your dashboard.
+
+If you have any questions or need help, feel free to reach out to our support team.
+
+Best regards,
+The Audit Team
+.
+250 2.0.0 OK  1794914011 d9443c01a7336-2efd7abf4f7sm13343295ad.71 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection d9443c01a7336-2efd7abf4f7sm13343295ad.71 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP d2e1a72fcca58-8bed1f5aef9sm5147382b3a.34 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK d2e1a72fcca58-8bed1f5aef9sm5147382b3a.34 - gsmtp
+RCPT TO:<abcde@gmail.com>
+250 2.1.5 OK d2e1a72fcca58-8bed1f5aef9sm5147382b3a.34 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   abcde@gmail.com
+DATA
+354 Go ahead d2e1a72fcca58-8bed1f5aef9sm5147382b3a.34 - gsmtp
+Date: Tue, 17 Nov 2026 16:43:38 +0530 (IST)
+From: info@cca.gov.in
+To: abcde@gmail.com
+Message-ID: <287977916.36.1794914023271@DESKTOP-QLTPTK0>
+Subject: Annual Audit Reminder
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Dear Licensee, 
+
+This is a reminder that your annual audit is due. Please make sure to complete the necessary audit procedures as per the schedule. If you haven't started the audit yet, we recommend initiating it as soon as possible.
+
+For more details and the audit schedule, please check your email or log into your dashboard.
+
+If you have any questions or need help, feel free to reach out to our support team.
+
+Best regards,
+The Audit Team
+.
+250 2.0.0 OK  1794914024 d2e1a72fcca58-8bed1f5aef9sm5147382b3a.34 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection d2e1a72fcca58-8bed1f5aef9sm5147382b3a.34 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id
+Hibernate: select nt1_0.notification_type_id,nt1_0.created,nt1_0.notification_type_name,nt1_0.status,nt1_0.updated from notification_management.notification_type nt1_0 where nt1_0.notification_type_name=?
+DEBUG: getProvider() returning jakarta.mail.Provider[TRANSPORT,smtp,org.eclipse.angus.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 465, isSSL true
+220 smtp.gmail.com ESMTP d2e1a72fcca58-8bed2055031sm5279966b3a.39 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 465
+EHLO DESKTOP-QLTPTK0
+250-smtp.gmail.com at your service, [164.100.26.108]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250-SMTPUTF8
+250 LIMITS MAILMAX=1000 RCPTMAX=100
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Found extension "LIMITS", arg "MAILMAX=1000 RCPTMAX=100"
+DEBUG SMTP: protocolConnect login, host=smtp.gmail.com, user=ccalms.cca@gmail.com, password=<non-null>
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2 
+DEBUG SMTP: Using mechanism LOGIN
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<info@cca.gov.in>
+250 2.1.0 OK d2e1a72fcca58-8bed2055031sm5279966b3a.39 - gsmtp
+RCPT TO:<abcd@gmail.com>
+250 2.1.5 OK d2e1a72fcca58-8bed2055031sm5279966b3a.39 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   abcd@gmail.com
+DATA
+354 Go ahead d2e1a72fcca58-8bed2055031sm5279966b3a.39 - gsmtp
+Date: Tue, 17 Nov 2026 16:43:51 +0530 (IST)
+From: info@cca.gov.in
+To: abcd@gmail.com
+Message-ID: <1808791404.37.1794914036091@DESKTOP-QLTPTK0>
+Subject: Annual Audit Reminder
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Dear Licensee, 
+
+This is a reminder that your annual audit is due. Please make sure to complete the necessary audit procedures as per the schedule. If you haven't started the audit yet, we recommend initiating it as soon as possible.
+
+For more details and the audit schedule, please check your email or log into your dashboard.
+
+If you have any questions or need help, feel free to reach out to our support team.
+
+Best regards,
+The Audit Team
+.
+250 2.0.0 OK  1794914037 d2e1a72fcca58-8bed2055031sm5279966b3a.39 - gsmtp
+DEBUG SMTP: message successfully delivered to mail server
+QUIT
+221 2.0.0 closing connection d2e1a72fcca58-8bed2055031sm5279966b3a.39 - gsmtp
+Hibernate: insert into notification_management.notifications (created,isread,message,notification_type_id,role,updated,username) values (?,?,?,?,?,?,?) returning notification_id

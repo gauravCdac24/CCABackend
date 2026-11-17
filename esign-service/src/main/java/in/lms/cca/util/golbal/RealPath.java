@@ -8,10 +8,10 @@ import java.nio.file.Paths;
 public class RealPath {
 
 	 // Linux / server path
-	 // public static final String REAL_PATH = "/home/dashboard/CCABackend/esign-service";
+	 public static final String REAL_PATH = "/home/dashboard/CCABackend/esign-service";
 
 	 // Local Windows (this machine)
-	 public static final String REAL_PATH = "C:\\Users\\hp\\Documents\\CCABackend\\CCABackend\\esign-service";
+	 // public static final String REAL_PATH = "C:\\Users\\hp\\Documents\\CCABackend\\CCABackend\\esign-service";
 
 	 // public static final String REAL_PATH = "C:\\Users\\hp\\Documents\\CCABackend\\esign-service\\src\\main\\webapp";
 	 //public static final String REAL_PATH = "E:\\CCA_PROD\\CCAB\\esign-service\\src\\main\\webapp";
