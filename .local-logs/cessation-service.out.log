@@ -25,6 +25,7 @@
 [INFO] 
 [INFO] --- spring-boot:3.3.3:run (default-cli) @ cessation-service ---
 [INFO] Attaching agents: []
+Picked up JAVA_TOOL_OPTIONS: -Xms64m -Xmx384m -XX:MaxMetaspaceSize=192m -XX:+UseSerialGC
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -35,40 +36,43 @@
 
  :: Spring Boot ::                (v3.3.3)
 
-2026-11-16 10:40:49 - Starting CessationServiceApplication using Java 17.0.10 with PID 26036 (C:\Users\hp\Documents\CCABackend\CCABackend\cessation-service\target\classes started by hp in C:\Users\hp\Documents\CCABackend\CCABackend\cessation-service)
-2026-11-16 10:40:49 - Running with Spring Boot v3.3.3, Spring v6.1.12
-2026-11-16 10:40:49 - The following 1 profile is active: "test"
-2026-11-16 10:40:49 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2026-11-16 10:40:49 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2026-11-16 10:40:50 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-11-16 10:40:50 - Finished Spring Data repository scanning in 189 ms. Found 5 JPA repository interfaces.
-2026-11-16 10:40:50 - BeanFactory id=39215ab4-5f59-38b6-8c0a-1701dc6073b4
-2026-11-16 10:40:50 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
-2026-11-16 10:40:50 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
-2026-11-16 10:40:51 - Tomcat initialized with port 7789 (http)
-2026-11-16 10:40:51 - Starting service [Tomcat]
-2026-11-16 10:40:51 - Starting Servlet engine: [Apache Tomcat/10.1.28]
-2026-11-16 10:40:51 - Initializing Spring embedded WebApplicationContext
-2026-11-16 10:40:51 - Root WebApplicationContext: initialization completed in 1929 ms
-2026-11-16 10:40:51 - HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-11-16 10:40:51 - HHH000412: Hibernate ORM core version 6.5.2.Final
-2026-11-16 10:40:51 - HHH000026: Second-level cache disabled
-2026-11-16 10:40:51 - No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-11-16 10:40:51 - HikariPool-1 - Starting...
-2026-11-16 10:40:51 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@795b1bc1
-2026-11-16 10:40:51 - HikariPool-1 - Start completed.
-2026-11-16 10:40:51 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-11-16 10:40:52 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-11-16 10:40:53 - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-11-16 10:40:53 - Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-11-16 10:40:54 - Unable to start LiveReload server
-2026-11-16 10:40:54 - Eureka HTTP Client uses RestTemplate.
-2026-11-16 10:40:54 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
-2026-11-16 10:40:54 - Setting initial instance status as: STARTING
-2026-11-16 10:40:54 - Initializing Eureka in region us-east-1
-2026-11-16 10:40:54 - Client configured to neither register nor query for data.
-2026-11-16 10:40:54 - Discovery Client initialized at timestamp 1794805854954 with initial instances count: 0
-2026-11-16 10:40:54 - Registering application CESSATION-SERVICE with eureka with status UP
-2026-11-16 10:40:54 - Tomcat started on port 7789 (http) with context path '/'
-2026-11-16 10:40:54 - Updating port to 7789
-2026-11-16 10:40:55 - Started CessationServiceApplication in 6.771 seconds (process running for 7.298)
+2026-11-17 09:46:31 - Starting CessationServiceApplication using Java 17.0.10 with PID 21180 (C:\Users\hp\Documents\CCABackend\CCABackend\cessation-service\target\classes started by hp in C:\Users\hp\Documents\CCABackend\CCABackend\cessation-service)
+2026-11-17 09:46:31 - Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-11-17 09:46:31 - The following 1 profile is active: "test"
+2026-11-17 09:46:31 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-11-17 09:46:31 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-11-17 09:46:33 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-17 09:46:33 - Finished Spring Data repository scanning in 286 ms. Found 5 JPA repository interfaces.
+2026-11-17 09:46:34 - BeanFactory id=39215ab4-5f59-38b6-8c0a-1701dc6073b4
+2026-11-17 09:46:34 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-11-17 09:46:34 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-11-17 09:46:34 - Tomcat initialized with port 7789 (http)
+2026-11-17 09:46:34 - Starting service [Tomcat]
+2026-11-17 09:46:34 - Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-11-17 09:46:34 - Initializing Spring embedded WebApplicationContext
+2026-11-17 09:46:34 - Root WebApplicationContext: initialization completed in 2996 ms
+2026-11-17 09:46:35 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-11-17 09:46:35 - HHH000412: Hibernate ORM core version 6.5.2.Final
+2026-11-17 09:46:35 - HHH000026: Second-level cache disabled
+2026-11-17 09:46:35 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-17 09:46:35 - HikariPool-1 - Starting...
+2026-11-17 09:46:35 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6ba5db77
+2026-11-17 09:46:35 - HikariPool-1 - Start completed.
+2026-11-17 09:46:35 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-11-17 09:46:37 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-17 09:46:37 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-17 09:46:37 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-11-17 09:46:38 - Unable to start LiveReload server
+2026-11-17 09:46:40 - Cannot determine local hostname
+2026-11-17 09:46:41 - Cannot determine local hostname
+2026-11-17 09:46:41 - Eureka HTTP Client uses RestTemplate.
+2026-11-17 09:46:41 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-11-17 09:46:41 - Setting initial instance status as: STARTING
+2026-11-17 09:46:41 - Initializing Eureka in region us-east-1
+2026-11-17 09:46:41 - Client configured to neither register nor query for data.
+2026-11-17 09:46:41 - Discovery Client initialized at timestamp 1794889001688 with initial instances count: 0
+2026-11-17 09:46:41 - Registering application CESSATION-SERVICE with eureka with status UP
+2026-11-17 09:46:41 - Tomcat started on port 7789 (http) with context path '/'
+2026-11-17 09:46:41 - Updating port to 7789
+2026-11-17 09:46:42 - Cannot determine local hostname
+2026-11-17 09:46:42 - Started CessationServiceApplication in 13.443 seconds (process running for 14.405)

@@ -25,6 +25,7 @@
 [INFO] 
 [INFO] --- spring-boot:3.3.4:run (default-cli) @ esign-application-service ---
 [INFO] Attaching agents: []
+Picked up JAVA_TOOL_OPTIONS: -Xms64m -Xmx384m -XX:MaxMetaspaceSize=192m -XX:+UseSerialGC
 =============================================================================================================================       
 |                                                                                                                           |
 |        ____      ____    _    ____                                                                                        |
@@ -46,341 +47,49 @@
 |                                                                                                                           |
 =============================================================================================================================
 
-2026-11-16 10:39:59 - Starting EsignApplicationServiceApplication using Java 17.0.10 with PID 23560 (C:\Users\hp\Documents\CCABackend\CCABackend\esign-application-service\target\classes started by hp in C:\Users\hp\Documents\CCABackend\CCABackend\esign-application-service)
-2026-11-16 10:39:59 - Running with Spring Boot v3.3.4, Spring v6.1.13
-2026-11-16 10:39:59 - The following 1 profile is active: "test"
-2026-11-16 10:39:59 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2026-11-16 10:39:59 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2026-11-16 10:40:00 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-11-16 10:40:01 - Finished Spring Data repository scanning in 282 ms. Found 9 JPA repository interfaces.
-2026-11-16 10:40:01 - BeanFactory id=cf2f08c7-736a-3e3b-b452-f7fe75ec2bb9
-2026-11-16 10:40:01 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
-2026-11-16 10:40:01 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
-2026-11-16 10:40:02 - Tomcat initialized with port 7785 (http)
-2026-11-16 10:40:02 - Starting service [Tomcat]
-2026-11-16 10:40:02 - Starting Servlet engine: [Apache Tomcat/10.1.30]
-2026-11-16 10:40:02 - Initializing Spring embedded WebApplicationContext
-2026-11-16 10:40:02 - Root WebApplicationContext: initialization completed in 2701 ms
-2026-11-16 10:40:02 - HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-11-16 10:40:02 - HHH000412: Hibernate ORM core version 6.5.3.Final
-2026-11-16 10:40:02 - HHH000026: Second-level cache disabled
-2026-11-16 10:40:02 - No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-11-16 10:40:03 - HikariPool-1 - Starting...
-2026-11-16 10:40:03 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@53dc5d0
-2026-11-16 10:40:03 - HikariPool-1 - Start completed.
-2026-11-16 10:40:03 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-11-16 10:40:04 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-17 09:46:14 - Starting EsignApplicationServiceApplication using Java 17.0.10 with PID 7416 (C:\Users\hp\Documents\CCABackend\CCABackend\esign-application-service\target\classes started by hp in C:\Users\hp\Documents\CCABackend\CCABackend\esign-application-service)
+2026-11-17 09:46:14 - Running with Spring Boot v3.3.4, Spring v6.1.13
+2026-11-17 09:46:14 - The following 1 profile is active: "test"
+2026-11-17 09:46:14 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-11-17 09:46:14 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-11-17 09:46:16 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-17 09:46:16 - Finished Spring Data repository scanning in 310 ms. Found 9 JPA repository interfaces.
+2026-11-17 09:46:17 - BeanFactory id=cf2f08c7-736a-3e3b-b452-f7fe75ec2bb9
+2026-11-17 09:46:17 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-11-17 09:46:17 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-11-17 09:46:18 - Tomcat initialized with port 7785 (http)
+2026-11-17 09:46:18 - Starting service [Tomcat]
+2026-11-17 09:46:18 - Starting Servlet engine: [Apache Tomcat/10.1.30]
+2026-11-17 09:46:18 - Initializing Spring embedded WebApplicationContext
+2026-11-17 09:46:18 - Root WebApplicationContext: initialization completed in 3328 ms
+2026-11-17 09:46:18 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-11-17 09:46:18 - HHH000412: Hibernate ORM core version 6.5.3.Final
+2026-11-17 09:46:18 - HHH000026: Second-level cache disabled
+2026-11-17 09:46:19 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-17 09:46:19 - HikariPool-1 - Starting...
+2026-11-17 09:46:20 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6d5e7b4f
+2026-11-17 09:46:20 - HikariPool-1 - Start completed.
+2026-11-17 09:46:20 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-11-17 09:46:24 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
 Hibernate: alter table if exists esign_application_management.review_esp_application alter column cca_remarks set data type TEXT
 Hibernate: alter table if exists esign_application_management.review_esp_application alter column remarks set data type TEXT
-2026-11-16 10:40:04 - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-11-16 10:40:05 - Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-11-16 10:40:05 - 40 mappings in 'requestMappingHandlerMapping'
-2026-11-16 10:40:06 - Patterns [/webjars/**, /**, /esign-application-service/swagger-ui*/*swagger-initializer.js, /esign-application-service/swagger-ui*/**] in 'resourceHandlerMapping'
-2026-11-16 10:40:06 - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-2026-11-16 10:40:06 - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
-2026-11-16 10:40:06 - Unable to start LiveReload server
-2026-11-16 10:40:06 - Eureka HTTP Client uses RestTemplate.
-2026-11-16 10:40:06 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
-2026-11-16 10:40:06 - Setting initial instance status as: STARTING
-2026-11-16 10:40:06 - Initializing Eureka in region us-east-1
-2026-11-16 10:40:06 - Client configured to neither register nor query for data.
-2026-11-16 10:40:06 - Discovery Client initialized at timestamp 1794805806885 with initial instances count: 0
-2026-11-16 10:40:06 - Registering application ESIGN-APPLICATION-SERVICE with eureka with status UP
-2026-11-16 10:40:06 - Tomcat started on port 7785 (http) with context path '/'
-2026-11-16 10:40:06 - Updating port to 7785
-2026-11-16 10:40:07 - Started EsignApplicationServiceApplication in 8.524 seconds (process running for 9.106)
-2026-11-16 10:58:48 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-11-16 10:58:48 - Initializing Servlet 'dispatcherServlet'
-2026-11-16 10:58:48 - Detected StandardServletMultipartResolver
-2026-11-16 10:58:48 - Detected AcceptHeaderLocaleResolver
-2026-11-16 10:58:48 - Detected FixedThemeResolver
-2026-11-16 10:58:48 - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@158306d6
-2026-11-16 10:58:48 - Detected org.springframework.web.servlet.support.SessionFlashMapManager@504896e0
-2026-11-16 10:58:48 - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
-2026-11-16 10:58:48 - Completed initialization in 4 ms
-2026-11-16 10:58:48 - GET "/esign-application-service/get-all-esp-with-ekyc-mode-approved", parameters={}
-2026-11-16 10:58:48 - GET "/esign-application-service/get-esp-application-approved-for-esign-go-live", parameters={}
-2026-11-16 10:58:48 - GET "/esign-application-service/get-all-esp-with-ekyc-mode-approved", parameters={}
-2026-11-16 10:58:48 - GET "/esign-application-service/get-all-esp-with-ekyc-mode-approved", parameters={}
-2026-11-16 10:58:48 - GET "/esign-application-service/get-all-esp-with-ekyc-mode-approved", parameters={}
-2026-11-16 10:58:48 - Mapped to in.lms.cca.controller.ESPApplicationController#getAllespApplicationApprovedForEsignGoLive()
-2026-11-16 10:58:48 - Mapped to in.lms.cca.controller.ESPApplicationController#getAllESPWithEkycModeApproved()
-2026-11-16 10:58:48 - Mapped to in.lms.cca.controller.ESPApplicationController#getAllESPWithEkycModeApproved()
-2026-11-16 10:58:48 - Mapped to in.lms.cca.controller.ESPApplicationController#getAllESPWithEkycModeApproved()
-2026-11-16 10:58:48 - Mapped to in.lms.cca.controller.ESPApplicationController#getAllESPWithEkycModeApproved()
-2026-11-16 10:58:49 - GET "/esign-application-service/get-all-esp-with-ekyc-mode-approved", parameters={}
-2026-11-16 10:58:49 - Mapped to in.lms.cca.controller.ESPApplicationController#getAllESPWithEkycModeApproved()
-Hibernate: select ela1_0.esign_licensee_appid,ela1_0.application_number,ela1_0.application_status,ela1_0.created,ela1_0.created_by,ela1_0.empanelment_date,ela1_0.licenseid,ela1_0.updated,ela1_0.updated_by,ela1_0.username from esign_application_management.esign_licensee_application ela1_0 where ela1_0.application_status=? order by ela1_0.created desc
-Hibernate: select ela1_0.esign_licensee_appid,ela1_0.application_number,ela1_0.application_status,ela1_0.created,ela1_0.created_by,ela1_0.empanelment_date,ela1_0.licenseid,ela1_0.updated,ela1_0.updated_by,ela1_0.username from esign_application_management.esign_licensee_application ela1_0 where ela1_0.application_status=? order by ela1_0.created desc
-Hibernate: select ela1_0.esign_licensee_appid,ela1_0.application_number,ela1_0.application_status,ela1_0.created,ela1_0.created_by,ela1_0.empanelment_date,ela1_0.licenseid,ela1_0.updated,ela1_0.updated_by,ela1_0.username from esign_application_management.esign_licensee_application ela1_0 where ela1_0.application_status=? order by ela1_0.created desc
-Hibernate: select ela1_0.esign_licensee_appid,ela1_0.application_number,ela1_0.application_status,ela1_0.created,ela1_0.created_by,ela1_0.empanelment_date,ela1_0.licenseid,ela1_0.updated,ela1_0.updated_by,ela1_0.username from esign_application_management.esign_licensee_application ela1_0 where ela1_0.application_status=? order by ela1_0.created desc
-Hibernate: select ela1_0.esign_licensee_appid,ela1_0.application_number,ela1_0.application_status,ela1_0.created,ela1_0.created_by,ela1_0.empanelment_date,ela1_0.licenseid,ela1_0.updated,ela1_0.updated_by,ela1_0.username from esign_application_management.esign_licensee_application ela1_0 where ela1_0.application_status=? order by ela1_0.created desc
-Hibernate: select ela1_0.esign_licensee_appid,ela1_0.application_number,ela1_0.application_status,ela1_0.created,ela1_0.created_by,ela1_0.empanelment_date,ela1_0.licenseid,ela1_0.updated,ela1_0.updated_by,ela1_0.username from esign_application_management.esign_licensee_application ela1_0 where ela1_0.application_status=? order by ela1_0.created desc
-2026-11-16 10:58:49 - Using 'application/json', given [application/json, application/yaml, application/*+json] and supported [application/json, application/*+json]
-2026-11-16 10:58:49 - Writing [[in.lms.cca.entity.EsignLicenseeApplication@7e78cd96, in.lms.cca.entity.EsignLicenseeApplication@277 (truncated)...]
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-2026-11-16 10:58:49 - Using 'application/json', given [application/json, application/yaml, application/*+json] and supported [application/json, application/*+json]
-2026-11-16 10:58:49 - Using 'application/json', given [application/json, application/yaml, application/*+json] and supported [application/json, application/*+json]
-2026-11-16 10:58:49 - Using 'application/json', given [application/json, application/yaml, application/*+json] and supported [application/json, application/*+json]
-2026-11-16 10:58:49 - Using 'application/json', given [application/json, application/yaml, application/*+json] and supported [application/json, application/*+json]
-2026-11-16 10:58:49 - Writing [[in.lms.cca.dto.ESPWithEkycModeDTO@10ef7d76, in.lms.cca.dto.ESPWithEkycModeDTO@7fbca62d, in.lms.cca. (truncated)...]
-2026-11-16 10:58:49 - Writing [[in.lms.cca.dto.ESPWithEkycModeDTO@46e9ba15, in.lms.cca.dto.ESPWithEkycModeDTO@4f48386d, in.lms.cca. (truncated)...]
-2026-11-16 10:58:49 - Using 'application/json', given [application/json, application/yaml, application/*+json] and supported [application/json, application/*+json]
-2026-11-16 10:58:49 - Writing [[in.lms.cca.dto.ESPWithEkycModeDTO@96669d3, in.lms.cca.dto.ESPWithEkycModeDTO@27644d07, in.lms.cca.d (truncated)...]
-2026-11-16 10:58:49 - Writing [[in.lms.cca.dto.ESPWithEkycModeDTO@3e235f2a, in.lms.cca.dto.ESPWithEkycModeDTO@729797f6, in.lms.cca. (truncated)...]
-2026-11-16 10:58:49 - Writing [[in.lms.cca.dto.ESPWithEkycModeDTO@6559f47d, in.lms.cca.dto.ESPWithEkycModeDTO@68219691, in.lms.cca. (truncated)...]
-2026-11-16 10:58:49 - Completed 200 OK
-2026-11-16 10:58:49 - Completed 200 OK
-2026-11-16 10:58:49 - Completed 200 OK
-2026-11-16 10:58:49 - Completed 200 OK
-2026-11-16 10:58:49 - Completed 200 OK
-2026-11-16 10:58:49 - Completed 200 OK
-2026-11-16 10:58:49 - GET "/esign-application-service/get-all-esp-with-ekyc-mode-approved", parameters={}
-2026-11-16 10:58:49 - GET "/esign-application-service/get-all-esp-with-ekyc-mode-approved", parameters={}
-2026-11-16 10:58:49 - Mapped to in.lms.cca.controller.ESPApplicationController#getAllESPWithEkycModeApproved()
-2026-11-16 10:58:49 - Mapped to in.lms.cca.controller.ESPApplicationController#getAllESPWithEkycModeApproved()
-Hibernate: select ela1_0.esign_licensee_appid,ela1_0.application_number,ela1_0.application_status,ela1_0.created,ela1_0.created_by,ela1_0.empanelment_date,ela1_0.licenseid,ela1_0.updated,ela1_0.updated_by,ela1_0.username from esign_application_management.esign_licensee_application ela1_0 where ela1_0.application_status=? order by ela1_0.created desc
-Hibernate: select ela1_0.esign_licensee_appid,ela1_0.application_number,ela1_0.application_status,ela1_0.created,ela1_0.created_by,ela1_0.empanelment_date,ela1_0.licenseid,ela1_0.updated,ela1_0.updated_by,ela1_0.username from esign_application_management.esign_licensee_application ela1_0 where ela1_0.application_status=? order by ela1_0.created desc
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-2026-11-16 10:58:49 - Using 'application/json', given [application/json, application/yaml, application/*+json] and supported [application/json, application/*+json]
-2026-11-16 10:58:49 - Using 'application/json', given [application/json, application/yaml, application/*+json] and supported [application/json, application/*+json]
-2026-11-16 10:58:49 - Writing [[in.lms.cca.dto.ESPWithEkycModeDTO@678f98f8, in.lms.cca.dto.ESPWithEkycModeDTO@2e7c156d, in.lms.cca. (truncated)...]
-2026-11-16 10:58:49 - Writing [[in.lms.cca.dto.ESPWithEkycModeDTO@51f9404b, in.lms.cca.dto.ESPWithEkycModeDTO@2f957902, in.lms.cca. (truncated)...]
-2026-11-16 10:58:49 - Completed 200 OK
-2026-11-16 10:58:49 - Completed 200 OK
-2026-11-16 10:58:49 - GET "/esign-application-service/get-esp-application-approved-for-esign-go-live", parameters={}
-2026-11-16 10:58:49 - Mapped to in.lms.cca.controller.ESPApplicationController#getAllespApplicationApprovedForEsignGoLive()
-Hibernate: select ela1_0.esign_licensee_appid,ela1_0.application_number,ela1_0.application_status,ela1_0.created,ela1_0.created_by,ela1_0.empanelment_date,ela1_0.licenseid,ela1_0.updated,ela1_0.updated_by,ela1_0.username from esign_application_management.esign_licensee_application ela1_0 where ela1_0.application_status=? order by ela1_0.created desc
-2026-11-16 10:58:49 - Using 'application/json', given [application/json, application/yaml, application/*+json] and supported [application/json, application/*+json]
-2026-11-16 10:58:49 - Writing [[in.lms.cca.entity.EsignLicenseeApplication@2d461a5, in.lms.cca.entity.EsignLicenseeApplication@47d6 (truncated)...]
-2026-11-16 10:58:49 - GET "/esign-application-service/get-all-esp-with-ekyc-mode-approved", parameters={}
-2026-11-16 10:58:49 - GET "/esign-application-service/get-all-esp-with-ekyc-mode-approved", parameters={}
-2026-11-16 10:58:49 - Mapped to in.lms.cca.controller.ESPApplicationController#getAllESPWithEkycModeApproved()
-2026-11-16 10:58:49 - Completed 200 OK
-2026-11-16 10:58:49 - Mapped to in.lms.cca.controller.ESPApplicationController#getAllESPWithEkycModeApproved()
-Hibernate: select ela1_0.esign_licensee_appid,ela1_0.application_number,ela1_0.application_status,ela1_0.created,ela1_0.created_by,ela1_0.empanelment_date,ela1_0.licenseid,ela1_0.updated,ela1_0.updated_by,ela1_0.username from esign_application_management.esign_licensee_application ela1_0 where ela1_0.application_status=? order by ela1_0.created desc
-Hibernate: select ela1_0.esign_licensee_appid,ela1_0.application_number,ela1_0.application_status,ela1_0.created,ela1_0.created_by,ela1_0.empanelment_date,ela1_0.licenseid,ela1_0.updated,ela1_0.updated_by,ela1_0.username from esign_application_management.esign_licensee_application ela1_0 where ela1_0.application_status=? order by ela1_0.created desc
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-2026-11-16 10:58:49 - Using 'application/json', given [application/json, application/yaml, application/*+json] and supported [application/json, application/*+json]
-2026-11-16 10:58:49 - Writing [[in.lms.cca.dto.ESPWithEkycModeDTO@456e04c, in.lms.cca.dto.ESPWithEkycModeDTO@135d96e6, in.lms.cca.d (truncated)...]
-2026-11-16 10:58:49 - Using 'application/json', given [application/json, application/yaml, application/*+json] and supported [application/json, application/*+json]
-2026-11-16 10:58:49 - Writing [[in.lms.cca.dto.ESPWithEkycModeDTO@19ee5f8a, in.lms.cca.dto.ESPWithEkycModeDTO@577846c3, in.lms.cca. (truncated)...]
-2026-11-16 10:58:49 - Completed 200 OK
-2026-11-16 10:58:49 - Completed 200 OK
-2026-11-16 10:58:49 - GET "/esign-application-service/get-all-esp-with-ekyc-mode-approved", parameters={}
-2026-11-16 10:58:49 - Mapped to in.lms.cca.controller.ESPApplicationController#getAllESPWithEkycModeApproved()
-Hibernate: select ela1_0.esign_licensee_appid,ela1_0.application_number,ela1_0.application_status,ela1_0.created,ela1_0.created_by,ela1_0.empanelment_date,ela1_0.licenseid,ela1_0.updated,ela1_0.updated_by,ela1_0.username from esign_application_management.esign_licensee_application ela1_0 where ela1_0.application_status=? order by ela1_0.created desc
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-2026-11-16 10:58:49 - Using 'application/json', given [application/json, application/yaml, application/*+json] and supported [application/json, application/*+json]
-2026-11-16 10:58:49 - Writing [[in.lms.cca.dto.ESPWithEkycModeDTO@3084a0fe, in.lms.cca.dto.ESPWithEkycModeDTO@5708be7e, in.lms.cca. (truncated)...]
-2026-11-16 10:58:49 - Completed 200 OK
-2026-11-16 10:59:52 - GET "/esign-application-service/get-esp-application-approved-for-esign-go-live", parameters={}
-2026-11-16 10:59:52 - Mapped to in.lms.cca.controller.ESPApplicationController#getAllespApplicationApprovedForEsignGoLive()
-Hibernate: select ela1_0.esign_licensee_appid,ela1_0.application_number,ela1_0.application_status,ela1_0.created,ela1_0.created_by,ela1_0.empanelment_date,ela1_0.licenseid,ela1_0.updated,ela1_0.updated_by,ela1_0.username from esign_application_management.esign_licensee_application ela1_0 where ela1_0.application_status=? order by ela1_0.created desc
-2026-11-16 10:59:52 - Using 'application/json', given [application/json, application/yaml, application/*+json] and supported [application/json, application/*+json]
-2026-11-16 10:59:52 - Writing [[in.lms.cca.entity.EsignLicenseeApplication@6fd1359d, in.lms.cca.entity.EsignLicenseeApplication@1b6 (truncated)...]
-2026-11-16 10:59:52 - Completed 200 OK
-2026-11-16 10:59:52 - GET "/esign-application-service/get-all-esp-with-ekyc-mode-approved", parameters={}
-2026-11-16 10:59:52 - Mapped to in.lms.cca.controller.ESPApplicationController#getAllESPWithEkycModeApproved()
-2026-11-16 10:59:52 - GET "/esign-application-service/get-all-esp-with-ekyc-mode-approved", parameters={}
-2026-11-16 10:59:52 - Mapped to in.lms.cca.controller.ESPApplicationController#getAllESPWithEkycModeApproved()
-Hibernate: select ela1_0.esign_licensee_appid,ela1_0.application_number,ela1_0.application_status,ela1_0.created,ela1_0.created_by,ela1_0.empanelment_date,ela1_0.licenseid,ela1_0.updated,ela1_0.updated_by,ela1_0.username from esign_application_management.esign_licensee_application ela1_0 where ela1_0.application_status=? order by ela1_0.created desc
-Hibernate: select ela1_0.esign_licensee_appid,ela1_0.application_number,ela1_0.application_status,ela1_0.created,ela1_0.created_by,ela1_0.empanelment_date,ela1_0.licenseid,ela1_0.updated,ela1_0.updated_by,ela1_0.username from esign_application_management.esign_licensee_application ela1_0 where ela1_0.application_status=? order by ela1_0.created desc
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-2026-11-16 10:59:52 - GET "/esign-application-service/get-all-esp-with-ekyc-mode-approved", parameters={}
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-2026-11-16 10:59:52 - GET "/esign-application-service/get-all-esp-with-ekyc-mode-approved", parameters={}
-2026-11-16 10:59:52 - Using 'application/json', given [application/json, application/yaml, application/*+json] and supported [application/json, application/*+json]
-2026-11-16 10:59:52 - Mapped to in.lms.cca.controller.ESPApplicationController#getAllESPWithEkycModeApproved()
-2026-11-16 10:59:52 - Mapped to in.lms.cca.controller.ESPApplicationController#getAllESPWithEkycModeApproved()
-2026-11-16 10:59:52 - Writing [[in.lms.cca.dto.ESPWithEkycModeDTO@6b820c, in.lms.cca.dto.ESPWithEkycModeDTO@1eadc127, in.lms.cca.dt (truncated)...]
-2026-11-16 10:59:52 - Using 'application/json', given [application/json, application/yaml, application/*+json] and supported [application/json, application/*+json]
-2026-11-16 10:59:52 - Writing [[in.lms.cca.dto.ESPWithEkycModeDTO@7aed72f, in.lms.cca.dto.ESPWithEkycModeDTO@26a4471a, in.lms.cca.d (truncated)...]
-2026-11-16 10:59:52 - Completed 200 OK
-Hibernate: select ela1_0.esign_licensee_appid,ela1_0.application_number,ela1_0.application_status,ela1_0.created,ela1_0.created_by,ela1_0.empanelment_date,ela1_0.licenseid,ela1_0.updated,ela1_0.updated_by,ela1_0.username from esign_application_management.esign_licensee_application ela1_0 where ela1_0.application_status=? order by ela1_0.created desc
-2026-11-16 10:59:52 - Completed 200 OK
-Hibernate: select ela1_0.esign_licensee_appid,ela1_0.application_number,ela1_0.application_status,ela1_0.created,ela1_0.created_by,ela1_0.empanelment_date,ela1_0.licenseid,ela1_0.updated,ela1_0.updated_by,ela1_0.username from esign_application_management.esign_licensee_application ela1_0 where ela1_0.application_status=? order by ela1_0.created desc
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-2026-11-16 10:59:52 - GET "/esign-application-service/get-esp-application-approved-for-esign-go-live", parameters={}
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-2026-11-16 10:59:52 - Mapped to in.lms.cca.controller.ESPApplicationController#getAllespApplicationApprovedForEsignGoLive()
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select ela1_0.esign_licensee_appid,ela1_0.application_number,ela1_0.application_status,ela1_0.created,ela1_0.created_by,ela1_0.empanelment_date,ela1_0.licenseid,ela1_0.updated,ela1_0.updated_by,ela1_0.username from esign_application_management.esign_licensee_application ela1_0 where ela1_0.application_status=? order by ela1_0.created desc
-2026-11-16 10:59:52 - Using 'application/json', given [application/json, application/yaml, application/*+json] and supported [application/json, application/*+json]
-2026-11-16 10:59:52 - Using 'application/json', given [application/json, application/yaml, application/*+json] and supported [application/json, application/*+json]
-2026-11-16 10:59:52 - Writing [[in.lms.cca.dto.ESPWithEkycModeDTO@19df15a, in.lms.cca.dto.ESPWithEkycModeDTO@1b539620, in.lms.cca.d (truncated)...]
-2026-11-16 10:59:52 - Writing [[in.lms.cca.dto.ESPWithEkycModeDTO@27fad467, in.lms.cca.dto.ESPWithEkycModeDTO@7b8941e5, in.lms.cca. (truncated)...]
-2026-11-16 10:59:52 - Completed 200 OK
-2026-11-16 10:59:52 - Completed 200 OK
-2026-11-16 10:59:52 - Using 'application/json', given [application/json, application/yaml, application/*+json] and supported [application/json, application/*+json]
-2026-11-16 10:59:52 - Writing [[in.lms.cca.entity.EsignLicenseeApplication@5be802d3, in.lms.cca.entity.EsignLicenseeApplication@5bc (truncated)...]
-2026-11-16 10:59:52 - Completed 200 OK
-2026-11-16 10:59:52 - GET "/esign-application-service/get-all-esp-with-ekyc-mode-approved", parameters={}
-2026-11-16 10:59:52 - Mapped to in.lms.cca.controller.ESPApplicationController#getAllESPWithEkycModeApproved()
-Hibernate: select ela1_0.esign_licensee_appid,ela1_0.application_number,ela1_0.application_status,ela1_0.created,ela1_0.created_by,ela1_0.empanelment_date,ela1_0.licenseid,ela1_0.updated,ela1_0.updated_by,ela1_0.username from esign_application_management.esign_licensee_application ela1_0 where ela1_0.application_status=? order by ela1_0.created desc
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-2026-11-16 10:59:52 - Using 'application/json', given [application/json, application/yaml, application/*+json] and supported [application/json, application/*+json]
-2026-11-16 10:59:52 - Writing [[in.lms.cca.dto.ESPWithEkycModeDTO@3d069828, in.lms.cca.dto.ESPWithEkycModeDTO@1c1b415d, in.lms.cca. (truncated)...]
-2026-11-16 10:59:52 - Completed 200 OK
-2026-11-16 10:59:53 - GET "/esign-application-service/get-all-esp-with-ekyc-mode-approved", parameters={}
-2026-11-16 10:59:53 - Mapped to in.lms.cca.controller.ESPApplicationController#getAllESPWithEkycModeApproved()
-Hibernate: select ela1_0.esign_licensee_appid,ela1_0.application_number,ela1_0.application_status,ela1_0.created,ela1_0.created_by,ela1_0.empanelment_date,ela1_0.licenseid,ela1_0.updated,ela1_0.updated_by,ela1_0.username from esign_application_management.esign_licensee_application ela1_0 where ela1_0.application_status=? order by ela1_0.created desc
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-2026-11-16 10:59:53 - Using 'application/json', given [application/json, application/yaml, application/*+json] and supported [application/json, application/*+json]
-2026-11-16 10:59:53 - Writing [[in.lms.cca.dto.ESPWithEkycModeDTO@2e75e22e, in.lms.cca.dto.ESPWithEkycModeDTO@3c989ebb, in.lms.cca. (truncated)...]
-2026-11-16 10:59:53 - Completed 200 OK
-2026-11-16 10:59:53 - GET "/esign-application-service/get-all-esp-with-ekyc-mode-approved", parameters={}
-2026-11-16 10:59:53 - Mapped to in.lms.cca.controller.ESPApplicationController#getAllESPWithEkycModeApproved()
-Hibernate: select ela1_0.esign_licensee_appid,ela1_0.application_number,ela1_0.application_status,ela1_0.created,ela1_0.created_by,ela1_0.empanelment_date,ela1_0.licenseid,ela1_0.updated,ela1_0.updated_by,ela1_0.username from esign_application_management.esign_licensee_application ela1_0 where ela1_0.application_status=? order by ela1_0.created desc
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-2026-11-16 10:59:53 - Using 'application/json', given [application/json, application/yaml, application/*+json] and supported [application/json, application/*+json]
-2026-11-16 10:59:53 - Writing [[in.lms.cca.dto.ESPWithEkycModeDTO@325be1fb, in.lms.cca.dto.ESPWithEkycModeDTO@f1b0690, in.lms.cca.d (truncated)...]
-2026-11-16 10:59:53 - Completed 200 OK
-2026-11-16 18:27:58 - GET "/esign-application-service/get-esp-application-approved-for-esign-go-live", parameters={}
-2026-11-16 18:27:58 - Mapped to in.lms.cca.controller.ESPApplicationController#getAllespApplicationApprovedForEsignGoLive()
-2026-11-16 18:27:58 - GET "/esign-application-service/get-all-esp-with-ekyc-mode-approved", parameters={}
-2026-11-16 18:27:58 - GET "/esign-application-service/get-all-esp-with-ekyc-mode-approved", parameters={}
-2026-11-16 18:27:58 - GET "/esign-application-service/get-all-esp-with-ekyc-mode-approved", parameters={}
-2026-11-16 18:27:58 - GET "/esign-application-service/get-all-esp-with-ekyc-mode-approved", parameters={}
-2026-11-16 18:27:58 - Mapped to in.lms.cca.controller.ESPApplicationController#getAllESPWithEkycModeApproved()
-2026-11-16 18:27:58 - Mapped to in.lms.cca.controller.ESPApplicationController#getAllESPWithEkycModeApproved()
-2026-11-16 18:27:58 - Mapped to in.lms.cca.controller.ESPApplicationController#getAllESPWithEkycModeApproved()
-2026-11-16 18:27:58 - Mapped to in.lms.cca.controller.ESPApplicationController#getAllESPWithEkycModeApproved()
-Hibernate: select ela1_0.esign_licensee_appid,ela1_0.application_number,ela1_0.application_status,ela1_0.created,ela1_0.created_by,ela1_0.empanelment_date,ela1_0.licenseid,ela1_0.updated,ela1_0.updated_by,ela1_0.username from esign_application_management.esign_licensee_application ela1_0 where ela1_0.application_status=? order by ela1_0.created desc
-Hibernate: select ela1_0.esign_licensee_appid,ela1_0.application_number,ela1_0.application_status,ela1_0.created,ela1_0.created_by,ela1_0.empanelment_date,ela1_0.licenseid,ela1_0.updated,ela1_0.updated_by,ela1_0.username from esign_application_management.esign_licensee_application ela1_0 where ela1_0.application_status=? order by ela1_0.created desc
-Hibernate: select ela1_0.esign_licensee_appid,ela1_0.application_number,ela1_0.application_status,ela1_0.created,ela1_0.created_by,ela1_0.empanelment_date,ela1_0.licenseid,ela1_0.updated,ela1_0.updated_by,ela1_0.username from esign_application_management.esign_licensee_application ela1_0 where ela1_0.application_status=? order by ela1_0.created desc
-Hibernate: select ela1_0.esign_licensee_appid,ela1_0.application_number,ela1_0.application_status,ela1_0.created,ela1_0.created_by,ela1_0.empanelment_date,ela1_0.licenseid,ela1_0.updated,ela1_0.updated_by,ela1_0.username from esign_application_management.esign_licensee_application ela1_0 where ela1_0.application_status=? order by ela1_0.created desc
-Hibernate: select ela1_0.esign_licensee_appid,ela1_0.application_number,ela1_0.application_status,ela1_0.created,ela1_0.created_by,ela1_0.empanelment_date,ela1_0.licenseid,ela1_0.updated,ela1_0.updated_by,ela1_0.username from esign_application_management.esign_licensee_application ela1_0 where ela1_0.application_status=? order by ela1_0.created desc
-2026-11-16 18:27:58 - Using 'application/json', given [application/json, application/yaml, application/*+json] and supported [application/json, application/*+json]
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-2026-11-16 18:27:58 - Writing [[in.lms.cca.entity.EsignLicenseeApplication@755d5e2e, in.lms.cca.entity.EsignLicenseeApplication@7eb (truncated)...]
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-2026-11-16 18:27:58 - Completed 200 OK
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-2026-11-16 18:27:58 - Using 'application/json', given [application/json, application/yaml, application/*+json] and supported [application/json, application/*+json]
-2026-11-16 18:27:58 - Using 'application/json', given [application/json, application/yaml, application/*+json] and supported [application/json, application/*+json]
-2026-11-16 18:27:58 - Using 'application/json', given [application/json, application/yaml, application/*+json] and supported [application/json, application/*+json]
-2026-11-16 18:27:58 - Writing [[in.lms.cca.dto.ESPWithEkycModeDTO@510fedf9, in.lms.cca.dto.ESPWithEkycModeDTO@1d6e242b, in.lms.cca. (truncated)...]
-2026-11-16 18:27:58 - Writing [[in.lms.cca.dto.ESPWithEkycModeDTO@3b4a5de9, in.lms.cca.dto.ESPWithEkycModeDTO@412bb4ac, in.lms.cca. (truncated)...]
-2026-11-16 18:27:58 - Using 'application/json', given [application/json, application/yaml, application/*+json] and supported [application/json, application/*+json]
-2026-11-16 18:27:58 - Writing [[in.lms.cca.dto.ESPWithEkycModeDTO@5d755c6c, in.lms.cca.dto.ESPWithEkycModeDTO@12a47766, in.lms.cca. (truncated)...]
-2026-11-16 18:27:58 - Completed 200 OK
-2026-11-16 18:27:58 - Completed 200 OK
-2026-11-16 18:27:58 - Writing [[in.lms.cca.dto.ESPWithEkycModeDTO@29ffa6c6, in.lms.cca.dto.ESPWithEkycModeDTO@5d4998ba, in.lms.cca. (truncated)...]
-2026-11-16 18:27:58 - Completed 200 OK
-2026-11-16 18:27:58 - Completed 200 OK
-2026-11-16 18:27:58 - GET "/esign-application-service/get-all-esp-with-ekyc-mode-approved", parameters={}
-2026-11-16 18:27:58 - Mapped to in.lms.cca.controller.ESPApplicationController#getAllESPWithEkycModeApproved()
-Hibernate: select ela1_0.esign_licensee_appid,ela1_0.application_number,ela1_0.application_status,ela1_0.created,ela1_0.created_by,ela1_0.empanelment_date,ela1_0.licenseid,ela1_0.updated,ela1_0.updated_by,ela1_0.username from esign_application_management.esign_licensee_application ela1_0 where ela1_0.application_status=? order by ela1_0.created desc
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-2026-11-16 18:27:58 - GET "/esign-application-service/get-esp-application-approved-for-esign-go-live", parameters={}
-2026-11-16 18:27:58 - Mapped to in.lms.cca.controller.ESPApplicationController#getAllespApplicationApprovedForEsignGoLive()
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select ela1_0.esign_licensee_appid,ela1_0.application_number,ela1_0.application_status,ela1_0.created,ela1_0.created_by,ela1_0.empanelment_date,ela1_0.licenseid,ela1_0.updated,ela1_0.updated_by,ela1_0.username from esign_application_management.esign_licensee_application ela1_0 where ela1_0.application_status=? order by ela1_0.created desc
-2026-11-16 18:27:58 - Using 'application/json', given [application/json, application/yaml, application/*+json] and supported [application/json, application/*+json]
-2026-11-16 18:27:58 - Writing [[in.lms.cca.dto.ESPWithEkycModeDTO@2fd0a2d7, in.lms.cca.dto.ESPWithEkycModeDTO@357eca1d, in.lms.cca. (truncated)...]
-2026-11-16 18:27:58 - Using 'application/json', given [application/json, application/yaml, application/*+json] and supported [application/json, application/*+json]
-2026-11-16 18:27:58 - Completed 200 OK
-2026-11-16 18:27:58 - Writing [[in.lms.cca.entity.EsignLicenseeApplication@125af675, in.lms.cca.entity.EsignLicenseeApplication@5e6 (truncated)...]
-2026-11-16 18:27:58 - Completed 200 OK
-2026-11-16 18:27:58 - GET "/esign-application-service/get-all-esp-with-ekyc-mode-approved", parameters={}
-2026-11-16 18:27:58 - Mapped to in.lms.cca.controller.ESPApplicationController#getAllESPWithEkycModeApproved()
-Hibernate: select ela1_0.esign_licensee_appid,ela1_0.application_number,ela1_0.application_status,ela1_0.created,ela1_0.created_by,ela1_0.empanelment_date,ela1_0.licenseid,ela1_0.updated,ela1_0.updated_by,ela1_0.username from esign_application_management.esign_licensee_application ela1_0 where ela1_0.application_status=? order by ela1_0.created desc
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-2026-11-16 18:27:58 - Using 'application/json', given [application/json, application/yaml, application/*+json] and supported [application/json, application/*+json]
-2026-11-16 18:27:58 - Writing [[in.lms.cca.dto.ESPWithEkycModeDTO@46686e08, in.lms.cca.dto.ESPWithEkycModeDTO@5fc7fd6c, in.lms.cca. (truncated)...]
-2026-11-16 18:27:58 - Completed 200 OK
-2026-11-16 18:27:58 - GET "/esign-application-service/get-all-esp-with-ekyc-mode-approved", parameters={}
-2026-11-16 18:27:58 - Mapped to in.lms.cca.controller.ESPApplicationController#getAllESPWithEkycModeApproved()
-Hibernate: select ela1_0.esign_licensee_appid,ela1_0.application_number,ela1_0.application_status,ela1_0.created,ela1_0.created_by,ela1_0.empanelment_date,ela1_0.licenseid,ela1_0.updated,ela1_0.updated_by,ela1_0.username from esign_application_management.esign_licensee_application ela1_0 where ela1_0.application_status=? order by ela1_0.created desc
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-2026-11-16 18:27:58 - Using 'application/json', given [application/json, application/yaml, application/*+json] and supported [application/json, application/*+json]
-2026-11-16 18:27:58 - Writing [[in.lms.cca.dto.ESPWithEkycModeDTO@78ee2c27, in.lms.cca.dto.ESPWithEkycModeDTO@6848f172, in.lms.cca. (truncated)...]
-2026-11-16 18:27:58 - Completed 200 OK
-2026-11-16 18:27:58 - GET "/esign-application-service/get-all-esp-with-ekyc-mode-approved", parameters={}
-2026-11-16 18:27:58 - Mapped to in.lms.cca.controller.ESPApplicationController#getAllESPWithEkycModeApproved()
-Hibernate: select ela1_0.esign_licensee_appid,ela1_0.application_number,ela1_0.application_status,ela1_0.created,ela1_0.created_by,ela1_0.empanelment_date,ela1_0.licenseid,ela1_0.updated,ela1_0.updated_by,ela1_0.username from esign_application_management.esign_licensee_application ela1_0 where ela1_0.application_status=? order by ela1_0.created desc
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-Hibernate: select distinct em1_0.ekycmode from esign_application_management.ekyc_mode em1_0 join esign_application_management.esign_licensee_application elai1_0 on elai1_0.esign_licensee_appid=em1_0.esign_licensee_appid where elai1_0.username=?
-2026-11-16 18:27:58 - Using 'application/json', given [application/json, application/yaml, application/*+json] and supported [application/json, application/*+json]
-2026-11-16 18:27:58 - Writing [[in.lms.cca.dto.ESPWithEkycModeDTO@16f35350, in.lms.cca.dto.ESPWithEkycModeDTO@3932ebcd, in.lms.cca. (truncated)...]
-2026-11-16 18:27:58 - Completed 200 OK
+2026-11-17 09:46:24 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-17 09:46:25 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-11-17 09:46:27 - 40 mappings in 'requestMappingHandlerMapping'
+2026-11-17 09:46:27 - Patterns [/webjars/**, /**, /esign-application-service/swagger-ui*/*swagger-initializer.js, /esign-application-service/swagger-ui*/**] in 'resourceHandlerMapping'
+2026-11-17 09:46:27 - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2026-11-17 09:46:28 - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2026-11-17 09:46:28 - Unable to start LiveReload server
+2026-11-17 09:46:30 - Cannot determine local hostname
+2026-11-17 09:46:31 - Cannot determine local hostname
+2026-11-17 09:46:31 - Eureka HTTP Client uses RestTemplate.
+2026-11-17 09:46:31 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-11-17 09:46:31 - Setting initial instance status as: STARTING
+2026-11-17 09:46:31 - Initializing Eureka in region us-east-1
+2026-11-17 09:46:31 - Client configured to neither register nor query for data.
+2026-11-17 09:46:31 - Discovery Client initialized at timestamp 1794888991648 with initial instances count: 0
+2026-11-17 09:46:31 - Registering application ESIGN-APPLICATION-SERVICE with eureka with status UP
+2026-11-17 09:46:31 - Tomcat started on port 7785 (http) with context path '/'
+2026-11-17 09:46:31 - Updating port to 7785
+2026-11-17 09:46:33 - Cannot determine local hostname
+2026-11-17 09:46:33 - Started EsignApplicationServiceApplication in 20.809 seconds (process running for 21.565)

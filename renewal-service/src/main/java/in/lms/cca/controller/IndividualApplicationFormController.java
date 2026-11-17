@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -1367,8 +1368,7 @@ List<ApplicationDocument> sortedActiveDocuments = applicationDocument.stream()
 	            documentDTOs.add(appDocumentDTO);
 	        }
 
-	        // Add the list of document DTOs to the response
-	        response.put("documents", documentDTOs);
+	        response.put("documents", keepLatestDocumentPerTitle(documentDTOs));
 
 	        return new ResponseEntity<>(response, HttpStatus.OK);
 
@@ -1378,6 +1378,43 @@ List<ApplicationDocument> sortedActiveDocuments = applicationDocument.stream()
 	        e.printStackTrace();  // Add this to get more detailed error messages
 	        return new ResponseEntity<>("Error retrieving application data: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 	    }
+	}
+
+	/**
+	 * One file per title. A later Active upload replaces an older copy of the same title.
+	 */
+	private List<ApplicationDocumentDTO> keepLatestDocumentPerTitle(List<ApplicationDocumentDTO> documents) {
+	    if (documents == null || documents.isEmpty()) {
+	        return documents;
+	    }
+	    documents.sort(Comparator.comparing(ApplicationDocumentDTO::getAppDocId, Comparator.nullsLast(Long::compareTo)));
+	    Map<String, ApplicationDocumentDTO> chosen = new LinkedHashMap<>();
+	    for (ApplicationDocumentDTO document : documents) {
+	        String title = document.getDocumentTitle() == null ? "" : document.getDocumentTitle();
+	        ApplicationDocumentDTO current = chosen.get(title);
+	        if (current == null || preferDocument(document, current)) {
+	            chosen.put(title, document);
+	        }
+	    }
+	    return new ArrayList<>(chosen.values());
+	}
+
+	private boolean preferDocument(ApplicationDocumentDTO candidate, ApplicationDocumentDTO current) {
+	    boolean candidateActive = isActiveDocument(candidate.getStatus());
+	    boolean currentActive = isActiveDocument(current.getStatus());
+	    if (candidateActive != currentActive) {
+	        return candidateActive;
+	    }
+	    Long candidateId = candidate.getAppDocId();
+	    Long currentId = current.getAppDocId();
+	    if (candidateId == null || currentId == null) {
+	        return candidateId != null;
+	    }
+	    return candidateId > currentId;
+	}
+
+	private boolean isActiveDocument(String status) {
+	    return status != null && "active".equalsIgnoreCase(status.trim());
 	}
 
 
@@ -2455,6 +2492,26 @@ List<ApplicationDocument> sortedActiveDocuments = applicationDocument.stream()
 	    }
 	}
 
+	private Path resolveApplicationDocumentPath(String fileName) {
+		if (fileName == null || fileName.isBlank()) {
+			return null;
+		}
+		Path[] candidates = new Path[] {
+				Paths.get(Constant.REAL_PATH, "AdditionalDocument", "Document").resolve(fileName),
+				Paths.get(Constant.REAL_PATH, "CPSDocument", "Document").resolve(fileName),
+				Paths.get(Constant.REAL_PATH, "FirmDocuments", "Documents").resolve(fileName),
+				Paths.get(Constant.REAL_PATH, "IssuanceDocuments", "Document").resolve(fileName),
+				Paths.get(Constant.REAL_PATH, "BankGuaranteeProof", "Document").resolve(fileName)
+		};
+		for (Path candidate : candidates) {
+			Path normalized = candidate.normalize();
+			if (Files.exists(normalized)) {
+				return normalized;
+			}
+		}
+		return null;
+	}
+
 	@GetMapping(IndividualApplicationFormAPIs.VIEW_FILE)
 	public ResponseEntity<Resource> viewFile(@RequestParam("id") String cpsDocuId) {
 	    System.out.println(cpsDocuId);
@@ -2466,12 +2523,7 @@ List<ApplicationDocument> sortedActiveDocuments = applicationDocument.stream()
 	        if (cpsDocumentOpt.isPresent()) {
 	        	ApplicationDocument c = cpsDocumentOpt.get();
                 System.out.println(c.getFileName());
-                Path additionalDocPath = Paths.get(Constant.REAL_PATH + "//AdditionalDocument//Document").resolve(c.getFileName()).normalize();
-                Path cpsDocPath = Paths.get(Constant.REAL_PATH + "//CPSDocument//Document").resolve(c.getFileName()).normalize();
-                Path firmDocPath = Paths.get(Constant.REAL_PATH + "//FirmDocuments//Documents").resolve(c.getFileName()).normalize();
-                Path filePath = Files.exists(additionalDocPath) ? additionalDocPath
-                        : Files.exists(cpsDocPath) ? cpsDocPath
-                        : Files.exists(firmDocPath) ? firmDocPath : null;
+                Path filePath = resolveApplicationDocumentPath(c.getFileName());
                 if (filePath == null) {
                     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
                 }

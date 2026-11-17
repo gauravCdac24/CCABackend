@@ -27,12 +27,17 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -206,6 +211,12 @@ public class ApplicationAuditController {
 
 	@Autowired
 	private EsignedDocumentsService documentsService;
+
+	@Autowired
+	private RestTemplate restTemplate;
+
+	@Value("${apigateway.service.url}")
+	private String apigatewayServiceUrl;
 
 	@Autowired
 	private IAnnualAuditPeriodMainService periodMainServ;
@@ -4123,14 +4134,14 @@ contentBuilder.append("<h3 style='color: red;'>15. CA Self-assessment for audit 
 						if (allActiveAuditorsHaveEsigned(applicantUser)) {
 							auditReportCriteriaService.changedTheStatusToPendingAuditAcceptance(applicantUser);
 						}
-					} else if ("ACCEPTANCE".equalsIgnoreCase(signerKey)) {
+					} else if (isAcceptanceSignerKey(signerKey)) {
 						ApplicationAuditEntity audit = applicationAuditServ.getByApplicantUserName(applicantUser);
 						if (audit != null) {
 							audit.setAcceptanceLetterStatus("SIGNED");
 							audit.setUpdated(new Date());
 							applicationAuditServ.updateData(audit);
 						}
-						// Applicant acceptance letter signed → Review NC Report (old workflow)
+						// Applicant acceptance eSign (full report or letter) → Review NC Report
 						auditReportCriteriaService.changedTheStatus(applicantUser);
 					} else {
 						// Legacy single-sign path: send to applicant acceptance
@@ -4189,7 +4200,7 @@ contentBuilder.append("<h3 style='color: red;'>15. CA Self-assessment for audit 
 			response.put("allComplete", allComplete && completed >= 2);
 			response.put("completedCount", completed);
 			response.put("requiredMinimum", 2);
-			ESignedDocumentsEntity latestSigned = findLatestCompletedEsignRecord(normalized);
+			ESignedDocumentsEntity latestSigned = findLatestCompletedAuditorEsignRecord(normalized);
 			response.put("latestSignedDocId",
 					latestSigned != null && latestSigned.getSignedDocId() != null
 							? latestSigned.getSignedDocId()
@@ -4218,9 +4229,9 @@ contentBuilder.append("<h3 style='color: red;'>15. CA Self-assessment for audit 
 			Map<String, Object> response = new HashMap<>();
 			response.put("eSignedId", pending.get().geteSignedId());
 			response.put("signerKey", signerKey);
-			boolean anyCompleted = findLatestCompletedEsignRecord(normalized) != null;
+			ESignedDocumentsEntity latestSigned = findLatestCompletedAuditorEsignRecord(normalized);
+			boolean anyCompleted = latestSigned != null;
 			response.put("needsFreshReport", !anyCompleted);
-			ESignedDocumentsEntity latestSigned = findLatestCompletedEsignRecord(normalized);
 			response.put("previousSignedDocId",
 					latestSigned != null ? latestSigned.getSignedDocId() : null);
 			return ResponseEntity.ok(response);
@@ -4248,13 +4259,16 @@ contentBuilder.append("<h3 style='color: red;'>15. CA Self-assessment for audit 
 			response.put("acceptanceLetterStatus",
 					status == null || status.isBlank() ? "NONE" : status);
 			response.put("acceptanceLetterFile", audit.getAcceptanceLetterFile());
-			ESignedDocumentsEntity acceptancePending = findLatestPendingEsignRecord(normalized, "ACCEPTANCE");
+			ESignedDocumentsEntity acceptancePending = findLatestPendingEsignRecord(normalized, "ACCEPTANCE_REPORT");
+			if (acceptancePending == null) {
+				acceptancePending = findLatestPendingEsignRecord(normalized, "ACCEPTANCE");
+			}
 			ESignedDocumentsEntity acceptanceAny = acceptancePending;
 			if (acceptanceAny == null) {
 				List<ESignedDocumentsEntity> docs = documentsService.getEsignDocumentByUserName(normalized);
 				if (docs != null) {
 					acceptanceAny = docs.stream()
-							.filter(doc -> "ACCEPTANCE".equalsIgnoreCase(
+							.filter(doc -> isAcceptanceSignerKey(
 									doc.getSignerKey() == null ? "" : doc.getSignerKey().trim()))
 							.max(java.util.Comparator.comparing(ESignedDocumentsEntity::geteSignedId))
 							.orElse(null);
@@ -4273,12 +4287,23 @@ contentBuilder.append("<h3 style='color: red;'>15. CA Self-assessment for audit 
 	public ResponseEntity<?> prepareAcceptanceEsign(@RequestParam("userName") String userName) {
 		try {
 			String normalized = normalizeReportUsername(userName);
-			Optional<ESignedDocumentsEntity> pending = resolveOrCreatePendingEsignRecord(normalized, "ACCEPTANCE");
+			// Applicant eSigns the already auditor-signed full NC report (not the cover letter alone)
+			String signerKey = "ACCEPTANCE_REPORT";
+			Optional<ESignedDocumentsEntity> pending = resolveOrCreatePendingEsignRecord(normalized, signerKey);
 			if (!pending.isPresent()) {
 				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 						.body("Failed to prepare acceptance eSign");
 			}
-			return ResponseEntity.ok(Map.of("eSignedId", pending.get().geteSignedId(), "signerKey", "ACCEPTANCE"));
+			ESignedDocumentsEntity latestAuditorSigned = findLatestCompletedAuditorEsignRecord(normalized);
+			Map<String, Object> response = new HashMap<>();
+			response.put("eSignedId", pending.get().geteSignedId());
+			response.put("signerKey", signerKey);
+			response.put("previousSignedDocId",
+					latestAuditorSigned != null ? latestAuditorSigned.getSignedDocId() : null);
+			response.put("needsFullReport", latestAuditorSigned != null
+					&& latestAuditorSigned.getSignedDocId() != null
+					&& !latestAuditorSigned.getSignedDocId().isBlank());
+			return ResponseEntity.ok(response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -4329,7 +4354,7 @@ contentBuilder.append("<h3 style='color: red;'>15. CA Self-assessment for audit 
 			audit.setUpdated(new Date());
 			applicationAuditServ.updateData(audit);
 
-			Optional<ESignedDocumentsEntity> pending = resolveOrCreatePendingEsignRecord(normalized, "ACCEPTANCE");
+			Optional<ESignedDocumentsEntity> pending = resolveOrCreatePendingEsignRecord(normalized, "ACCEPTANCE_REPORT");
 			Map<String, Object> response = new HashMap<>();
 			response.put("acceptanceLetterStatus", "UPLOADED");
 			response.put("acceptanceLetterFile", filename);
@@ -4373,7 +4398,7 @@ contentBuilder.append("<h3 style='color: red;'>15. CA Self-assessment for audit 
 
 		try {
 
-			String eSignDocId = userName;
+			String eSignDocId = normalizeReportUsername(userName);
 			List<ESignedDocumentsEntity> edoc = documentsService.getEsignDocumentByUserName(eSignDocId);
 
 			if (edoc == null || edoc.isEmpty()) {
@@ -4381,14 +4406,92 @@ contentBuilder.append("<h3 style='color: red;'>15. CA Self-assessment for audit 
 						.body("No eSign document found for username: " + userName);
 			}
 
-			ESignedDocumentsEntity latest = edoc.stream()
-					.max(java.util.Comparator.comparing(ESignedDocumentsEntity::geteSignedId))
-					.orElse(edoc.get(0));
+			// Final eSigned Report for Review Committee must be the full NC report
+			// (NC + summary + annexure A2 + eSigns), not the acceptance cover letter alone.
+			ESignedDocumentsEntity latest = findFinalAuditReportEsignRecord(eSignDocId);
+			if (latest == null) {
+				latest = edoc.stream()
+						.max(java.util.Comparator.comparing(ESignedDocumentsEntity::geteSignedId))
+						.orElse(edoc.get(0));
+			}
 
-			return new ResponseEntity<>(latest, HttpStatus.OK);
+			Map<String, Object> response = new HashMap<>();
+			response.put("eSignedId", latest.geteSignedId());
+			response.put("signedDocId", latest.getSignedDocId());
+			response.put("userName", latest.getUserName());
+			response.put("status", latest.getStatus());
+			response.put("signerKey", latest.getSignerKey());
+			ESignedDocumentsEntity acceptanceLetter = findLatestCompletedAcceptanceLetterEsignRecord(eSignDocId);
+			response.put("acceptanceSignedDocId",
+					acceptanceLetter != null ? acceptanceLetter.getSignedDocId() : null);
+			response.put("acceptanceESignedId",
+					acceptanceLetter != null ? acceptanceLetter.geteSignedId() : null);
+			return new ResponseEntity<>(response, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>("Failed: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	/**
+	 * Merge ordered PDF parts (e.g. auditor-signed NC report + applicant acceptance letter).
+	 */
+	@PostMapping("/merge-pdfs")
+	public ResponseEntity<?> mergePdfs(@RequestParam("files") List<MultipartFile> files) {
+		try {
+			if (files == null || files.isEmpty()) {
+				return ResponseEntity.badRequest().body("At least one PDF file is required");
+			}
+			List<byte[]> parts = new ArrayList<>();
+			for (MultipartFile file : files) {
+				if (file == null || file.isEmpty()) {
+					continue;
+				}
+				byte[] bytes = file.getBytes();
+				if (bytes != null && bytes.length >= 100) {
+					parts.add(bytes);
+				}
+			}
+			if (parts.isEmpty()) {
+				return ResponseEntity.badRequest().body("No valid PDF content received");
+			}
+			byte[] merged = parts.size() == 1 ? parts.get(0) : mergePdfByteArrays(parts);
+			return ResponseEntity.ok()
+					.contentType(MediaType.APPLICATION_PDF)
+					.header(HttpHeaders.CONTENT_DISPOSITION,
+							"attachment; filename=\"MergedAuditReport.pdf\"")
+					.header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, HttpHeaders.CONTENT_DISPOSITION)
+					.body(merged);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Failed to merge PDFs: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * Review Committee Final eSigned Report = auditor-signed NC report
+	 * + applicant eSigned acceptance letter (when signed separately).
+	 */
+	@GetMapping("/download-final-review-report")
+	public ResponseEntity<?> downloadFinalReviewReport(@RequestParam("userName") String userName) {
+		try {
+			String normalized = normalizeReportUsername(userName);
+			byte[] merged = buildFinalReviewReportPdf(normalized);
+			if (merged == null || merged.length < 100) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body("No final review report found for username: " + userName);
+			}
+			return ResponseEntity.ok()
+					.contentType(MediaType.APPLICATION_PDF)
+					.header(HttpHeaders.CONTENT_DISPOSITION,
+							"attachment; filename=\"FinalReviewAuditReport.pdf\"")
+					.header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, HttpHeaders.CONTENT_DISPOSITION)
+					.body(merged);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Failed to build final review report: " + e.getMessage());
 		}
 	}
 
@@ -4596,6 +4699,192 @@ contentBuilder.append("<h3 style='color: red;'>15. CA Self-assessment for audit 
 				.filter(doc -> doc.getSignedDocId() != null && !doc.getSignedDocId().isBlank())
 				.max(java.util.Comparator.comparing(ESignedDocumentsEntity::geteSignedId))
 				.orElse(null);
+	}
+
+	private boolean isAcceptanceSignerKey(String signerKey) {
+		if (signerKey == null || signerKey.isBlank()) {
+			return false;
+		}
+		String key = signerKey.trim();
+		return "ACCEPTANCE".equalsIgnoreCase(key) || "ACCEPTANCE_REPORT".equalsIgnoreCase(key);
+	}
+
+	private ESignedDocumentsEntity findLatestCompletedAuditorEsignRecord(String userName) {
+		List<ESignedDocumentsEntity> docs = documentsService.getEsignDocumentByUserName(userName);
+		if (docs == null || docs.isEmpty()) {
+			return null;
+		}
+		return docs.stream()
+				.filter(doc -> doc.getSignedDocId() != null && !doc.getSignedDocId().isBlank())
+				.filter(doc -> {
+					String key = doc.getSignerKey() == null ? "" : doc.getSignerKey().trim();
+					return key.startsWith("AUDITOR:");
+				})
+				.max(java.util.Comparator.comparing(ESignedDocumentsEntity::geteSignedId))
+				.orElse(null);
+	}
+
+	/**
+	 * Prefer applicant eSign of the full auditor-signed report, else the latest auditor-signed
+	 * full report. Never prefer legacy ACCEPTANCE cover-letter-only over the audit report.
+	 */
+	private ESignedDocumentsEntity findFinalAuditReportEsignRecord(String userName) {
+		List<ESignedDocumentsEntity> docs = documentsService.getEsignDocumentByUserName(userName);
+		if (docs == null || docs.isEmpty()) {
+			return null;
+		}
+		ESignedDocumentsEntity acceptanceReport = docs.stream()
+				.filter(doc -> doc.getSignedDocId() != null && !doc.getSignedDocId().isBlank())
+				.filter(doc -> "ACCEPTANCE_REPORT".equalsIgnoreCase(
+						doc.getSignerKey() == null ? "" : doc.getSignerKey().trim()))
+				.max(java.util.Comparator.comparing(ESignedDocumentsEntity::geteSignedId))
+				.orElse(null);
+		if (acceptanceReport != null) {
+			return acceptanceReport;
+		}
+		ESignedDocumentsEntity auditorReport = findLatestCompletedAuditorEsignRecord(userName);
+		if (auditorReport != null) {
+			return auditorReport;
+		}
+		return docs.stream()
+				.filter(doc -> doc.getSignedDocId() != null && !doc.getSignedDocId().isBlank())
+				.filter(doc -> {
+					String key = doc.getSignerKey() == null ? "" : doc.getSignerKey().trim();
+					return !"ACCEPTANCE".equalsIgnoreCase(key);
+				})
+				.max(java.util.Comparator.comparing(ESignedDocumentsEntity::geteSignedId))
+				.orElse(null);
+	}
+
+	/** Legacy/separate applicant acceptance-letter eSign (cover letter only). */
+	private ESignedDocumentsEntity findLatestCompletedAcceptanceLetterEsignRecord(String userName) {
+		List<ESignedDocumentsEntity> docs = documentsService.getEsignDocumentByUserName(userName);
+		if (docs == null || docs.isEmpty()) {
+			return null;
+		}
+		return docs.stream()
+				.filter(doc -> doc.getSignedDocId() != null && !doc.getSignedDocId().isBlank())
+				.filter(doc -> "ACCEPTANCE".equalsIgnoreCase(
+						doc.getSignerKey() == null ? "" : doc.getSignerKey().trim()))
+				.max(java.util.Comparator.comparing(ESignedDocumentsEntity::geteSignedId))
+				.orElse(null);
+	}
+
+	private byte[] buildFinalReviewReportPdf(String userName) throws Exception {
+		ESignedDocumentsEntity finalReport = findFinalAuditReportEsignRecord(userName);
+		if (finalReport == null || finalReport.getSignedDocId() == null || finalReport.getSignedDocId().isBlank()) {
+			return null;
+		}
+		byte[] auditPdf = fetchDigitallySignedPdfBytes(finalReport.getSignedDocId());
+		if (auditPdf == null || auditPdf.length < 100) {
+			return null;
+		}
+
+		String signerKey = finalReport.getSignerKey() == null ? "" : finalReport.getSignerKey().trim();
+		// ACCEPTANCE_REPORT already includes applicant eSign on the full packet.
+		if ("ACCEPTANCE_REPORT".equalsIgnoreCase(signerKey)) {
+			return auditPdf;
+		}
+
+		List<byte[]> parts = new ArrayList<>();
+		parts.add(auditPdf);
+
+		ESignedDocumentsEntity acceptanceLetter = findLatestCompletedAcceptanceLetterEsignRecord(userName);
+		if (acceptanceLetter != null && acceptanceLetter.getSignedDocId() != null
+				&& !acceptanceLetter.getSignedDocId().isBlank()) {
+			byte[] letterPdf = fetchDigitallySignedPdfBytes(acceptanceLetter.getSignedDocId());
+			if (letterPdf != null && letterPdf.length >= 100) {
+				parts.add(letterPdf);
+			}
+		} else {
+			byte[] uploadedLetter = readUploadedAcceptanceLetterBytes(userName);
+			if (uploadedLetter != null && uploadedLetter.length >= 100) {
+				parts.add(uploadedLetter);
+			}
+		}
+
+		if (parts.size() == 1) {
+			return parts.get(0);
+		}
+		return mergePdfByteArrays(parts);
+	}
+
+	private byte[] buildAcceptanceEsignPdfBytes(String userName) throws Exception {
+		ESignedDocumentsEntity auditorReport = findLatestCompletedAuditorEsignRecord(userName);
+		List<byte[]> parts = new ArrayList<>();
+		if (auditorReport != null && auditorReport.getSignedDocId() != null
+				&& !auditorReport.getSignedDocId().isBlank()) {
+			byte[] auditPdf = fetchDigitallySignedPdfBytes(auditorReport.getSignedDocId());
+			if (auditPdf != null && auditPdf.length >= 100) {
+				parts.add(auditPdf);
+			}
+		}
+		byte[] uploadedLetter = readUploadedAcceptanceLetterBytes(userName);
+		if (uploadedLetter != null && uploadedLetter.length >= 100) {
+			parts.add(uploadedLetter);
+		}
+		if (parts.isEmpty()) {
+			return null;
+		}
+		if (parts.size() == 1) {
+			return parts.get(0);
+		}
+		return mergePdfByteArrays(parts);
+	}
+
+	private byte[] readUploadedAcceptanceLetterBytes(String userName) {
+		try {
+			ApplicationAuditEntity audit = applicationAuditServ.getByApplicantUserName(userName);
+			if (audit == null || audit.getAcceptanceLetterFile() == null || audit.getAcceptanceLetterFile().isBlank()) {
+				return null;
+			}
+			Path filePath = Paths.get(Constant.REAL_PATH + "//AuditAcceptanceLetter")
+					.resolve(audit.getAcceptanceLetterFile()).normalize();
+			if (!Files.exists(filePath)) {
+				return null;
+			}
+			return Files.readAllBytes(filePath);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	private byte[] fetchDigitallySignedPdfBytes(String signedDocId) {
+		if (signedDocId == null || signedDocId.isBlank() || apigatewayServiceUrl == null) {
+			return null;
+		}
+		try {
+			String url = UriComponentsBuilder
+					.fromHttpUrl(apigatewayServiceUrl + "/esign-service/get-digitally-signed-document")
+					.queryParam("id", signedDocId)
+					.toUriString();
+			ResponseEntity<byte[]> response = restTemplate.exchange(url, HttpMethod.GET,
+					new HttpEntity<>(new HttpHeaders()), byte[].class);
+			if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
+				return response.getBody();
+			}
+		} catch (Exception e) {
+			System.out.println("Failed to fetch digitally signed PDF: " + e.getMessage());
+		}
+		return null;
+	}
+
+	private byte[] mergePdfByteArrays(List<byte[]> pdfParts) throws Exception {
+		ByteArrayOutputStream mergedOutput = new ByteArrayOutputStream();
+		try (PdfDocument finalPdfDoc = new PdfDocument(new PdfWriter(mergedOutput))) {
+			PdfMerger merger = new PdfMerger(finalPdfDoc);
+			for (byte[] part : pdfParts) {
+				if (part == null || part.length < 5) {
+					continue;
+				}
+				try (PdfDocument partDoc = new PdfDocument(new PdfReader(new ByteArrayInputStream(part)))) {
+					if (partDoc.getNumberOfPages() > 0) {
+						merger.merge(partDoc, 1, partDoc.getNumberOfPages());
+					}
+				}
+			}
+		}
+		return mergedOutput.toByteArray();
 	}
 
 	private void markAuditorReportEsignCompleted(String applicantUserName, String signerKey) {

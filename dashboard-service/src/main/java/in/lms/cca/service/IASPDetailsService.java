@@ -15,4 +15,5 @@ public interface IASPDetailsService {
 	ASPDetails getASPDetailsById(Long id);
 	ASPDetails getASPDetailsByUsernameAndName(String username, String aspName);
 	ASPDetails getASPDetailsByUsernameAndEmailId(String username, String emailId);
+	List<AspAuditReport> getAuditReportsByAspId(Long aspId);
 }

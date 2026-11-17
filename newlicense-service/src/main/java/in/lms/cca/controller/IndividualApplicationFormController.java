@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -1367,14 +1368,27 @@ public class IndividualApplicationFormController {
 	            return new ResponseEntity<>("Additional details not found.", HttpStatus.NOT_FOUND);
 	        }
 
+	        // Prefer Active additional-details row so credit card / passport values are not
+	        // taken from an older inactive draft that may have blank credit-card fields.
 	        Optional<IndivAdditionalDetails> mostRecentActive = indivAdditionalDetails.stream()
-	                .sorted((d1, d2) -> d2.getCreated().compareTo(d1.getCreated())) // Sort by most recent created date
+	                .filter(d -> d.getStatus() != null && "Active".equalsIgnoreCase(d.getStatus()))
+	                .sorted((d1, d2) -> d2.getCreated().compareTo(d1.getCreated()))
 	                .findFirst();
+	        if (!mostRecentActive.isPresent()) {
+	        	mostRecentActive = indivAdditionalDetails.stream()
+	        			.sorted((d1, d2) -> d2.getCreated().compareTo(d1.getCreated()))
+	        			.findFirst();
+	        }
 	        // Fetch Application Documents associated with the IndivApplication
 	        // Check if the method expects the entire IntentApplication or just its ID
 	        List<ApplicationDocument> applicationDocument = applicationDocumentServiceServ.findIntentWithoutStatusAppById(intentApp.getIntentAppId()); // Pass intentApp if method expects it
 	        if (applicationDocument == null || applicationDocument.isEmpty()) {
-	            return new ResponseEntity<>("No documents found.", HttpStatus.NOT_FOUND);
+	            // Still return additional details (credit card etc.) even if docs are missing
+	            Map<String, Object> partial = new HashMap<>();
+	            partial.put("indivAdditionalDetails", mostRecentActive.orElse(null));
+	            partial.put("applicationDocument", new ArrayList<>());
+	            partial.put("fileNames", new ArrayList<>());
+	            return new ResponseEntity<>(partial, HttpStatus.OK);
 	        }
 System.out.println("applicationDocument=====>"+applicationDocument.size());
 List<ApplicationDocument> sortedActiveDocuments = applicationDocument.stream()
@@ -1635,8 +1649,10 @@ List<ApplicationDocument> sortedActiveDocuments = applicationDocument.stream()
 	            documentDTOs.add(appDocumentDTO);
 	        }
 
-	        // Add the list of document DTOs to the response
-	        response.put("documents", documentDTOs);
+	        // One row per title. A later Active upload replaces an older copy
+	        // (the earlier Bank Guarantee / CSR / Agreement / Cross Certification
+	        // rows were the audit report and must not be listed beside the applicant file).
+	        response.put("documents", keepLatestDocumentPerTitle(documentDTOs));
 
 	        return new ResponseEntity<>(response, HttpStatus.OK);
 
@@ -1646,6 +1662,44 @@ List<ApplicationDocument> sortedActiveDocuments = applicationDocument.stream()
 	        e.printStackTrace();  // Add this to get more detailed error messages
 	        return new ResponseEntity<>("Error retrieving application data: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 	    }
+	}
+
+	/**
+	 * Section 35 lists one file per title. When the same title was uploaded again,
+	 * keep the Active file (the applicant upload) and drop the older copy.
+	 */
+	private List<ApplicationDocumentDTO> keepLatestDocumentPerTitle(List<ApplicationDocumentDTO> documents) {
+	    if (documents == null || documents.isEmpty()) {
+	        return documents;
+	    }
+	    documents.sort(Comparator.comparing(ApplicationDocumentDTO::getAppDocId, Comparator.nullsLast(Long::compareTo)));
+	    Map<String, ApplicationDocumentDTO> chosen = new LinkedHashMap<>();
+	    for (ApplicationDocumentDTO document : documents) {
+	        String title = document.getDocumentTitle() == null ? "" : document.getDocumentTitle();
+	        ApplicationDocumentDTO current = chosen.get(title);
+	        if (current == null || preferDocument(document, current)) {
+	            chosen.put(title, document);
+	        }
+	    }
+	    return new ArrayList<>(chosen.values());
+	}
+
+	private boolean preferDocument(ApplicationDocumentDTO candidate, ApplicationDocumentDTO current) {
+	    boolean candidateActive = isActiveDocument(candidate.getStatus());
+	    boolean currentActive = isActiveDocument(current.getStatus());
+	    if (candidateActive != currentActive) {
+	        return candidateActive;
+	    }
+	    Long candidateId = candidate.getAppDocId();
+	    Long currentId = current.getAppDocId();
+	    if (candidateId == null || currentId == null) {
+	        return candidateId != null;
+	    }
+	    return candidateId > currentId;
+	}
+
+	private boolean isActiveDocument(String status) {
+	    return status != null && "active".equalsIgnoreCase(status.trim());
 	}
 
 
@@ -2821,6 +2875,32 @@ List<ApplicationDocument> sortedActiveDocuments = applicationDocument.stream()
 	}
 
 	
+	/**
+	 * Application documents are stored in different folders by upload step
+	 * (MoA/additional, CPS, firm docs, and IPA issuance docs).
+	 */
+	private Path resolveApplicationDocumentPath(String fileName) {
+		if (fileName == null || fileName.isBlank()) {
+			return null;
+		}
+		Path[] candidates = new Path[] {
+				Paths.get(Constant.REAL_PATH, "AdditionalDocument", "Document").resolve(fileName),
+				Paths.get(Constant.REAL_PATH, "CPSDocument", "Document").resolve(fileName),
+				Paths.get(Constant.REAL_PATH, "FirmDocuments", "Documents").resolve(fileName),
+				// Bank Guarantee / CSR / Agreement / Cross Certification (IPA upload)
+				Paths.get(Constant.REAL_PATH, "IssuanceDocuments", "Document").resolve(fileName),
+				Paths.get(Constant.REAL_PATH, "BankGuaranteeProof", "Document").resolve(fileName)
+		};
+		for (Path candidate : candidates) {
+			Path normalized = candidate.normalize();
+			if (Files.exists(normalized)) {
+				System.out.println("Resolved application document at: " + normalized);
+				return normalized;
+			}
+		}
+		return null;
+	}
+
 	@GetMapping(IndividualApplicationFormAPIs.VIEW_FILE)
 	public ResponseEntity<Resource> viewFile(@RequestParam("id") String cpsDocuId) {
 	    System.out.println(cpsDocuId);
@@ -2833,32 +2913,14 @@ List<ApplicationDocument> sortedActiveDocuments = applicationDocument.stream()
 	            ApplicationDocument c = cpsDocumentOpt.get();
 	            System.out.println(c.getFileName());
 
-	            // Define the paths for all three directories
-	            Path additionalDocPath = Paths.get(Constant.REAL_PATH + "//AdditionalDocument//Document").resolve(c.getFileName()).normalize();
-	            Path cpsDocPath = Paths.get(Constant.REAL_PATH + "//CPSDocument//Document").resolve(c.getFileName()).normalize();
-	            Path firmDocPath = Paths.get(Constant.REAL_PATH + "//FirmDocuments//Documents").resolve(c.getFileName()).normalize();
-
-	            System.out.println("Checking Additional Document Path: " + additionalDocPath);
-	            System.out.println("Checking CPS Document Path: " + cpsDocPath);
-	            System.out.println("Checking Firm Document Path: " + firmDocPath);
-
-	            // Check the file path in the three directories
-	            Path filePath = null;
-	            if (Files.exists(additionalDocPath)) {
-	                filePath = additionalDocPath;  // If file exists in the first path
-	            } else if (Files.exists(cpsDocPath)) {
-	                filePath = cpsDocPath;  // If file exists in the second path
-	            } else if (Files.exists(firmDocPath)) {
-	                filePath = firmDocPath;  // If file exists in the third path
-	            }
+	            // Resolve across known application document folders
+	            Path filePath = resolveApplicationDocumentPath(c.getFileName());
 
 	            if (filePath != null) {
-	                // If file exists in one of the directories, load and return it
 	                Resource resource = new UrlResource(filePath.toUri());
 	                System.out.println("Resource found at: " + resource);
 
 	                if (resource.exists()) {
-	                    // Get the content type of the file
 	                    String contentType = Files.probeContentType(filePath);
 	                    System.out.println("Content Type: " + contentType);
 
@@ -2867,10 +2929,10 @@ List<ApplicationDocument> sortedActiveDocuments = applicationDocument.stream()
 	                            .header("Content-Disposition", "attachment; filename=\"" + resource.getFilename() + "\"")
 	                            .body(resource);
 	                } else {
-	                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);  // File exists but unable to load
+	                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 	                }
 	            } else {
-	                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);  // File not found in any of the three paths
+	                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 	            }
 	        } else {
 	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);  // Document not found in the database

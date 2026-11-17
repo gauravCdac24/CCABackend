@@ -3,8 +3,12 @@ package in.lms.cca.controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.IntStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -147,6 +151,31 @@ public class SubMenuMasterController {
 		
 	}
 	
+	/**
+	 * Fixed add/edit child routes for master pages (CPS, CSR, templates, etc.).
+	 * These must work without inserting Internal SubMenu rows per environment/device.
+	 */
+	private static final Map<String, Set<String>> FIXED_CHILD_ROUTES = buildFixedChildRoutes();
+
+	private static Map<String, Set<String>> buildFixedChildRoutes() {
+		Map<String, Set<String>> map = new HashMap<>();
+		map.put("/admin/cps", Set.of("/admin/cps/addcps", "/admin/cps/editcps"));
+		map.put("/admin/csr", Set.of("/admin/csr/addcsr", "/admin/csr/editcsr"));
+		map.put("/admin/bankguaranteeproof",
+				Set.of("/admin/bankguaranteeproof/addbankguaranteetemplate",
+						"/admin/bankguaranteeproof/editbankguaranteetemplate"));
+		map.put("/admin/agreement",
+				Set.of("/admin/agreement/addagreementtemplate",
+						"/admin/agreement/editagreementtemplate"));
+		map.put("/admin/crosscertificationarrangement",
+				Set.of("/admin/crosscertificationarrangement/addcrosscertificationtemplate",
+						"/admin/crosscertificationarrangement/editcrosscertificationtemplate"));
+		map.put("/admin/auditacceptance",
+				Set.of("/admin/auditacceptance/addauditacceptance",
+						"/admin/auditacceptance/editauditacceptance"));
+		return map;
+	}
+
 	@GetMapping(SubMenuMasterServiceAPIs.GET_ROUTES_BY_ROLE)
 	public ResponseEntity<?> getRoutesByRole(@RequestParam("id") String role, @RequestParam("pid") String path){
 		
@@ -162,12 +191,22 @@ public class SubMenuMasterController {
 
 	    boolean isValidRoute = false;
 	    String requestedPath = normalizeRoute(pathName);
+	    Set<String> authorizedParents = new HashSet<>();
 	    
 	    for(RoutesDTO r: allRoutes) {
-	    	if(r.getRoutePath() != null && normalizeRoute(r.getRoutePath()).equals(requestedPath)) {
+	    	if(r.getRoutePath() == null) {
+	    		continue;
+	    	}
+	    	String normalized = normalizeRoute(r.getRoutePath());
+	    	authorizedParents.add(normalized);
+	    	if(normalized.equals(requestedPath)) {
 	    		isValidRoute = true;
 	    		break;
 	    	}
+	    }
+
+	    if (!isValidRoute) {
+	    	isValidRoute = isFixedAuthorizedChildRoute(requestedPath, authorizedParents);
 	    }
 	    
 	    if(isValidRoute) {
@@ -177,6 +216,31 @@ public class SubMenuMasterController {
 		return new ResponseEntity<>(EncryptionUtil.encrypt("false"), HttpStatus.OK);
 	}
 
+	private boolean isFixedAuthorizedChildRoute(String requestedPath, Set<String> authorizedParents) {
+		if (requestedPath == null || requestedPath.isBlank() || authorizedParents == null) {
+			return false;
+		}
+		String requestedLower = requestedPath.toLowerCase();
+		Set<String> parentsLower = new HashSet<>();
+		for (String parent : authorizedParents) {
+			if (parent != null) {
+				parentsLower.add(parent.toLowerCase());
+			}
+		}
+		for (Map.Entry<String, Set<String>> entry : FIXED_CHILD_ROUTES.entrySet()) {
+			String parent = entry.getKey().toLowerCase();
+			if (!parentsLower.contains(parent)) {
+				continue;
+			}
+			for (String child : entry.getValue()) {
+				if (child != null && child.toLowerCase().equals(requestedLower)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	private String normalizeRoute(String path) {
 		if (path == null) {
 			return "";
@@ -184,6 +248,10 @@ public class SubMenuMasterController {
 		String value = path.trim().replace("\"", "");
 		if (!value.startsWith("/")) {
 			value = "/" + value;
+		}
+		// drop trailing slash except root
+		if (value.length() > 1 && value.endsWith("/")) {
+			value = value.substring(0, value.length() - 1);
 		}
 		return value.replaceAll("/{2,}", "/");
 	}

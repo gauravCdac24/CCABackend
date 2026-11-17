@@ -62,7 +62,11 @@ public class ASPDetailsServiceImpl implements IASPDetailsService{
 
 	@Override
 	public List<ASPDetails> getASPDetailsByUsername(String username) {
-		return aspRepo.findASPDetailsByUsername(username);
+		List<ASPDetails> list = aspRepo.findASPDetailsByUsername(username);
+		for (ASPDetails asp : list) {
+			asp.setAuditReportCount(getAuditReportsByAspId(asp.getAspId()).size());
+		}
+		return list;
 	}
 
 	@Override
@@ -80,6 +84,14 @@ public class ASPDetailsServiceImpl implements IASPDetailsService{
 	public ASPDetails getASPDetailsByUsernameAndEmailId(String username, String emailId) {
 
 		return aspRepo.findASPDetailsByUsernameAndEmailId(username, emailId);
+	}
+
+	@Override
+	public List<AspAuditReport> getAuditReportsByAspId(Long aspId) {
+		if (aspId == null) {
+			return List.of();
+		}
+		return auditReportRepo.findByAspIdOrderByAuditReportDate(aspId);
 	}
 
 }

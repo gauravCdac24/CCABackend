@@ -90,6 +90,7 @@ import in.lms.cca.service.IClientDashboardService;
 import in.lms.cca.service.IDSCeSignIssuedService;
 import in.lms.cca.service.ILdifDocumentService;
 import in.lms.cca.util.api.DashboardAPIs;
+import in.lms.cca.util.global.AspAuditReportFiles;
 import in.lms.cca.util.global.DocumentFileUtil;
 import in.lms.cca.util.global.EncryptionUtil;
 
@@ -641,11 +642,15 @@ public class DashoboardController {
 	
 	
 	@GetMapping(DashboardAPIs.GET_ALL_ASP)
-	public ResponseEntity<?> getAllASP(){
+	public ResponseEntity<?> getAllASP(@RequestParam("id") String username){
 		
 		try {
-		List<ASPDetails> list = aspServ.getAllASPDetails();
-		return new ResponseEntity<>(list, HttpStatus.OK);
+			String uname = EncryptionUtil.decrypt(username);
+			if (uname == null || uname.isBlank()) {
+				return new ResponseEntity<>("Licensee details not found, try after some time.", HttpStatus.BAD_REQUEST);
+			}
+			List<ASPDetails> list = aspServ.getASPDetailsByUsername(uname.trim());
+			return new ResponseEntity<>(list, HttpStatus.OK);
 		}catch(Exception e) {
 			return new ResponseEntity<>("Error in fetching data, try after some time.", HttpStatus.BAD_REQUEST);
 		}
@@ -663,6 +668,45 @@ public class DashoboardController {
 			return new ResponseEntity<>("Invalid Id.", HttpStatus.BAD_REQUEST);
 		}
 		
+	}
+
+	@GetMapping(DashboardAPIs.DOWNLOAD_ASP_AUDIT_REPORTS)
+	public ResponseEntity<?> downloadAspAuditReports(@RequestParam("id") String id,
+			@RequestParam("pid") String username) {
+		try {
+			String aspIdText = EncryptionUtil.decrypt(id);
+			String caUsername = EncryptionUtil.decrypt(username);
+			if (aspIdText == null || caUsername == null || caUsername.isBlank()) {
+				return new ResponseEntity<>("Invalid ASP.", HttpStatus.BAD_REQUEST);
+			}
+			Long aspId = Long.parseLong(aspIdText.trim());
+			ASPDetails asp = aspServ.getASPDetailsById(aspId);
+			if (asp == null || asp.getCaUsername() == null
+					|| !asp.getCaUsername().trim().equals(caUsername.trim())) {
+				return new ResponseEntity<>("ASP audit report was not found.", HttpStatus.BAD_REQUEST);
+			}
+			List<AspAuditReport> reports = aspServ.getAuditReportsByAspId(aspId);
+			if (reports == null || reports.isEmpty()) {
+				return new ResponseEntity<>("No ASP audit report was uploaded.", HttpStatus.BAD_REQUEST);
+			}
+			if (reports.size() == 1) {
+				AspAuditReport report = reports.get(0);
+				byte[] file = AspAuditReportFiles.read(report);
+				String fileName = AspAuditReportFiles.downloadName(report.getFileName(), file);
+				return ResponseEntity.ok()
+						.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
+						.contentType(MediaType.parseMediaType(AspAuditReportFiles.contentType(fileName, file)))
+						.body(file);
+			}
+			byte[] merged = AspAuditReportFiles.combinedPdf(reports);
+			return ResponseEntity.ok()
+					.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"ASPReports.pdf\"")
+					.contentType(MediaType.APPLICATION_PDF)
+					.body(merged);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Unable to download the ASP audit reports.", HttpStatus.BAD_REQUEST);
+		}
 	}
 
 	

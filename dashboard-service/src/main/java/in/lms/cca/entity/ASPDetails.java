@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "asp_details", schema = "dashboard_management")
@@ -51,6 +52,9 @@ public class ASPDetails extends AbstractTimestampEntity{
 
 	    @Column(name = "Updated_by", length = 75)
 	    private String updatedBy;
+
+	    @Transient
+	    private Integer auditReportCount;
 	    
 	    
 
@@ -148,6 +152,14 @@ public class ASPDetails extends AbstractTimestampEntity{
 
 		public void setUpdatedBy(String updatedBy) {
 			this.updatedBy = updatedBy;
+		}
+
+		public Integer getAuditReportCount() {
+			return auditReportCount;
+		}
+
+		public void setAuditReportCount(Integer auditReportCount) {
+			this.auditReportCount = auditReportCount;
 		}
 
 	    

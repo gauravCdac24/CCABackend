@@ -12,6 +12,7 @@ public class DashboardAPIs {
 	public static final String ADD_ASP_DETAILS = "/add-asp-details";
 	public static final String GET_ALL_ASP = "/get-all-asp";
 	public static final String GET_ASP_BY_ID = "/get-asp-by-id";
+	public static final String DOWNLOAD_ASP_AUDIT_REPORTS = "/download-asp-audit-reports";
 
 	
 	
