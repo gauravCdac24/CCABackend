@@ -15,7 +15,7 @@
 [INFO] Nothing to compile - all classes are up to date.
 [INFO] 
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ annual-audit-service ---
-[INFO] Copying 0 resource from src\test\resources to target\test-classes
+[INFO] skip non existing resourceDirectory E:\New folder\CCABackend-Gaurav_Backend\annual-audit-service\src\test\resources
 [INFO] 
 [INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ annual-audit-service ---
 [INFO] Nothing to compile - all classes are up to date.
@@ -25,6 +25,7 @@
 [INFO] 
 [INFO] --- spring-boot:3.3.2:run (default-cli) @ annual-audit-service ---
 [INFO] Attaching agents: []
+Picked up JAVA_TOOL_OPTIONS: -Xms64m -Xmx320m -XX:MaxMetaspaceSize=160m -XX:+UseSerialGC
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -35,31 +36,31 @@
 
  :: Spring Boot ::                (v3.3.2)
 
-2026-11-13 10:40:43 - Starting AnnualAuditServiceApplication using Java 17.0.10 with PID 26944 (C:\Users\hp\Documents\CCABackend\CCABackend\annual-audit-service\target\classes started by hp in C:\Users\hp\Documents\CCABackend\CCABackend\annual-audit-service)
-2026-11-13 10:40:43 - Running with Spring Boot v3.3.2, Spring v6.1.11
-2026-11-13 10:40:43 - The following 1 profile is active: "test"
-2026-11-13 10:40:44 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2026-11-13 10:40:44 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2026-11-13 10:40:51 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-11-13 10:40:52 - Finished Spring Data repository scanning in 486 ms. Found 12 JPA repository interfaces.
-2026-11-13 10:40:53 - BeanFactory id=183fa3aa-d751-374d-b2f0-6f01fa576d51
-2026-11-13 10:40:53 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
-2026-11-13 10:40:53 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
-2026-11-13 10:40:54 - Tomcat initialized with port 7791 (http)
-2026-11-13 10:40:54 - Starting service [Tomcat]
-2026-11-13 10:40:54 - Starting Servlet engine: [Apache Tomcat/10.1.26]
-2026-11-13 10:40:54 - Initializing Spring embedded WebApplicationContext
-2026-11-13 10:40:54 - Root WebApplicationContext: initialization completed in 9923 ms
-2026-11-13 10:40:54 - Filter 'annualAuditScheduleFilter' configured for use
-2026-11-13 10:40:54 - HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-11-13 10:40:54 - HHH000412: Hibernate ORM core version 6.5.2.Final
-2026-11-13 10:40:54 - HHH000026: Second-level cache disabled
-2026-11-13 10:40:55 - No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-11-13 10:40:55 - HikariPool-1 - Starting...
-2026-11-13 10:40:55 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@61d62a0f
-2026-11-13 10:40:55 - HikariPool-1 - Start completed.
-2026-11-13 10:40:56 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-11-13 10:40:58 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-18 15:35:50 - Starting AnnualAuditServiceApplication using Java 17.0.11 with PID 35704 (E:\New folder\CCABackend-Gaurav_Backend\annual-audit-service\target\classes started by hp in E:\New folder\CCABackend-Gaurav_Backend\annual-audit-service)
+2026-11-18 15:35:50 - Running with Spring Boot v3.3.2, Spring v6.1.11
+2026-11-18 15:35:50 - The following 1 profile is active: "test"
+2026-11-18 15:35:50 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-11-18 15:35:50 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-11-18 15:35:51 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-18 15:35:51 - Finished Spring Data repository scanning in 263 ms. Found 12 JPA repository interfaces.
+2026-11-18 15:35:51 - BeanFactory id=183fa3aa-d751-374d-b2f0-6f01fa576d51
+2026-11-18 15:35:52 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-11-18 15:35:52 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-11-18 15:35:52 - Tomcat initialized with port 7791 (http)
+2026-11-18 15:35:52 - Starting service [Tomcat]
+2026-11-18 15:35:52 - Starting Servlet engine: [Apache Tomcat/10.1.26]
+2026-11-18 15:35:52 - Initializing Spring embedded WebApplicationContext
+2026-11-18 15:35:52 - Root WebApplicationContext: initialization completed in 2416 ms
+2026-11-18 15:35:52 - Filter 'annualAuditScheduleFilter' configured for use
+2026-11-18 15:35:52 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-11-18 15:35:52 - HHH000412: Hibernate ORM core version 6.5.2.Final
+2026-11-18 15:35:52 - HHH000026: Second-level cache disabled
+2026-11-18 15:35:53 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-18 15:35:53 - HikariPool-1 - Starting...
+2026-11-18 15:35:53 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@524c477e
+2026-11-18 15:35:53 - HikariPool-1 - Start completed.
+2026-11-18 15:35:53 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-11-18 15:35:54 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
 Hibernate: alter table if exists annual_audit_management.application_action_taken alter column auditor_remarks set data type TEXT
 Hibernate: alter table if exists annual_audit_management.application_action_taken alter column remarks set data type TEXT
 Hibernate: alter table if exists annual_audit_management.application_audit alter column applicant_remarks set data type TEXT
@@ -72,47 +73,17 @@ Hibernate: alter table if exists annual_audit_management."audit_report-criteria"
 Hibernate: alter table if exists annual_audit_management.audit_report_document alter column remarks set data type TEXT
 Hibernate: alter table if exists annual_audit_management.audit_schedule alter column description set data type TEXT
 Hibernate: alter table if exists annual_audit_management.audit_short_coming alter column remarks set data type TEXT
-2026-11-13 10:40:58 - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-11-13 10:40:59 - Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-11-13 10:41:02 - Unable to start LiveReload server
-2026-11-13 10:41:03 - Cannot determine local hostname
-2026-11-13 10:41:05 - Cannot determine local hostname
-2026-11-13 10:41:05 - Eureka HTTP Client uses RestTemplate.
-2026-11-13 10:41:05 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
-2026-11-13 10:41:05 - Setting initial instance status as: STARTING
-2026-11-13 10:41:05 - Initializing Eureka in region us-east-1
-2026-11-13 10:41:05 - Client configured to neither register nor query for data.
-2026-11-13 10:41:05 - Discovery Client initialized at timestamp 1794546665593 with initial instances count: 0
-2026-11-13 10:41:05 - Registering application ANNUAL-AUDIT-SERVICE with eureka with status UP
-2026-11-13 10:41:05 - Tomcat started on port 7791 (http) with context path '/'
-2026-11-13 10:41:05 - Updating port to 7791
-2026-11-13 10:41:07 - Cannot determine local hostname
-2026-11-13 10:41:07 - Started AnnualAuditServiceApplication in 29.925 seconds (process running for 34.193)
+2026-11-18 15:35:54 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-18 15:35:54 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-11-18 15:35:56 - Unable to start LiveReload server
+2026-11-18 15:35:56 - Eureka HTTP Client uses RestTemplate.
+2026-11-18 15:35:56 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-11-18 15:35:56 - Setting initial instance status as: STARTING
+2026-11-18 15:35:56 - Initializing Eureka in region us-east-1
+2026-11-18 15:35:56 - Client configured to neither register nor query for data.
+2026-11-18 15:35:56 - Discovery Client initialized at timestamp 1794996356788 with initial instances count: 0
+2026-11-18 15:35:56 - Registering application ANNUAL-AUDIT-SERVICE with eureka with status UP
+2026-11-18 15:35:56 - Tomcat started on port 7791 (http) with context path '/'
+2026-11-18 15:35:56 - Updating port to 7791
+2026-11-18 15:35:57 - Started AnnualAuditServiceApplication in 7.989 seconds (process running for 8.928)
 Hibernate: select aase1_0.audit_schedule_id,aase1_0.actual_start_date,aase1_0.audit_agency_id,aase1_0.created,aase1_0.created_by,aase1_0.date_of_completion,aase1_0.date_of_submission,aase1_0.esign_document_id,aase1_0.license_id,aase1_0.schedule_start_date,aase1_0.schedule_submission_date,aase1_0.status,aase1_0.updated,aase1_0.updated_by,aase1_0.user_name from annual_audit_management.annual_audit_schedule aase1_0
-2026-11-13 10:41:08 - Unexpected error occurred in scheduled task
-org.springframework.web.client.HttpServerErrorException$InternalServerError: 500 : "{"timestamp":"2026-11-13T05:11:08.092+00:00","path":"/api/notification-service/send-notification","status":500,"error":"Internal Server Error","requestId":"49d1c717","message":"Connection refused: no further information: localhost/127.0.0.1:7780","trace":"io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: no further information: localhost/127.0.0.1:7780\r\n\tSuppressed: The stacktrace has been enhanced by Reactor, refer to additional information below: \r\nError has been observed at the following site(s):\r\n\t*__checkpoint ? org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]\r\n\t*__checkpoint ? HTTP POST \"/api/notification-service/send-notification\" [ExceptionHandlingWebHandler]\r\nOriginal Stack Trace:\r\nCaused by: java.net.ConnectException: Connection refused: no further information\r\n\tat java.base/sun.nio.ch.Net.pollConnect(Native Method)\r\n\tat java.base/sun.nio.ch.Net.pollConnectNow(Net.java:672)\r\n\tat java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:946)\r\n\tat io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:336)\r\n\tat io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)\r\n\tat io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:776)\r\n\tat io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)\r\n\tat io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)\r\n\tat io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)\r\n\tat io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:994)\r\n\tat io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)\r\n\tat io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)\r\n\tat java.base/java.lang.Thread.run(Thread.java:842)\r\n"}"
-	at org.springframework.web.client.HttpServerErrorException.create(HttpServerErrorException.java:102)
-	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:186)
-	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:137)
-	at org.springframework.web.client.ResponseErrorHandler.handleError(ResponseErrorHandler.java:63)
-	at org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:942)
-	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:891)
-	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:790)
-	at org.springframework.web.client.RestTemplate.postForEntity(RestTemplate.java:538)
-	at in.lms.cca.service.Impl.NotificationClientServiceImpl.sendNotification(NotificationClientServiceImpl.java:27)
-	at in.lms.cca.service.Impl.LicenseSchedulerService.notifyLicenseRenewal(LicenseSchedulerService.java:57)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.springframework.scheduling.support.ScheduledMethodRunnable.runInternal(ScheduledMethodRunnable.java:130)
-	at org.springframework.scheduling.support.ScheduledMethodRunnable.lambda$run$2(ScheduledMethodRunnable.java:124)
-	at io.micrometer.observation.Observation.observe(Observation.java:499)
-	at org.springframework.scheduling.support.ScheduledMethodRunnable.run(ScheduledMethodRunnable.java:124)
-	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
-	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:305)
-	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:305)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:842)
