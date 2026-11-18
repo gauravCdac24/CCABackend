@@ -1,0 +1,198 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------< in.lms.cca:dashboard-service >--------------------
+[INFO] Building dashboard-service 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.4.0:run (default-cli) > test-compile @ dashboard-service >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ dashboard-service ---
+[INFO] Copying 5 resources from src\main\resources to target\classes
+[INFO] Copying 2 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ dashboard-service ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ dashboard-service ---
+[INFO] skip non existing resourceDirectory C:\Users\hp\Documents\CCABackend\CCABackend\dashboard-service\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ dashboard-service ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] <<< spring-boot:3.4.0:run (default-cli) < test-compile @ dashboard-service <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.4.0:run (default-cli) @ dashboard-service ---
+[INFO] Attaching agents: []
+Picked up JAVA_TOOL_OPTIONS: -Xms64m -Xmx384m -XX:MaxMetaspaceSize=192m -XX:+UseSerialGC
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.0)
+
+2026-11-17 15:58:18 - Starting DashboardServiceApplication using Java 17.0.10 with PID 14908 (C:\Users\hp\Documents\CCABackend\CCABackend\dashboard-service\target\classes started by hp in C:\Users\hp\Documents\CCABackend\CCABackend\dashboard-service)
+2026-11-17 15:58:18 - Running with Spring Boot v3.4.0, Spring v6.2.0
+2026-11-17 15:58:18 - The following 1 profile is active: "test"
+2026-11-17 15:58:18 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-11-17 15:58:18 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-11-17 15:58:18 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-17 15:58:19 - Finished Spring Data repository scanning in 134 ms. Found 4 JPA repository interfaces.
+2026-11-17 15:58:19 - BeanFactory id=924754ef-3f4d-3230-87c6-07ea944b0c0b
+2026-11-17 15:58:19 - Tomcat initialized with port 7790 (http)
+2026-11-17 15:58:19 - Starting service [Tomcat]
+2026-11-17 15:58:19 - Starting Servlet engine: [Apache Tomcat/10.1.33]
+2026-11-17 15:58:19 - Initializing Spring embedded WebApplicationContext
+2026-11-17 15:58:19 - Root WebApplicationContext: initialization completed in 1625 ms
+2026-11-17 15:58:19 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-11-17 15:58:20 - HHH000412: Hibernate ORM core version 6.6.2.Final
+2026-11-17 15:58:20 - HHH000026: Second-level cache disabled
+2026-11-17 15:58:20 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-17 15:58:20 - HikariPool-1 - Starting...
+2026-11-17 15:58:20 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3fd287ae
+2026-11-17 15:58:20 - HikariPool-1 - Start completed.
+2026-11-17 15:58:20 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-11-17 15:58:20 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 16.13
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-11-17 15:58:21 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-17 15:58:21 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-17 15:58:21 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-11-17 15:58:22 - Unable to start LiveReload server
+2026-11-17 15:58:24 - Cannot determine local hostname
+2026-11-17 15:58:25 - Cannot determine local hostname
+2026-11-17 15:58:25 - Eureka HTTP Client uses RestTemplate.
+2026-11-17 15:58:25 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-11-17 15:58:25 - Setting initial instance status as: STARTING
+2026-11-17 15:58:25 - Initializing Eureka in region us-east-1
+2026-11-17 15:58:25 - Client configured to neither register nor query for data.
+2026-11-17 15:58:25 - Discovery Client initialized at timestamp 1794911305459 with initial instances count: 0
+2026-11-17 15:58:25 - Registering application DASHBOARD-SERVICE with eureka with status UP
+2026-11-17 15:58:25 - Tomcat started on port 7790 (http) with context path '/'
+2026-11-17 15:58:25 - Updating port to 7790
+2026-11-17 15:58:26 - Cannot determine local hostname
+2026-11-17 15:58:26 - Started DashboardServiceApplication in 10.146 seconds (process running for 10.729)
+2026-11-17 16:04:19 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-11-17 16:04:19 - Initializing Servlet 'dispatcherServlet'
+2026-11-17 16:04:19 - Completed initialization in 1 ms
+Hibernate: select a1_0.aspid,a1_0.api_specification_id,a1_0.api_version_id,a1_0.aspname,a1_0.causername,a1_0.countryid,a1_0.created,a1_0.created_by,a1_0.emailid,a1_0.exit_date,a1_0.onboarding_date,a1_0.stateid,a1_0.updated,a1_0.updated_by from dashboard_management.asp_details a1_0 where a1_0.aspid=?
+Hibernate: select aar1_0.asp_audit_report_id,aar1_0.aspid,aar1_0.audit_report_date,aar1_0.file_name from dashboard_management.asp_audit_report aar1_0 where aar1_0.aspid=? order by aar1_0.audit_report_date,aar1_0.asp_audit_report_id
+Hibernate: select a1_0.aspid,a1_0.api_specification_id,a1_0.api_version_id,a1_0.aspname,a1_0.causername,a1_0.countryid,a1_0.created,a1_0.created_by,a1_0.emailid,a1_0.exit_date,a1_0.onboarding_date,a1_0.stateid,a1_0.updated,a1_0.updated_by from dashboard_management.asp_details a1_0 where a1_0.aspid=?
+Hibernate: select aar1_0.asp_audit_report_id,aar1_0.aspid,aar1_0.audit_report_date,aar1_0.file_name from dashboard_management.asp_audit_report aar1_0 where aar1_0.aspid=? order by aar1_0.audit_report_date,aar1_0.asp_audit_report_id
+Hibernate: select a1_0.aspid,a1_0.api_specification_id,a1_0.api_version_id,a1_0.aspname,a1_0.causername,a1_0.countryid,a1_0.created,a1_0.created_by,a1_0.emailid,a1_0.exit_date,a1_0.onboarding_date,a1_0.stateid,a1_0.updated,a1_0.updated_by from dashboard_management.asp_details a1_0 where a1_0.causername=? order by a1_0.created desc
+Hibernate: select aar1_0.asp_audit_report_id,aar1_0.aspid,aar1_0.audit_report_date,aar1_0.file_name from dashboard_management.asp_audit_report aar1_0 where aar1_0.aspid=? order by aar1_0.audit_report_date,aar1_0.asp_audit_report_id
+Hibernate: select a1_0.aspid,a1_0.api_specification_id,a1_0.api_version_id,a1_0.aspname,a1_0.causername,a1_0.countryid,a1_0.created,a1_0.created_by,a1_0.emailid,a1_0.exit_date,a1_0.onboarding_date,a1_0.stateid,a1_0.updated,a1_0.updated_by from dashboard_management.asp_details a1_0 where a1_0.causername=? order by a1_0.created desc
+Hibernate: select aar1_0.asp_audit_report_id,aar1_0.aspid,aar1_0.audit_report_date,aar1_0.file_name from dashboard_management.asp_audit_report aar1_0 where aar1_0.aspid=? order by aar1_0.audit_report_date,aar1_0.asp_audit_report_id
+Hibernate: select a1_0.aspid,a1_0.api_specification_id,a1_0.api_version_id,a1_0.aspname,a1_0.causername,a1_0.countryid,a1_0.created,a1_0.created_by,a1_0.emailid,a1_0.exit_date,a1_0.onboarding_date,a1_0.stateid,a1_0.updated,a1_0.updated_by from dashboard_management.asp_details a1_0 where a1_0.aspid=?
+Hibernate: select aar1_0.asp_audit_report_id,aar1_0.aspid,aar1_0.audit_report_date,aar1_0.file_name from dashboard_management.asp_audit_report aar1_0 where aar1_0.aspid=? order by aar1_0.audit_report_date,aar1_0.asp_audit_report_id
+Hibernate: select a1_0.aspid,a1_0.api_specification_id,a1_0.api_version_id,a1_0.aspname,a1_0.causername,a1_0.countryid,a1_0.created,a1_0.created_by,a1_0.emailid,a1_0.exit_date,a1_0.onboarding_date,a1_0.stateid,a1_0.updated,a1_0.updated_by from dashboard_management.asp_details a1_0 where a1_0.causername=? order by a1_0.created desc
+Hibernate: select aar1_0.asp_audit_report_id,aar1_0.aspid,aar1_0.audit_report_date,aar1_0.file_name from dashboard_management.asp_audit_report aar1_0 where aar1_0.aspid=? order by aar1_0.audit_report_date,aar1_0.asp_audit_report_id
+Hibernate: select a1_0.aspid,a1_0.api_specification_id,a1_0.api_version_id,a1_0.aspname,a1_0.causername,a1_0.countryid,a1_0.created,a1_0.created_by,a1_0.emailid,a1_0.exit_date,a1_0.onboarding_date,a1_0.stateid,a1_0.updated,a1_0.updated_by from dashboard_management.asp_details a1_0 where a1_0.causername=? order by a1_0.created desc
+Hibernate: select aar1_0.asp_audit_report_id,aar1_0.aspid,aar1_0.audit_report_date,aar1_0.file_name from dashboard_management.asp_audit_report aar1_0 where aar1_0.aspid=? order by aar1_0.audit_report_date,aar1_0.asp_audit_report_id
+Hibernate: select a1_0.aspid,a1_0.api_specification_id,a1_0.api_version_id,a1_0.aspname,a1_0.causername,a1_0.countryid,a1_0.created,a1_0.created_by,a1_0.emailid,a1_0.exit_date,a1_0.onboarding_date,a1_0.stateid,a1_0.updated,a1_0.updated_by from dashboard_management.asp_details a1_0 where a1_0.causername=? order by a1_0.created desc
+Hibernate: select aar1_0.asp_audit_report_id,aar1_0.aspid,aar1_0.audit_report_date,aar1_0.file_name from dashboard_management.asp_audit_report aar1_0 where aar1_0.aspid=? order by aar1_0.audit_report_date,aar1_0.asp_audit_report_id
+Hibernate: select a1_0.aspid,a1_0.api_specification_id,a1_0.api_version_id,a1_0.aspname,a1_0.causername,a1_0.countryid,a1_0.created,a1_0.created_by,a1_0.emailid,a1_0.exit_date,a1_0.onboarding_date,a1_0.stateid,a1_0.updated,a1_0.updated_by from dashboard_management.asp_details a1_0 where a1_0.causername=? order by a1_0.created desc
+Hibernate: select aar1_0.asp_audit_report_id,aar1_0.aspid,aar1_0.audit_report_date,aar1_0.file_name from dashboard_management.asp_audit_report aar1_0 where aar1_0.aspid=? order by aar1_0.audit_report_date,aar1_0.asp_audit_report_id
+Hibernate: select dsi1_0.dscesign_issued_id,dsi1_0.causername,dsi1_0.countryid,dsi1_0.created,dsi1_0.created_by,dsi1_0.dsc_issued,dsi1_0.esign_issued,dsi1_0.month,dsi1_0.stateid,dsi1_0.updated,dsi1_0.updated_by,dsi1_0.year from dashboard_management.dsc_esign_issued dsi1_0 where dsi1_0.causername=? order by dsi1_0.created desc
+Hibernate: select dsi1_0.dscesign_issued_id,dsi1_0.causername,dsi1_0.countryid,dsi1_0.created,dsi1_0.created_by,dsi1_0.dsc_issued,dsi1_0.esign_issued,dsi1_0.month,dsi1_0.stateid,dsi1_0.updated,dsi1_0.updated_by,dsi1_0.year from dashboard_management.dsc_esign_issued dsi1_0 where dsi1_0.causername=? order by dsi1_0.created desc
+Hibernate: select dsi1_0.dscesign_issued_id,dsi1_0.causername,dsi1_0.countryid,dsi1_0.created,dsi1_0.created_by,dsi1_0.dsc_issued,dsi1_0.esign_issued,dsi1_0.month,dsi1_0.stateid,dsi1_0.updated,dsi1_0.updated_by,dsi1_0.year from dashboard_management.dsc_esign_issued dsi1_0 where dsi1_0.causername=? order by dsi1_0.created desc
+Hibernate: select dsi1_0.dscesign_issued_id,dsi1_0.causername,dsi1_0.countryid,dsi1_0.created,dsi1_0.created_by,dsi1_0.dsc_issued,dsi1_0.esign_issued,dsi1_0.month,dsi1_0.stateid,dsi1_0.updated,dsi1_0.updated_by,dsi1_0.year from dashboard_management.dsc_esign_issued dsi1_0 where dsi1_0.causername=? order by dsi1_0.created desc
+2026-11-17 16:41:24 - Restarting due to 101 class path changes (0 additions, 101 deletions, 0 modifications)
+2026-11-17 16:41:24 - Unregistering application DASHBOARD-SERVICE with eureka with status DOWN
+2026-11-17 16:41:24 - Commencing graceful shutdown. Waiting for active requests to complete
+2026-11-17 16:41:49 - Graceful shutdown complete
+2026-11-17 16:41:49 - Socket accept failed
+java.nio.channels.AsynchronousCloseException: null
+	at java.base/java.nio.channels.spi.AbstractInterruptibleChannel.end(AbstractInterruptibleChannel.java:202)
+	at java.base/sun.nio.ch.ServerSocketChannelImpl.end(ServerSocketChannelImpl.java:376)
+	at java.base/sun.nio.ch.ServerSocketChannelImpl.accept(ServerSocketChannelImpl.java:399)
+	at org.apache.tomcat.util.net.NioEndpoint.serverSocketAccept(NioEndpoint.java:518)
+	at org.apache.tomcat.util.net.NioEndpoint.serverSocketAccept(NioEndpoint.java:71)
+	at org.apache.tomcat.util.net.Acceptor.run(Acceptor.java:128)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+2026-11-17 16:41:49 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-11-17 16:41:49 - HikariPool-1 - Shutdown initiated...
+2026-11-17 16:41:49 - HikariPool-1 - Shutdown completed.
+2026-11-17 16:41:49 - Shutting down DiscoveryClient ...
+2026-11-17 16:41:49 - Completed shut down of DiscoveryClient
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.0)
+
+2026-11-17 16:41:53 - Starting DashboardServiceApplication using Java 17.0.10 with PID 14908 (C:\Users\hp\Documents\CCABackend\CCABackend\dashboard-service\target\classes started by hp in C:\Users\hp\Documents\CCABackend\CCABackend\dashboard-service)
+2026-11-17 16:41:53 - Running with Spring Boot v3.4.0, Spring v6.2.0
+2026-11-17 16:41:53 - The following 1 profile is active: "test"
+2026-11-17 16:41:54 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-17 16:41:54 - Finished Spring Data repository scanning in 42 ms. Found 4 JPA repository interfaces.
+2026-11-17 16:41:54 - BeanFactory id=924754ef-3f4d-3230-87c6-07ea944b0c0b
+2026-11-17 16:41:54 - Tomcat initialized with port 7790 (http)
+2026-11-17 16:41:54 - Starting service [Tomcat]
+2026-11-17 16:41:54 - Starting Servlet engine: [Apache Tomcat/10.1.33]
+2026-11-17 16:41:54 - Initializing Spring embedded WebApplicationContext
+2026-11-17 16:41:54 - Root WebApplicationContext: initialization completed in 1217 ms
+2026-11-17 16:41:54 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-11-17 16:41:54 - HHH000026: Second-level cache disabled
+2026-11-17 16:41:54 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-17 16:41:54 - HikariPool-2 - Starting...
+2026-11-17 16:41:54 - HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@780c0c7f
+2026-11-17 16:41:54 - HikariPool-2 - Start completed.
+2026-11-17 16:41:54 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-11-17 16:41:54 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-2)']
+	Database driver: undefined/unknown
+	Database version: 16.13
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-11-17 16:41:54 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-17 16:41:54 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-17 16:41:55 - Unable to start LiveReload server
+2026-11-17 16:41:57 - Cannot determine local hostname
+2026-11-17 16:41:57 - Creating singleton bean 'eurekaAutoServiceRegistration' in thread "File Watcher" while other thread holds singleton lock for other beans [eurekaAutoServiceRegistration, eurekaInstanceConfigBean, org.springframework.cloud.client.serviceregistry.AutoServiceRegistrationAutoConfiguration, eurekaServiceRegistry]
+Exception in thread "File Watcher" org.springframework.beans.factory.BeanCurrentlyInCreationException: Error creating bean with name 'eurekaAutoServiceRegistration': Requested bean is currently in creation: Is there an unresolvable circular reference or an asynchronous initialization dependency?
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.beforeSingletonCreation(DefaultSingletonBeanRegistry.java:420)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:281)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:334)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:204)
+	at org.springframework.context.event.AbstractApplicationEventMulticaster.retrieveApplicationListeners(AbstractApplicationEventMulticaster.java:267)
+	at org.springframework.context.event.AbstractApplicationEventMulticaster.getApplicationListeners(AbstractApplicationEventMulticaster.java:223)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:145)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:454)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:387)
+	at org.springframework.boot.devtools.classpath.ClassPathFileChangeListener.publishEvent(ClassPathFileChangeListener.java:67)
+	at org.springframework.boot.devtools.classpath.ClassPathFileChangeListener.onChange(ClassPathFileChangeListener.java:63)
+	at org.springframework.boot.devtools.filewatch.FileSystemWatcher$Watcher.fireListeners(FileSystemWatcher.java:327)
+	at org.springframework.boot.devtools.filewatch.FileSystemWatcher$Watcher.updateSnapshots(FileSystemWatcher.java:321)
+	at org.springframework.boot.devtools.filewatch.FileSystemWatcher$Watcher.scan(FileSystemWatcher.java:281)
+	at org.springframework.boot.devtools.filewatch.FileSystemWatcher$Watcher.run(FileSystemWatcher.java:261)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+2026-11-17 16:41:58 - Cannot determine local hostname
+2026-11-17 16:41:58 - Eureka HTTP Client uses RestTemplate.
+2026-11-17 16:41:58 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-11-17 16:41:58 - Setting initial instance status as: STARTING
+2026-11-17 16:41:58 - Initializing Eureka in region us-east-1
+2026-11-17 16:41:58 - Client configured to neither register nor query for data.
+2026-11-17 16:41:58 - Discovery Client initialized at timestamp 1794913918658 with initial instances count: 0
+2026-11-17 16:41:58 - Registering application DASHBOARD-SERVICE with eureka with status UP
+2026-11-17 16:41:58 - Tomcat started on port 7790 (http) with context path '/'
+2026-11-17 16:41:58 - Updating port to 7790
+2026-11-17 16:42:00 - Cannot determine local hostname
+2026-11-17 16:42:00 - Started DashboardServiceApplication in 10.235 seconds (process running for 2624.237)
+2026-11-17 16:42:00 - Condition evaluation unchanged

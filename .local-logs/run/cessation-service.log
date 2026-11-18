@@ -1,0 +1,117 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------< in.lms.cca:cessation-service >--------------------
+[INFO] Building cessation-service 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.3.3:run (default-cli) > test-compile @ cessation-service >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ cessation-service ---
+[INFO] Copying 5 resources from src\main\resources to target\classes
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ cessation-service ---
+[INFO] Recompiling the module because of added or removed source files.
+[INFO] Compiling 40 source files with javac [debug parameters release 17] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ cessation-service ---
+[INFO] skip non existing resourceDirectory E:\New folder\CCABackend-Gaurav_Backend\cessation-service\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ cessation-service ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug parameters release 17] to target\test-classes
+[INFO] 
+[INFO] <<< spring-boot:3.3.3:run (default-cli) < test-compile @ cessation-service <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.3.3:run (default-cli) @ cessation-service ---
+[INFO] Attaching agents: []
+Picked up JAVA_TOOL_OPTIONS: -Xms64m -Xmx320m -XX:MaxMetaspaceSize=160m -XX:+UseSerialGC
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.3)
+
+2026-11-18 09:46:17 - Starting CessationServiceApplication using Java 17.0.11 with PID 7228 (E:\New folder\CCABackend-Gaurav_Backend\cessation-service\target\classes started by hp in E:\New folder\CCABackend-Gaurav_Backend\cessation-service)
+2026-11-18 09:46:18 - Running with Spring Boot v3.3.3, Spring v6.1.12
+2026-11-18 09:46:18 - The following 1 profile is active: "test"
+2026-11-18 09:46:18 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-11-18 09:46:18 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-11-18 09:46:19 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-18 09:46:20 - Finished Spring Data repository scanning in 324 ms. Found 5 JPA repository interfaces.
+2026-11-18 09:46:20 - BeanFactory id=39215ab4-5f59-38b6-8c0a-1701dc6073b4
+2026-11-18 09:46:20 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-11-18 09:46:20 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-11-18 09:46:21 - Tomcat initialized with port 7789 (http)
+2026-11-18 09:46:21 - Starting service [Tomcat]
+2026-11-18 09:46:21 - Starting Servlet engine: [Apache Tomcat/10.1.28]
+2026-11-18 09:46:21 - Initializing Spring embedded WebApplicationContext
+2026-11-18 09:46:21 - Root WebApplicationContext: initialization completed in 3645 ms
+2026-11-18 09:46:21 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-11-18 09:46:22 - HHH000412: Hibernate ORM core version 6.5.2.Final
+2026-11-18 09:46:22 - HHH000026: Second-level cache disabled
+2026-11-18 09:46:22 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-18 09:46:22 - HikariPool-1 - Starting...
+2026-11-18 09:46:22 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@317b2e5c
+2026-11-18 09:46:22 - HikariPool-1 - Start completed.
+2026-11-18 09:46:23 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-11-18 09:46:24 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-18 09:46:24 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-18 09:46:25 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-11-18 09:46:27 - Unable to start LiveReload server
+2026-11-18 09:46:28 - Eureka HTTP Client uses RestTemplate.
+2026-11-18 09:46:29 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-11-18 09:46:29 - Setting initial instance status as: STARTING
+2026-11-18 09:46:29 - Initializing Eureka in region us-east-1
+2026-11-18 09:46:29 - Client configured to neither register nor query for data.
+2026-11-18 09:46:29 - Discovery Client initialized at timestamp 1794975389076 with initial instances count: 0
+2026-11-18 09:46:29 - Registering application CESSATION-SERVICE with eureka with status UP
+2026-11-18 09:46:29 - Tomcat started on port 7789 (http) with context path '/'
+2026-11-18 09:46:29 - Updating port to 7789
+2026-11-18 09:46:29 - Started CessationServiceApplication in 13.0 seconds (process running for 13.881)
+2026-11-18 11:09:41 - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=13m47s211ms12µs900ns).
+2026-11-18 11:18:53 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-11-18 11:18:53 - Initializing Servlet 'dispatcherServlet'
+2026-11-18 11:18:53 - Completed initialization in 11 ms
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.status='Recommand For Rejection'
+LicenseCessationApplicationEntity size-=-=->[]
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.status='Recommand For Rejection'
+LicenseCessationApplicationEntity size-=-=->[]
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.status='Recommand For Rejection'
+LicenseCessationApplicationEntity size-=-=->[]
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.status='Recommand For Rejection'
+LicenseCessationApplicationEntity size-=-=->[]
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.status='approval_from_cca_officer'
+LicenseCessationApplicationEntity size-=-=->[LicenseCessationApplicationEntity [cessationAppId=5, licenseId=43, cessationNotice=CessationNotice_17062026165715_3a44c180-7541-4b39-8d6d-3c85198db821770.pdf, status=approval_from_cca_officer, createdBy=null, updatedBy=null, userName=UCCA20260060]]
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.status='approval_from_cca_officer'
+LicenseCessationApplicationEntity size-=-=->[LicenseCessationApplicationEntity [cessationAppId=5, licenseId=43, cessationNotice=CessationNotice_17062026165715_3a44c180-7541-4b39-8d6d-3c85198db821770.pdf, status=approval_from_cca_officer, createdBy=null, updatedBy=null, userName=UCCA20260060]]
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.status='approval_from_cca_officer'
+LicenseCessationApplicationEntity size-=-=->[LicenseCessationApplicationEntity [cessationAppId=5, licenseId=43, cessationNotice=CessationNotice_17062026165715_3a44c180-7541-4b39-8d6d-3c85198db821770.pdf, status=approval_from_cca_officer, createdBy=null, updatedBy=null, userName=UCCA20260060]]
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.status='approval_from_cca_officer'
+LicenseCessationApplicationEntity size-=-=->[LicenseCessationApplicationEntity [cessationAppId=5, licenseId=43, cessationNotice=CessationNotice_17062026165715_3a44c180-7541-4b39-8d6d-3c85198db821770.pdf, status=approval_from_cca_officer, createdBy=null, updatedBy=null, userName=UCCA20260060]]
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.status<>'Inactive'
+LicenseCessationApplicationEntity size-=-=->[LicenseCessationApplicationEntity [cessationAppId=4, licenseId=1, cessationNotice=CessationNotice_13122024172252_9b38d6c5-69d1-40a3-9665-aac9ce25a21517.pdf, status=cessace the licensee, createdBy=null, updatedBy=null, userName=UCCA20240024], LicenseCessationApplicationEntity [cessationAppId=5, licenseId=43, cessationNotice=CessationNotice_17062026165715_3a44c180-7541-4b39-8d6d-3c85198db821770.pdf, status=approval_from_cca_officer, createdBy=null, updatedBy=null, userName=UCCA20260060]]
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.status<>'Inactive'
+LicenseCessationApplicationEntity size-=-=->[LicenseCessationApplicationEntity [cessationAppId=4, licenseId=1, cessationNotice=CessationNotice_13122024172252_9b38d6c5-69d1-40a3-9665-aac9ce25a21517.pdf, status=cessace the licensee, createdBy=null, updatedBy=null, userName=UCCA20240024], LicenseCessationApplicationEntity [cessationAppId=5, licenseId=43, cessationNotice=CessationNotice_17062026165715_3a44c180-7541-4b39-8d6d-3c85198db821770.pdf, status=approval_from_cca_officer, createdBy=null, updatedBy=null, userName=UCCA20260060]]
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.status<>'Inactive'
+LicenseCessationApplicationEntity size-=-=->[LicenseCessationApplicationEntity [cessationAppId=4, licenseId=1, cessationNotice=CessationNotice_13122024172252_9b38d6c5-69d1-40a3-9665-aac9ce25a21517.pdf, status=cessace the licensee, createdBy=null, updatedBy=null, userName=UCCA20240024], LicenseCessationApplicationEntity [cessationAppId=5, licenseId=43, cessationNotice=CessationNotice_17062026165715_3a44c180-7541-4b39-8d6d-3c85198db821770.pdf, status=approval_from_cca_officer, createdBy=null, updatedBy=null, userName=UCCA20260060]]
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.status<>'Inactive'
+LicenseCessationApplicationEntity size-=-=->[LicenseCessationApplicationEntity [cessationAppId=4, licenseId=1, cessationNotice=CessationNotice_13122024172252_9b38d6c5-69d1-40a3-9665-aac9ce25a21517.pdf, status=cessace the licensee, createdBy=null, updatedBy=null, userName=UCCA20240024], LicenseCessationApplicationEntity [cessationAppId=5, licenseId=43, cessationNotice=CessationNotice_17062026165715_3a44c180-7541-4b39-8d6d-3c85198db821770.pdf, status=approval_from_cca_officer, createdBy=null, updatedBy=null, userName=UCCA20260060]]
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.status='cessation_form_submitted'
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.status='cessation_form_submitted'
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.status='cessation_form_submitted'
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.status='cessation_form_submitted'
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.status<>'Inactive'
+LicenseCessationApplicationEntity size-=-=->[LicenseCessationApplicationEntity [cessationAppId=4, licenseId=1, cessationNotice=CessationNotice_13122024172252_9b38d6c5-69d1-40a3-9665-aac9ce25a21517.pdf, status=cessace the licensee, createdBy=null, updatedBy=null, userName=UCCA20240024], LicenseCessationApplicationEntity [cessationAppId=5, licenseId=43, cessationNotice=CessationNotice_17062026165715_3a44c180-7541-4b39-8d6d-3c85198db821770.pdf, status=approval_from_cca_officer, createdBy=null, updatedBy=null, userName=UCCA20260060]]
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.status<>'Inactive'
+LicenseCessationApplicationEntity size-=-=->[LicenseCessationApplicationEntity [cessationAppId=4, licenseId=1, cessationNotice=CessationNotice_13122024172252_9b38d6c5-69d1-40a3-9665-aac9ce25a21517.pdf, status=cessace the licensee, createdBy=null, updatedBy=null, userName=UCCA20240024], LicenseCessationApplicationEntity [cessationAppId=5, licenseId=43, cessationNotice=CessationNotice_17062026165715_3a44c180-7541-4b39-8d6d-3c85198db821770.pdf, status=approval_from_cca_officer, createdBy=null, updatedBy=null, userName=UCCA20260060]]
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.status<>'Inactive'
+LicenseCessationApplicationEntity size-=-=->[LicenseCessationApplicationEntity [cessationAppId=4, licenseId=1, cessationNotice=CessationNotice_13122024172252_9b38d6c5-69d1-40a3-9665-aac9ce25a21517.pdf, status=cessace the licensee, createdBy=null, updatedBy=null, userName=UCCA20240024], LicenseCessationApplicationEntity [cessationAppId=5, licenseId=43, cessationNotice=CessationNotice_17062026165715_3a44c180-7541-4b39-8d6d-3c85198db821770.pdf, status=approval_from_cca_officer, createdBy=null, updatedBy=null, userName=UCCA20260060]]
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.status<>'Inactive'
+LicenseCessationApplicationEntity size-=-=->[LicenseCessationApplicationEntity [cessationAppId=4, licenseId=1, cessationNotice=CessationNotice_13122024172252_9b38d6c5-69d1-40a3-9665-aac9ce25a21517.pdf, status=cessace the licensee, createdBy=null, updatedBy=null, userName=UCCA20240024], LicenseCessationApplicationEntity [cessationAppId=5, licenseId=43, cessationNotice=CessationNotice_17062026165715_3a44c180-7541-4b39-8d6d-3c85198db821770.pdf, status=approval_from_cca_officer, createdBy=null, updatedBy=null, userName=UCCA20260060]]

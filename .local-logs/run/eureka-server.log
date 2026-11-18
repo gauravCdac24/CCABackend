@@ -1,0 +1,287 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< in.lms.cca:eureka-server >----------------------
+[INFO] Building eureka-server 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.3.1:run (default-cli) > test-compile @ eureka-server >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ eureka-server ---
+[INFO] Copying 5 resources from src\main\resources to target\classes
+[INFO] Copying 2 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ eureka-server ---
+[INFO] Recompiling the module because of added or removed source files.
+[INFO] Compiling 2 source files with javac [debug parameters release 17] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ eureka-server ---
+[INFO] skip non existing resourceDirectory E:\New folder\CCABackend-Gaurav_Backend\eureka-server\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ eureka-server ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug parameters release 17] to target\test-classes
+[INFO] 
+[INFO] <<< spring-boot:3.3.1:run (default-cli) < test-compile @ eureka-server <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.3.1:run (default-cli) @ eureka-server ---
+[INFO] Attaching agents: []
+Picked up JAVA_TOOL_OPTIONS: -Xms64m -Xmx320m -XX:MaxMetaspaceSize=160m -XX:+UseSerialGC
+Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts
+Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts
+=============================================================================================================================       
+|                                                                                                                           |
+|        ____      ____    _    ____                                                                                        |
+|       / ___|    |  _ \  / \  / ___|                                                                                       |
+|      | |   _____| | | |/ _ \| |                                                                                           |
+|      | |__|_____| |_| / ___ \ |___                                                                                        |
+|       \____|    |____/_/   \_\____|                                                                                       |
+|                                                                                                                           |
+|                                                                                                                           |                               
+|   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++      |
+|   +                                                                                                                +      |
+|   + P o w e r e d  B y   e - G o v e r n a n c e   S o l u t i o n s   G r o u p ,  C - D A C   N e w   D e l h i  +      |
+|   +                                                                                                                +      |
+|   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++      |
+|                                                                                                                           | 
+|                                                                                                                           | 
+|   Eureka Server for CCA                                                                                          |
+|   Spring Boot V3.3.1                                                                                                      |
+|                                                                                                                           |
+=============================================================================================================================
+
+2026-11-18T09:45:40.473+05:30  INFO 20564 --- [eureka-server] [  restartedMain] in.lms.cca.EurekaServerApplication       : Starting EurekaServerApplication using Java 17.0.11 with PID 20564 (E:\New folder\CCABackend-Gaurav_Backend\eureka-server\target\classes started by hp in E:\New folder\CCABackend-Gaurav_Backend\eureka-server)
+2026-11-18T09:45:40.477+05:30  INFO 20564 --- [eureka-server] [  restartedMain] in.lms.cca.EurekaServerApplication       : The following 1 profile is active: "test"
+2026-11-18T09:45:40.515+05:30  INFO 20564 --- [eureka-server] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-11-18T09:45:40.515+05:30  INFO 20564 --- [eureka-server] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-11-18T09:45:41.202+05:30  INFO 20564 --- [eureka-server] [  restartedMain] o.s.cloud.context.scope.GenericScope     : BeanFactory id=7c83ee15-0b7a-382f-99ca-a746fef413a5
+2026-11-18T09:45:41.231+05:30  WARN 20564 --- [eureka-server] [  restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-11-18T09:45:41.234+05:30  WARN 20564 --- [eureka-server] [  restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-11-18T09:45:41.559+05:30  INFO 20564 --- [eureka-server] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 7777 (http)
+2026-11-18T09:45:41.568+05:30  INFO 20564 --- [eureka-server] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-11-18T09:45:41.569+05:30  INFO 20564 --- [eureka-server] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.25]
+2026-11-18T09:45:41.612+05:30  INFO 20564 --- [eureka-server] [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-11-18T09:45:41.613+05:30  INFO 20564 --- [eureka-server] [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1096 ms
+Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts
+2026-11-18T09:45:42.121+05:30  INFO 20564 --- [eureka-server] [  restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
+2026-11-18T09:45:42.122+05:30  INFO 20564 --- [eureka-server] [  restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
+2026-11-18T09:45:42.255+05:30  INFO 20564 --- [eureka-server] [  restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
+2026-11-18T09:45:42.255+05:30  INFO 20564 --- [eureka-server] [  restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
+2026-11-18T09:45:42.875+05:30  INFO 20564 --- [eureka-server] [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-11-18T09:45:43.103+05:30  WARN 20564 --- [eureka-server] [  restartedMain] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-11-18T09:45:43.113+05:30  INFO 20564 --- [eureka-server] [  restartedMain] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2026-11-18T09:45:43.125+05:30  INFO 20564 --- [eureka-server] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2026-11-18T09:45:43.126+05:30  INFO 20564 --- [eureka-server] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Client configured to neither register nor query for data.
+2026-11-18T09:45:43.130+05:30  INFO 20564 --- [eureka-server] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1794975343130 with initial instances count: 0
+2026-11-18T09:45:43.149+05:30  INFO 20564 --- [eureka-server] [  restartedMain] c.n.eureka.DefaultEurekaServerContext    : Initializing ...
+2026-11-18T09:45:43.150+05:30  INFO 20564 --- [eureka-server] [  restartedMain] c.n.eureka.cluster.PeerEurekaNodes       : Adding new peer nodes [http://localhost:7777/eureka/]
+2026-11-18T09:45:43.241+05:30  INFO 20564 --- [eureka-server] [  restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
+2026-11-18T09:45:43.241+05:30  INFO 20564 --- [eureka-server] [  restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
+2026-11-18T09:45:43.241+05:30  INFO 20564 --- [eureka-server] [  restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
+2026-11-18T09:45:43.241+05:30  INFO 20564 --- [eureka-server] [  restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
+2026-11-18T09:45:43.307+05:30  INFO 20564 --- [eureka-server] [  restartedMain] c.n.eureka.cluster.PeerEurekaNodes       : Replica node URL:  http://localhost:7777/eureka/
+2026-11-18T09:45:43.311+05:30  INFO 20564 --- [eureka-server] [  restartedMain] c.n.e.registry.AbstractInstanceRegistry  : Finished initializing remote region registries. All known remote regions: []
+2026-11-18T09:45:43.312+05:30  INFO 20564 --- [eureka-server] [  restartedMain] c.n.eureka.DefaultEurekaServerContext    : Initialized
+2026-11-18T09:45:43.319+05:30  INFO 20564 --- [eureka-server] [  restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-11-18T09:45:43.349+05:30  INFO 20564 --- [eureka-server] [  restartedMain] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application EUREKA-SERVER with eureka with status UP
+2026-11-18T09:45:43.358+05:30  INFO 20564 --- [eureka-server] [      Thread-15] o.s.c.n.e.server.EurekaServerBootstrap   : isAws returned false
+2026-11-18T09:45:43.359+05:30  INFO 20564 --- [eureka-server] [      Thread-15] o.s.c.n.e.server.EurekaServerBootstrap   : Initialized server context
+2026-11-18T09:45:43.359+05:30  INFO 20564 --- [eureka-server] [      Thread-15] c.n.e.r.PeerAwareInstanceRegistryImpl    : Got 1 instances from neighboring DS node
+2026-11-18T09:45:43.359+05:30  INFO 20564 --- [eureka-server] [      Thread-15] c.n.e.r.PeerAwareInstanceRegistryImpl    : Renew threshold is: 1
+2026-11-18T09:45:43.359+05:30  INFO 20564 --- [eureka-server] [      Thread-15] c.n.e.r.PeerAwareInstanceRegistryImpl    : Changing status to UP
+2026-11-18T09:45:43.366+05:30  INFO 20564 --- [eureka-server] [      Thread-15] e.s.EurekaServerInitializerConfiguration : Started Eureka Server
+2026-11-18T09:45:43.373+05:30  INFO 20564 --- [eureka-server] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 7777 (http) with context path '/'
+2026-11-18T09:45:43.374+05:30  INFO 20564 --- [eureka-server] [  restartedMain] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 7777
+2026-11-18T09:45:43.578+05:30  INFO 20564 --- [eureka-server] [  restartedMain] in.lms.cca.EurekaServerApplication       : Started EurekaServerApplication in 3.562 seconds (process running for 3.973)
+2026-11-18T09:45:43.581+05:30  INFO 20564 --- [eureka-server] [  restartedMain] in.lms.cca.EurekaServerApplication       : Eureka Server has been initiated...!!
+2026-11-18T09:46:34.423+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-11-18T09:46:34.424+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-11-18T09:46:34.425+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-11-18T09:46:34.711+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-2] c.n.e.registry.AbstractInstanceRegistry  : Registered instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 with status UP (replication=false)
+2026-11-18T09:46:35.378+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-3] c.n.e.registry.AbstractInstanceRegistry  : Registered instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 with status UP (replication=true)
+2026-11-18T09:46:43.360+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-11-18T09:47:43.360+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-11-18T09:48:08.307+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-3] c.n.e.registry.AbstractInstanceRegistry  : Registered instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 with status DOWN (replication=false)
+2026-11-18T09:48:08.830+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-4] c.n.e.registry.AbstractInstanceRegistry  : Registered instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 with status DOWN (replication=true)
+2026-11-18T09:48:11.869+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-5] c.n.e.registry.AbstractInstanceRegistry  : Cancelled instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 (replication=false)
+2026-11-18T09:48:12.388+05:30  WARN 20564 --- [eureka-server] [nio-7777-exec-7] c.n.e.registry.AbstractInstanceRegistry  : DS: Registry: cancel failed because Lease is not registered for: ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782
+2026-11-18T09:48:12.389+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-7] c.n.eureka.resources.InstanceResource    : Not Found (Cancel): ADMIN-SERVICE - host.docker.internal:ADMIN-SERVICE:7782
+2026-11-18T09:48:12.391+05:30  WARN 20564 --- [eureka-server] [et_localhost-16] c.n.eureka.cluster.ReplicationTask       : The replication of task ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782:Cancel@localhost failed with response code 404
+2026-11-18T09:48:12.391+05:30  WARN 20564 --- [eureka-server] [et_localhost-16] c.netflix.eureka.cluster.PeerEurekaNode  : ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782:Cancel@localhost: missing entry.
+2026-11-18T09:48:14.764+05:30  INFO 20564 --- [eureka-server] [io-7777-exec-10] c.n.e.registry.AbstractInstanceRegistry  : Registered instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 with status UP (replication=false)
+2026-11-18T09:48:15.292+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-1] c.n.e.registry.AbstractInstanceRegistry  : Registered instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 with status UP (replication=true)
+2026-11-18T09:48:15.607+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-2] c.n.e.registry.AbstractInstanceRegistry  : Registered instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 with status DOWN (replication=false)
+2026-11-18T09:48:16.121+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-3] c.n.e.registry.AbstractInstanceRegistry  : Registered instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 with status DOWN (replication=true)
+2026-11-18T09:48:19.031+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-4] c.n.e.registry.AbstractInstanceRegistry  : Cancelled instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 (replication=false)
+2026-11-18T09:48:19.552+05:30  WARN 20564 --- [eureka-server] [nio-7777-exec-6] c.n.e.registry.AbstractInstanceRegistry  : DS: Registry: cancel failed because Lease is not registered for: ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782
+2026-11-18T09:48:19.552+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-6] c.n.eureka.resources.InstanceResource    : Not Found (Cancel): ADMIN-SERVICE - host.docker.internal:ADMIN-SERVICE:7782
+2026-11-18T09:48:19.554+05:30  WARN 20564 --- [eureka-server] [get_localhost-4] c.n.eureka.cluster.ReplicationTask       : The replication of task ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782:Cancel@localhost failed with response code 404
+2026-11-18T09:48:19.554+05:30  WARN 20564 --- [eureka-server] [get_localhost-4] c.netflix.eureka.cluster.PeerEurekaNode  : ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782:Cancel@localhost: missing entry.
+2026-11-18T09:48:21.453+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-9] c.n.e.registry.AbstractInstanceRegistry  : Registered instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 with status UP (replication=false)
+2026-11-18T09:48:21.977+05:30  INFO 20564 --- [eureka-server] [io-7777-exec-10] c.n.e.registry.AbstractInstanceRegistry  : Registered instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 with status UP (replication=true)
+2026-11-18T09:48:43.364+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 4ms
+2026-11-18T09:49:43.364+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-11-18T09:50:43.366+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1ms
+2026-11-18T09:51:43.378+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 12ms
+2026-11-18T09:52:43.382+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 3ms
+2026-11-18T09:53:43.397+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 15ms
+2026-11-18T09:54:43.400+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 2ms
+2026-11-18T09:55:43.415+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 15ms
+2026-11-18T09:56:43.415+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-11-18T09:57:43.427+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 12ms
+2026-11-18T09:58:43.433+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 5ms
+2026-11-18T09:59:43.434+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1ms
+2026-11-18T10:00:43.311+05:30  INFO 20564 --- [eureka-server] [hresholdUpdater] c.n.e.r.PeerAwareInstanceRegistryImpl    : Current renewal threshold is : 3
+2026-11-18T10:00:43.447+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 12ms
+2026-11-18T10:01:43.447+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-11-18T10:02:43.449+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1ms
+2026-11-18T10:03:43.450+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1ms
+2026-11-18T10:04:43.451+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-11-18T10:05:43.457+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 6ms
+2026-11-18T10:06:43.463+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 6ms
+2026-11-18T10:07:43.465+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 2ms
+2026-11-18T10:08:43.466+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-11-18T10:09:43.480+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 13ms
+2026-11-18T10:10:43.494+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 13ms
+2026-11-18T10:11:43.501+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 7ms
+2026-11-18T10:12:43.501+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-11-18T10:13:43.514+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 12ms
+2026-11-18T10:14:43.515+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1ms
+2026-11-18T10:15:43.322+05:30  INFO 20564 --- [eureka-server] [hresholdUpdater] c.n.e.r.PeerAwareInstanceRegistryImpl    : Current renewal threshold is : 3
+2026-11-18T10:15:43.526+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 10ms
+2026-11-18T10:16:43.532+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 6ms
+2026-11-18T10:17:43.547+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 14ms
+2026-11-18T10:18:43.551+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 3ms
+2026-11-18T10:19:43.561+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 10ms
+2026-11-18T10:20:43.569+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 8ms
+2026-11-18T10:21:43.574+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 4ms
+2026-11-18T10:22:43.585+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 10ms
+2026-11-18T10:23:43.596+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 10ms
+2026-11-18T10:24:43.605+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 8ms
+2026-11-18T10:25:43.619+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 14ms
+2026-11-18T10:26:43.632+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 12ms
+2026-11-18T10:27:43.639+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 7ms
+2026-11-18T10:28:43.646+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 6ms
+2026-11-18T10:29:43.647+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1ms
+2026-11-18T10:30:43.330+05:30  INFO 20564 --- [eureka-server] [hresholdUpdater] c.n.e.r.PeerAwareInstanceRegistryImpl    : Current renewal threshold is : 3
+2026-11-18T10:30:43.647+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-11-18T10:31:43.652+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 4ms
+2026-11-18T10:32:43.652+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-11-18T10:33:43.652+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-11-18T10:34:43.665+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 12ms
+2026-11-18T10:35:43.667+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1ms
+2026-11-18T10:36:43.667+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-11-18T10:37:43.672+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 3ms
+2026-11-18T10:38:43.675+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 3ms
+2026-11-18T10:39:43.684+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 8ms
+2026-11-18T10:40:43.697+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 13ms
+2026-11-18T10:41:43.700+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 3ms
+2026-11-18T10:42:43.713+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 12ms
+2026-11-18T10:43:43.724+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 10ms
+2026-11-18T10:44:43.735+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 10ms
+2026-11-18T10:45:43.330+05:30  INFO 20564 --- [eureka-server] [hresholdUpdater] c.n.e.r.PeerAwareInstanceRegistryImpl    : Current renewal threshold is : 3
+2026-11-18T10:45:43.747+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 11ms
+2026-11-18T10:46:43.755+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 8ms
+2026-11-18T10:47:43.771+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 15ms
+2026-11-18T10:48:43.780+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 9ms
+2026-11-18T10:49:43.787+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 7ms
+2026-11-18T10:50:43.794+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 6ms
+2026-11-18T10:51:43.801+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 6ms
+2026-11-18T10:52:43.808+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 6ms
+2026-11-18T10:53:43.821+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 13ms
+2026-11-18T10:54:43.836+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 14ms
+2026-11-18T10:55:43.849+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 13ms
+2026-11-18T11:10:01.059+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 797209ms
+2026-11-18T11:11:01.059+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-11-18T11:12:01.064+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 4ms
+2026-11-18T11:13:01.075+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 10ms
+2026-11-18T11:14:00.545+05:30  INFO 20564 --- [eureka-server] [hresholdUpdater] c.n.e.r.PeerAwareInstanceRegistryImpl    : Current renewal threshold is : 3
+2026-11-18T11:14:01.089+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 14ms
+2026-11-18T11:15:01.092+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 3ms
+2026-11-18T11:16:01.105+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 13ms
+2026-11-18T11:17:01.110+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 5ms
+2026-11-18T11:18:01.110+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-11-18T11:19:01.127+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 16ms
+2026-11-18T11:20:01.139+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 11ms
+2026-11-18T11:21:01.152+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 13ms
+2026-11-18T11:22:01.160+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 8ms
+2026-11-18T11:22:21.824+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-3] c.n.e.registry.AbstractInstanceRegistry  : Registered instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 with status DOWN (replication=false)
+2026-11-18T11:22:22.332+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-8] c.n.e.registry.AbstractInstanceRegistry  : Registered instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 with status DOWN (replication=true)
+2026-11-18T11:22:25.163+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-1] c.n.e.registry.AbstractInstanceRegistry  : Cancelled instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 (replication=false)
+2026-11-18T11:22:25.666+05:30  WARN 20564 --- [eureka-server] [nio-7777-exec-4] c.n.e.registry.AbstractInstanceRegistry  : DS: Registry: cancel failed because Lease is not registered for: ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782
+2026-11-18T11:22:25.666+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-4] c.n.eureka.resources.InstanceResource    : Not Found (Cancel): ADMIN-SERVICE - host.docker.internal:ADMIN-SERVICE:7782
+2026-11-18T11:22:25.667+05:30  WARN 20564 --- [eureka-server] [et_localhost-14] c.n.eureka.cluster.ReplicationTask       : The replication of task ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782:Cancel@localhost failed with response code 404
+2026-11-18T11:22:25.667+05:30  WARN 20564 --- [eureka-server] [et_localhost-14] c.netflix.eureka.cluster.PeerEurekaNode  : ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782:Cancel@localhost: missing entry.
+2026-11-18T11:22:28.000+05:30  INFO 20564 --- [eureka-server] [io-7777-exec-10] c.n.e.registry.AbstractInstanceRegistry  : Registered instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 with status UP (replication=false)
+2026-11-18T11:22:28.508+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-9] c.n.e.registry.AbstractInstanceRegistry  : Registered instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 with status UP (replication=true)
+2026-11-18T11:22:30.054+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-5] c.n.e.registry.AbstractInstanceRegistry  : Registered instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 with status DOWN (replication=false)
+2026-11-18T11:22:30.566+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-3] c.n.e.registry.AbstractInstanceRegistry  : Registered instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 with status DOWN (replication=true)
+2026-11-18T11:22:33.415+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-8] c.n.e.registry.AbstractInstanceRegistry  : Cancelled instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 (replication=false)
+2026-11-18T11:22:33.922+05:30  WARN 20564 --- [eureka-server] [nio-7777-exec-6] c.n.e.registry.AbstractInstanceRegistry  : DS: Registry: cancel failed because Lease is not registered for: ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782
+2026-11-18T11:22:33.923+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-6] c.n.eureka.resources.InstanceResource    : Not Found (Cancel): ADMIN-SERVICE - host.docker.internal:ADMIN-SERVICE:7782
+2026-11-18T11:22:33.924+05:30  WARN 20564 --- [eureka-server] [get_localhost-3] c.n.eureka.cluster.ReplicationTask       : The replication of task ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782:Cancel@localhost failed with response code 404
+2026-11-18T11:22:33.924+05:30  WARN 20564 --- [eureka-server] [get_localhost-3] c.netflix.eureka.cluster.PeerEurekaNode  : ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782:Cancel@localhost: missing entry.
+2026-11-18T11:22:35.800+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-2] c.n.e.registry.AbstractInstanceRegistry  : Registered instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 with status UP (replication=false)
+2026-11-18T11:22:36.307+05:30  INFO 20564 --- [eureka-server] [io-7777-exec-10] c.n.e.registry.AbstractInstanceRegistry  : Registered instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 with status UP (replication=true)
+2026-11-18T11:22:36.880+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-9] c.n.e.registry.AbstractInstanceRegistry  : Registered instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 with status DOWN (replication=false)
+2026-11-18T11:22:37.386+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-5] c.n.e.registry.AbstractInstanceRegistry  : Registered instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 with status DOWN (replication=true)
+2026-11-18T11:22:40.252+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-3] c.n.e.registry.AbstractInstanceRegistry  : Cancelled instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 (replication=false)
+2026-11-18T11:22:40.756+05:30  WARN 20564 --- [eureka-server] [nio-7777-exec-1] c.n.e.registry.AbstractInstanceRegistry  : DS: Registry: cancel failed because Lease is not registered for: ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782
+2026-11-18T11:22:40.757+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-1] c.n.eureka.resources.InstanceResource    : Not Found (Cancel): ADMIN-SERVICE - host.docker.internal:ADMIN-SERVICE:7782
+2026-11-18T11:22:40.757+05:30  WARN 20564 --- [eureka-server] [get_localhost-8] c.n.eureka.cluster.ReplicationTask       : The replication of task ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782:Cancel@localhost failed with response code 404
+2026-11-18T11:22:40.758+05:30  WARN 20564 --- [eureka-server] [get_localhost-8] c.netflix.eureka.cluster.PeerEurekaNode  : ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782:Cancel@localhost: missing entry.
+2026-11-18T11:22:43.233+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-4] c.n.e.registry.AbstractInstanceRegistry  : Registered instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 with status UP (replication=false)
+2026-11-18T11:22:43.745+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-2] c.n.e.registry.AbstractInstanceRegistry  : Registered instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 with status UP (replication=true)
+2026-11-18T11:23:01.169+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 7ms
+2026-11-18T11:24:01.179+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 10ms
+2026-11-18T11:25:01.185+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 6ms
+2026-11-18T11:25:02.681+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-5] c.n.e.registry.AbstractInstanceRegistry  : Registered instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 with status DOWN (replication=false)
+2026-11-18T11:25:03.193+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-3] c.n.e.registry.AbstractInstanceRegistry  : Registered instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 with status DOWN (replication=true)
+2026-11-18T11:25:06.045+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-8] c.n.e.registry.AbstractInstanceRegistry  : Cancelled instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 (replication=false)
+2026-11-18T11:25:06.556+05:30  WARN 20564 --- [eureka-server] [nio-7777-exec-1] c.n.e.registry.AbstractInstanceRegistry  : DS: Registry: cancel failed because Lease is not registered for: ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782
+2026-11-18T11:25:06.557+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-1] c.n.eureka.resources.InstanceResource    : Not Found (Cancel): ADMIN-SERVICE - host.docker.internal:ADMIN-SERVICE:7782
+2026-11-18T11:25:06.558+05:30  WARN 20564 --- [eureka-server] [et_localhost-17] c.n.eureka.cluster.ReplicationTask       : The replication of task ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782:Cancel@localhost failed with response code 404
+2026-11-18T11:25:06.558+05:30  WARN 20564 --- [eureka-server] [et_localhost-17] c.netflix.eureka.cluster.PeerEurekaNode  : ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782:Cancel@localhost: missing entry.
+2026-11-18T11:25:08.545+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-2] c.n.e.registry.AbstractInstanceRegistry  : Registered instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 with status UP (replication=false)
+2026-11-18T11:25:09.057+05:30  INFO 20564 --- [eureka-server] [io-7777-exec-10] c.n.e.registry.AbstractInstanceRegistry  : Registered instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 with status UP (replication=true)
+2026-11-18T11:25:09.591+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-9] c.n.e.registry.AbstractInstanceRegistry  : Registered instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 with status DOWN (replication=false)
+2026-11-18T11:25:10.101+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-5] c.n.e.registry.AbstractInstanceRegistry  : Registered instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 with status DOWN (replication=true)
+2026-11-18T11:25:12.929+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-3] c.n.e.registry.AbstractInstanceRegistry  : Cancelled instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 (replication=false)
+2026-11-18T11:25:13.434+05:30  WARN 20564 --- [eureka-server] [nio-7777-exec-7] c.n.e.registry.AbstractInstanceRegistry  : DS: Registry: cancel failed because Lease is not registered for: ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782
+2026-11-18T11:25:13.434+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-7] c.n.eureka.resources.InstanceResource    : Not Found (Cancel): ADMIN-SERVICE - host.docker.internal:ADMIN-SERVICE:7782
+2026-11-18T11:25:13.435+05:30  WARN 20564 --- [eureka-server] [get_localhost-4] c.n.eureka.cluster.ReplicationTask       : The replication of task ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782:Cancel@localhost failed with response code 404
+2026-11-18T11:25:13.435+05:30  WARN 20564 --- [eureka-server] [get_localhost-4] c.netflix.eureka.cluster.PeerEurekaNode  : ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782:Cancel@localhost: missing entry.
+2026-11-18T11:25:15.649+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-4] c.n.e.registry.AbstractInstanceRegistry  : Registered instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 with status UP (replication=false)
+2026-11-18T11:25:16.153+05:30  INFO 20564 --- [eureka-server] [nio-7777-exec-2] c.n.e.registry.AbstractInstanceRegistry  : Registered instance ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782 with status UP (replication=true)
+2026-11-18T11:26:01.193+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 7ms
+2026-11-18T11:27:01.194+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1ms
+2026-11-18T11:28:01.208+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 13ms
+2026-11-18T11:29:00.559+05:30  INFO 20564 --- [eureka-server] [hresholdUpdater] c.n.e.r.PeerAwareInstanceRegistryImpl    : Current renewal threshold is : 3
+2026-11-18T11:29:01.209+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1ms
+2026-11-18T11:30:01.225+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 15ms
+2026-11-18T11:31:01.227+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1ms
+2026-11-18T11:32:01.234+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 7ms
+2026-11-18T11:33:01.248+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 14ms
+2026-11-18T11:34:01.259+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 11ms
+2026-11-18T11:35:01.262+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 2ms
+2026-11-18T11:36:01.278+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 16ms
+2026-11-18T11:37:01.286+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 8ms
+2026-11-18T11:38:01.295+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 8ms
+2026-11-18T11:39:01.306+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 11ms
+2026-11-18T11:40:01.310+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 4ms
+2026-11-18T11:41:01.310+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-11-18T11:42:01.313+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 2ms
+2026-11-18T11:43:01.328+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 14ms
+2026-11-18T11:44:00.573+05:30  INFO 20564 --- [eureka-server] [hresholdUpdater] c.n.e.r.PeerAwareInstanceRegistryImpl    : Current renewal threshold is : 3
+2026-11-18T11:44:01.343+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 15ms
+2026-11-18T11:45:01.344+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1ms
+2026-11-18T11:46:01.356+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 11ms
+2026-11-18T11:47:01.365+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 9ms
+2026-11-18T11:48:01.377+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 11ms
+2026-11-18T11:49:01.381+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 4ms
+2026-11-18T11:50:01.386+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 4ms
+2026-11-18T11:51:01.386+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-11-18T11:52:01.395+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 9ms
+2026-11-18T11:53:01.401+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 5ms
+2026-11-18T11:54:01.402+05:30  INFO 20564 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms

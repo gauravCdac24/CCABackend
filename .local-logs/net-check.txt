@@ -1,0 +1,5 @@
+self 5432 []
+self ns net:[4026532962]
+810 [Errno 13] Permission denied: '/proc/810/ns/net'
+7155 [Errno 13] Permission denied: '/proc/7155/ns/net'
+nsenter: cannot open /proc/810/ns/net: Permission denied

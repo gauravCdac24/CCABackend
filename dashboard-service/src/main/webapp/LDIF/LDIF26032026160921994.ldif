@@ -1,0 +1,19 @@
+dn: CN=FirstName LastName\,CN\=Users\,DC\=DOMAIN\,DC\=FOREST\,DC\=CONTOSO\,DC\=com
+changetype: Add
+objectClass: user
+Department: DEPARTMENT
+WorkEmail: user@contoso.com
+SPS-ClaimProviderID: Windows
+SPS-DistinguishedName: CN=FirstName LastName,CN=Users,DC=DOMAIN,DC=FOREST,DC=CONTOSO,DC=com
+WorkPhone: +1 (999) 9999999
+FirstName: FirstName
+SID: AQUAAAAAAAUVAAAAFsDqMufL3X0jX2NrAQUAAA==
+Office: 001/0001
+domain: DOMAIN
+UserProfile_GUID: 00000000-0000-0000-0000-000000000000
+Title: TITLE
+PreferredName: FirstName LastName
+LastName: LastName
+UserName: user
+AccountName: CN=FirstName LastName\,CN\=Users\,DC\=DOMAIN\,DC\=FOREST\,DC\=CONTOSO\,DC\=com
+SPS-ClaimProviderType: Windows

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><EsignResp errCode="OT04" resCode="6960d6cb-aaa6-4334-bf44-3b78d8403558" status="0" ts="2025-04-17T12:52:50.582" txn="6ukzryNwv935Q4uzZvpMzrBdn0SvHHRPRgTLYL7Y"><Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+<SignedInfo>
+<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+<Reference URI="">
+<Transforms>
+<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+</Transforms>
+<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+<DigestValue>EaFlnQ0gOm64LZItZQ9zHgAorjo=</DigestValue>
+</Reference>
+</SignedInfo>
+<SignatureValue>
+Ku2SYokwpuQspPpWF0L1cwfUJsNHuV2BZiObUGtveAlUcoUUk+vUk+Ei0McIzJDgH9cnl05gn2t/
+sSRv/M7GNTmo4UV28rAPv0lafkmcgFfcJF2+lFqjeO10XDfPkg32FYietAk9EgWKZFw9DiN4crqr
+mDso13/3vn7NWMHhbhdOmeZEVOG9CtPPXPEC4CtSn+NUYNbu5PrBhNN++pN1KvQ+GTS0wby0bU1j
++qrdb53wiDrvMNw2QFKvY+PRQhcnh8V68CdS3Ju+eI9PuilILEaxIowi+NfvC3W9ferkA+kxrNr1
+bE9bJtMOxN5Vt7j6TxonxMW/NsIYhGKRPCFLsA==
+</SignatureValue>
+</Signature></EsignResp>

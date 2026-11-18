@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Controller of Certifying Authorities(CCA) licenses and regulate the working of Certifying Authorities" />
+    <meta name="keywords" content="Controller of Certifying Authorities CCA, India Digital Signature Certificate, DSC, PKI Public Key Infrastructure, Certification Authority, PKI Framework, Root CA of India, Licensed CAs, eSign, Electronic Signature, Information Security" />
+    <meta charset="utf-8" />
+
+
+    <link rel="apple-touch-icon" href="/logo192.png" />
+    
+    <link rel="manifest" href="/manifest.json" />
+    
+    <title>Welcome to CCA | CCA</title>
+
+    <style>
+      ::-ms-reveal {
+          display: none;
+      }
+    </style>
+
+  <script defer src="/static/js/bundle.js"></script></head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+   
+  </body>
+</html>

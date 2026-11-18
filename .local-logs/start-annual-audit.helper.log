@@ -1,0 +1,26 @@
++ fuser -k 7791/tcp
++ true
++ sleep 1
++ :
++ :
++ export JAVA_HOME=/home/gaurav/.local/jdk/jdk-17.0.21+9
++ JAVA_HOME=/home/gaurav/.local/jdk/jdk-17.0.21+9
++ export PATH=/home/gaurav/.local/jdk/jdk-17.0.21+9/bin:/home/gaurav/.local/bin:/home/gaurav/Downloads/data/usr/share/cursor/resources/app/node_modules/@vscode/ripgrep/bin:/home/gaurav/.local/bin:/home/gaurav/.nvm/versions/node/v22.23.3/bin:/home/gaurav/.local/bin:/home/gaurav/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
++ PATH=/home/gaurav/.local/jdk/jdk-17.0.21+9/bin:/home/gaurav/.local/bin:/home/gaurav/Downloads/data/usr/share/cursor/resources/app/node_modules/@vscode/ripgrep/bin:/home/gaurav/.local/bin:/home/gaurav/.nvm/versions/node/v22.23.3/bin:/home/gaurav/.local/bin:/home/gaurav/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
++ export HOME=/home/gaurav
++ HOME=/home/gaurav
++ export 'MAVEN_OPTS=-Xms64m -Xmx256m -XX:+UseSerialGC'
++ MAVEN_OPTS='-Xms64m -Xmx256m -XX:+UseSerialGC'
++ cd /home/gaurav/Documents/CCABackend/annual-audit-service
++ echo 47755
++ setsid ./mvnw spring-boot:run -Dspring-boot.run.profiles=test -Dmaven.repo.local=/home/gaurav/.m2/repository '-Dspring-boot.run.jvmArguments=-Xms64m -Xmx256m -XX:+UseSerialGC -XX:MaxMetaspaceSize=192m'
+++ cat /home/gaurav/Documents/CCABackend/.local-logs/annual-audit-service.pid
++ echo PID=47755
+PID=47755
++ sleep 3
+++ cat /home/gaurav/Documents/CCABackend/.local-logs/annual-audit-service.pid
++ ps -p 47755 -o pid,cmd
+    PID CMD
+  47755 /home/gaurav/.local/jdk/jdk-17.0.21+9/bin/java -Xms64m -Xmx256m -XX:+UseSerialGC -classpath /home/gaurav/.m2/wrapper/dists/apache-maven-3.9.9/3477a4f1/boot/plexus-classworlds-2.8.0.jar -Dclassworlds.conf=/home/gaurav/.m2/wrapper/dists/apache-maven-3.9.9/3477a4f1/bin/m2.conf -Dmaven.home=/home/gaurav/.m2/wrapper/dists/apache-maven-3.9.9/3477a4f1 -Dlibrary.jansi.path=/home/gaurav/.m2/wrapper/dists/apache-maven-3.9.9/3477a4f1/lib/jansi-native -Dmaven.multiModuleProjectDirectory=/home/gaurav/Documents/CCABackend/annual-audit-service org.codehaus.plexus.classworlds.launcher.Launcher spring-boot:run -Dspring-boot.run.profiles=test -Dmaven.repo.local=/home/gaurav/.m2/repository -Dspring-boot.run.jvmArguments=-Xms64m -Xmx256m -XX:+UseSerialGC -XX:MaxMetaspaceSize=192m
++ wc -l /home/gaurav/Documents/CCABackend/.local-logs/annual-audit-service.out.log
+42 /home/gaurav/Documents/CCABackend/.local-logs/annual-audit-service.out.log
