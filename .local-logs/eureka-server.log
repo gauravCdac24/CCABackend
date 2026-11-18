@@ -140,3 +140,11 @@ Standard Commons Logging discovery in action with spring-jcl: please remove comm
 2026-11-18T16:00:21.863+05:30  INFO 29848 --- [eureka-server] [nio-7777-exec-7] c.n.eureka.resources.InstanceResource    : Not Found (Cancel): ADMIN-SERVICE - host.docker.internal:ADMIN-SERVICE:7782
 2026-11-18T16:00:21.865+05:30  WARN 29848 --- [eureka-server] [get_localhost-2] c.n.eureka.cluster.ReplicationTask       : The replication of task ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782:Cancel@localhost failed with response code 404
 2026-11-18T16:00:21.865+05:30  WARN 29848 --- [eureka-server] [get_localhost-2] c.netflix.eureka.cluster.PeerEurekaNode  : ADMIN-SERVICE/host.docker.internal:ADMIN-SERVICE:7782:Cancel@localhost: missing entry.
+2026-11-18T16:01:13.573+05:30  INFO 29848 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 3ms
+2026-11-18T16:02:13.579+05:30  INFO 29848 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 4ms
+2026-11-18T16:03:13.580+05:30  INFO 29848 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2026-11-18T16:04:13.592+05:30  INFO 29848 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 11ms
+2026-11-18T16:05:13.407+05:30  INFO 29848 --- [eureka-server] [hresholdUpdater] c.n.e.r.PeerAwareInstanceRegistryImpl    : Current renewal threshold is : 1
+2026-11-18T16:05:13.594+05:30  INFO 29848 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 1ms
+2026-11-18T16:06:13.605+05:30  INFO 29848 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 10ms
+2026-11-18T16:07:13.606+05:30  INFO 29848 --- [eureka-server] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
