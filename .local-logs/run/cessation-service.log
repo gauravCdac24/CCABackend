@@ -115,3 +115,27 @@ Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.crea
 LicenseCessationApplicationEntity size-=-=->[LicenseCessationApplicationEntity [cessationAppId=4, licenseId=1, cessationNotice=CessationNotice_13122024172252_9b38d6c5-69d1-40a3-9665-aac9ce25a21517.pdf, status=cessace the licensee, createdBy=null, updatedBy=null, userName=UCCA20240024], LicenseCessationApplicationEntity [cessationAppId=5, licenseId=43, cessationNotice=CessationNotice_17062026165715_3a44c180-7541-4b39-8d6d-3c85198db821770.pdf, status=approval_from_cca_officer, createdBy=null, updatedBy=null, userName=UCCA20260060]]
 Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.status<>'Inactive'
 LicenseCessationApplicationEntity size-=-=->[LicenseCessationApplicationEntity [cessationAppId=4, licenseId=1, cessationNotice=CessationNotice_13122024172252_9b38d6c5-69d1-40a3-9665-aac9ce25a21517.pdf, status=cessace the licensee, createdBy=null, updatedBy=null, userName=UCCA20240024], LicenseCessationApplicationEntity [cessationAppId=5, licenseId=43, cessationNotice=CessationNotice_17062026165715_3a44c180-7541-4b39-8d6d-3c85198db821770.pdf, status=approval_from_cca_officer, createdBy=null, updatedBy=null, userName=UCCA20260060]]
+-=-=-=-=-=-=-==->55
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.license_id=? and lcae1_0.status<>'Inactive'
+-=-=-=-=-=-=-==->55
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.license_id=? and lcae1_0.status<>'Inactive'
+-=-=-=-=-=-=-==->55
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.license_id=? and lcae1_0.status<>'Inactive'
+-=-=-=-=-=-=-==->55
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.license_id=? and lcae1_0.status<>'Inactive'
+-=-=-=-=-=-=-==->55
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.license_id=? and lcae1_0.status<>'Inactive'
+-=-=-=-=-=-=-==->55
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.license_id=? and lcae1_0.status<>'Inactive'
+-=-=-=-=-=-=-==->55
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.license_id=? and lcae1_0.status<>'Inactive'
+-=-=-=-=-=-=-==->55
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.license_id=? and lcae1_0.status<>'Inactive'
+-=-=-=-=-=-=-==->55
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.license_id=? and lcae1_0.status<>'Inactive'
+-=-=-=-=-=-=-==->55
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.license_id=? and lcae1_0.status<>'Inactive'
+-=-=-=-=-=-=-==->55
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.license_id=? and lcae1_0.status<>'Inactive'
+-=-=-=-=-=-=-==->55
+Hibernate: select lcae1_0.cessation_app_id,lcae1_0.cessation_notice,lcae1_0.created,lcae1_0.created_by,lcae1_0.license_id,lcae1_0.status,lcae1_0.updated,lcae1_0.updated_by,lcae1_0.user_name from cessation_management."license_cessation-application" lcae1_0 where lcae1_0.license_id=? and lcae1_0.status<>'Inactive'
