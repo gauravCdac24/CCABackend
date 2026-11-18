@@ -106,7 +106,8 @@ public class CityServiceImpl implements ICityService{
 
 	@Override
 	public List<City> getAllCity() {
-		return cityRepo.findAll(Sort.by(Sort.Direction.DESC, "created"));
+		//return cityRepo.findAll(Sort.by(Sort.Direction.DESC, "created"));
+		return cityRepo.findAll(Sort.by(Sort.Direction.ASC, "cityName"));
 	}
 
 	@Override
