@@ -32,7 +32,7 @@ public class AuditAgencyLogs extends LogAbstractTimestampOperationEntity{
 	@JoinColumn(name = "address_id", referencedColumnName = "address_id")
 	private Address addressId;
 	
-	@Column(name = "agency_name", length = 50)
+	@Column(name = "agency_name", length = 100)
 	private String agencyName;
 	
 	@Column(name = "effective_from")
@@ -43,6 +43,9 @@ public class AuditAgencyLogs extends LogAbstractTimestampOperationEntity{
 	
 	@Column(name = "status", length = 12)
 	private String status;
+
+	@Column(name = "client_host_name", length = 100)
+	private String clientHostName;
 
 	public Long getLogAuditAgencyId() {
 		return logAuditAgencyId;
@@ -98,6 +101,14 @@ public class AuditAgencyLogs extends LogAbstractTimestampOperationEntity{
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getClientHostName() {
+		return clientHostName;
+	}
+
+	public void setClientHostName(String clientHostName) {
+		this.clientHostName = clientHostName;
 	}
 
 	public AuditAgencyLogs(Long logAuditAgencyId, Long auditAgencyId, Address addressId, String agencyName,

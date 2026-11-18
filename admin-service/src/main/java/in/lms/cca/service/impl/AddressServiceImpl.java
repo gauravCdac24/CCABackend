@@ -38,6 +38,9 @@ public class AddressServiceImpl implements IAddressService{
 	 @Autowired
 	 private AddressRepositoryLogs log;
 
+	 @Autowired
+	 private AuditChangeLogService auditChangeLog;
+
 	
 	@Override
 	public Optional<Address> addAddress(Address address) {
@@ -88,9 +91,14 @@ public class AddressServiceImpl implements IAddressService{
 	        String clientHostname = clientAddress.getHostName();
 	        String bearerToken = request.getHeader("Authorization");
 	        String usernameFromToken = "1";
-	        Address savedAddress = addressRepo.save(address);
-	        if (usernameFromToken != null) {
-	            log.save(new AddressLogs(address, ipAddress, Constant.UPDATED, usernameFromToken));
+	        if (address.getStatus() == null || address.getStatus().isBlank()) {
+	            address.setStatus("Active");
+	        }
+	        Address savedAddress = addressRepo.saveAndFlush(address);
+	        try {
+	            auditChangeLog.addressChanged(savedAddress, ipAddress, clientHostname, Constant.UPDATED, usernameFromToken);
+	        } catch (Exception logEx) {
+	            logEx.printStackTrace();
 	        }
 	        System.out.println("Client Hostnames: " + clientHostname);
 	        System.out.println("Client IP Address: " + ipAddress);
@@ -101,7 +109,10 @@ public class AddressServiceImpl implements IAddressService{
 	    
 	}catch(Exception e) {
 			e.printStackTrace();
-			return Optional.empty();
+			if (e instanceof RuntimeException runtimeException) {
+				throw runtimeException;
+			}
+			throw new IllegalStateException(e.getMessage(), e);
 		}
 		
 	}

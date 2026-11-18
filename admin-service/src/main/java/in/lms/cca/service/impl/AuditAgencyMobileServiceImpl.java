@@ -35,6 +35,9 @@ public class AuditAgencyMobileServiceImpl implements IAuditAgencyMobileService{
 	
 	@Autowired
 	private AuditAgencyMobileRepositoryLogs log;
+
+	@Autowired
+	private AuditChangeLogService auditChangeLog;
 	
 	@Override
 	public Optional<AuditAgencyMobile> addAuditAgencyMobile(AuditAgencyMobile auditAgencyMobile) {
@@ -48,20 +51,13 @@ public class AuditAgencyMobileServiceImpl implements IAuditAgencyMobileService{
 	        String clientHostname = clientAddress.getHostName();
 	        String bearerToken = request.getHeader("Authorization");
 	        String usernameFromToken = "1";
-	        AuditAgencyMobile savedAuditAgencyMobile = mobileRepo.save(auditAgencyMobile);
-	        
-//	        if (usernameFromToken != null) {
-//	            log.save(new AuditAgencyMobileLogs(savedAuditAgencyMobile, ipAddress, Constant.CREATED, usernameFromToken));
-//	        }
-	        
+	        AuditAgencyMobile savedAuditAgencyMobile = mobileRepo.saveAndFlush(auditAgencyMobile);
 	        if (usernameFromToken != null) {
-	            // OLD CODE: log.save(new AuditAgencyMobileLogs(savedAuditAgencyMobile, ipAddress, Constant.CREATED, usernameFromToken));
-	            
-	            // NEW CODE: Pass clientHostname to the constructor or use a setter
-	            AuditAgencyMobileLogs mobileLog = new AuditAgencyMobileLogs(savedAuditAgencyMobile, ipAddress, Constant.CREATED, usernameFromToken);
-	            mobileLog.setClientHostName(clientHostname != null && !clientHostname.isBlank() ? clientHostname : "unknown"); // Use the variable calculated on Line 51
-	            
-	            log.save(mobileLog);
+	            try {
+	                auditChangeLog.mobileChanged(savedAuditAgencyMobile, ipAddress, clientHostname, Constant.CREATED, usernameFromToken);
+	            } catch (Exception logEx) {
+	                logEx.printStackTrace();
+	            }
 	        }
 	        System.out.println("Client Hostnames: " + clientHostname);
 	        System.out.println("Client IP Address: " + ipAddress);
@@ -72,7 +68,10 @@ public class AuditAgencyMobileServiceImpl implements IAuditAgencyMobileService{
 	    
 	}catch(Exception e) {
 			e.printStackTrace();
-			return Optional.empty();
+			if (e instanceof RuntimeException runtimeException) {
+				throw runtimeException;
+			}
+			throw new IllegalStateException(e.getMessage(), e);
 		}
 		
 	}
@@ -92,11 +91,13 @@ public class AuditAgencyMobileServiceImpl implements IAuditAgencyMobileService{
 	        String clientHostname = clientAddress.getHostName();
 	        String bearerToken = request.getHeader("Authorization");
 	        String usernameFromToken = "1";
-	        AuditAgencyMobile savedAuditAgencyMobile = mobileRepo.save(auditAgencyMobile);
+	        AuditAgencyMobile savedAuditAgencyMobile = mobileRepo.saveAndFlush(auditAgencyMobile);
 	        if (usernameFromToken != null) {
-	            AuditAgencyMobileLogs mobileLog = new AuditAgencyMobileLogs(savedAuditAgencyMobile, ipAddress, Constant.UPDATED, usernameFromToken);
-	            mobileLog.setClientHostName(clientHostname != null && !clientHostname.isBlank() ? clientHostname : "unknown");
-	            log.save(mobileLog);
+	            try {
+	                auditChangeLog.mobileChanged(savedAuditAgencyMobile, ipAddress, clientHostname, Constant.UPDATED, usernameFromToken);
+	            } catch (Exception logEx) {
+	                logEx.printStackTrace();
+	            }
 	        }
 	        System.out.println("Client Hostnames: " + clientHostname);
 	        System.out.println("Client IP Address: " + ipAddress);
@@ -107,7 +108,10 @@ public class AuditAgencyMobileServiceImpl implements IAuditAgencyMobileService{
 	    
 	}catch(Exception e) {
 			e.printStackTrace();
-			return Optional.empty();
+			if (e instanceof RuntimeException runtimeException) {
+				throw runtimeException;
+			}
+			throw new IllegalStateException(e.getMessage(), e);
 		}
 		
 	}

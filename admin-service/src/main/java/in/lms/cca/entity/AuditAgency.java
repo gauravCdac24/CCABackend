@@ -25,7 +25,7 @@ public class AuditAgency extends AbstractTimestampEntity{
 	@JoinColumn(name = "address_id", referencedColumnName = "address_id")
 	private Address addressId;
 	
-	@Column(name = "agency_name", length = 50)
+	@Column(name = "agency_name", length = 100)
 	private String agencyName;
 	
 	@Column(name = "effective_from")

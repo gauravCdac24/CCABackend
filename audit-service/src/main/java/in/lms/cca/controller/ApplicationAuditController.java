@@ -4426,6 +4426,9 @@ contentBuilder.append("<h3 style='color: red;'>15. CA Self-assessment for audit 
 			response.put("userName", latest.getUserName());
 			response.put("status", latest.getStatus());
 			response.put("signerKey", latest.getSignerKey());
+			ESignedDocumentsEntity agencyReport = findAgencySignedAuditReport(eSignDocId);
+			response.put("auditorSignedDocId",
+					agencyReport != null ? agencyReport.getSignedDocId() : null);
 			ESignedDocumentsEntity acceptanceLetter = findLatestCompletedAcceptanceLetterEsignRecord(eSignDocId);
 			response.put("acceptanceSignedDocId",
 					acceptanceLetter != null ? acceptanceLetter.getSignedDocId() : null);
@@ -4471,6 +4474,40 @@ contentBuilder.append("<h3 style='color: red;'>15. CA Self-assessment for audit 
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.body("Failed to merge PDFs: " + e.getMessage());
+		}
+	}
+
+	/**
+	 * Auditor-signed audit report for the applicant to download.
+	 * Read-only: it does not create an eSign record or change application status.
+	 */
+	@GetMapping("/download-auditor-signed-report")
+	public ResponseEntity<?> downloadAuditorSignedReport(@RequestParam("userName") String userName) {
+		try {
+			String normalized = normalizeReportUsername(userName);
+			if (normalized.isEmpty()) {
+				return ResponseEntity.badRequest().body("Username is required");
+			}
+			ESignedDocumentsEntity auditorReport = findAgencySignedAuditReport(normalized);
+			if (auditorReport == null || auditorReport.getSignedDocId() == null
+					|| auditorReport.getSignedDocId().isBlank()) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body("Signed audit report is not available.");
+			}
+			byte[] pdf = fetchDigitallySignedPdfBytes(auditorReport.getSignedDocId());
+			if (pdf == null || pdf.length < 100) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body("Signed audit report is not available.");
+			}
+			return ResponseEntity.ok()
+					.contentType(MediaType.APPLICATION_PDF)
+					.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"AuditReport.pdf\"")
+					.header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, HttpHeaders.CONTENT_DISPOSITION)
+					.body(pdf);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Failed to download the audit report.");
 		}
 	}
 
@@ -4730,6 +4767,26 @@ contentBuilder.append("<h3 style='color: red;'>15. CA Self-assessment for audit 
 	}
 
 	/**
+	 * Audit-agency eSigned report: latest AUDITOR signature, otherwise the latest completed
+	 * record that is not the applicant acceptance letter.
+	 */
+	private ESignedDocumentsEntity findAgencySignedAuditReport(String userName) {
+		ESignedDocumentsEntity auditorReport = findLatestCompletedAuditorEsignRecord(userName);
+		if (auditorReport != null) {
+			return auditorReport;
+		}
+		List<ESignedDocumentsEntity> docs = documentsService.getEsignDocumentByUserName(userName);
+		if (docs == null || docs.isEmpty()) {
+			return null;
+		}
+		return docs.stream()
+				.filter(doc -> doc.getSignedDocId() != null && !doc.getSignedDocId().isBlank())
+				.filter(doc -> !isAcceptanceSignerKey(doc.getSignerKey()))
+				.max(java.util.Comparator.comparing(ESignedDocumentsEntity::geteSignedId))
+				.orElse(null);
+	}
+
+	/**
 	 * Prefer applicant eSign of the full auditor-signed report, else the latest auditor-signed
 	 * full report. Never prefer legacy ACCEPTANCE cover-letter-only over the audit report.
 	 */
@@ -4859,12 +4916,16 @@ contentBuilder.append("<h3 style='color: red;'>15. CA Self-assessment for audit 
 			return null;
 		}
 		try {
-			String url = UriComponentsBuilder
+			java.net.URI uri = UriComponentsBuilder
 					.fromHttpUrl(apigatewayServiceUrl + "/esign-service/get-digitally-signed-document")
 					.queryParam("id", signedDocId)
-					.toUriString();
-			ResponseEntity<byte[]> response = restTemplate.exchange(url, HttpMethod.GET,
-					new HttpEntity<>(new HttpHeaders()), byte[].class);
+					.build()
+					.encode()
+					.toUri();
+			HttpHeaders headers = new HttpHeaders();
+			headers.setAccept(java.util.List.of(MediaType.APPLICATION_PDF, MediaType.APPLICATION_OCTET_STREAM));
+			ResponseEntity<byte[]> response = restTemplate.exchange(uri, HttpMethod.GET,
+					new HttpEntity<>(headers), byte[].class);
 			if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
 				return response.getBody();
 			}

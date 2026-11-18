@@ -37,6 +37,9 @@ public class AuditorsServiceImpl implements IAuditorsService{
 	@Autowired
 	private AuditorsRepositoryLogs log;
 
+	@Autowired
+	private AuditChangeLogService auditChangeLog;
+
 	@Override
 	public List<Auditors> getAllAuditors() {
 		return auditorsRepo.findAll(Sort.by(Sort.Direction.DESC, "created"));
@@ -53,17 +56,13 @@ public class AuditorsServiceImpl implements IAuditorsService{
 	        String clientHostname = clientAddress.getHostName();
 	        String bearerToken = request.getHeader("Authorization");
 	        String usernameFromToken = "1";
-	        Auditors savedAuditors = auditorsRepo.save(auditorObj);
+	        Auditors savedAuditors = auditorsRepo.saveAndFlush(auditorObj);
 	        if (usernameFromToken != null) {
-	        
-	            AuditorsLog auditorsLog = new AuditorsLog(savedAuditors, ipAddress, Constant.CREATED, usernameFromToken);
-	            
-	            auditorsLog.setClientHostName(clientHostname != null && !clientHostname.isBlank() ? clientHostname : "unknown"); 
-	            
-	            log.save(auditorsLog);
-	        // log.save(new AuditorsLog(savedAuditors, ipAddress, Constant.CREATED, usernameFromToken));
-
-	        
+	            try {
+	                auditChangeLog.auditorChanged(savedAuditors, ipAddress, clientHostname, Constant.CREATED, usernameFromToken);
+	            } catch (Exception logEx) {
+	                logEx.printStackTrace();
+	            }
 	        }
 	        System.out.println("Client Hostnames: " + clientHostname);
 	        System.out.println("Client IP Address: " + ipAddress);
@@ -74,7 +73,10 @@ public class AuditorsServiceImpl implements IAuditorsService{
 	    
 	}catch(Exception e) {
 			e.printStackTrace();
-			return Optional.empty();
+			if (e instanceof RuntimeException runtimeException) {
+				throw runtimeException;
+			}
+			throw new IllegalStateException(e.getMessage(), e);
 		}
 	}
 
@@ -91,11 +93,13 @@ public class AuditorsServiceImpl implements IAuditorsService{
 	        String clientHostname = clientAddress.getHostName();
 	        String bearerToken = request.getHeader("Authorization");
 	        String usernameFromToken = "1";
-	        Auditors savedAuditors = auditorsRepo.save(auditorObj);
+	        Auditors savedAuditors = auditorsRepo.saveAndFlush(auditorObj);
 	        if (usernameFromToken != null) {
-	            AuditorsLog auditorsLog = new AuditorsLog(savedAuditors, ipAddress, Constant.UPDATED, usernameFromToken);
-	            auditorsLog.setClientHostName(clientHostname != null && !clientHostname.isBlank() ? clientHostname : "unknown");
-	            log.save(auditorsLog);
+	            try {
+	                auditChangeLog.auditorChanged(savedAuditors, ipAddress, clientHostname, Constant.UPDATED, usernameFromToken);
+	            } catch (Exception logEx) {
+	                logEx.printStackTrace();
+	            }
 	        }
 	        System.out.println("Client Hostnames: " + clientHostname);
 	        System.out.println("Client IP Address: " + ipAddress);
@@ -106,7 +110,10 @@ public class AuditorsServiceImpl implements IAuditorsService{
 	    
 	}catch(Exception e) {
 			e.printStackTrace();
-			return Optional.empty();
+			if (e instanceof RuntimeException runtimeException) {
+				throw runtimeException;
+			}
+			throw new IllegalStateException(e.getMessage(), e);
 		}
 	}
 

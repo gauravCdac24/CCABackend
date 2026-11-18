@@ -62,6 +62,9 @@ public class AddressLogs extends LogAbstractTimestampOperationEntity{
 	@Column(name = "status", length = 8)
 	private String status;
 
+	@Column(name = "client_host_name", length = 100)
+	private String clientHostName;
+
 	public Long getLogAddressId() {
 		return logAddressId;
 	}
@@ -156,6 +159,14 @@ public class AddressLogs extends LogAbstractTimestampOperationEntity{
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getClientHostName() {
+		return clientHostName;
+	}
+
+	public void setClientHostName(String clientHostName) {
+		this.clientHostName = clientHostName;
 	}
 
 	public AddressLogs(Long logAddressId, Long addressId, AddressType addressTypeId, String blockNo, String village,

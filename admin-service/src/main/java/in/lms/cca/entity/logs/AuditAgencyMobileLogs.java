@@ -33,7 +33,7 @@ public class AuditAgencyMobileLogs extends LogAbstractTimestampOperationEntity{
 	@Column(name = "areacode", length = 3)
 	private String areaCode;
 	
-	@Column(name = "contact_type", length = 8)
+	@Column(name = "contact_type", length = 16)
 	private String contactType;
 	
 	@Column(name = "status", length = 8)

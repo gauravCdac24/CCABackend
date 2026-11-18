@@ -189,9 +189,10 @@ public class ApplicationReviewController {
 	    	
 	    	
 
-	        // Check if the application status is "underReview"
-	    	if (app.getApplicationStatus() != null && 
-	    		    (app.getApplicationStatus().equals("underReview") || app.getApplicationStatus().equals("Edit_Upon_Review"))) {
+	        // Fresh applications reach this queue after CCA officer payment approval (underReview).
+	        // Edit_Upon_Review is a later send-back. Also include a verified payment that never
+	        // had its status moved, otherwise the committee list stays empty.
+	    	if (isReviewCommitteeQueue(app)) {
 
 	            ApplicationDTO application = new ApplicationDTO();
 
@@ -831,6 +832,18 @@ public class ApplicationReviewController {
 	    sendApplicationRejectionSmsIfNeeded(intentApp);
 	   
 	    return ResponseEntity.ok("Application Review Data Saved Successfully");
+	}
+
+	private boolean isReviewCommitteeQueue(IntentApplication app) {
+		if (app == null || app.getApplicationStatus() == null) {
+			return false;
+		}
+		String status = app.getApplicationStatus();
+		if (status.equals(ApplicationStatusUtil.UNDER_REVIEW) || ApplicationStatusUtil.isEditUponReview(status)) {
+			return true;
+		}
+		return ApplicationStatusUtil.isPaymentProofReceived(status)
+				&& licenseAcquisitionWorkflowService.isPaymentVerificationCompleted(app.getIntentAppId());
 	}
 
 	private boolean isCommitteeApproval(Boolean isApproved) {

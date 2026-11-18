@@ -3823,11 +3823,13 @@ List<ApplicationDocument> sortedActiveDocuments = applicationDocument.stream()
 	            paymentVerification.setVerifiedBy(paymentVerificationDTO.getUserName());
 	            paymentVerification.setStatus("Active");
 		        Optional<PaymentVerification>optional=iPaymentVerficationService.addPaymentProof(paymentVerification);
-		        intentApplication.setApplicationStatus("Edit_Upon_Review");
+		        // Officer approval hands the fresh application to the review committee.
+		        // Edit_Upon_Review is only for a later send-back to the applicant.
+		        intentApplication.setApplicationStatus(ApplicationStatusUtil.UNDER_REVIEW);
 		        intentAppServ.updateIntentApp(intentApplication);
 		        
 		        ApplicationTimeLine obj1 = new ApplicationTimeLine();
-				obj1.setApplicationStatus("Edit_Upon_Review");
+				obj1.setApplicationStatus(ApplicationStatusUtil.UNDER_REVIEW);
 				obj1.setInitiatedBy(EncryptionUtil.encrypt(paymentVerificationDTO.getUserName()));
 				obj1.setIntentAppId(intentApplication);
 				

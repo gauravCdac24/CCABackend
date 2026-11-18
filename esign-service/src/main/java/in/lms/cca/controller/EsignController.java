@@ -251,29 +251,26 @@ public class EsignController {
             String UserX509Certificate = (String) userX509Certificate.evaluate(document, XPathConstants.STRING);
      
             
-            //Check for Signer name
-            
-            PdfEmbedder pdfSign = new PdfEmbedder(); 
-            String signerName = PdfEmbedder.findSignerName(UserX509Certificate);
-            
-            //String signerName = pdfSign.findSignerName(UserX509Certificate);
-
-            if( signerName != null && !ereqquest.getFullname().equals(signerName)) {
-            	
-            	// do not sign
-            	
-                String pid =  EncryptionUtil.encrypt(ereqquest.getRedirectUrl());
-                String id = EncryptionUtil.encrypt("signer_mismatch");
-                
-                String urlToRedirect = CrossOrigins.Origins + "/esignresponse" + "?id="+id+"&pid="+pid;
-                URI location = URI.create(urlToRedirect);
-                HttpHeaders headers = new HttpHeaders();
-                headers.setLocation(location);
-                return new ResponseEntity<>(headers, HttpStatus.FOUND);
-
-                
-                
-            }
+            // Aadhaar certificate CN is not compared with the auditor or applicant name.
+            // Any Aadhaar may be used. The visible signature name is the fullName sent
+            // with the request (auditor full name for auditor eSign, applicant full name
+            // for applicant eSign), set in PdfEmbedder.prepareForSigning.
+            PdfEmbedder pdfSign = new PdfEmbedder();
+            // String signerName = PdfEmbedder.findSignerName(UserX509Certificate);
+            //
+            // if( signerName != null && !ereqquest.getFullname().equals(signerName)) {
+            //
+            // 	// do not sign
+            //
+            //     String pid =  EncryptionUtil.encrypt(ereqquest.getRedirectUrl());
+            //     String id = EncryptionUtil.encrypt("signer_mismatch");
+            //
+            //     String urlToRedirect = CrossOrigins.Origins + "/esignresponse" + "?id="+id+"&pid="+pid;
+            //     URI location = URI.create(urlToRedirect);
+            //     HttpHeaders headers = new HttpHeaders();
+            //     headers.setLocation(location);
+            //     return new ResponseEntity<>(headers, HttpStatus.FOUND);
+            // }
             
             
             //

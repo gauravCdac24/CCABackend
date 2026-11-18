@@ -38,6 +38,9 @@ public class AuditAgencyEmailServiceImpl implements IAuditAgencyEmailService{
 	 @Autowired
 	 private AuditAgencyEmailRepositoryLogs log;
 
+	 @Autowired
+	 private AuditChangeLogService auditChangeLog;
+
 	
 	@Override
 	public Optional<AuditAgencyEmail> addAuditAgencyEmail(AuditAgencyEmail auditAgencyEmail) {
@@ -51,15 +54,13 @@ public class AuditAgencyEmailServiceImpl implements IAuditAgencyEmailService{
 	        String clientHostname = clientAddress.getHostName();
 	        String bearerToken = request.getHeader("Authorization");
 	        String usernameFromToken = "1";
-	        AuditAgencyEmail savedAuditAgencyEmail = emailRepo.save(auditAgencyEmail);
+	        AuditAgencyEmail savedAuditAgencyEmail = emailRepo.saveAndFlush(auditAgencyEmail);
 	        if (usernameFromToken != null) {
-	        	
-	        	AuditAgencyEmailLogs emailLog = new AuditAgencyEmailLogs(savedAuditAgencyEmail, ipAddress, Constant.CREATED, usernameFromToken);
-	            
-	            // Explicitly set the hostname
-	            emailLog.setClientHostName(clientHostname != null && !clientHostname.isBlank() ? clientHostname : "unknown");
-	           // log.save(new AuditAgencyEmailLogs(savedAuditAgencyEmail, ipAddress, Constant.CREATED, usernameFromToken));
-	            log.save(emailLog);
+	            try {
+	                auditChangeLog.emailChanged(savedAuditAgencyEmail, ipAddress, clientHostname, Constant.CREATED, usernameFromToken);
+	            } catch (Exception logEx) {
+	                logEx.printStackTrace();
+	            }
 	        }
 	        System.out.println("Client Hostnames: " + clientHostname);
 	        System.out.println("Client IP Address: " + ipAddress);
@@ -70,7 +71,10 @@ public class AuditAgencyEmailServiceImpl implements IAuditAgencyEmailService{
 	    
 	}catch(Exception e) {
 			e.printStackTrace();
-			return Optional.empty();
+			if (e instanceof RuntimeException runtimeException) {
+				throw runtimeException;
+			}
+			throw new IllegalStateException(e.getMessage(), e);
 		}
 		
 	}
@@ -91,11 +95,13 @@ public class AuditAgencyEmailServiceImpl implements IAuditAgencyEmailService{
 	        String clientHostname = clientAddress.getHostName();
 	        String bearerToken = request.getHeader("Authorization");
 	        String usernameFromToken = "1";
-	        AuditAgencyEmail savedAuditAgencyEmail = emailRepo.save(auditAgencyEmail);
+	        AuditAgencyEmail savedAuditAgencyEmail = emailRepo.saveAndFlush(auditAgencyEmail);
 	        if (usernameFromToken != null) {
-	            AuditAgencyEmailLogs emailLog = new AuditAgencyEmailLogs(savedAuditAgencyEmail, ipAddress, Constant.UPDATED, usernameFromToken);
-	            emailLog.setClientHostName(clientHostname != null && !clientHostname.isBlank() ? clientHostname : "unknown");
-	            log.save(emailLog);
+	            try {
+	                auditChangeLog.emailChanged(savedAuditAgencyEmail, ipAddress, clientHostname, Constant.UPDATED, usernameFromToken);
+	            } catch (Exception logEx) {
+	                logEx.printStackTrace();
+	            }
 	        }
 	        System.out.println("Client Hostnames: " + clientHostname);
 	        System.out.println("Client IP Address: " + ipAddress);
@@ -106,7 +112,10 @@ public class AuditAgencyEmailServiceImpl implements IAuditAgencyEmailService{
 	    
 	}catch(Exception e) {
 			e.printStackTrace();
-			return Optional.empty();
+			if (e instanceof RuntimeException runtimeException) {
+				throw runtimeException;
+			}
+			throw new IllegalStateException(e.getMessage(), e);
 		}
 		
 	}

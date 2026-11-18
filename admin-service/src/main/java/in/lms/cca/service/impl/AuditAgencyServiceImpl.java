@@ -37,6 +37,9 @@ public class AuditAgencyServiceImpl implements IAuditAgencyService{
 	
 	@Autowired
 	private AuditAgencyRepositoryLogs log;
+
+	@Autowired
+	private AuditChangeLogService auditChangeLog;
 	
 	@Override
 	public Optional<AuditAgency> addAuditAgency(AuditAgency auditAgency) {
@@ -50,9 +53,13 @@ public class AuditAgencyServiceImpl implements IAuditAgencyService{
 	        String clientHostname = clientAddress.getHostName();
 	        String bearerToken = request.getHeader("Authorization");
 	        String usernameFromToken = "1";
-	        AuditAgency savedAuditAgency = auditAgencyRepo.save(auditAgency);
+	        AuditAgency savedAuditAgency = auditAgencyRepo.saveAndFlush(auditAgency);
 	        if (usernameFromToken != null) {
-	            log.save(new AuditAgencyLogs(savedAuditAgency, ipAddress, Constant.CREATED, usernameFromToken));
+	            try {
+	                auditChangeLog.agencyChanged(savedAuditAgency, ipAddress, clientHostname, Constant.CREATED, usernameFromToken);
+	            } catch (Exception logEx) {
+	                logEx.printStackTrace();
+	            }
 	        }
 	        System.out.println("Client Hostnames: " + clientHostname);
 	        System.out.println("Client IP Address: " + ipAddress);
@@ -82,12 +89,13 @@ public class AuditAgencyServiceImpl implements IAuditAgencyService{
 	        String clientHostname = clientAddress.getHostName();
 	        String bearerToken = request.getHeader("Authorization");
 	        String usernameFromToken = "1";
-	        AuditAgency savedAuditAgency = auditAgencyRepo.save(auditAgency);
+	        AuditAgency savedAuditAgency = auditAgencyRepo.saveAndFlush(auditAgency);
 	        if (usernameFromToken != null) {
-	        	
-	            log.save(new AuditAgencyLogs(savedAuditAgency, ipAddress, Constant.UPDATED, usernameFromToken));
-	            
-	            
+	            try {
+	                auditChangeLog.agencyChanged(savedAuditAgency, ipAddress, clientHostname, Constant.UPDATED, usernameFromToken);
+	            } catch (Exception logEx) {
+	                logEx.printStackTrace();
+	            }
 	        }
 	        System.out.println("Client Hostnames: " + clientHostname);
 	        System.out.println("Client IP Address: " + ipAddress);
@@ -98,7 +106,10 @@ public class AuditAgencyServiceImpl implements IAuditAgencyService{
 	    
 	}catch(Exception e) {
 			e.printStackTrace();
-			return Optional.empty();
+			if (e instanceof RuntimeException runtimeException) {
+				throw runtimeException;
+			}
+			throw new IllegalStateException(e.getMessage(), e);
 		}
 		
 	}

@@ -29,7 +29,7 @@ public class AuditAgencyMobile extends AbstractTimestampEntity{
 	@Column(name = "areacode", length = 3)
 	private String areaCode;
 	
-	@Column(name = "contact_type", length = 10)
+	@Column(name = "contact_type", length = 16)
 	private String contactType;
 	
 	@Column(name = "status", length = 8)
