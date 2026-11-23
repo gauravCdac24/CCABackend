@@ -5,6 +5,7 @@ public class AddressDTO {
 	private String AddressId;
 	private String locationName ;
 	private String blockNo;
+	private String officeName;
 	private String village;
 	private String postOffice;
 	private String subDivision;
@@ -58,6 +59,12 @@ public class AddressDTO {
 	}
 	public void setBlockNo(String blockNo) {
 		this.blockNo = blockNo;
+	}
+	public String getOfficeName() {
+		return officeName;
+	}
+	public void setOfficeName(String officeName) {
+		this.officeName = officeName;
 	}
 	public String getVillage() {
 		return village;

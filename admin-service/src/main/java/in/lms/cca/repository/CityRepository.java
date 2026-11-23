@@ -16,11 +16,13 @@ public interface CityRepository extends JpaRepository<City, Long>{
 	@Query("FROM City a WHERE a.stateId.stateId=:stateId")
 	List<City> findCityByStateId(Long stateId);
 	
-	@Query("FROM City WHERE status = 'Active' ORDER BY created DESC")
-	List<City> findAllActiveCity();
+	// 
 	
-	@Query("FROM City WHERE status = 'Inactive' ORDER BY created DESC")
-	List<City> findAllInActiveCity();
+	@Query("FROM City WHERE status = 'Active' ORDER BY cityName ASC")
+    List<City> findAllActiveCity();
+	
+    @Query("FROM City WHERE status = 'Inactive' ORDER BY cityName ASC")
+    List<City> findAllInActiveCity();
 	
 	@Query("FROM City a WHERE a.cityName=:cityName")
 	City findByCityName(@Param("cityName")String cityName);

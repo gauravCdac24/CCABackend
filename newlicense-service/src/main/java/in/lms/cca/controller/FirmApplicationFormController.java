@@ -172,8 +172,10 @@ public class FirmApplicationFormController {
             return new ResponseEntity<>("The length of Fax must be between 0 and 15 characters.", HttpStatus.BAD_REQUEST);
         }
 
-        // Telephone No validation
-        if (firmApplicationDTO.getTelephoneNo() != null && !firmApplicationDTO.getTelephoneNo().matches("\\d{10,15}")) {
+        // Telephone No validation (optional)
+        if (firmApplicationDTO.getTelephoneNo() != null
+                && !firmApplicationDTO.getTelephoneNo().trim().isEmpty()
+                && !firmApplicationDTO.getTelephoneNo().matches("\\d{10,15}")) {
             return new ResponseEntity<>("Please enter a valid telephone number.", HttpStatus.BAD_REQUEST);
         }
 
@@ -538,7 +540,10 @@ public class FirmApplicationFormController {
 	    if (firmApplicationDTO.getFax() != null && firmApplicationDTO.getFax().length() > 15) {
 	        return new ResponseEntity<>("The length of Fax must be between 0 and 15 characters.", HttpStatus.BAD_REQUEST);
 	    }
-	    if (firmApplicationDTO.getTelephoneNo() != null && !firmApplicationDTO.getTelephoneNo().matches("\\d{10,15}")) {
+	    // Telephone No validation (optional)
+	    if (firmApplicationDTO.getTelephoneNo() != null
+	            && !firmApplicationDTO.getTelephoneNo().trim().isEmpty()
+	            && !firmApplicationDTO.getTelephoneNo().matches("\\d{10,15}")) {
 	        return new ResponseEntity<>("Please enter a valid telephone number.", HttpStatus.BAD_REQUEST);
 	    }
 	    if (firmApplicationDTO.getPublicKey() != null && firmApplicationDTO.getPublicKey().length() > 255) {

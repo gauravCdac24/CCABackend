@@ -79,6 +79,7 @@ public class AddressController {
         		Address address = new Address();
 
         		address.setBlockNo(addressObj.getBlockNo());
+        		address.setOfficeName(addressObj.getOfficeName());
         		address.setVillage(addressObj.getVillage());
         		address.setPostOffice(addressObj.getPostOffice());
         		address.setSubDivision(addressObj.getSubDivision());
@@ -182,6 +183,7 @@ public class AddressController {
 	            addressDTO.setCountryName(addressObj.getCountryId().getCountryName());
 	        }
 	        addressDTO.setBlockNo(addressObj.getBlockNo());
+	        addressDTO.setOfficeName(addressObj.getOfficeName());
 	        addressDTO.setVillage(addressObj.getVillage());
 	        addressDTO.setPostOffice(addressObj.getPostOffice());
 	        addressDTO.setSubDivision(addressObj.getSubDivision());
@@ -241,6 +243,7 @@ public class AddressController {
        		
             address.setAddressId(parsedAddressId);
        		address.setBlockNo(addressObj.getBlockNo());
+       		address.setOfficeName(addressObj.getOfficeName());
        		address.setVillage(addressObj.getVillage());
        		address.setPostOffice(addressObj.getPostOffice());
        		address.setSubDivision(addressObj.getSubDivision());

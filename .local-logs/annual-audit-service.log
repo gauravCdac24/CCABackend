@@ -12,15 +12,13 @@
 [INFO] Copying 1 resource from src\main\resources to target\classes
 [INFO] 
 [INFO] --- compiler:3.13.0:compile (default-compile) @ annual-audit-service ---
-[INFO] Recompiling the module because of added or removed source files.
-[INFO] Compiling 107 source files with javac [debug parameters release 17] to target\classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO] 
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ annual-audit-service ---
-[INFO] Copying 0 resource from src\test\resources to target\test-classes
+[INFO] skip non existing resourceDirectory C:\Users\hp\Documents\CCABackend\annual-audit-service\src\test\resources
 [INFO] 
 [INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ annual-audit-service ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 1 source file with javac [debug parameters release 17] to target\test-classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO] 
 [INFO] <<< spring-boot:3.3.2:run (default-cli) < test-compile @ annual-audit-service <<<
 [INFO] 
@@ -37,31 +35,91 @@
 
  :: Spring Boot ::                (v3.3.2)
 
-2026-10-29 11:31:36 - Starting AnnualAuditServiceApplication using Java 17.0.10 with PID 28664 (C:\Users\hp\Documents\CCABackend\CCABackend\annual-audit-service\target\classes started by hp in C:\Users\hp\Documents\CCABackend\CCABackend\annual-audit-service)
-2026-10-29 11:31:36 - Running with Spring Boot v3.3.2, Spring v6.1.11
-2026-10-29 11:31:36 - The following 1 profile is active: "test"
-2026-10-29 11:31:36 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2026-10-29 11:31:36 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2026-10-29 11:31:38 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-10-29 11:31:39 - Finished Spring Data repository scanning in 493 ms. Found 11 JPA repository interfaces.
-2026-10-29 11:31:40 - BeanFactory id=42ef994f-6b97-3a09-a501-6a4b08627c83
-2026-10-29 11:31:40 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
-2026-10-29 11:31:40 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
-2026-10-29 11:31:41 - Tomcat initialized with port 7791 (http)
-2026-10-29 11:31:41 - Starting service [Tomcat]
-2026-10-29 11:31:41 - Starting Servlet engine: [Apache Tomcat/10.1.26]
-2026-10-29 11:31:41 - Initializing Spring embedded WebApplicationContext
-2026-10-29 11:31:41 - Root WebApplicationContext: initialization completed in 5045 ms
-2026-10-29 11:31:41 - Filter 'annualAuditScheduleFilter' configured for use
-2026-10-29 11:31:42 - HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-10-29 11:31:42 - HHH000412: Hibernate ORM core version 6.5.2.Final
-2026-10-29 11:31:42 - HHH000026: Second-level cache disabled
-2026-10-29 11:31:43 - No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-10-29 11:31:43 - HikariPool-1 - Starting...
-2026-10-29 11:31:43 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1d46ba7e
-2026-10-29 11:31:43 - HikariPool-1 - Start completed.
-2026-10-29 11:31:43 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-10-29 11:31:46 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-23 16:17:04 - Starting AnnualAuditServiceApplication using Java 17.0.11 with PID 46604 (C:\Users\hp\Documents\CCABackend\annual-audit-service\target\classes started by hp in C:\Users\hp\Documents\CCABackend\annual-audit-service)
+2026-11-23 16:17:04 - Running with Spring Boot v3.3.2, Spring v6.1.11
+2026-11-23 16:17:04 - The following 1 profile is active: "test"
+2026-11-23 16:17:04 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-11-23 16:17:04 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-11-23 16:17:05 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-23 16:17:06 - Finished Spring Data repository scanning in 359 ms. Found 11 JPA repository interfaces.
+2026-11-23 16:17:06 - BeanFactory id=42ef994f-6b97-3a09-a501-6a4b08627c83
+2026-11-23 16:17:06 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-11-23 16:17:06 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-11-23 16:17:07 - Tomcat initialized with port 7791 (http)
+2026-11-23 16:17:07 - Starting service [Tomcat]
+2026-11-23 16:17:07 - Starting Servlet engine: [Apache Tomcat/10.1.26]
+2026-11-23 16:17:07 - Initializing Spring embedded WebApplicationContext
+2026-11-23 16:17:07 - Root WebApplicationContext: initialization completed in 3623 ms
+2026-11-23 16:17:08 - Filter 'annualAuditScheduleFilter' configured for use
+2026-11-23 16:17:08 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-11-23 16:17:08 - HHH000412: Hibernate ORM core version 6.5.2.Final
+2026-11-23 16:17:08 - HHH000026: Second-level cache disabled
+2026-11-23 16:17:09 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-23 16:17:09 - HikariPool-1 - Starting...
+2026-11-23 16:17:09 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5f5fed6
+2026-11-23 16:17:09 - HikariPool-1 - Start completed.
+2026-11-23 16:17:09 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-11-23 16:17:11 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: alter table if exists annual_audit_management.annual_audit_schedule alter column status set data type varchar(20)
+2026-11-23 16:17:11 - GenerationTarget encountered exception accepting command : Error executing DDL "alter table if exists annual_audit_management.annual_audit_schedule alter column status set data type varchar(20)" via JDBC [ERROR: value too long for type character varying(20)]
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "alter table if exists annual_audit_management.annual_audit_schedule alter column status set data type varchar(20)" via JDBC [ERROR: value too long for type character varying(20)]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:94)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlString(AbstractSchemaMigrator.java:575)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlStrings(AbstractSchemaMigrator.java:515)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.migrateTable(AbstractSchemaMigrator.java:333)
+	at org.hibernate.tool.schema.internal.GroupedSchemaMigratorImpl.performTablesMigration(GroupedSchemaMigratorImpl.java:84)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.performMigration(AbstractSchemaMigrator.java:232)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:117)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:280)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:144)
+	at java.base/java.util.HashMap.forEach(HashMap.java:1421)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:141)
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37)
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:322)
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:457)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1506)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1853)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1802)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:205)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:954)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:625)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:335)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352)
+	at in.lms.cca.AnnualAuditServiceApplication.main(AnnualAuditServiceApplication.java:12)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: org.postgresql.util.PSQLException: ERROR: value too long for type character varying(20)
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2725)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2412)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:371)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:502)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:419)
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:341)
+	at org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:326)
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:302)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:297)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:80)
+	... 42 common frames omitted
 Hibernate: alter table if exists annual_audit_management.application_action_taken alter column remarks set data type TEXT
 Hibernate: alter table if exists annual_audit_management.application_audit alter column applicant_remarks set data type TEXT
 Hibernate: alter table if exists annual_audit_management.application_audit alter column remarks set data type TEXT
@@ -72,20 +130,43 @@ Hibernate: alter table if exists annual_audit_management.audit_ncs alter column 
 Hibernate: alter table if exists annual_audit_management.audit_report_document alter column remarks set data type TEXT
 Hibernate: alter table if exists annual_audit_management.audit_schedule alter column description set data type TEXT
 Hibernate: alter table if exists annual_audit_management.audit_short_coming alter column remarks set data type TEXT
-2026-10-29 11:31:47 - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-10-29 11:31:47 - Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-10-29 11:31:49 - Unable to start LiveReload server
-2026-10-29 11:31:50 - Cannot determine local hostname
-2026-10-29 11:31:52 - Cannot determine local hostname
-2026-10-29 11:31:52 - Eureka HTTP Client uses RestTemplate.
-2026-10-29 11:31:52 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
-2026-10-29 11:31:52 - Setting initial instance status as: STARTING
-2026-10-29 11:31:52 - Initializing Eureka in region us-east-1
-2026-10-29 11:31:52 - Client configured to neither register nor query for data.
-2026-10-29 11:31:52 - Discovery Client initialized at timestamp 1793253712268 with initial instances count: 0
-2026-10-29 11:31:52 - Registering application ANNUAL-AUDIT-SERVICE with eureka with status UP
-2026-10-29 11:31:52 - Tomcat started on port 7791 (http) with context path '/'
-2026-10-29 11:31:52 - Updating port to 7791
-2026-10-29 11:31:53 - Cannot determine local hostname
-2026-10-29 11:31:53 - Started AnnualAuditServiceApplication in 19.755 seconds (process running for 20.663)
-Hibernate: select aase1_0.audit_schedule_id,aase1_0.actual_start_date,aase1_0.audit_agency_id,aase1_0.created,aase1_0.created_by,aase1_0.date_of_completion,aase1_0.date_of_submission,aase1_0.license_id,aase1_0.schedule_start_date,aase1_0.schedule_submission_date,aase1_0.status,aase1_0.updated,aase1_0.updated_by,aase1_0.user_name from annual_audit_management.annual_audit_schedule aase1_0
+2026-11-23 16:17:12 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-23 16:17:12 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-11-23 16:17:14 - Unable to start LiveReload server
+2026-11-23 16:17:15 - Eureka HTTP Client uses RestTemplate.
+2026-11-23 16:17:15 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-11-23 16:17:15 - Setting initial instance status as: STARTING
+2026-11-23 16:17:15 - Initializing Eureka in region us-east-1
+2026-11-23 16:17:15 - Client configured to neither register nor query for data.
+2026-11-23 16:17:15 - Discovery Client initialized at timestamp 1795430835180 with initial instances count: 0
+2026-11-23 16:17:15 - Registering application ANNUAL-AUDIT-SERVICE with eureka with status UP
+2026-11-23 16:17:15 - Unregistering application ANNUAL-AUDIT-SERVICE with eureka with status DOWN
+2026-11-23 16:17:15 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2026-11-23 16:17:15 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-11-23 16:17:15 - HikariPool-1 - Shutdown initiated...
+2026-11-23 16:17:15 - HikariPool-1 - Shutdown completed.
+2026-11-23 16:17:15 - Shutting down DiscoveryClient ...
+2026-11-23 16:17:15 - Completed shut down of DiscoveryClient
+2026-11-23 16:17:15 - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-11-23 16:17:15 - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 7791 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 7791 or configure this application to listen on another port.
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  20.705 s
+[INFO] Finished at: 2026-11-23T16:17:15+05:30
+[INFO] ------------------------------------------------------------------------

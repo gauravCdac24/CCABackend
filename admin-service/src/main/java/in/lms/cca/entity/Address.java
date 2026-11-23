@@ -25,6 +25,9 @@ public class Address extends AbstractTimestampEntity{
 	
 	@Column(name = "blockno", length = 15)
 	private String blockNo;
+
+	@Column(name = "office_name", length = 75)
+	private String officeName;
 	
 	@Column(name = "village", length = 30)
 	private String village;
@@ -119,6 +122,14 @@ public class Address extends AbstractTimestampEntity{
 
 	public void setBlockNo(String blockNo) {
 		this.blockNo = blockNo;
+	}
+
+	public String getOfficeName() {
+		return officeName;
+	}
+
+	public void setOfficeName(String officeName) {
+		this.officeName = officeName;
 	}
 
 	public String getVillage() {

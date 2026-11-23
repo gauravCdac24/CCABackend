@@ -179,20 +179,20 @@ public class GovernmentAgencyFormController {
 	        return new ResponseEntity<>("The length of Fax must be between 0 and 15 characters.", HttpStatus.BAD_REQUEST);
 	    }
 
-	    // Telephone No validation
-	    if (organizationalDTO.getTelephoneNo() != null && !organizationalDTO.getTelephoneNo().matches("\\d{10,15}")) {
+	    // Telephone No validation (optional)
+	    if (organizationalDTO.getTelephoneNo() != null && !organizationalDTO.getTelephoneNo().trim().isEmpty()
+	            && !organizationalDTO.getTelephoneNo().matches("\\d{10,15}")) {
 	        return new ResponseEntity<>("Please enter a valid telephone number.", HttpStatus.BAD_REQUEST);
 	    }
 
-	    // Web Page URL validation (required)
-	    if (organizationalDTO.getWebURL() == null || organizationalDTO.getWebURL().trim().isEmpty()) {
-	        return new ResponseEntity<>("Web Page URL is required.", HttpStatus.BAD_REQUEST);
-	    }
-	    if (organizationalDTO.getWebURL().trim().length() > 100) {
-	        return new ResponseEntity<>("The length of Web Page URL must not exceed 100 characters.", HttpStatus.BAD_REQUEST);
-	    }
-	    if (!isValidWebUrl(organizationalDTO.getWebURL())) {
-	        return new ResponseEntity<>("Please enter a valid Web Page URL (e.g. https://example.gov.in).", HttpStatus.BAD_REQUEST);
+	    // Web Page URL validation (optional)
+	    if (organizationalDTO.getWebURL() != null && !organizationalDTO.getWebURL().trim().isEmpty()) {
+	        if (organizationalDTO.getWebURL().trim().length() > 100) {
+	            return new ResponseEntity<>("The length of Web Page URL must not exceed 100 characters.", HttpStatus.BAD_REQUEST);
+	        }
+	        if (!isValidWebUrl(organizationalDTO.getWebURL())) {
+	            return new ResponseEntity<>("Please enter a valid Web Page URL (e.g. https://example.gov.in).", HttpStatus.BAD_REQUEST);
+	        }
 	    }
 
 	    // Salutation validation
@@ -551,20 +551,20 @@ public class GovernmentAgencyFormController {
 	        return new ResponseEntity<>("The length of Fax must be between 0 and 15 characters.", HttpStatus.BAD_REQUEST);
 	    }
 
-	    // Telephone No validation
-	    if (organizationalDTO.getTelephoneNo() != null && !organizationalDTO.getTelephoneNo().matches("\\d{10,15}")) {
+	    // Telephone No validation (optional)
+	    if (organizationalDTO.getTelephoneNo() != null && !organizationalDTO.getTelephoneNo().trim().isEmpty()
+	            && !organizationalDTO.getTelephoneNo().matches("\\d{10,15}")) {
 	        return new ResponseEntity<>("Please enter a valid telephone number.", HttpStatus.BAD_REQUEST);
 	    }
 
-	    // Web Page URL validation (required)
-	    if (organizationalDTO.getWebURL() == null || organizationalDTO.getWebURL().trim().isEmpty()) {
-	        return new ResponseEntity<>("Web Page URL is required.", HttpStatus.BAD_REQUEST);
-	    }
-	    if (organizationalDTO.getWebURL().trim().length() > 100) {
-	        return new ResponseEntity<>("The length of Web Page URL must not exceed 100 characters.", HttpStatus.BAD_REQUEST);
-	    }
-	    if (!isValidWebUrl(organizationalDTO.getWebURL())) {
-	        return new ResponseEntity<>("Please enter a valid Web Page URL (e.g. https://example.gov.in).", HttpStatus.BAD_REQUEST);
+	    // Web Page URL validation (optional)
+	    if (organizationalDTO.getWebURL() != null && !organizationalDTO.getWebURL().trim().isEmpty()) {
+	        if (organizationalDTO.getWebURL().trim().length() > 100) {
+	            return new ResponseEntity<>("The length of Web Page URL must not exceed 100 characters.", HttpStatus.BAD_REQUEST);
+	        }
+	        if (!isValidWebUrl(organizationalDTO.getWebURL())) {
+	            return new ResponseEntity<>("Please enter a valid Web Page URL (e.g. https://example.gov.in).", HttpStatus.BAD_REQUEST);
+	        }
 	    }
 
 	    // Salutation validation

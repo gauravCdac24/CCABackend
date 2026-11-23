@@ -108,7 +108,8 @@ public class StateServiceImpl implements IStateService{
 
 	@Override
 	public List<State> getAllState() {
-		return stateRepo.findAll(Sort.by(Sort.Direction.DESC, "created"));
+		//return stateRepo.findAll(Sort.by(Sort.Direction.DESC, "created"));
+		return stateRepo.findAll(Sort.by(Sort.Direction.ASC, "stateName"));
 	}
 
 	@Override

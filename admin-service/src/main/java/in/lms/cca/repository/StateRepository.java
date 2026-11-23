@@ -16,11 +16,18 @@ public interface StateRepository extends JpaRepository<State, Long>{
 		@Query("FROM State a WHERE a.countryId.countryId=:countryId")
 		List<State> findStateByCountryId(Long countryId);
 		
-		@Query("FROM State WHERE status = 'Active' ORDER BY created DESC")
-		List<State> findAllActiveState();
+		// @Query("FROM State WHERE status = 'Active' ORDER BY created DESC")
+		// List<State> findAllActiveState();
 		
-		@Query("FROM State WHERE status = 'Inactive' ORDER BY created DESC")
-		List<State> findAllInActiveState();
+		// @Query("FROM State WHERE status = 'Inactive' ORDER BY created DESC")
+		// List<State> findAllInActiveState();
+
+		//
+		@Query("FROM State WHERE status = 'Active' ORDER BY stateName ASC")
+        List<State> findAllActiveState();
+
+        @Query("FROM State WHERE status = 'Inactive' ORDER BY stateName ASC")
+        List<State> findAllInActiveState();
 
 		@Query("FROM State a WHERE a.stateName=:stateName")
 		State findByStateName(@Param("stateName")String stateName);

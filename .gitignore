@@ -1,0 +1,4 @@
+/.metadata/
+
+# Local runtime logs (do not commit)
+.local-logs/

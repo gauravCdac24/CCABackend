@@ -5,7 +5,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 public class CrossOrigins {
 
 	public static final String Origins = "https://ccalms.cca.gov.in";
-	public static final String Origins1 = "https://45.127.74.108:443";
+	public static final String Origins1 = "http://localhost:443";
 	public static final String Local = "http://localhost:3000";
 	public static final String LocalLoopback = "http://127.0.0.1:3000";
 	public static final String LocalLan = "http://10.*.*.*:3000";
