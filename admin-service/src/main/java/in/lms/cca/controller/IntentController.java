@@ -3,7 +3,9 @@ package in.lms.cca.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -392,7 +394,20 @@ public class IntentController {
 	            // Fetch details from IntentUniqueCode if necessary
 	            if (uniqueCodeObj != null) {
 	                IntentUniqueCode intentUniqueCodeDTO = uniqueCodeServ.getUniqueCodeById(uniqueCodeObj.getUniqueCodeId());
-	                return new ResponseEntity<>(intentUniqueCodeDTO, HttpStatus.OK);
+	                // Keep unique-code fields for existing callers; also return intent personal name fields
+	                Map<String, Object> response = new LinkedHashMap<>();
+	                response.put("uniqueCodeId", intentUniqueCodeDTO.getUniqueCodeId());
+	                response.put("uniqueCode", intentUniqueCodeDTO.getUniqueCode());
+	                response.put("emailId", intentUniqueCodeDTO.getEmailId());
+	                response.put("mobileNo", intentUniqueCodeDTO.getMobileNo());
+	                response.put("organizationName", intentUniqueCodeDTO.getOrganizationName());
+	                response.put("appTypeMasterId", intentUniqueCodeDTO.getAppTypeMasterId());
+	                response.put("status", intentUniqueCodeDTO.getStatus());
+	                response.put("salutation", intentObj.getSalutation());
+	                response.put("firstName", intentObj.getFirstName());
+	                response.put("middleName", intentObj.getMiddleName());
+	                response.put("lastName", intentObj.getLastName());
+	                return new ResponseEntity<>(response, HttpStatus.OK);
 	            } else {
 	                return new ResponseEntity<>("Unique Code not found.", HttpStatus.NOT_FOUND);
 	            }

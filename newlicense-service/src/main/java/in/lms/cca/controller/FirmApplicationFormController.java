@@ -1018,18 +1018,20 @@ public class FirmApplicationFormController {
 	                String originalName = file.getOriginalFilename();
 	                System.out.println("Received file for key: " + key + ", filename: " + originalName);
 
-	                // Extract the index from the file key (e.g., "files[passportDocument][1]")
-	                String fileIndexStr = key.replaceAll("[^0-9]", ""); // Extract numbers from the key
-	                int fileIndex = Integer.parseInt(fileIndexStr);
+	                // Extract partner index from keys like files[idCardDocument][0]
+	                java.util.regex.Matcher indexMatcher = java.util.regex.Pattern.compile("\\[(\\d+)\\]\\s*$").matcher(key);
+	                int fileIndex = indexMatcher.find()
+	                        ? Integer.parseInt(indexMatcher.group(1))
+	                        : Integer.parseInt(key.replaceAll("[^0-9]", ""));
 
 	                // Check if the fileIndex matches the current partner index
 	                if (fileIndex == i) {
-	                    // Match the keys and save the file accordingly
-	                    if (key.contains("files[passportDocument]")) {
+	                    // Match document type even if Spring rewrites bracket keys
+	                    if (key.contains("passportDocument")) {
 	                        passportDocumentName = saveFile(file, "passportDocument", currentDate); // Save passport document
-	                    } else if (key.contains("files[idCardDocument]")) {
+	                    } else if (key.contains("idCardDocument")) {
 	                        idCardDocumentName = saveFile(file, "idCardDocument", currentDate); // Save ID card document
-	                    } else if (key.contains("files[panCardDocument]")) {
+	                    } else if (key.contains("panCardDocument")) {
 	                        panCardDocumentName = saveFile(file, "panCardDocument", currentDate); // Save PAN card document
 	                    } else {
 	                        System.out.println("No matching key for file: " + originalName);
@@ -1053,6 +1055,15 @@ public class FirmApplicationFormController {
 	}
 
 
+	/** Normalize country/state/city ids so District is saved/returned consistently for every partner */
+	private String normalizeId(String value) {
+	    if (value == null) {
+	        return null;
+	    }
+	    String trimmed = value.trim();
+	    return trimmed.isEmpty() ? null : trimmed;
+	}
+
 	// Method to save partner details
 	private void savePartnerDetails(PartnerDetailsDTO partner, String passportDocumentName, String idCardDocumentName, String panCardDocumentName) {
 	    IntentApplication intentApps = intentAppServ.findIntentAppById(partner.getUserName());
@@ -1068,9 +1079,9 @@ public class FirmApplicationFormController {
 	    addressDTO.setVillage(partner.getVillage());
 	    addressDTO.setPostOffice(partner.getPostOffice());
 	    addressDTO.setSubDivision(partner.getSubDivision());
-	    addressDTO.setCountry(partner.getCountry());
-	    addressDTO.setCity(partner.getCity());
-	    addressDTO.setState(partner.getState());
+	    addressDTO.setCountry(normalizeId(partner.getCountry()));
+	    addressDTO.setCity(normalizeId(partner.getCity()));
+	    addressDTO.setState(normalizeId(partner.getState()));
 	    addressDTO.setPin(partner.getPin());
 	    addressDTO.setFax(partner.getFax());
 	    addressDTO.setMobile(partner.getMobile());
@@ -1177,83 +1188,45 @@ public class FirmApplicationFormController {
 
 	        List<FirmPartnerDetails> appFirmPartnerDetails = firmPartnerServ.findIntentAppById(intentAppId);
 
-	     // Sort the list in descending order by creation date
+	     // Return all partners in the order they were added (do not limit to 1)
 	     List<FirmPartnerDetails> sortedFirmPartnerDetails = appFirmPartnerDetails.stream()
-	             .sorted((b1, b2) -> b2.getCreated().compareTo(b1.getCreated())) // Sort in descending order
-	             .limit(1)
+	             .sorted((b1, b2) -> b1.getCreated().compareTo(b2.getCreated()))
 	             .collect(Collectors.toList());
 
-	     // Add the sorted list to the response
 	     response.put("appFirmApplications", sortedFirmPartnerDetails);
 
-	     List<AppLocation> appLocation = appLocationServ.findIntentWithoutStatusAppById(intentAppId);
-
-	  // Sort the AppLocation list by created date in descending order
-	  List<AppLocation> sortedAppLocations = appLocation.stream()
-	      .sorted((b1, b2) -> b2.getCreated().compareTo(b1.getCreated())) // Sort in descending order
-	      .collect(Collectors.toList()); // Collect to list
-
-	  // List to hold multiple AddressDTO objects and relevant AppLocation objects
+	  // Resolve each partner's address (all partners share locationName FirmPartnershipAddress)
 	  List<AddressDTO> addressDTOList = new ArrayList<>();
 	  List<AppLocation> filteredAppLocations = new ArrayList<>();
+	  Set<String> seenAddressIds = new HashSet<>();
 
-	  // Use a Set to track unique location names
-	  Set<String> uniqueLocationNames = new HashSet<>();
-
-	  for (AppLocation location : sortedAppLocations) {
-	      String locationName = location.getLocationName();
-
-	      // Only process the location if its name is not already processed
-	      if (!uniqueLocationNames.contains(locationName)) {
-	          uniqueLocationNames.add(locationName); // Mark the locationName as processed
-	          System.out.println("AppLocation object: " + locationName);
-
-	          // Check if the location name is "FirmPartnershipAddress"
-	          if ("FirmPartnershipAddress".equals(locationName)) {
-	              String addressIdStr = location.getAddressId();
-	              if (addressIdStr != null && !addressIdStr.isEmpty()) {
-	                  try {
-	                      // Decrypt the address ID
-	                      String decryptedAddressId = EncryptionUtil.decrypt(addressIdStr);
-	                      System.out.println("Decrypted Address ID: " + decryptedAddressId);
-
-	                      // Retrieve AddressDTO by decrypted address ID
-	                      AddressDTO addressDTO = intentAppServ.getAllLocationByAddressId(decryptedAddressId);
-	                      System.out.println("addressDTO==>" + addressDTO);
-
-	                      // Add the AddressDTO to the list if it's not null
-	                      if (addressDTO != null) {
-	                          addressDTOList.add(addressDTO);
-	                          // Add the AppLocation object to the filtered list
-	                          filteredAppLocations.add(location);
-	                      } else {
-	                          System.out.println("No AddressDTO found for decrypted Address ID: " + decryptedAddressId);
-	                      }
-
-	                  } catch (Exception e) {
-	                      System.out.println("Error processing Address ID: " + addressIdStr + " - " + e.getMessage());
-	                  }
-	              } else {
-	                  System.out.println("Address ID is null or empty for this location.");
-	              }
-	          } else {
-	              System.out.println("Location name is not FirmPartnershipAddress, skipping.");
+	  for (FirmPartnerDetails partner : sortedFirmPartnerDetails) {
+	      String addressIdStr = partner.getAddressId();
+	      if (addressIdStr == null || addressIdStr.isEmpty()) {
+	          continue;
+	      }
+	      try {
+	          String decryptedAddressId = EncryptionUtil.decrypt(addressIdStr);
+	          if (!seenAddressIds.add(decryptedAddressId)) {
+	              continue;
 	          }
-	      } else {
-	          System.out.println("Duplicate location name found: " + locationName + ", skipping.");
+	          AddressDTO addressDTO = intentAppServ.getAllLocationByAddressId(decryptedAddressId);
+	          if (addressDTO != null) {
+	              // Keep plain addressId + normalized location ids so frontend can match/show District
+	              addressDTO.setAddressId(decryptedAddressId);
+	              addressDTO.setCountry(normalizeId(addressDTO.getCountry()));
+	              addressDTO.setState(normalizeId(addressDTO.getState()));
+	              addressDTO.setCity(normalizeId(addressDTO.getCity()));
+	              addressDTOList.add(addressDTO);
+	          }
+	      } catch (Exception e) {
+	          System.out.println("Error processing partner Address ID: " + addressIdStr + " - " + e.getMessage());
 	      }
 	  }
 
-	      // Add the list of addresses and filtered app locations to the response
 	      response.put("addressDTOs", addressDTOList);
 	      response.put("filteredAppLocations", filteredAppLocations);
 
-
-	      // Add the list of addresses and filtered app locations to the response
-	      response.put("addressDTOs", addressDTOList);
-	      response.put("filteredAppLocations", filteredAppLocations);
-
-	        // Return the response with both appFirmPartnerDetails, addressDTOList, and filteredAppLocations
 	        return new ResponseEntity<>(response, HttpStatus.OK);
 
 	    } catch (NumberFormatException e) {
@@ -1308,19 +1281,18 @@ public class FirmApplicationFormController {
 	  	                String originalName = file.getOriginalFilename();
 	  	                System.out.println("Received file for key: " + key + ", filename: " + originalName);
 
-	  	                // Extract the index from the file key (e.g., "files[passportDocument][1]")
-	  	                String fileIndexStr = key.replaceAll("[^0-9]", ""); // Extract numbers from the key
-	  	                int fileIndex = Integer.parseInt(fileIndexStr);
+	  	                java.util.regex.Matcher indexMatcher = java.util.regex.Pattern.compile("\\[(\\d+)\\]\\s*$").matcher(key);
+	  	                int fileIndex = indexMatcher.find()
+	  	                        ? Integer.parseInt(indexMatcher.group(1))
+	  	                        : Integer.parseInt(key.replaceAll("[^0-9]", ""));
 
-	  	                // Check if the fileIndex matches the current partner index
 	  	                if (fileIndex == i) {
-	  	                    // Match the keys and save the file accordingly
-	  	                    if (key.contains("files[passportDocument]")) {
-	  	                        passportDocumentName = saveFile(file, "passportDocument", currentDate); // Save passport document
-	  	                    } else if (key.contains("files[idCardDocument]")) {
-	  	                        idCardDocumentName = saveFile(file, "idCardDocument", currentDate); // Save ID card document
-	  	                    } else if (key.contains("files[panCardDocument]")) {
-	  	                        panCardDocumentName = saveFile(file, "panCardDocument", currentDate); // Save PAN card document
+	  	                    if (key.contains("passportDocument")) {
+	  	                        passportDocumentName = saveFile(file, "passportDocument", currentDate);
+	  	                    } else if (key.contains("idCardDocument")) {
+	  	                        idCardDocumentName = saveFile(file, "idCardDocument", currentDate);
+	  	                    } else if (key.contains("panCardDocument")) {
+	  	                        panCardDocumentName = saveFile(file, "panCardDocument", currentDate);
 	  	                    } else {
 	  	                        System.out.println("No matching key for file: " + originalName);
 	  	                    }
@@ -1355,19 +1327,18 @@ public class FirmApplicationFormController {
 	  	                String originalName = file.getOriginalFilename();
 	  	                System.out.println("Received file for key: " + key + ", filename: " + originalName);
 
-	  	                // Extract the index from the file key (e.g., "files[passportDocument][1]")
-	  	                String fileIndexStr = key.replaceAll("[^0-9]", ""); // Extract numbers from the key
-	  	                int fileIndex = Integer.parseInt(fileIndexStr);
+	  	                java.util.regex.Matcher indexMatcher = java.util.regex.Pattern.compile("\\[(\\d+)\\]\\s*$").matcher(key);
+	  	                int fileIndex = indexMatcher.find()
+	  	                        ? Integer.parseInt(indexMatcher.group(1))
+	  	                        : Integer.parseInt(key.replaceAll("[^0-9]", ""));
 
-	  	                // Check if the fileIndex matches the current partner index
 	  	                if (fileIndex == i) {
-	  	                    // Match the keys and save the file accordingly
-	  	                    if (key.contains("files[passportDocument]")) {
-	  	                        passportDocumentName = saveFile(file, "passportDocument", currentDate); // Save passport document
-	  	                    } else if (key.contains("files[idCardDocument]")) {
-	  	                        idCardDocumentName = saveFile(file, "idCardDocument", currentDate); // Save ID card document
-	  	                    } else if (key.contains("files[panCardDocument]")) {
-	  	                        panCardDocumentName = saveFile(file, "panCardDocument", currentDate); // Save PAN card document
+	  	                    if (key.contains("passportDocument")) {
+	  	                        passportDocumentName = saveFile(file, "passportDocument", currentDate);
+	  	                    } else if (key.contains("idCardDocument")) {
+	  	                        idCardDocumentName = saveFile(file, "idCardDocument", currentDate);
+	  	                    } else if (key.contains("panCardDocument")) {
+	  	                        panCardDocumentName = saveFile(file, "panCardDocument", currentDate);
 	  	                    } else {
 	  	                        System.out.println("No matching key for file: " + originalName);
 	  	                    }
@@ -1383,8 +1354,26 @@ public class FirmApplicationFormController {
 	          System.out.println("All entries are active in both FirmPartnerDetails and AppLocation.");
 	          // Proceed with your logic
 	      }
-	    
-	   
+
+	    // Partners removed in UI (2nd/3rd) must not come back on reload
+	    Set<Long> submittedPartnerIds = partnerDetailsList.stream()
+	            .map(PartnerDetailsDTO::getPartnerDetailId)
+	            .filter(id -> id != null && !id.isBlank())
+	            .map(Long::valueOf)
+	            .collect(Collectors.toSet());
+	    Date deactivateDate = new Date();
+	    for (FirmPartnerDetails existingPartner : firmPartnerDetails) {
+	        Long existingId = existingPartner.getPartnerDetailId();
+	        if (existingId == null || submittedPartnerIds.contains(existingId)) {
+	            continue;
+	        }
+	        if ("Inactive".equalsIgnoreCase(existingPartner.getStatus())) {
+	            continue;
+	        }
+	        existingPartner.setStatus("Inactive");
+	        existingPartner.setUpdated(deactivateDate);
+	        firmPartnerServ.updateData(existingPartner);
+	    }
 
 	    return new ResponseEntity<>("Third step (Partner Details) updated successfully.", HttpStatus.OK);
 	}
@@ -1404,9 +1393,9 @@ public class FirmApplicationFormController {
 	    addressDTO.setVillage(partner.getVillage());
 	    addressDTO.setPostOffice(partner.getPostOffice());
 	    addressDTO.setSubDivision(partner.getSubDivision());
-	    addressDTO.setCountry(partner.getCountry());
-	    addressDTO.setCity(partner.getCity());
-	    addressDTO.setState(partner.getState());
+	    addressDTO.setCountry(normalizeId(partner.getCountry()));
+	    addressDTO.setCity(normalizeId(partner.getCity()));
+	    addressDTO.setState(normalizeId(partner.getState()));
 	    addressDTO.setPin(partner.getPin());
 	    addressDTO.setFax(partner.getFax());
 	    addressDTO.setMobile(partner.getMobile());
@@ -1442,9 +1431,9 @@ public class FirmApplicationFormController {
 	    firmPartner.setVoterIdCard(partner.getVoterCardNo());
 	    firmPartner.setPan(partner.getPancardNo());
 	    
-	    firmPartner.setPanDocument(partner.getPancardDocument());
-	    firmPartner.setVoterIdCardDocument(partner.getVoterCardDocument());
-	    firmPartner.setPassportDocument(partner.getPassportDocument());
+	    firmPartner.setPanDocument(panCardDocumentName != null ? panCardDocumentName : partner.getPancardDocument());
+	    firmPartner.setVoterIdCardDocument(idCardDocumentName != null ? idCardDocumentName : partner.getVoterCardDocument());
+	    firmPartner.setPassportDocument(passportDocumentName != null ? passportDocumentName : partner.getPassportDocument());
 	    firmPartner.setPersonalWebPage(partner.getWebURL());
 	    firmPartner.setNationality(partner.getNationality());
 	    firmPartner.setAddressId(EncryptionUtil.encrypt(String.valueOf(resAddId)));

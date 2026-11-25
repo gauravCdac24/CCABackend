@@ -11,7 +11,7 @@ import in.lms.cca.entity.FirmPartnerDetails;
 public interface FirmPartnerRepository extends JpaRepository<FirmPartnerDetails, Long> {
 
 	
-	@Query("SELECT d FROM FirmPartnerDetails d WHERE d.intentAppId.intentAppId = :intentAppId")
+	@Query("SELECT d FROM FirmPartnerDetails d WHERE d.intentAppId.intentAppId = :intentAppId AND (d.status IS NULL OR LOWER(d.status) = 'active')")
 	 List<FirmPartnerDetails> findIntentAppById(@Param("intentAppId")Long intentAppId);
 
 	@Query("SELECT d FROM FirmPartnerDetails d WHERE d.intentAppId.intentAppId = :intentAppId")

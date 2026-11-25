@@ -506,11 +506,13 @@ public class IndividualApplicationFormController {
 	        indivAdditionalDetails.setPassportIssuingAuthority(passportIssuingAuthority);
 
 	        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	        Date publishDateParsed;
-	        try {
-	            publishDateParsed = dateFormat.parse(passportExpiryDate);
-	        } catch (ParseException e) {
-	            return new ResponseEntity<>("Invalid  date format.", HttpStatus.BAD_REQUEST);
+	        Date publishDateParsed = null;
+	        if (passportExpiryDate != null && !passportExpiryDate.trim().isEmpty()) {
+	            try {
+	                publishDateParsed = dateFormat.parse(passportExpiryDate.trim());
+	            } catch (ParseException e) {
+	                return new ResponseEntity<>("Invalid  date format.", HttpStatus.BAD_REQUEST);
+	            }
 	        }
 	        indivAdditionalDetails.setPassportExpiryDate(publishDateParsed);
 	        indivAdditionalDetails.setVoterId(voterIdNo);
@@ -2175,14 +2177,16 @@ List<ApplicationDocument> sortedActiveDocuments = applicationDocument.stream()
 	    	
 	    	 System.out.println("file4====>"+file4);
 	    	
-	        // Parse and validate the expiry date
+	        // Parse and validate the expiry date (optional when passport is not selected)
 	        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	        Date publishDateParsed;
-	        try {
-	            publishDateParsed = dateFormat.parse(passportExpiryDate);
-	        } catch (ParseException e) {
-	            return new ResponseEntity<>("Invalid date format.", HttpStatus.BAD_REQUEST);
-	        }  
+	        Date publishDateParsed = null;
+	        if (passportExpiryDate != null && !passportExpiryDate.trim().isEmpty()) {
+	            try {
+	                publishDateParsed = dateFormat.parse(passportExpiryDate.trim());
+	            } catch (ParseException e) {
+	                return new ResponseEntity<>("Invalid date format.", HttpStatus.BAD_REQUEST);
+	            }
+	        }
 	        IntentApplication intentApp = intentAppServ.findIntentAppById(useName);
 	        
 	        List<IndivAdditionalDetails> indivAdditionalDetailsList = indivAdditionalDetailsServiceServ.findIntentWithoutStatusAppById(intentApp.getIntentAppId());
@@ -2218,12 +2222,13 @@ List<ApplicationDocument> sortedActiveDocuments = applicationDocument.stream()
 	 	        indivAdditionalDetails.setPassportNo(passportNo);
 	 	        indivAdditionalDetails.setPassportIssuingAuthority(passportIssuingAuthority);
 
-	 	        SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
-	 	        Date publishDateParsed1;
-	 	        try {
-	 	            publishDateParsed1 = dateFormat1.parse(passportExpiryDate);
-	 	        } catch (ParseException e) {
-	 	            return new ResponseEntity<>("Invalid  date format.", HttpStatus.BAD_REQUEST);
+	 	        Date publishDateParsed1 = null;
+	 	        if (passportExpiryDate != null && !passportExpiryDate.trim().isEmpty()) {
+	 	            try {
+	 	                publishDateParsed1 = dateFormat.parse(passportExpiryDate.trim());
+	 	            } catch (ParseException e) {
+	 	                return new ResponseEntity<>("Invalid  date format.", HttpStatus.BAD_REQUEST);
+	 	            }
 	 	        }
 	 	        indivAdditionalDetails.setPassportExpiryDate(publishDateParsed1);
 	 	        indivAdditionalDetails.setVoterId(voterIdNo);
@@ -2282,15 +2287,15 @@ List<ApplicationDocument> sortedActiveDocuments = applicationDocument.stream()
 	 	            applicationDocumentServiceServ.addApplicationDocument(panDocument);
 	 	        }
 	 	        // Handle capital proof document
-	 	        ApplicationDocument capitalDocument = new ApplicationDocument();
-	 	        capitalDocument.setDocumentTitle(capitalDocuments);
-	 	        if (file3 != null && !file4.isEmpty()) {
+	 	        if (file4 != null && !file4.isEmpty()) {
+	 	            ApplicationDocument capitalDocument = new ApplicationDocument();
+	 	            capitalDocument.setDocumentTitle(capitalDocuments);
 	 	            String capitalFileName = saveFile(file4, capitalDocuments, currentDate);
-	 	            capitalDocument.setFileName(capitalFileName);  // e.g., capitalName_20230908_153012
+	 	            capitalDocument.setFileName(capitalFileName);
+	 	            capitalDocument.setIntentAppId(intentApp);
+	 	            capitalDocument.setStatus("ACTIVE");
+	 	            applicationDocumentServiceServ.addApplicationDocument(capitalDocument);
 	 	        }
-	 	        capitalDocument.setIntentAppId(intentApp); 
-	 	        capitalDocument.setStatus("ACTIVE");
-	 	        applicationDocumentServiceServ.addApplicationDocument(capitalDocument);
 	 	      
 	 	        // Save all documents to the database
 	 	        
@@ -2327,19 +2332,11 @@ List<ApplicationDocument> sortedActiveDocuments = applicationDocument.stream()
 	 	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
 	 	        String currentDate = LocalDateTime.now().format(formatter);
 
-	 	        // Save documents
-	 	        if (file1 != null && !file1.isEmpty()) {
-	 	            saveDocument(file1, "passportDocument", passportappDocId, currentDate, passportName, intentApp.getIntentAppId(), fileName1);
-	 	        }
-	 	        if (file2 != null && !file2.isEmpty()) {
-	 	            saveDocument(file2, "idCardDocument", votarappDocId, currentDate, voterCardName, intentApp.getIntentAppId(), fileName2);
-	 	        }
-	 	        if (file3 != null && !file3.isEmpty()) {
-	 	            saveDocument(file3, "panCardDocument", panappDocId, currentDate, panCardName, intentApp.getIntentAppId(), fileName3);
-	 	        }
-	 	       
-	 	        
-	 	        saveDocument(file4, "capitalDocument", capitalappDocId, currentDate, capitalName, intentApp.getIntentAppId(), fileName4);
+	 	        // ID card + capital documents: update when appDocId exists, otherwise add new file
+	 	        saveOrUpdateIdCardDocument(file1, "passportDocument", passportappDocId, currentDate, fileName1, intentApp);
+	 	        saveOrUpdateIdCardDocument(file2, "idCardDocument", votarappDocId, currentDate, fileName2, intentApp);
+	 	        saveOrUpdateIdCardDocument(file3, "panCardDocument", panappDocId, currentDate, fileName3, intentApp);
+	 	        saveOrUpdateIdCardDocument(file4, "capitalDocument", capitalappDocId, currentDate, fileName4, intentApp);
 	 	       
 
 	        	 
@@ -2376,6 +2373,51 @@ List<ApplicationDocument> sortedActiveDocuments = applicationDocument.stream()
 
 	    applicationDocumentServiceServ.updateApplicationDocument(document);
 	    
+	}
+
+	/**
+	 * Saves ID-card/capital document for form step-3 update.
+	 * - New upload without appDocId → insert
+	 * - Upload/existing with appDocId → update
+	 * - No file and no appDocId → skip (e.g. unselected ID card type)
+	 */
+	private void saveOrUpdateIdCardDocument(MultipartFile file, String documentTitle, String appDocId,
+	        String currentDate, String existingFileName, IntentApplication intentApp) throws IOException {
+	    boolean hasNewFile = file != null && !file.isEmpty();
+	    boolean hasDocId = appDocId != null && !appDocId.trim().isEmpty();
+
+	    if (!hasNewFile && !hasDocId) {
+	        return;
+	    }
+
+	    if (hasDocId) {
+	        ApplicationDocument document = new ApplicationDocument();
+	        document.setDocumentTitle(documentTitle);
+	        document.setAppDocId(Long.valueOf(appDocId.trim()));
+	        Date date = new Date();
+	        document.setCreated(date);
+	        document.setUpdated(date);
+	        document.setStatus("ACTIVE");
+	        document.setIntentAppId(intentApp);
+	        if (hasNewFile) {
+	            document.setFileName(saveFile(file, documentTitle, currentDate));
+	        } else if (existingFileName != null && !existingFileName.trim().isEmpty()) {
+	            document.setFileName(existingFileName);
+	        } else {
+	            return;
+	        }
+	        applicationDocumentServiceServ.updateApplicationDocument(document);
+	        return;
+	    }
+
+	    if (hasNewFile) {
+	        ApplicationDocument document = new ApplicationDocument();
+	        document.setDocumentTitle(documentTitle);
+	        document.setFileName(saveFile(file, documentTitle, currentDate));
+	        document.setIntentAppId(intentApp);
+	        document.setStatus("ACTIVE");
+	        applicationDocumentServiceServ.addApplicationDocument(document);
+	    }
 	}
 
 	@PostMapping(IndividualApplicationFormAPIs.UPDATE_INDIVIDUAL_APPLICATIONS_FORM4)
