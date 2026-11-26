@@ -47,4 +47,9 @@ public class ESignedDocumentsServiceImpl implements EsignedDocumentsService {
 	
 	
 
+	@Override
+	public List<ESignedDocumentsEntity> getAllForApplicant(String userName) {
+		return documentsRepository.getAllForApplicant(userName);
+	}
+
 }

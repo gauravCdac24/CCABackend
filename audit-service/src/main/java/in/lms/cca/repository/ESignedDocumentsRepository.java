@@ -16,4 +16,13 @@ public interface ESignedDocumentsRepository extends JpaRepository< ESignedDocume
 	@Query("FROM ESignedDocumentsEntity a WHERE a.userName = :eSignDocId")
 	List<ESignedDocumentsEntity> getEsignDocumentByUserName(@Param("eSignDocId")String eSignDocId);
 
+
+	/**
+	 * All eSign rows for an applicant: the plain username (legacy / cover letter
+	 * flows) plus every composite signer row such as {@code UCCA...|AUDITOR:63}
+	 * or {@code UCCA...|ACCEPTANCE}.
+	 */
+	@Query("FROM ESignedDocumentsEntity a WHERE a.userName = :userName OR a.userName LIKE CONCAT(:userName, '|%')")
+	List<ESignedDocumentsEntity> getAllForApplicant(@Param("userName") String userName);
+
 }

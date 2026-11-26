@@ -8,6 +8,7 @@ public class AuditAgencyServiceAPIs {
 	public static final String GET_ALL_AUDIT_AGENCY = "/get-all-audit-agency";
 	public static final String GET_ALL_ACTIVE_AUDIT_AGENCY = "/get-all-active-audit-agency";
 	public static final String GET_AUDIT_AGENCY_BY_ID = "/get-audit-agency-by-id";
+	public static final String GET_AUDITORS_BY_AGENCY_ID = "/get-auditors-by-agency-id";
 	public static final String DOWNLOAD_FILE = "/download-file";
 	public static final String CHANGE_AUDIT_AGENCY_STATUS = "status-change";
 	public static final String GET_AUDIT_AGENCY_BY_USERNAME = "/get-audit-agency-by-username/{username}";

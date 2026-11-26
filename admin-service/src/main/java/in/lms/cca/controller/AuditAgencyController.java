@@ -410,8 +410,14 @@ public class AuditAgencyController {
                 auditAgencyDTO.setPin(address.getPincode());
             }
 
-	        // Map auditors to DTO
-	        List<AuditorsDTO> auditorsDTOList = auditorsList.stream()
+	        // Prefer Active auditors; if none, still return all so Select Auditor is not empty
+	        List<Auditors> activeAuditors = auditorsList.stream()
+	            .filter(auditor -> auditor != null && "Active".equalsIgnoreCase(auditor.getStatus()))
+	            .collect(Collectors.toList());
+	        List<Auditors> auditorsForDto = activeAuditors.isEmpty() ? auditorsList : activeAuditors;
+
+	        List<AuditorsDTO> auditorsDTOList = auditorsForDto.stream()
+	            .filter(auditor -> auditor != null)
 	            .map(auditor -> {
 	                AuditorsDTO auditorsDTO = new AuditorsDTO();
 	                auditorsDTO.setAuditorsId(auditor.getAuditorsId() != null ? String.valueOf(auditor.getAuditorsId()) : null);
@@ -886,9 +892,14 @@ public class AuditAgencyController {
 	    // Fetch auditors for the current audit agency
 	    List<Auditors> auditorsList = auditorsServ.findByAuditAgencyId(auditAgency.getAuditAgencyId());
 
-	    // Map auditors to DTO and filter by status
-	    List<AuditorsDTO> auditorsDTOList = auditorsList.stream()
-	        .filter(auditor -> "Active".equals(auditor.getStatus()))  // Filter by status
+	    // Prefer Active; if none (e.g. wrongly inactivated), still return all for Select Auditor
+	    List<Auditors> activeAuditors = auditorsList.stream()
+	        .filter(auditor -> auditor != null && "Active".equalsIgnoreCase(auditor.getStatus()))
+	        .collect(Collectors.toList());
+	    List<Auditors> auditorsForDto = activeAuditors.isEmpty() ? auditorsList : activeAuditors;
+
+	    List<AuditorsDTO> auditorsDTOList = auditorsForDto.stream()
+	        .filter(auditor -> auditor != null)
 	        .map(auditor -> {
 	            AuditorsDTO auditorsDTO = new AuditorsDTO();
 	            auditorsDTO.setSalutation(auditor.getSalutation());
@@ -911,7 +922,7 @@ public class AuditAgencyController {
 
 	    if (address != null) {
 	        auditAgencyDTO.setAddressId(String.valueOf(address.getAddressId()));
-	        auditAgencyDTO.setAuditAgencyId(auditAgencyId);
+	        auditAgencyDTO.setAuditAgencyId(String.valueOf(auditAgency.getAuditAgencyId()));
 	        auditAgencyDTO.setBlockNo(address.getBlockNo());
 	        auditAgencyDTO.setVillage(address.getVillage());
 	        auditAgencyDTO.setPostOffice(address.getPostOffice());
@@ -973,6 +984,39 @@ public class AuditAgencyController {
 
 	    // Return the response with the DTO
 	    return new ResponseEntity<>(auditAgencyDTO, HttpStatus.OK);
+	}
+
+	@GetMapping(AuditAgencyServiceAPIs.GET_AUDITORS_BY_AGENCY_ID)
+	public ResponseEntity<?> getAuditorsByAgencyId(@RequestParam("id") String agencyIdParam) {
+		try {
+			Long agencyId = resolveAgencyLongId(agencyIdParam);
+			if (agencyId == null) {
+				return new ResponseEntity<>("Invalid audit agency id.", HttpStatus.BAD_REQUEST);
+			}
+			List<Auditors> auditorsList = auditorsServ.findByAuditAgencyId(agencyId);
+			if (auditorsList == null) {
+				auditorsList = new ArrayList<>();
+			}
+			List<Auditors> active = auditorsList.stream()
+					.filter(a -> a != null && "Active".equalsIgnoreCase(a.getStatus()))
+					.collect(Collectors.toList());
+			List<Auditors> source = active.isEmpty() ? auditorsList : active;
+			List<AuditorsDTO> dtoList = source.stream().filter(a -> a != null).map(auditor -> {
+				AuditorsDTO dto = new AuditorsDTO();
+				dto.setAuditorsId(auditor.getAuditorsId() != null ? String.valueOf(auditor.getAuditorsId()) : null);
+				dto.setSalutation(auditor.getSalutation());
+				dto.setFirstName(auditor.getFirstName());
+				dto.setMiddleName(auditor.getMiddleName());
+				dto.setLastName(auditor.getLastName());
+				dto.setCertificateType(auditor.getCertificateType());
+				dto.setStatus(auditor.getStatus());
+				return dto;
+			}).collect(Collectors.toList());
+			return new ResponseEntity<>(dtoList, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Failed to fetch auditors.", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 	
 	@GetMapping(AuditAgencyServiceAPIs.DOWNLOAD_FILE)
@@ -1268,6 +1312,22 @@ public class AuditAgencyController {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.body("Error fetching audit agency by name: " + e.getMessage());
+		}
+	}
+
+	private Long resolveAgencyLongId(String raw) {
+		if (raw == null || raw.trim().isEmpty()) {
+			return null;
+		}
+		String value = raw.trim().replace("\"", "");
+		String decrypted = EncryptionUtil.decrypt(value);
+		if (decrypted != null && !decrypted.trim().isEmpty()) {
+			value = decrypted.trim().replace("\"", "");
+		}
+		try {
+			return Long.valueOf(value);
+		} catch (NumberFormatException ex) {
+			return null;
 		}
 	}
 

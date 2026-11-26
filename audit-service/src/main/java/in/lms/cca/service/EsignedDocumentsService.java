@@ -13,4 +13,6 @@ public interface EsignedDocumentsService {
 
 	List<ESignedDocumentsEntity> getEsignDocumentByUserName(String eSignDocId);
 
+	List<ESignedDocumentsEntity> getAllForApplicant(String userName);
+
 }

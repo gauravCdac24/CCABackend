@@ -1555,6 +1555,30 @@ public class ApplicationReviewController {
 				return new ResponseEntity<>("Failed: " + e.getMessage(), HttpStatus.BAD_REQUEST);
 			}
 		}
+
+		@GetMapping("/change-applicant-pending-audit-acceptance/{applicantUserName}")
+		public ResponseEntity<?> changeStatusPendingAuditAcceptance(
+				@PathVariable String applicantUserName) {
+			String userName = applicantUserName;
+			try {
+				IntentApplication intentApp = intentAppServ.findIntentAppById(userName);
+				if (intentApp == null) {
+					return new ResponseEntity<>("Application not found for username: " + userName,
+							HttpStatus.NOT_FOUND);
+				}
+				IntentApplication inApp = intentAppServ.getIntentByIntentAppId(intentApp.getIntentAppId());
+				if (inApp == null) {
+					return new ResponseEntity<>("Application details not found", HttpStatus.NOT_FOUND);
+				}
+				inApp.setApplicationStatus(ApplicationStatusUtil.PENDING_AUDIT_ACCEPTANCE);
+				inApp.setUpdated(new Date());
+				intentAppServ.updateIntentApp(inApp);
+				return new ResponseEntity<>("Success", HttpStatus.OK);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return new ResponseEntity<>("Failed: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+			}
+		}
 		
 			@GetMapping("/change-applicant-approve-for-rejection/{applicantUserName}")
 			public ResponseEntity<?> changeStatusApproveForRejection(

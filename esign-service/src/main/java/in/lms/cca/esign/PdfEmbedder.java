@@ -8,6 +8,9 @@ import com.itextpdf.kernel.pdf.*;
 import com.itextpdf.signatures.*;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.security.GeneralSecurityException;
 import java.security.MessageDigest;
 import java.security.Security;
@@ -16,6 +19,7 @@ import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.Base64;
 import java.util.Calendar;
+import java.util.Map;
 
 import javax.security.auth.x500.X500Principal;
 
@@ -26,15 +30,16 @@ import in.lms.cca.util.golbal.RealPath;
 public class PdfEmbedder {
 
     private static final String FIELD_NAME = "CDAC_ESIGN_SIG";
+    private static final String SIG_FIELD_SUFFIX = ".sigfield";
 
     /**
      * Two-pass approach, pass 1:
      * Prepares the PDF with a blank signature placeholder and returns the SHA-256
      * hex digest of the PDF byte range.
      *
-     * This digest MUST be sent to CDAC as the InputHash so that the PKCS7 blob
-     * CDAC returns is cryptographically tied to the exact bytes that iText will
-     * later verify — fixing the "signature invalid / document modified" error.
+     * Supports multi-auditor chaining: if the PDF already has a signed
+     * {@code CDAC_ESIGN_SIG*} field, a new unique field is created so the next
+     * signer can append without "Field has been already signed".
      *
      * @param src        path to the uploaded (original) PDF
      * @param dest       path to write the prepared PDF (may be the same as src)
@@ -43,6 +48,9 @@ public class PdfEmbedder {
      */
     public static String prepareForSigning(String src, String dest, String signerName) throws Exception {
         Security.addProvider(new BouncyCastleProvider());
+
+        int existingSigCount = countSignatureFields(src);
+        String fieldName = existingSigCount <= 0 ? FIELD_NAME : FIELD_NAME + "_" + (existingSigCount + 1);
 
         ByteArrayOutputStream preparedStream = new ByteArrayOutputStream();
 
@@ -54,20 +62,20 @@ public class PdfEmbedder {
         StampingProperties props = new StampingProperties().useAppendMode();
         PdfSigner signer = new PdfSigner(reader, preparedStream, props);
 
-        // Position signature box bottom-right of page 1
+        // Stack signature boxes upward so later auditors do not cover earlier ones
         PdfDocument tmpDoc = signer.getDocument();
         PdfPage page = tmpDoc.getPage(1);
         Rectangle pageSize = page.getPageSize();
         float sigWidth = 200, sigHeight = 50;
         float xPos = pageSize.getWidth() - (sigWidth + 20);
-        float yPos = 10;
+        float yPos = 10 + Math.max(0, existingSigCount) * (sigHeight + 8);
 
-        SignatureFieldAppearance appearance = new SignatureFieldAppearance(FIELD_NAME);
+        SignatureFieldAppearance appearance = new SignatureFieldAppearance(fieldName);
         appearance.setContent("Digitally signed by " + (signerName != null ? signerName : ""));
         appearance.setFontSize(8);
 
         signer.setSignatureAppearance(appearance);
-        signer.setFieldName(FIELD_NAME);
+        signer.setFieldName(fieldName);
         signer.setPageNumber(1);
         signer.setPageRect(new Rectangle(xPos, yPos, sigWidth, sigHeight));
         signer.setSignDate(Calendar.getInstance());
@@ -83,6 +91,7 @@ public class PdfEmbedder {
         try (FileOutputStream fos = new FileOutputStream(dest)) {
             fos.write(preparedBytes);
         }
+        writeSigFieldName(dest, fieldName);
 
         // Extract /ByteRange written by iText.
         // PdfAcroForm.getAcroForm is the correct iText 8 API (PdfFormCreator does not exist).
@@ -90,10 +99,10 @@ public class PdfEmbedder {
         preparedReader.setUnethicalReading(true);
         PdfDocument preparedDoc = new PdfDocument(preparedReader);
         PdfAcroForm acroForm = PdfAcroForm.getAcroForm(preparedDoc, false);
-        PdfFormField sigField = acroForm.getField(FIELD_NAME);
+        PdfFormField sigField = acroForm.getField(fieldName);
         if (sigField == null) {
             preparedDoc.close();
-            throw new IllegalStateException("Signature field '" + FIELD_NAME + "' not found after preparation");
+            throw new IllegalStateException("Signature field '" + fieldName + "' not found after preparation");
         }
         PdfDictionary valueDict = sigField.getPdfObject().getAsDictionary(PdfName.V);
         if (valueDict == null) {
@@ -140,6 +149,7 @@ public class PdfEmbedder {
 
         signatureValue = signatureValue.trim().replaceAll("[^A-Za-z0-9+/=]", "");
         final byte[] pkcs7Bytes = Base64.getDecoder().decode(signatureValue);
+        final String fieldName = resolveSigFieldName(src);
 
         PdfReader reader = new PdfReader(src);
         reader.setUnethicalReading(true);
@@ -147,7 +157,7 @@ public class PdfEmbedder {
 
         RealPath.ensureParentDirectory(dest);
         try (OutputStream out = new FileOutputStream(dest)) {
-            PdfSigner.signDeferred(preparedDoc, FIELD_NAME, out,
+            PdfSigner.signDeferred(preparedDoc, fieldName, out,
                     new IExternalSignatureContainer() {
                         @Override
                         public byte[] sign(InputStream data) throws GeneralSecurityException {
@@ -167,6 +177,76 @@ public class PdfEmbedder {
         preparedDoc.close();
 
         return "Document signed successfully.";
+    }
+
+    private static int countSignatureFields(String src) throws IOException {
+        PdfReader reader = new PdfReader(src);
+        reader.setUnethicalReading(true);
+        PdfDocument doc = new PdfDocument(reader);
+        try {
+            PdfAcroForm acroForm = PdfAcroForm.getAcroForm(doc, false);
+            if (acroForm == null) {
+                return 0;
+            }
+            Map<String, PdfFormField> fields = acroForm.getAllFormFields();
+            if (fields == null || fields.isEmpty()) {
+                return 0;
+            }
+            int count = 0;
+            for (String name : fields.keySet()) {
+                if (name != null && name.startsWith(FIELD_NAME)) {
+                    count++;
+                }
+            }
+            return count;
+        } finally {
+            doc.close();
+        }
+    }
+
+    private static void writeSigFieldName(String destPdf, String fieldName) throws IOException {
+        Path sidecar = Path.of(destPdf + SIG_FIELD_SUFFIX);
+        Files.writeString(sidecar, fieldName == null ? FIELD_NAME : fieldName, StandardCharsets.UTF_8);
+    }
+
+    private static String resolveSigFieldName(String srcPdf) throws IOException {
+        Path sidecar = Path.of(srcPdf + SIG_FIELD_SUFFIX);
+        if (Files.exists(sidecar)) {
+            String name = Files.readString(sidecar, StandardCharsets.UTF_8).trim();
+            if (!name.isEmpty()) {
+                return name;
+            }
+        }
+        // Fallback for older prepared PDFs without a sidecar: prefer blank field, else default
+        PdfReader reader = new PdfReader(srcPdf);
+        reader.setUnethicalReading(true);
+        PdfDocument doc = new PdfDocument(reader);
+        try {
+            PdfAcroForm acroForm = PdfAcroForm.getAcroForm(doc, false);
+            if (acroForm != null) {
+                Map<String, PdfFormField> fields = acroForm.getAllFormFields();
+                if (fields != null) {
+                    String latestBlank = null;
+                    for (Map.Entry<String, PdfFormField> entry : fields.entrySet()) {
+                        String name = entry.getKey();
+                        if (name == null || !name.startsWith(FIELD_NAME)) {
+                            continue;
+                        }
+                        PdfDictionary valueDict = entry.getValue().getPdfObject().getAsDictionary(PdfName.V);
+                        if (valueDict != null && valueDict.getAsString(PdfName.Contents) != null) {
+                            // blank placeholder still has Contents zeroes — keep scanning for newest
+                            latestBlank = name;
+                        }
+                    }
+                    if (latestBlank != null) {
+                        return latestBlank;
+                    }
+                }
+            }
+        } finally {
+            doc.close();
+        }
+        return FIELD_NAME;
     }
 
     public static String findSignerName(String certificateString) throws CertificateException {

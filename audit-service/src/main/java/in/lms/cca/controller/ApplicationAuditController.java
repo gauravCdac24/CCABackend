@@ -207,6 +207,9 @@ public class ApplicationAuditController {
 	private EsignedDocumentsService documentsService;
 
 	@Autowired
+	private in.lms.cca.repository.ApplicantAuditAcceptanceRepository applicantAuditAcceptanceRepository;
+
+	@Autowired
 	private IAnnualAuditPeriodMainService periodMainServ;
 
 	@Autowired
@@ -3461,7 +3464,8 @@ contentBuilder.append("<h3 style='color: red;'>15. CA Self-assessment for audit 
 	        @RequestParam(value ="annexureVIII" , required = false) MultipartFile annexureVIII,
 	        @RequestParam(value ="annexureVIIIRepeat" , required = false) MultipartFile annexureVIIIRepeat,
 	        @RequestParam(value ="annexureVIIIUndertaking" , required = false) MultipartFile annexureVIIIUndertaking,
-	        @RequestParam(value = "preview", required = false, defaultValue = "false") boolean preview) {
+	        @RequestParam(value = "preview", required = false, defaultValue = "false") boolean preview,
+	        @RequestParam(value = "signerKey", required = false) String signerKey) {
 
 	    if (userName == null || userName.trim().isEmpty()) {
 	        return ResponseEntity.badRequest().body("Username is required");
@@ -3481,7 +3485,8 @@ contentBuilder.append("<h3 style='color: red;'>15. CA Self-assessment for audit 
 
 	        String downloadFileName = "AuditReportPreview.pdf";
 	        if (!preview) {
-	            Optional<ESignedDocumentsEntity> optional = resolveOrCreatePendingEsignRecord(normalizedUserName);
+	            String esignLookupUser = resolveAuditorEsignUserName(normalizedUserName, signerKey);
+	            Optional<ESignedDocumentsEntity> optional = resolveOrCreatePendingEsignRecord(esignLookupUser);
 	            if (!optional.isPresent()) {
 	                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to save eSigned document");
 	            }
@@ -4010,8 +4015,41 @@ contentBuilder.append("<h3 style='color: red;'>15. CA Self-assessment for audit 
 				edoc.setStatus("Active");
 				documentsService.addEsignDocument(edoc);
 
-				if (edoc.getUserName() != null && !edoc.getUserName().isBlank()) {
-					auditReportCriteriaService.changedTheStatus(edoc.getUserName());
+				String edocUser = edoc.getUserName() != null ? edoc.getUserName().trim() : "";
+				String edocSignerKey = edoc.getSignerKey() != null ? edoc.getSignerKey().trim().toUpperCase() : "";
+				boolean acceptanceSigner = edocUser.endsWith("|ACCEPTANCE")
+						|| edocSignerKey.equals("ACCEPTANCE")
+						|| edocSignerKey.startsWith("ACCEPTANCE");
+				if (acceptanceSigner && !edocUser.isEmpty()) {
+					// Applicant signed the Audit acceptance letter → Review NC Report
+					String applicantUserName = edocUser.contains("|")
+							? edocUser.substring(0, edocUser.indexOf('|')).trim()
+							: edocUser;
+					in.lms.cca.entity.ApplicantAuditAcceptanceEntity acceptance = applicantAuditAcceptanceRepository
+							.findFirstByApplicantUserNameOrderByAcceptanceIdDesc(applicantUserName).orElse(null);
+					if (acceptance != null) {
+						acceptance.setSignedDocId(edoc.getSignedDocId());
+						acceptance.setEsignStatus("SIGNED");
+						applicantAuditAcceptanceRepository.save(acceptance);
+					}
+					if (applicantUserName != null && !applicantUserName.isBlank()) {
+						try {
+							auditReportCriteriaService.changedTheStatus(applicantUserName);
+						} catch (Exception statusEx) {
+							statusEx.printStackTrace();
+						}
+					}
+				} else if (!edocUser.isEmpty()) {
+					if (isAuditorEsignUserName(edoc.getUserName())) {
+						String applicantUserName = extractApplicantFromAuditorEsignUserName(edoc.getUserName());
+						if (areAllAuditorsEsignComplete(applicantUserName)) {
+							auditReportCriteriaService
+									.changedTheStatusPendingAuditAcceptance(applicantUserName);
+						}
+					} else {
+						auditReportCriteriaService
+								.changedTheStatusPendingAuditAcceptance(edoc.getUserName());
+					}
 				}
 
 			}
@@ -4023,29 +4061,86 @@ contentBuilder.append("<h3 style='color: red;'>15. CA Self-assessment for audit 
 		}
 	}
 
-	@GetMapping("/get-esign-document-id")
-	public ResponseEntity<?> eSignDocumentId(@RequestParam("userName") String userName) {
-
+	@GetMapping("/multi-auditor-esign-status")
+	public ResponseEntity<?> getMultiAuditorEsignStatus(@RequestParam("userName") String userName) {
 		try {
-
-			String eSignDocId = userName;
-			List<ESignedDocumentsEntity> edoc = documentsService.getEsignDocumentByUserName(eSignDocId);
-
-			if (edoc == null || edoc.isEmpty()) {
-				return ResponseEntity.status(HttpStatus.NOT_FOUND)
-						.body("No eSign document found for username: " + userName);
+			if (userName == null || userName.trim().isEmpty()) {
+				return ResponseEntity.badRequest().body("userName is required");
 			}
-
-			ESignedDocumentsEntity latest = edoc.stream()
-					.max(java.util.Comparator.comparing(ESignedDocumentsEntity::geteSignedId))
-					.orElse(edoc.get(0));
-
-			return new ResponseEntity<>(latest, HttpStatus.OK);
+			String normalizedUserName = normalizeReportUsername(userName);
+			if (normalizedUserName.isEmpty()) {
+				return ResponseEntity.badRequest().body("Invalid username format");
+			}
+			return ResponseEntity.ok(buildMultiAuditorEsignStatus(normalizedUserName));
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("Failed: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Failed to fetch multi-auditor eSign status: " + e.getMessage());
 		}
 	}
+
+	@PostMapping("/prepare-auditor-esign")
+	public ResponseEntity<?> prepareAuditorEsign(@RequestParam("userName") String userName,
+			@RequestParam("appAuditorId") Long appAuditorId) {
+		try {
+			if (userName == null || userName.trim().isEmpty()) {
+				return ResponseEntity.badRequest().body("userName is required");
+			}
+			if (appAuditorId == null) {
+				return ResponseEntity.badRequest().body("appAuditorId is required");
+			}
+			String normalizedUserName = normalizeReportUsername(userName);
+			if (normalizedUserName.isEmpty()) {
+				return ResponseEntity.badRequest().body("Invalid username format");
+			}
+
+			ApplicationAuditEntity applicationAuditEntity = applicationAuditServ
+					.getByApplicantUserName(normalizedUserName);
+			if (applicationAuditEntity == null) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body("No audit data found for user: " + normalizedUserName);
+			}
+
+			List<ApplicationAuditorsEntity> activeAuditors = applicationAuditorsService
+					.getAllDataByAuditId(applicationAuditEntity.getAppAuditId());
+			ApplicationAuditorsEntity target = activeAuditors == null ? null
+					: activeAuditors.stream()
+							.filter(a -> a != null && appAuditorId.equals(a.getAppAuditorId()))
+							.findFirst().orElse(null);
+			if (target == null) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body("Auditor not found for this application undertaking.");
+			}
+
+			String signerKey = "AUDITOR:" + appAuditorId;
+			String esignUserName = resolveAuditorEsignUserName(normalizedUserName, signerKey);
+			Optional<ESignedDocumentsEntity> pendingOpt = resolveOrCreatePendingEsignRecord(esignUserName);
+			if (!pendingOpt.isPresent()) {
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+						.body("Failed to prepare eSign document for auditor.");
+			}
+
+			String previousSignedDocId = findLatestCompletedAuditorSignedDocId(normalizedUserName, appAuditorId,
+					activeAuditors);
+			boolean needsFreshReport = previousSignedDocId == null || previousSignedDocId.isBlank();
+
+			Map<String, Object> response = new HashMap<>();
+			response.put("eSignedId", pendingOpt.get().geteSignedId());
+			response.put("needsFreshReport", needsFreshReport);
+			response.put("previousSignedDocId", previousSignedDocId);
+			response.put("signerKey", signerKey);
+			response.put("appAuditorId", appAuditorId);
+			response.put("auditorName", target.getFullName());
+			return ResponseEntity.ok(response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Failed to prepare auditor eSign: " + e.getMessage());
+		}
+	}
+
+	// NOTE: GET /get-esign-document-id now lives in AuditAcceptanceLetterController
+	// (resolves multi-auditor "UCCA...|AUDITOR:id" and acceptance eSign rows).
 
 	@GetMapping("/repair-audit-report-document-links")
 	public ResponseEntity<?> repairAuditReportDocumentLinksGet(
@@ -4255,6 +4350,135 @@ contentBuilder.append("<h3 style='color: red;'>15. CA Self-assessment for audit 
 		status.put("eSignedId", latest.geteSignedId());
 		status.put("signedDocId", hasSignedDoc ? latest.getSignedDocId() : null);
 		return status;
+	}
+
+	private String resolveAuditorEsignUserName(String applicantUserName, String signerKey) {
+		if (signerKey == null || signerKey.trim().isEmpty()) {
+			return applicantUserName;
+		}
+		String key = signerKey.trim();
+		if (!key.toUpperCase().startsWith("AUDITOR:")) {
+			key = "AUDITOR:" + key;
+		}
+		return applicantUserName + "|" + key;
+	}
+
+	private boolean isAuditorEsignUserName(String userName) {
+		return userName != null && userName.contains("|AUDITOR:");
+	}
+
+	private String extractApplicantFromAuditorEsignUserName(String userName) {
+		if (userName == null) {
+			return "";
+		}
+		int idx = userName.indexOf("|AUDITOR:");
+		if (idx <= 0) {
+			return userName.trim();
+		}
+		return userName.substring(0, idx).trim();
+	}
+
+	private Map<String, Object> buildMultiAuditorEsignStatus(String applicantUserName) {
+		Map<String, Object> response = new HashMap<>();
+		List<Map<String, Object>> auditorRows = new ArrayList<>();
+		int completedCount = 0;
+		String latestSignedDocId = null;
+
+		ApplicationAuditEntity applicationAuditEntity = applicationAuditServ
+				.getByApplicantUserName(applicantUserName);
+		if (applicationAuditEntity == null) {
+			response.put("auditors", auditorRows);
+			response.put("completedCount", 0);
+			response.put("allComplete", false);
+			response.put("latestSignedDocId", null);
+			return response;
+		}
+
+		List<ApplicationAuditorsEntity> activeAuditors = applicationAuditorsService
+				.getAllDataByAuditId(applicationAuditEntity.getAppAuditId());
+		if (activeAuditors != null) {
+			for (ApplicationAuditorsEntity auditor : activeAuditors) {
+				if (auditor == null || auditor.getAppAuditorId() == null) {
+					continue;
+				}
+				String esignUserName = resolveAuditorEsignUserName(applicantUserName,
+						"AUDITOR:" + auditor.getAppAuditorId());
+				ESignedDocumentsEntity latest = findLatestEsignRecord(esignUserName);
+				boolean completed = latest != null && latest.getSignedDocId() != null
+						&& !latest.getSignedDocId().isBlank();
+				String esignStatus;
+				if (completed) {
+					esignStatus = "COMPLETED";
+					completedCount++;
+					latestSignedDocId = latest.getSignedDocId();
+				} else if (latest != null && "Failed".equalsIgnoreCase(latest.getStatus())) {
+					esignStatus = "FAILED";
+				} else if (latest != null) {
+					esignStatus = "PENDING";
+				} else {
+					esignStatus = "NONE";
+				}
+
+				Map<String, Object> row = new HashMap<>();
+				row.put("appAuditorId", auditor.getAppAuditorId());
+				row.put("auditorName", auditor.getFullName());
+				row.put("certificateType", auditor.getCertificationType());
+				row.put("esignStatus", esignStatus);
+				row.put("eSignedId", latest != null ? latest.geteSignedId() : null);
+				row.put("signedDocId", completed ? latest.getSignedDocId() : null);
+				auditorRows.add(row);
+			}
+		}
+
+		response.put("auditors", auditorRows);
+		response.put("completedCount", completedCount);
+		response.put("allComplete", !auditorRows.isEmpty() && completedCount == auditorRows.size());
+		response.put("latestSignedDocId", latestSignedDocId);
+		return response;
+	}
+
+	private boolean areAllAuditorsEsignComplete(String applicantUserName) {
+		if (applicantUserName == null || applicantUserName.trim().isEmpty()) {
+			return false;
+		}
+		Map<String, Object> status = buildMultiAuditorEsignStatus(applicantUserName.trim());
+		Object allComplete = status.get("allComplete");
+		return Boolean.TRUE.equals(allComplete);
+	}
+
+	private String findLatestCompletedAuditorSignedDocId(String applicantUserName, Long excludeAppAuditorId,
+			List<ApplicationAuditorsEntity> activeAuditors) {
+		String previousSignedDocId = null;
+		Long bestId = null;
+		if (activeAuditors != null) {
+			for (ApplicationAuditorsEntity auditor : activeAuditors) {
+				if (auditor == null || auditor.getAppAuditorId() == null) {
+					continue;
+				}
+				if (excludeAppAuditorId != null && excludeAppAuditorId.equals(auditor.getAppAuditorId())) {
+					continue;
+				}
+				String esignUserName = resolveAuditorEsignUserName(applicantUserName,
+						"AUDITOR:" + auditor.getAppAuditorId());
+				ESignedDocumentsEntity latest = findLatestEsignRecord(esignUserName);
+				if (latest == null || latest.getSignedDocId() == null || latest.getSignedDocId().isBlank()) {
+					continue;
+				}
+				Long currentId = latest.geteSignedId();
+				if (bestId == null || (currentId != null && currentId > bestId)) {
+					bestId = currentId;
+					previousSignedDocId = latest.getSignedDocId();
+				}
+			}
+		}
+		if (previousSignedDocId == null || previousSignedDocId.isBlank()) {
+			ESignedDocumentsEntity applicantLatest = findLatestEsignRecord(applicantUserName);
+			if (applicantLatest != null && applicantLatest.getSignedDocId() != null
+					&& !applicantLatest.getSignedDocId().isBlank()) {
+				previousSignedDocId = applicantLatest.getSignedDocId();
+			}
+		}
+		return previousSignedDocId;
 	}
 
 	/**

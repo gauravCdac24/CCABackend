@@ -28,6 +28,7 @@ public final class ApplicationStatusUtil {
 	public static final String NC_ACTION_TAKEN = "NC Action taken By Applicant";
 	public static final String REVIEW_NC_REPORT = "Review NC Report";
 	public static final String REVIEW_AUDIT_REPORT = "Review Audit Report";
+	public static final String PENDING_AUDIT_ACCEPTANCE = "Pending Audit Acceptance";
 
 	private ApplicationStatusUtil() {
 	}

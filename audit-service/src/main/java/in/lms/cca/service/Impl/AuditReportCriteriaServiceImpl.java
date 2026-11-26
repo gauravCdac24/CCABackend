@@ -146,6 +146,13 @@ public class AuditReportCriteriaServiceImpl implements AuditReportCriteriaServic
 	}
 
 	@Override
+	public void changedTheStatusPendingAuditAcceptance(String applicantUserName) {
+		String uriTemplate = apigatewayServiceUrl
+				+ "/api/newlicense-service/change-applicant-pending-audit-acceptance/{applicantUserName}";
+		restTemplate.getForObject(uriTemplate, String.class, applicantUserName);
+	}
+
+	@Override
 	public void changedTheAproveOfRejection(String applicantUserName) {
 		String uriTemplate = apigatewayServiceUrl + "/api/newlicense-service/change-applicant-approve-for-rejection/{applicantUserName}";
 	    

@@ -227,6 +227,10 @@ public class LicenseAcquisitionWorkflowServiceImpl implements LicenseAcquisition
 				.equals(ApplicationStatusUtil.normalize(ApplicationStatusUtil.NC_ISSUED))) {
 			actions.add("NC_ACTION");
 		}
+		if (ApplicationStatusUtil.normalize(status)
+				.equals(ApplicationStatusUtil.normalize(ApplicationStatusUtil.PENDING_AUDIT_ACCEPTANCE))) {
+			actions.add("AUDIT_ACCEPTANCE");
+		}
 	}
 
 	private void addCcaOfficerActions(List<String> actions, IntentApplication intentApplication,
@@ -330,7 +334,8 @@ public class LicenseAcquisitionWorkflowServiceImpl implements LicenseAcquisition
 				|| normalized.equals(ApplicationStatusUtil.normalize(ApplicationStatusUtil.REVIEW_AUDIT_REPORT))
 				|| normalized.equals(ApplicationStatusUtil.normalize(ApplicationStatusUtil.NC_ISSUED))
 				|| normalized.equals(ApplicationStatusUtil.normalize(ApplicationStatusUtil.NC_ACTION_TAKEN))
-				|| normalized.equals(ApplicationStatusUtil.normalize(ApplicationStatusUtil.REVIEW_NC_REPORT));
+				|| normalized.equals(ApplicationStatusUtil.normalize(ApplicationStatusUtil.REVIEW_NC_REPORT))
+				|| normalized.equals(ApplicationStatusUtil.normalize(ApplicationStatusUtil.PENDING_AUDIT_ACCEPTANCE));
 	}
 
 	private boolean isCcaReviewStatus(String status) {

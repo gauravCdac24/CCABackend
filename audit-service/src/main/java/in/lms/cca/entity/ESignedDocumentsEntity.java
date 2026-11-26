@@ -27,6 +27,17 @@ public class ESignedDocumentsEntity extends AbstractTimestampEntity {
 	 @Column(name = "status",length = 11)
 	private String status;
 
+	@Column(name = "signer_key", length = 100)
+	private String signerKey;
+
+	public String getSignerKey() {
+		return signerKey;
+	}
+
+	public void setSignerKey(String signerKey) {
+		this.signerKey = signerKey;
+	}
+
 	public Long geteSignedId() {
 		return eSignedId;
 	}
